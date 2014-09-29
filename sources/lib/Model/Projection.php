@@ -30,7 +30,7 @@ class Projection
      * __construct
      *
      * @access public
-     * @param  array $fields list of field names.
+     * @param  array $structure list of field names with types.
      * @return void
      */
     public function __construct(array $structure = null)
