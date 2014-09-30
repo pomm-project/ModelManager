@@ -25,7 +25,7 @@ use PommProject\ModelManager\Exception\ModelException;
 abstract class RowStructure implements \ArrayAccess
 {
     protected $field_definitions = [];
-    protected $relation_name;
+    protected $relation;
     protected $primary_key = [];
 
     /**
@@ -42,7 +42,7 @@ abstract class RowStructure implements \ArrayAccess
             throw new ModelException(sprintf("Incorrect field definition after initialization in class '%s'.", get_class($this)));
         }
 
-        if ($this->relation_name === null || $this->relation_name === '') {
+        if ($this->relation === null || $this->relation === '') {
             throw new ModelException(sprintf("Invalid relation name after initialization in class '%s'.", get_class($this)));
         }
     }
@@ -51,7 +51,7 @@ abstract class RowStructure implements \ArrayAccess
      * initialize
      *
      * Method to be overloaded by user's structures.
-     * It must defines 'field_definitions' & 'relation_name'.
+     * It must defines 'field_definitions' & 'relation'.
      *
      * @access protected
      * @return void
@@ -152,16 +152,16 @@ abstract class RowStructure implements \ArrayAccess
     }
 
     /**
-     * getRelationName
+     * getRelation
      *
      * Return the relation name.
      *
      * @access public
      * @return string
      */
-    public function getRelationName()
+    public function getRelation()
     {
-        return $this->relation_name;
+        return $this->relation;
     }
 
     /**
@@ -183,7 +183,7 @@ abstract class RowStructure implements \ArrayAccess
      * Test if given value is null.
      *
      * @access              private
-     * @param  mixed        $val
+     * @param  string       $val
      * @param  string       $name
      * @throw \InvalidArgumentException if $val is null
      * @return RowStructure $this

@@ -16,7 +16,7 @@ class RowStructure extends Atoum
 {
     public function testConstructor()
     {
-        $this->exception(function() { new FailingRelationNameStructure(); })
+        $this->exception(function() { new FailingRelationStructure(); })
             ->isinstanceof('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains('relation name')
             ;
@@ -107,10 +107,10 @@ class RowStructure extends Atoum
             ;
     }
 
-    public function testGetRelationName()
+    public function testGetRelation()
     {
         $structure = new GoodStructure();
-        $this->string($structure->getRelationName())
+        $this->string($structure->getRelation())
             ->isEqualTo('pika')
             ;
     }
@@ -147,11 +147,11 @@ class FailingFieldDefinitionStructure extends PommRowStructure
 {
     protected function initialize()
     {
-        $this->relation_name = 'plop';
+        $this->relation = 'plop';
     }
 }
 
-class FailingRelationNameStructure extends PommRowStructure
+class FailingRelationStructure extends PommRowStructure
 {
     protected function initialize()
     {
@@ -163,7 +163,7 @@ class GoodStructure extends PommRowStructure
 {
     protected function initialize()
     {
-        $this->relation_name = 'pika';
+        $this->relation                  = 'pika';
         $this->field_definitions['pika'] = 'int4';
     }
 }
@@ -172,8 +172,8 @@ class ChuStructure extends PommRowStructure
 {
     protected function initialize()
     {
-        $this->relation_name = 'chu';
+        $this->relation                 = 'chu';
         $this->field_definitions['chu'] = 'bool';
-        $this->primary_key = ['chu'];
+        $this->primary_key              = ['chu'];
     }
 }
