@@ -41,6 +41,8 @@ class ModelPooler extends ClientPooler
      * wanted model class exists and try to instance it. It is then
      * registered in the ClientHolder and sent back.
      *
+     * @throw ModelException if class can not be loaded or does not implement
+     * the ClientInterface.
      * @see ClientPoolerInterface
      */
     public function getClient($class)
@@ -52,8 +54,6 @@ class ModelPooler extends ClientPooler
             try {
                 $class_name = sprintf("%sModel", $class);
                 $reflection = new \ReflectionClass($class_name);
-                $model    = new $class_name();
-                $this->session->registerClient($model);
             } catch (\ReflectionException $e) {
                 throw new ModelException(sprintf(
                     "Could not instanciate Model class '%s'. (Reason: '%s').",
@@ -61,6 +61,13 @@ class ModelPooler extends ClientPooler
                     $e->getMessage()
                 ));
             }
+
+            if (!$reflection->implementsInterface('\PommProject\Foundation\Client\ClientInterface')) {
+                throw new ModelException(sprintf("'%s' class does not implement the ClientInterface interface.", $class));
+            }
+
+            $model = new $class_name();
+            $this->session->registerClient($model);
         }
 
         return $model;
