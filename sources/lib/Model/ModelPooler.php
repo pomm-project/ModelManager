@@ -51,25 +51,46 @@ class ModelPooler extends ClientPooler
         $model = $this->session->getClient('model', $class);
 
         if ($model === null) {
-            try {
-                $class_name = sprintf("%sModel", $class);
-                $reflection = new \ReflectionClass($class_name);
-            } catch (\ReflectionException $e) {
-                throw new ModelException(sprintf(
-                    "Could not instanciate Model class '%s'. (Reason: '%s').",
-                    $class_name,
-                    $e->getMessage()
-                ));
-            }
-
-            if (!$reflection->implementsInterface('\PommProject\Foundation\Client\ClientInterface')) {
-                throw new ModelException(sprintf("'%s' class does not implement the ClientInterface interface.", $class));
-            }
-
-            $model = new $class_name();
+            $model = $this->createModel($class);
             $this->session->registerClient($model);
         }
 
         return $model;
+    }
+
+    /**
+     * createModel
+     *
+     * Model instance builder.
+     * A ModelException is thrown if the class does not exist, does not
+     * implement ClientInterface or is not a child of Model.
+     *
+     * @access protected
+     * @param  string    $class
+     * @throw  ModelException if incorrect
+     * @return Model
+     */
+    protected function createModel($class)
+    {
+        try {
+            $class_name = sprintf("%sModel", $class);
+            $reflection = new \ReflectionClass($class_name);
+        } catch (\ReflectionException $e) {
+            throw new ModelException(sprintf(
+                "Could not instanciate Model class '%s'. (Reason: '%s').",
+                $class_name,
+                $e->getMessage()
+            ));
+        }
+
+        if (!$reflection->implementsInterface('\PommProject\Foundation\Client\ClientInterface')) {
+            throw new ModelException(sprintf("'%s' class does not implement the ClientInterface interface.", $class));
+        }
+
+        if (!$reflection->isSubClassOf('\PommProject\ModelManager\Model\Model')) {
+            throw new ModelException(sprintf("'%s' class does not extend \PommProject\ModelManager\Model.", $class));
+        }
+
+        return new $class_name();
     }
 }
