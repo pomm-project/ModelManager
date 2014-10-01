@@ -12,13 +12,15 @@ namespace PommProject\ModelManager\Test\Unit\Model;
 use PommProject\Foundation\Where;
 use PommProject\Foundation\PreparedQuery\PreparedQueryPooler;
 use PommProject\Foundation\Test\Unit\Converter\BaseConverter;
+
 use PommProject\ModelManager\Test\Fixture\SimpleFixture;
-use PommProject\ModelManager\Model\FlexibleEntity;
 use PommProject\ModelManager\Test\Fixture\SimpleFixtureModel;
 use PommProject\ModelManager\Test\Fixture\ReadFixtureModel;
 use PommProject\ModelManager\Test\Fixture\WriteFixtureModel;
 use PommProject\ModelManager\Model\Model as PommModel;
-use Mock\PommProject\ModelManager\Model\RowStructure as RowStructureMock;
+
+use Mock\PommProject\ModelManager\Model\FlexibleEntity as FlexibleEntityMock;
+use Mock\PommProject\ModelManager\Model\RowStructure   as RowStructureMock;
 
 class Model extends BaseConverter
 {
@@ -194,7 +196,7 @@ class Model extends BaseConverter
             ->isIdenticalTo($model)
             ->boolean($entity->hasId())
             ->isTrue()
-            ->boolean($entity->status() === FlexibleEntity::EXIST)
+            ->boolean($entity->status() === FlexibleEntityMock::EXIST)
             ->isTrue()
             ;
     }
