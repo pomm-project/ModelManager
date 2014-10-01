@@ -9,6 +9,8 @@
  */
 namespace PommProject\ModelManager\Model;
 
+use PommProject\ModelManager\Model\RowStructure;
+use PommProject\ModelManager\Model\FlexibleEntity;
 use PommProject\ModelManager\Exception\ModelException;
 use PommProject\Foundation\Client\ClientInterface;
 use PommProject\Foundation\Session;
@@ -155,5 +157,42 @@ abstract class Model implements ClientInterface
     public function createProjection()
     {
         return new Projection($this->structure->getDefinition());
+    }
+
+    /**
+     * checkFlexibleEntity
+     *
+     * Check if the given entity is an instance of this model's flexible class.
+     * If not an exception is thrown.
+     *
+     * @access public
+     * @param  FlexibleEntity $entity
+     * @throw  InvalidArgumentException
+     * @return Model          $this
+     */
+    public function checkFlexibleEntity(FlexibleEntity $entity)
+    {
+        if (!($entity instanceOf $this->flexible_entity_class)) {
+            throw new \InvalidArgumentException(sprintf(
+                "Entity class '%s' is not a '%s'.",
+                get_class($entity),
+                $this->flexible_entity_class
+            ));
+        }
+
+        return $this;
+    }
+
+    /**
+     * getStructure
+     *
+     * Return the structure.
+     *
+     * @access public
+     * @return RowStructure
+     */
+    public function getStructure()
+    {
+        return $this->structure;
     }
 }

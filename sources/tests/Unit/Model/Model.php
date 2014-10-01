@@ -12,13 +12,32 @@ namespace PommProject\ModelManager\Test\Unit\Model;
 use PommProject\Foundation\Where;
 use PommProject\Foundation\PreparedQuery\PreparedQueryPooler;
 use PommProject\Foundation\Test\Unit\Converter\BaseConverter;
+use PommProject\ModelManager\Test\Fixture\SimpleFixture;
+use PommProject\ModelManager\Model\FlexibleEntity;
 use PommProject\ModelManager\Test\Fixture\SimpleFixtureModel;
 use PommProject\ModelManager\Test\Fixture\ReadFixtureModel;
+use PommProject\ModelManager\Test\Fixture\WriteFixtureModel;
 use PommProject\ModelManager\Model\Model as PommModel;
 use Mock\PommProject\ModelManager\Model\RowStructure as RowStructureMock;
 
 class Model extends BaseConverter
 {
+    public function setUp()
+    {
+        $this
+            ->getSession()
+            ->getConnection()
+            ->executeAnonymousQuery('drop schema if exists pomm_test cascade; create schema pomm_test');
+    }
+
+    public function tearDown()
+    {
+        $this
+            ->getSession()
+            ->getConnection()
+            ->executeAnonymousQuery('drop schema pomm_test cascade;');
+    }
+
     protected function registerClientPoolers()
     {
         parent::registerClientPoolers();
@@ -36,6 +55,14 @@ class Model extends BaseConverter
     protected function getReadFixtureModel()
     {
         $model = new ReadFixtureModel();
+        $model->initialize($this->getSession());
+
+        return $model;
+    }
+
+    protected function getWriteFixtureModel()
+    {
+        $model = new WriteFixtureModel();
         $model->initialize($this->getSession());
 
         return $model;
@@ -155,6 +182,20 @@ class Model extends BaseConverter
             ->isEqualTo(2)
             ->integer($model->countWhere($where))
             ->isEqualTo(2)
+            ;
+    }
+
+    public function testInsertOne()
+    {
+        $model = $this->getWriteFixtureModel();
+        $entity = new SimpleFixture(['some_data' => 'e']);
+        $this
+            ->object($model->insertOne($entity))
+            ->isIdenticalTo($model)
+            ->boolean($entity->hasId())
+            ->isTrue()
+            ->boolean($entity->status() === FlexibleEntity::EXIST)
+            ->isTrue()
             ;
     }
 }
