@@ -10,6 +10,7 @@
 namespace PommProject\ModelManager\Test\Fixture;
 
 use PommProject\ModelManager\Model\Model;
+use PommProject\Foundation\Where;
 
 class SimpleFixtureModel extends Model
 {
@@ -17,6 +18,24 @@ class SimpleFixtureModel extends Model
     {
         $this->structure = new SimpleFixtureStructure();
         $this->flexible_entity_class = '\PommProject\ModelManager\Test\Fixture\SimpleFixture';
+    }
+
+    public function doSimpleQuery(Where $where = null)
+    {
+        if ($where === null) {
+            $where = new Where();
+        }
+
+        $sql = strtr(
+            "select :fields from :relation where :condition",
+            [
+                ':fields' => $this->createProjection()->formatFieldsWithFieldAlias(),
+                ':relation' => $this->getRelation(),
+                ':condition' => (string) $where,
+            ]
+        );
+
+        return $this->query($sql, $where->getValues());
     }
 }
 
