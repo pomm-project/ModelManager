@@ -33,6 +33,19 @@ abstract class Model implements ClientInterface
     protected $structure;
 
     /**
+     * getSession
+     *
+     * Return the current session.
+     *
+     * @access protected
+     * @return Session
+     */
+    protected function getSession()
+    {
+        return $this->session;
+    }
+
+    /**
      * getClientType
      *
      * @see ClientInterface

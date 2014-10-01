@@ -9,6 +9,7 @@
  */
 namespace PommProject\ModelManager\Model;
 
+use PommProject\ModelManager\Model\Model;
 use PommProject\Foundation\Where;
 
 /**
@@ -23,6 +24,26 @@ use PommProject\Foundation\Where;
  */
 trait ReadModelTrait
 {
+    /**
+     * @see Model
+     */
+    abstract public function createProjection();
+
+    /**
+     * @see Model
+     */
+    abstract public function getRelation();
+
+    /**
+     * @see Model
+     */
+    abstract protected function query($sql, array $values = [], Projection $projection = null);
+
+    /**
+     * @see Model
+     */
+    abstract protected function getSession();
+
     /**
      * findAll
      *
