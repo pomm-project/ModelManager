@@ -12,6 +12,7 @@ namespace PommProject\ModelManager\Model;
 use PommProject\ModelManager\Exception\ModelException;
 use PommProject\ModelManager\Model\Projection;
 use PommProject\Foundation\ResultIterator;
+use PommProject\Foundation\ResultHandler;
 use PommProject\Foundation\Session;
 
 /**
@@ -41,9 +42,9 @@ class CollectionIterator extends ResultIterator
      * @param  string          $flexible_class_name
      * @return void
      */
-    public function __construct($result_resource, Session $session, Projection $projection, $flexible_class_name)
+    public function __construct(ResultHandler $result, Session $session, Projection $projection, $flexible_class_name)
     {
-        parent::__construct($result_resource, $session);
+        parent::__construct($result, $session);
 
         $this->projection           = $projection;
         $this->flexible_class_name  = $flexible_class_name;
