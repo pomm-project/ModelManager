@@ -13,6 +13,7 @@ use PommProject\Foundation\Where;
 use PommProject\Foundation\PreparedQuery\PreparedQueryPooler;
 use PommProject\Foundation\Test\Unit\Converter\BaseConverter;
 use PommProject\ModelManager\Test\Fixture\SimpleFixtureModel;
+use PommProject\ModelManager\Test\Fixture\ReadFixtureModel;
 use PommProject\ModelManager\Model\Model as PommModel;
 use Mock\PommProject\ModelManager\Model\RowStructure as RowStructureMock;
 
@@ -27,6 +28,14 @@ class Model extends BaseConverter
     protected function getSimpleFixtureModel()
     {
         $model = new SimpleFixtureModel();
+        $model->initialize($this->getSession());
+
+        return $model;
+    }
+
+    protected function getReadFixtureModel()
+    {
+        $model = new ReadFixtureModel();
         $model->initialize($this->getSession());
 
         return $model;
@@ -99,6 +108,53 @@ class Model extends BaseConverter
         $this
             ->object($this->getSimpleFixtureModel()->createProjection())
             ->isInstanceOf('\PommProject\ModelManager\Model\Projection')
+            ;
+    }
+
+    public function testFindAll()
+    {
+        $model = $this->getReadFixtureModel();
+        $this
+            ->object($model->findAll())
+            ->isInstanceOf('\PommProject\ModelManager\Model\CollectionIterator')
+            ->array($model->findAll()->slice('id'))
+            ->isIdenticalTo([1, 2, 3, 4])
+            ->array($model->findAll('order by id desc')->slice('id'))
+            ->isIdenticalTo([4, 3 ,2 ,1])
+            ->array($model->findAll('limit 3')->slice('id'))
+            ->isIdenticalTo([1, 2, 3,])
+            ;
+    }
+
+    public function testFindWhere()
+    {
+        $model = $this->getReadFixtureModel();
+        $condition = 'id % $* = 0';
+        $where = new Where($condition, [2]);
+        $this
+            ->object($model->findWhere('true'))
+            ->isInstanceOf('\PommProject\ModelManager\Model\CollectionIterator')
+            ->array($model->findWhere($condition, [2])->slice('id'))
+            ->isIdenticalTo($model->findWhere($where)->slice('id'))
+            ->integer($model->findWhere($where)->count())
+            ->isEqualTo(2)
+            ->array($model->findWhere($condition, [1], 'order by id desc limit 3')->slice('id'))
+            ->isIdenticalTo([4, 3, 2])
+            ;
+    }
+
+    public function testCountWhere()
+    {
+        $model = $this->getReadFixtureModel();
+        $condition = 'id % $* = 0';
+        $where = new Where($condition, [2]);
+        $this
+            ->integer($model->countWhere('true'))
+            ->isEqualTo(4)
+            ->integer($model->countWhere($condition, [2]))
+            ->isEqualTo(2)
+            ->integer($model->countWhere($where))
+            ->isEqualTo(2)
             ;
     }
 }
