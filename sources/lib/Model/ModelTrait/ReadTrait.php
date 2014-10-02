@@ -7,14 +7,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace PommProject\ModelManager\Model;
+namespace PommProject\ModelManager\Model\ModelTrait;
 
-use PommProject\ModelManager\Model\BaseModelTrait;
+use PommProject\ModelManager\Model\ModelTrait\BaseTrait;
 use PommProject\ModelManager\Model\Model;
 use PommProject\Foundation\Where;
 
 /**
- * ReadModelTrait
+ * ReadTrait
  *
  * Basic read queries for model instances.
  *
@@ -23,9 +23,9 @@ use PommProject\Foundation\Where;
  * @author Grégoire HUBERT
  * @license X11 {@link http://opensource.org/licenses/mit-license.php}
  */
-trait ReadModelTrait
+trait ReadTrait
 {
-    use BaseModelTrait;
+    use BaseTrait;
 
     /**
      * findAll
@@ -41,12 +41,14 @@ trait ReadModelTrait
      */
     public function findAll($suffix = null)
     {
-        $sql = "select :fields from :table :suffix";
-        $sql = strtr($sql, [
-            ':fields' => $this->createProjection()->formatFields(),
-            ':table'  => $this->getRelation(),
-            ':suffix' => $suffix
-        ]);
+        $sql = strtr(
+            "select :fields from :table :suffix",
+            [
+                ':fields' => $this->createProjection()->formatFields(),
+                ':table'  => $this->getRelation(),
+                ':suffix' => $suffix,
+            ]
+        );
 
         return $this->query($sql);
     }
@@ -70,11 +72,15 @@ trait ReadModelTrait
             $values = $where->getValues();
         }
 
-        $sql = sprintf("select :fields from :table where %s %s", (string) $where, $suffix);
-        $sql = strtr($sql, [
-            ':fields' => $this->createProjection()->formatFieldsWithFieldAlias(),
-            ':table'  => $this->getRelation()
-            ]);
+        $sql = strtr(
+            "select :fields from :table where :condition :suffix",
+            [
+                ':fields'    => $this->createProjection()->formatFieldsWithFieldAlias(),
+                ':table'     => $this->getRelation(),
+                ':condition' => (string) $where,
+                ':suffix'    => $suffix,
+            ]
+        );
 
         return $this->query($sql, $values);
     }

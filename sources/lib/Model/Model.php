@@ -195,4 +195,71 @@ abstract class Model implements ClientInterface
     {
         return $this->structure;
     }
+
+    /**
+     * getFlexibleEntityClass
+     *
+     * Return the according flexible entity class associate with this Model
+     * instance.
+     *
+     * @access public
+     * @return string
+     */
+    public function getFlexibleEntityClass()
+    {
+        return $this->flexible_entity_class;
+    }
+
+    /**
+     * escapeLiteral
+     *
+     * Handy method to escape strings.
+     *
+     * @access public
+     * @param  string $string
+     * @return string
+     */
+    public function escapeLiteral($string)
+    {
+        return $this
+            ->getSession()
+            ->getConnection()
+            ->escapeLiteral($string);
+    }
+
+    /**
+     * escapeLiteral
+     *
+     * Handy method to escape strings.
+     *
+     * @access public
+     * @param  string $string
+     * @return string
+     */
+    public function escapeIdentifier($string)
+    {
+        return $this
+            ->getSession()
+            ->getConnection()
+            ->escapeIdentifier($string);
+    }
+
+    /**
+     * executeAnonymousQuery
+     *
+     * Handy method for DDL statments.
+     *
+     * @access public
+     * @param  string $sql
+     * @return Model  $this
+     */
+    public function executeAnonymousQuery($sql)
+    {
+        $this
+            ->getSession()
+            ->getConnection()
+            ->executeAnonymousQuery($sql);
+
+        return $this;
+    }
 }

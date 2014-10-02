@@ -73,12 +73,11 @@ class ModelPooler extends ClientPooler
     protected function createModel($class)
     {
         try {
-            $class_name = sprintf("%sModel", $class);
-            $reflection = new \ReflectionClass($class_name);
+            $reflection = new \ReflectionClass($class);
         } catch (\ReflectionException $e) {
             throw new ModelException(sprintf(
                 "Could not instanciate Model class '%s'. (Reason: '%s').",
-                $class_name,
+                $class,
                 $e->getMessage()
             ));
         }
@@ -91,6 +90,6 @@ class ModelPooler extends ClientPooler
             throw new ModelException(sprintf("'%s' class does not extend \PommProject\ModelManager\Model.", $class));
         }
 
-        return new $class_name();
+        return new $class();
     }
 }

@@ -10,50 +10,34 @@
 namespace PommProject\ModelManager\Test\Fixture;
 
 use PommProject\Foundation\Session;
+use PommProject\Foundation\Exception\SqlException;
 use PommProject\ModelManager\Test\Fixture\SimpleFixtureModel;
-use PommProject\ModelManager\Model\ReadModelTrait;
-use PommProject\ModelManager\Model\WriteModelTrait;
+use PommProject\ModelManager\Model\ModelTrait\WriteTrait;
 
 class WriteFixtureModel extends SimpleFixtureModel
 {
-    use ReadModelTrait;
-    use WriteModelTrait;
+    use WriteTrait;
 
     public function getRelation()
     {
-        return 'pomm_test.write_fixture';
-    }
-
-    public function createTable()
-    {
-        $sql = sprintf("create table %s (id int, some_data varchar)", $this->getRelation());
-        $this
-            ->getSession()
-            ->getConnection()
-            ->executeAnonymousQuery($sql)
-            ;
-    }
-
-    public function dropTable()
-    {
-        $sql = sprintf("drop table %s cascade", $this->getRelation());
-        $this
-            ->getSession()
-            ->getConnection()
-            ->executeAnonymousQuery($sql)
-            ;
+        return 'write_fixture';
     }
 
     public function initialize(Session $session)
     {
         parent::initialize($session);
-        $this->createTable();
+        $this->executeAnonymousQuery(
+            sprintf(
+                "create temporary table %s (id serial primary key, a_varchar varchar, a_boolean boolean)",
+                $this->getRelation()
+            )
+        );
+
+        $this->primary_key = ['id'];
     }
 
     public function shutdown()
     {
-        $this->dropTable();
+        $this->executeAnonymousQuery(sprintf("drop table %s", $this->getRelation()));
     }
 }
-
-

@@ -15,10 +15,19 @@ class SimpleFixtureStructure extends RowStructure
 {
     protected function initialize()
     {
-        $this->relation = "(values (1,'one'),(2,'two'),(3,'three'),(4,'four')) simple_fixture (id,some_data)";
+        $this->relation = <<<_
+(values
+    (1::int4,'one'::varchar, bool 't'),
+    (2,'two', 'f'),
+    (3,'three', 'f'),
+    (4,'four', 't')
+)
+    simple_fixture (id, a_varchar, a_boolean)
+_;
         $this
             ->addField('id', 'int4')
-            ->addField('some_data', 'varchar')
+            ->addField('a_varchar', 'varchar')
+            ->addField('a_boolean', 'bool')
             ->primary_key = ['id']
             ;
     }

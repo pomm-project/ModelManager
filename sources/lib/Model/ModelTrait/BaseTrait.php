@@ -7,9 +7,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace PommProject\ModelManager\Model;
+namespace PommProject\ModelManager\Model\ModelTrait;
 
 use PommProject\ModelManager\Model\Model;
+use PommProject\ModelManager\Model\Projection;
 
 /**
  * BaseModelTrait
@@ -21,7 +22,7 @@ use PommProject\ModelManager\Model\Model;
  * @author Grégoire HUBERT
  * @license X11 {@link http://opensource.org/licenses/mit-license.php}
  */
-trait BaseModelTrait
+trait BaseTrait
 {
     /**
      * @see Model
@@ -47,4 +48,9 @@ trait BaseModelTrait
      * @see Model
      */
     abstract public function getStructure();
+
+    /**
+     * @see Model
+     */
+    abstract public function getFlexibleEntityClass();
 }

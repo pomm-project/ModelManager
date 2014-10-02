@@ -10,14 +10,13 @@
 namespace PommProject\ModelManager\Test\Unit\Model;
 
 use PommProject\Foundation\Where;
+use PommProject\Foundation\Query\QueryPooler;
 use PommProject\Foundation\PreparedQuery\PreparedQueryPooler;
 use PommProject\Foundation\Test\Unit\Converter\BaseConverter;
 
 use PommProject\ModelManager\Test\Fixture\SimpleFixture;
-use PommProject\ModelManager\Test\Fixture\SimpleFixtureModel;
-use PommProject\ModelManager\Test\Fixture\ReadFixtureModel;
-use PommProject\ModelManager\Test\Fixture\WriteFixtureModel;
 use PommProject\ModelManager\Model\Model as PommModel;
+use PommProject\ModelManager\Model\ModelPooler;
 
 use Mock\PommProject\ModelManager\Model\FlexibleEntity as FlexibleEntityMock;
 use Mock\PommProject\ModelManager\Model\RowStructure   as RowStructureMock;
@@ -26,10 +25,11 @@ class Model extends BaseConverter
 {
     public function setUp()
     {
-        $this
+        $connection = $this
             ->getSession()
             ->getConnection()
-            ->executeAnonymousQuery('drop schema if exists pomm_test cascade; create schema pomm_test');
+            ;
+        $connection->executeAnonymousQuery('drop schema if exists pomm_test cascade; create schema pomm_test');
     }
 
     public function tearDown()
@@ -43,31 +43,32 @@ class Model extends BaseConverter
     protected function registerClientPoolers()
     {
         parent::registerClientPoolers();
-        $this->session->registerClientPooler(new PreparedQueryPooler());
+        $this->session
+            ->registerClientPooler(new PreparedQueryPooler())
+            ->registerClientPooler(new QueryPooler())
+            ->registerClientPooler(new ModelPooler())
+            ;
     }
 
     protected function getSimpleFixtureModel()
     {
-        $model = new SimpleFixtureModel();
-        $model->initialize($this->getSession());
-
-        return $model;
+        return $this->getSession()
+            ->getModel('PommProject\ModelManager\Test\Fixture\SimpleFixtureModel')
+            ;
     }
 
     protected function getReadFixtureModel()
     {
-        $model = new ReadFixtureModel();
-        $model->initialize($this->getSession());
-
-        return $model;
+        return $this->getSession()
+            ->getModel('PommProject\ModelManager\Test\Fixture\ReadFixtureModel')
+            ;
     }
 
     protected function getWriteFixtureModel()
     {
-        $model = new WriteFixtureModel();
-        $model->initialize($this->getSession());
-
-        return $model;
+        return $this->getSession()
+            ->getModel('PommProject\ModelManager\Test\Fixture\WriteFixtureModel')
+            ;
     }
 
     public function testGetClientType()
@@ -82,7 +83,7 @@ class Model extends BaseConverter
     {
         $this
             ->string($this->getSimpleFixtureModel()->getClientIdentifier())
-            ->isEqualTo('PommProject\ModelManager\Test\Fixture\SimpleFixture')
+            ->isEqualTo('PommProject\ModelManager\Test\Fixture\SimpleFixtureModel')
             ;
     }
 
@@ -190,7 +191,7 @@ class Model extends BaseConverter
     public function testInsertOne()
     {
         $model = $this->getWriteFixtureModel();
-        $entity = new SimpleFixture(['some_data' => 'e']);
+        $entity = new SimpleFixture(['a_varchar' => 'e']);
         $this
             ->object($model->insertOne($entity))
             ->isIdenticalTo($model)
@@ -200,8 +201,22 @@ class Model extends BaseConverter
             ->isTrue()
             ;
     }
-}
 
+    public function testUpdateOne()
+    {
+        $model  = $this->getWriteFixtureModel();
+        $entity = $model->createAndSave(['a_varchar' => 'qwerty', 'a_boolean' => false]);
+        $entity->set('a_varchar', 'azerty')->set('a_boolean', true);
+        $this
+            ->object($model->updateOne($entity, ['a_varchar']))
+            ->isIdenticalTo($model)
+            ->string($entity->get('a_varchar'))
+            ->isEqualTo('azerty')
+            ->boolean($entity->get('a_boolean'))
+            ->isFalse()
+            ;
+    }
+}
 
 class NoStructureNoFlexibleEntityModel extends PommModel
 {
