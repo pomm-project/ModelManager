@@ -29,6 +29,7 @@ class CollectionIterator extends ResultIterator
 {
     protected $projection;
     protected $flexible_class_name;
+    protected $filters = [];
 
     /**
      * __construct
@@ -48,8 +49,6 @@ class CollectionIterator extends ResultIterator
 
         $this->projection           = $projection;
         $this->flexible_class_name  = $flexible_class_name;
-
-        $this->clearFilters();
     }
 
     /**
@@ -78,7 +77,7 @@ class CollectionIterator extends ResultIterator
      */
     protected function getFieldType($field_no)
     {
-        $type = $this->projection->getFieldType($this->getFieldName($field_no));
+        $type = $this->projection->getFieldType($this->result->getFieldName($field_no));
 
         if ($type !== null) {
             if (preg_match('/^(.+)\[\]$/', $type, $matchs)) {
