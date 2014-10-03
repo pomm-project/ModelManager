@@ -82,14 +82,35 @@ trait WriteTrait
      */
     public function updateOne(FlexibleEntity &$entity, array $fields)
     {
-        $where = $this->getWhereFrom($entity->get($this->structure->getPrimaryKey()));
-        $updates = [];
+        $entity = $this->updateByPk(
+            $entity->get($this->getStructure()->getPrimaryKey()),
+            $entity->get($fields)
+        );
 
-        foreach($fields as $field_name) {
-            $updates[] = sprintf(
+        return $this;
+    }
+
+    /**
+     * updateByPk
+     *
+     * Update a record and fetch it with its new values. If no records match
+     * the given key, null is returned.
+     *
+     * @access public
+     * @param  array $primary_key
+     * @param  array $updates
+     * @return FlexibleEntity
+     */
+    public function updateByPk(array $primary_key, array $updates)
+    {
+        $where = $this->getWhereFrom($primary_key);
+        $update_strings = [];
+
+        foreach($updates as $field_name => $new_value) {
+            $update_strings[] = sprintf(
                 "%s = %s",
                 $this->escapeIdentifier($field_name),
-                $this->convertValueToPg($entity->get($field_name), $this->getStructure()->getTypeFor($field_name))
+                $this->convertValueToPg($new_value, $this->getStructure()->getTypeFor($field_name))
             );
         }
 
@@ -97,15 +118,13 @@ trait WriteTrait
             "update :relation set :update where :condition returning :projection",
             [
                 ':relation'   => $this->getStructure()->getRelation(),
-                ':update'     => join(', ', $updates),
+                ':update'     => join(', ', $update_strings),
                 ':condition'  => (string) $where,
                 ':projection' => $this->createProjection()->formatFieldsWithFieldAlias(),
             ]
         );
 
-        $entity = $this->query($sql, $where->getValues())->current();
-
-        return $this;
+        return $this->query($sql, $where->getValues())->current();
     }
 
     /**
