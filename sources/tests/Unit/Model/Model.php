@@ -222,6 +222,20 @@ class Model extends BaseConverter
             ;
     }
 
+    public function testDeleteOne()
+    {
+        $model  = $this->getWriteFixtureModel();
+        $entity = $model->createAndSave(['a_varchar' => 'mlkjhgf']);
+        $this
+            ->object($model->deleteOne($entity))
+            ->isInstanceOf('\PommProject\ModelManager\Test\Fixture\WriteFixtureModel')
+            ->variable($model->findByPK(['id' => $entity['id']]))
+            ->isNull()
+            ->boolean($entity->isNew())
+            ->isTrue()
+            ;
+    }
+
     public function testCreateAndSave()
     {
         $model  = $this->getWriteFixtureModel();

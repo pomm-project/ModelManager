@@ -9,6 +9,7 @@
  */
 namespace PommProject\ModelManager\Model\ModelTrait;
 
+use PommProject\ModelManager\Exception\ModelException;
 use PommProject\ModelManager\Model\ModelTrait\BaseTrait;
 use PommProject\ModelManager\Model\Model;
 use PommProject\Foundation\Where;
@@ -174,8 +175,9 @@ trait ReadTrait
     protected function getWhereFrom(array $values)
     {
         $where = new Where();
+
         foreach($values as $field => $value) {
-            $where->andWhere(sprintf("%s = $*", $field), [$value]);
+            $where->andWhere(sprintf("%s = $*", $this->escapeIdentifier($field)), [$value]);
         }
 
         return $where;

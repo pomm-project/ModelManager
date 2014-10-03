@@ -9,6 +9,7 @@
  */
 namespace PommProject\ModelManager\Model\ModelTrait;
 
+use PommProject\ModelManager\Exception\ModelException;
 use PommProject\ModelManager\Model\ModelTrait\ReadTrait;
 use PommProject\ModelManager\Model\FlexibleEntity;
 use PommProject\ModelManager\Model\Model;
@@ -81,17 +82,7 @@ trait WriteTrait
      */
     public function updateOne(FlexibleEntity &$entity, array $fields)
     {
-        $where = new Where();
-
-        foreach($this->getStructure()->getPrimaryKey() as $key) {
-            $where->andWhere(
-                sprintf(
-                    "%s = $*",
-                    $this->escapeIdentifier($key)),
-                [$entity->get($key)]
-            );
-        }
-
+        $where = $this->getWhereFrom($entity->get($this->structure->getPrimaryKey()));
         $updates = [];
 
         foreach($fields as $field_name) {
@@ -113,6 +104,34 @@ trait WriteTrait
         );
 
         $entity = $this->query($sql, $where->getValues())->current();
+
+        return $this;
+    }
+
+    /**
+     * deleteOne
+     *
+     * Delete an entity from a table. Entity is passed by reference and is
+     * updated with the values fetched from the deleted record.
+     *
+     * @access public
+     * @param  FlexibleEntity $entity
+     * @return Model          $this
+     */
+    public function deleteOne(FlexibleEntity &$entity)
+    {
+        $where = $this->getWhereFrom($entity->get($this->structure->getPrimaryKey()));
+        $sql = strtr(
+            "delete from :relation where :condition returning :projection",
+            [
+                ':relation'   => $this->getStructure()->getRelation(),
+                ':condition'  => (string) $where,
+                ':projection' => $this->createProjection()->formatFieldsWithFieldAlias(),
+            ]
+        );
+
+        $entity = $this->query($sql, $where->getValues())->current();
+        $entity->status(FlexibleEntity::NONE);
 
         return $this;
     }
