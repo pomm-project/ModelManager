@@ -18,9 +18,11 @@ class WriteFixtureModel extends SimpleFixtureModel
 {
     use WriteTrait;
 
-    public function getRelation()
+    public function __construct()
     {
-        return 'write_fixture';
+        parent::__construct();
+        $this->primary_key = ['id'];
+        $this->structure->setRelation('write_fixture');
     }
 
     public function initialize(Session $session)
@@ -32,8 +34,6 @@ class WriteFixtureModel extends SimpleFixtureModel
                 $this->getRelation()
             )
         );
-
-        $this->primary_key = ['id'];
     }
 
     public function shutdown()

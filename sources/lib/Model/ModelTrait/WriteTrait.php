@@ -51,7 +51,7 @@ trait WriteTrait
         $sql = strtr(
             "insert into :relation (:fields) values (:values) returning :projection",
             [
-                ':relation'   => $this->getRelation(),
+                ':relation'   => $this->getStructure()->getRelation(),
                 ':fields'     => $this->getEscapedFieldList(array_keys($values)),
                 ':projection' => $this->createProjection()->formatFieldsWithFieldAlias(),
                 ':values'     => join(', ', $values),
@@ -83,7 +83,7 @@ trait WriteTrait
     {
         $where = new Where();
 
-        foreach($this->getPrimaryKey() as $key) {
+        foreach($this->getStructure()->getPrimaryKey() as $key) {
             $where->andWhere(
                 sprintf(
                     "%s = $*",
@@ -105,7 +105,7 @@ trait WriteTrait
         $sql = strtr(
             "update :relation set :update where :condition returning :projection",
             [
-                ':relation'   => $this->getRelation(),
+                ':relation'   => $this->getStructure()->getRelation(),
                 ':update'     => join(', ', $updates),
                 ':condition'  => (string) $where,
                 ':projection' => $this->createProjection()->formatFieldsWithFieldAlias(),

@@ -46,23 +46,25 @@ class ModelPooler extends Atoum
     {
         $client_pooler = $this->getClientPooler();
         $session = $this->getSession();
+        $model_class = '\PommProject\ModelManager\Test\Fixture\SimpleFixtureModel';
+        $identifier  = 'PommProject\ModelManager\Test\Fixture\SimpleFixtureModel';
 
         $this
             ->assert('Client is not in the ClientHolder.')
-            ->object($client_pooler->getClient('\PommProject\ModelManager\Test\Fixture\SimpleFixture'))
-            ->isInstanceOf('\PommProject\ModelManager\Test\Fixture\SimpleFixtureModel')
+            ->object($client_pooler->getClient($model_class))
+            ->isInstanceOf($model_class)
             ->mock($session)
             ->call('getClient')
-            ->withArguments('model', 'PommProject\ModelManager\Test\Fixture\SimpleFixture')
+            ->withArguments('model', $identifier)
             ->once()
             ->call('registerClient')
             ->once()
             ->assert('Client should be in the ClientHolder now.')
-            ->object($client_pooler->getClient('\PommProject\ModelManager\Test\Fixture\SimpleFixture'))
-            ->isInstanceOf('\PommProject\ModelManager\Test\Fixture\SimpleFixtureModel')
+            ->object($client_pooler->getClient($model_class))
+            ->isInstanceOf($model_class)
             ->mock($session)
             ->call('getClient')
-            ->withArguments('model', 'PommProject\ModelManager\Test\Fixture\SimpleFixture')
+            ->withArguments('model', $identifier)
             ->call('registerClient')
             ->never()
             ;

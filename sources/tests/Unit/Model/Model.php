@@ -125,14 +125,6 @@ class Model extends BaseConverter
             ;
     }
 
-    public function testGetPrimaryKey()
-    {
-        $this
-            ->array($this->getSimpleFixtureModel()->getPrimaryKey())
-            ->isIdenticalTo(['id'])
-            ;
-    }
-
     public function testCreateProjection()
     {
         $this

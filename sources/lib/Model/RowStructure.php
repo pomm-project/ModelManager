@@ -77,6 +77,22 @@ abstract class RowStructure implements \ArrayAccess
     }
 
     /**
+     * setRelation
+     *
+     * Set or change the relation.
+     *
+     * @access public
+     * @param  string       $relation
+     * @return RowStructure $this
+     */
+    public function setRelation($relation)
+    {
+        $this->relation = $relation;
+
+        return $this;
+    }
+
+    /**
      * addField
      *
      * Add a new field structure.

@@ -32,11 +32,6 @@ trait BaseTrait
     /**
      * @see Model
      */
-    abstract public function getRelation();
-
-    /**
-     * @see Model
-     */
     abstract protected function query($sql, array $values = [], Projection $projection = null);
 
     /**
@@ -53,4 +48,19 @@ trait BaseTrait
      * @see Model
      */
     abstract public function getFlexibleEntityClass();
+
+    /**
+     * @see Model
+     */
+    abstract public function escapeLiteral($string);
+
+    /**
+     * @see Model
+     */
+    abstract public function escapeIdentifier($string);
+
+    /**
+     * @see Model
+     */
+    abstract public function executeAnonymousQuery($sql);
 }

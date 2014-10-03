@@ -103,7 +103,7 @@ trait ReadTrait
 
         $sql = sprintf("select count(*) as count from :table where %s", (string) $where);
         $sql = strtr($sql, [
-            ':table' => $this->getRelation(),
+            ':table' => $this->getStructure()->getRelation(),
             ]);
 
         return (int) $this

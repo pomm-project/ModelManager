@@ -64,7 +64,7 @@ abstract class Model implements ClientInterface
      */
     public function getClientIdentifier()
     {
-        return preg_replace('/Model$/', '', get_class($this));
+        return get_class($this);
     }
 
     /**
@@ -118,18 +118,6 @@ abstract class Model implements ClientInterface
             $projection === null ? $this->createProjection() : $projection,
             $this->flexible_entity_class
         );
-    }
-
-    /**
-     * getPrimaryKey
-     *
-     * Proxy method to RowStructure::getPrimaryKey()
-     *
-     * @see RowStructure
-     */
-    public function getPrimaryKey()
-    {
-        return $this->structure->getPrimaryKey();
     }
 
     /**
