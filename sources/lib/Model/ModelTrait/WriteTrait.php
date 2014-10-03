@@ -120,7 +120,7 @@ trait WriteTrait
      */
     public function deleteOne(FlexibleEntity &$entity)
     {
-        $where = $this->getWhereFrom($entity->get($this->structure->getPrimaryKey()));
+        $where = $this->getWhereFrom($entity->get($this->getStructure()->getPrimaryKey()));
         $sql = strtr(
             "delete from :relation where :condition returning :projection",
             [
