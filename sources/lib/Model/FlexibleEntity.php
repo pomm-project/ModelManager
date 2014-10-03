@@ -322,7 +322,7 @@ abstract class FlexibleEntity implements \ArrayAccess, \IteratorAggregate
      *
      * @access public
      * @param  int (null)
-     * @return mixed
+     * @return int|FlexibleEntity
      */
     public function status($status = null)
     {
@@ -341,7 +341,7 @@ abstract class FlexibleEntity implements \ArrayAccess, \IteratorAggregate
      * is the current object self::NEW (does not it exist in the database already ?).
      *
      * @access public
-     * @return Boolean
+     * @return boolean
      */
     public function isNew()
     {
@@ -354,7 +354,7 @@ abstract class FlexibleEntity implements \ArrayAccess, \IteratorAggregate
      * Has the object been modified since we know it ?
      *
      * @access public
-     * @return Boolean
+     * @return boolean
      */
     public function isModified()
     {

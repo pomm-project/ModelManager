@@ -45,7 +45,7 @@ trait ReadTrait
             "select :fields from :table :suffix",
             [
                 ':fields' => $this->createProjection()->formatFields(),
-                ':table'  => $this->getRelation(),
+                ':table'  => $this->getStructure()->getRelation(),
                 ':suffix' => $suffix,
             ]
         );
@@ -76,7 +76,7 @@ trait ReadTrait
             "select :fields from :table where :condition :suffix",
             [
                 ':fields'    => $this->createProjection()->formatFieldsWithFieldAlias(),
-                ':table'     => $this->getRelation(),
+                ':table'     => $this->getStructure()->getRelation(),
                 ':condition' => (string) $where,
                 ':suffix'    => $suffix,
             ]

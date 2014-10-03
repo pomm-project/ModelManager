@@ -121,18 +121,6 @@ abstract class Model implements ClientInterface
     }
 
     /**
-     * getRelation
-     *
-     * Proxy method to RowStructure::getRelationName()
-     *
-     * @see RowStructure
-     */
-    public function getRelation()
-    {
-        return $this->structure->getRelation();
-    }
-
-    /**
      * createProjection
      *
      * This is a helper to create a new projection according to the current

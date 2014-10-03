@@ -30,7 +30,7 @@ class SimpleFixtureModel extends Model
             "select :fields from :relation where :condition",
             [
                 ':fields' => $this->createProjection()->formatFieldsWithFieldAlias(),
-                ':relation' => $this->getRelation(),
+                ':relation' => $this->getStructure()->getRelation(),
                 ':condition' => (string) $where,
             ]
         );

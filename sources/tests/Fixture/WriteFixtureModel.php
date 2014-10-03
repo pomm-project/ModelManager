@@ -31,13 +31,13 @@ class WriteFixtureModel extends SimpleFixtureModel
         $this->executeAnonymousQuery(
             sprintf(
                 "create temporary table %s (id serial primary key, a_varchar varchar, a_boolean boolean)",
-                $this->getRelation()
+                $this->getStructure()->getRelation()
             )
         );
     }
 
     public function shutdown()
     {
-        $this->executeAnonymousQuery(sprintf("drop table %s", $this->getRelation()));
+        $this->executeAnonymousQuery(sprintf("drop table %s", $this->getStructure()->getRelation()));
     }
 }
