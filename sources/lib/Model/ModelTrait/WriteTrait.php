@@ -124,7 +124,13 @@ trait WriteTrait
             ]
         );
 
-        return $this->query($sql, $where->getValues())->current();
+        $entity = $this->query($sql, $where->getValues())->current();
+
+        if ($entity !== null) {
+            $entity->status(FlexibleEntity::EXIST);
+        }
+
+        return $entity;
     }
 
     /**
@@ -139,7 +145,24 @@ trait WriteTrait
      */
     public function deleteOne(FlexibleEntity &$entity)
     {
-        $where = $this->getWhereFrom($entity->get($this->getStructure()->getPrimaryKey()));
+        $entity = $this->deleteByPK($entity->get($this->getStructure()->getPrimaryKey()));
+
+        return $this;
+    }
+
+    /**
+     * deleteByPK
+     *
+     * Delete a record from its primary key. The deleted entity is returned or
+     * null if not found.
+     *
+     * @access public
+     * @param  array $primary_key
+     * @return FlexibleEntity
+     */
+    public function deleteByPK(array $primary_key)
+    {
+        $where = $this->getWhereFrom($primary_key);
         $sql = strtr(
             "delete from :relation where :condition returning :projection",
             [
@@ -150,9 +173,12 @@ trait WriteTrait
         );
 
         $entity = $this->query($sql, $where->getValues())->current();
-        $entity->status(FlexibleEntity::NONE);
 
-        return $this;
+        if ($entity !== null) {
+            $entity->status(FlexibleEntity::NONE);
+        }
+
+        return $entity;
     }
 
     /**

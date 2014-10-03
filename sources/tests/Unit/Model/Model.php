@@ -232,6 +232,10 @@ class Model extends BaseConverter
             ->isInstanceOf('PommProject\ModelManager\Test\Fixture\SimpleFixture')
             ->boolean($updated_entity['a_boolean'])
             ->isTrue()
+            ->integer($updated_entity->status())
+            ->isEqualTo(FlexibleEntityMock::EXIST)
+            ->variable($model->updateByPk(['id' => PHP_INT_MAX], ['a_varchar' => 'whatever']))
+            ->isNull()
             ;
     }
 
@@ -246,6 +250,21 @@ class Model extends BaseConverter
             ->isNull()
             ->boolean($entity->isNew())
             ->isTrue()
+            ;
+    }
+
+    public function testDeleteByPK()
+    {
+        $model  = $this->getWriteFixtureModel();
+        $entity = $model->createAndSave(['a_varchar' => 'qwerty', 'a_boolean' => false]);
+        $deleted_entity = $model->deleteByPK(['id' => $entity['id']]);
+        $this
+            ->object($deleted_entity)
+            ->isInstanceOf('\PommProject\ModelManager\Test\Fixture\SimpleFixture')
+            ->boolean($deleted_entity->isNew())
+            ->isTrue()
+            ->variable($model->deleteByPK(['id' => $entity['id']]))
+            ->isNull()
             ;
     }
 
