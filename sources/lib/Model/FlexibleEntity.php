@@ -57,7 +57,7 @@ abstract class FlexibleEntity implements \ArrayAccess, \IteratorAggregate
      *
      * @final
      * @access public
-     * @param  string $var Key you want to retrieve value from.
+     * @param  string|array $var Key(s) you want to retrieve value from.
      * @throw  ModelException if strict and the attribute does not exist.
      * @return mixed
      */
