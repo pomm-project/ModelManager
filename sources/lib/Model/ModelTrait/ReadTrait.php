@@ -86,6 +86,28 @@ trait ReadTrait
     }
 
     /**
+     * findByPK
+     *
+     * Return an entity upon its primary key. If no entities are found, null is
+     * returned.
+     *
+     * @access public
+     * @param  array $primary_key
+     * @return FlexibleEntity
+     */
+    public function findByPK(array $primary_key)
+    {
+        $where = $this
+            ->checkPrimaryKey($primary_key)
+            ->getWhereFrom($primary_key)
+            ;
+
+        $iterator = $this->findWhere($where);
+
+        return $iterator->isEmpty() ? null : $iterator->current();
+    }
+
+    /**
      * countWhere
      *
      * Return the number of records matching a condition.
@@ -111,5 +133,51 @@ trait ReadTrait
             ->getClientUsingPooler('prepared_statement', $sql)
             ->execute($values)
             ->fetchColumn('count')[0];
+    }
+
+    /**
+     * checkPrimaryKey
+     *
+     * Check if the given values fully describe a primary key. Throw a
+     * ModelException if not.
+     *
+     * @access private
+     * @param  array $values
+     * @return Model $this
+     */
+    private function checkPrimaryKey(array $values)
+    {
+        foreach($this->getStructure()->getPrimaryKey() as $key) {
+            if (!isset($values[$key])) {
+                throw new ModelException(
+                    sprintf(
+                        "Key '%s' is missing to fully describes the primary key {%s}.",
+                        $key,
+                        join(', ', $this->getStructure()->getPrimaryKey())
+                    )
+                );
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * getWhereFrom
+     *
+     * Build a condition on given values.
+     *
+     * @access protected
+     * @param  array $values
+     * @return Where
+     */
+    protected function getWhereFrom(array $values)
+    {
+        $where = new Where();
+        foreach($values as $field => $value) {
+            $where->andWhere(sprintf("%s = $*", $field), [$value]);
+        }
+
+        return $where;
     }
 }

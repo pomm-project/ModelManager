@@ -165,6 +165,18 @@ class Model extends BaseConverter
             ;
     }
 
+    public function testFindByPK()
+    {
+        $this
+            ->object($this->getReadFixtureModel()->findByPK(['id' => 1]))
+            ->isInstanceOf('\PommProject\ModelManager\Test\Fixture\SimpleFixture')
+            ->integer($this->getReadFixtureModel()->findByPK(['id' => 2])['id'])
+            ->isEqualTo(2)
+            ->variable($this->getReadFixtureModel()->findByPK(['id' => 5]))
+            ->isNull()
+            ;
+    }
+
     public function testCountWhere()
     {
         $model = $this->getReadFixtureModel();
@@ -200,12 +212,27 @@ class Model extends BaseConverter
         $entity = $model->createAndSave(['a_varchar' => 'qwerty', 'a_boolean' => false]);
         $entity->set('a_varchar', 'azerty')->set('a_boolean', true);
         $this
+            ->assert('Simple update')
             ->object($model->updateOne($entity, ['a_varchar']))
             ->isIdenticalTo($model)
             ->string($entity->get('a_varchar'))
             ->isEqualTo('azerty')
             ->boolean($entity->get('a_boolean'))
             ->isFalse()
+            ;
+    }
+
+    public function testCreateAndSave()
+    {
+        $model  = $this->getWriteFixtureModel();
+        $entity = $model->createAndSave(['a_varchar' => 'wxcvbn', 'a_boolean' => true]);
+        $this
+            ->boolean($entity->has('id'))
+            ->isTrue()
+            ->boolean($entity->isNew())
+            ->isFalse()
+            ->array($model->findWhere('id = $*', [$entity['id']])->current()->getIterator()->getArrayCopy())
+            ->isIdenticalTo($entity->getIterator()->getArrayCopy())
             ;
     }
 }

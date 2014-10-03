@@ -21,7 +21,6 @@ class WriteFixtureModel extends SimpleFixtureModel
     public function __construct()
     {
         parent::__construct();
-        $this->primary_key = ['id'];
         $this->getStructure()->setRelation('write_fixture');
     }
 
