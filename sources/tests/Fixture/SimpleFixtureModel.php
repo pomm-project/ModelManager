@@ -29,8 +29,8 @@ class SimpleFixtureModel extends Model
         $sql = strtr(
             "select :fields from :relation where :condition",
             [
-                ':fields' => $this->createProjection()->formatFieldsWithFieldAlias(),
-                ':relation' => $this->getStructure()->getRelation(),
+                ':fields'    => $this->createProjection()->formatFieldsWithFieldAlias(),
+                ':relation'  => $this->getStructure()->getRelation(),
                 ':condition' => (string) $where,
             ]
         );

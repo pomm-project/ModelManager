@@ -22,7 +22,7 @@ class WriteFixtureModel extends SimpleFixtureModel
     {
         parent::__construct();
         $this->primary_key = ['id'];
-        $this->structure->setRelation('write_fixture');
+        $this->getStructure()->setRelation('write_fixture');
     }
 
     public function initialize(Session $session)
