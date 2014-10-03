@@ -43,22 +43,15 @@ SQL;
         );
     }
 
-    public function testConstructor()
-    {
-        $collection = $this->getCollectionMock();
-        $this
-            ->mock($collection)
-            ->call('clearFilters')
-            ->once()
-            ;
-    }
-
     public function testGetWithoutFilters()
     {
         $collection = $this->getCollectionMock();
         $this
             ->object($collection->get(0))
             ->isInstanceOf('\PommProject\ModelManager\Test\Fixture\SimpleFixture')
+            ->mock($collection)
+            ->call('parseRow')
+            ->atLeastOnce()
             ->array($collection->get(0)->extract())
             ->isEqualTo(['id' => 1, 'some_data' => 'one'])
             ->array($collection->get(3)->extract())

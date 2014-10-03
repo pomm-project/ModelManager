@@ -45,10 +45,10 @@ class CollectionIterator extends ResultIterator
      */
     public function __construct(ResultHandler $result, Session $session, Projection $projection, $flexible_class_name)
     {
-        parent::__construct($result, $session);
-
         $this->projection           = $projection;
         $this->flexible_class_name  = $flexible_class_name;
+
+        parent::__construct($result, $session);
     }
 
     /**
@@ -75,9 +75,9 @@ class CollectionIterator extends ResultIterator
      *
      * see @ResultIterator
      */
-    protected function getFieldType($field_no)
+    protected function getFieldType($name)
     {
-        $type = $this->projection->getFieldType($this->result->getFieldName($field_no));
+        $type = $this->projection->getFieldType($name);
 
         if ($type !== null) {
             if (preg_match('/^(.+)\[\]$/', $type, $matchs)) {
