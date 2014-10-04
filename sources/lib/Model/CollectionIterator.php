@@ -27,8 +27,8 @@ use PommProject\Foundation\Session;
  */
 class CollectionIterator extends ResultIterator
 {
+    protected $model;
     protected $projection;
-    protected $flexible_class_name;
     protected $filters = [];
 
     /**
@@ -40,15 +40,19 @@ class CollectionIterator extends ResultIterator
      * @param  ConverterHolder $converter_holder
      * @param  resource        $result_resource
      * @param  Projection      $projection
-     * @param  string          $flexible_class_name
+     * @param  Model           $model
      * @return void
      */
-    public function __construct(ResultHandler $result, Session $session, Projection $projection, $flexible_class_name)
+    public function __construct(ResultHandler $result, Projection $projection, Model $model)
     {
-        $this->projection           = $projection;
-        $this->flexible_class_name  = $flexible_class_name;
+        parent::__construct($result);
+        $this->projection = $projection;
+        $this->model      = $model;
+    }
 
-        parent::__construct($result, $session);
+    public function get($index)
+    {
+        return $this->parseRow(parent::get($index));
     }
 
     /**
@@ -64,28 +68,13 @@ class CollectionIterator extends ResultIterator
     public function parseRow(array $values)
     {
         $values = $this->launchFilters($values);
-        $values = parent::parseRow($values);
-        $class_name = $this->flexible_class_name;
 
-        return new $class_name($values);
-    }
-
-    /**
-     * getFieldType
-     *
-     * see @ResultIterator
-     */
-    protected function getFieldType($name)
-    {
-        $type = $this->projection->getFieldType($name);
-
-        if ($type !== null) {
-            if (preg_match('/^(.+)\[\]$/', $type, $matchs)) {
-                $type = sprintf("_%s", $matchs[1]);
-            }
-
-            return $type;
-        }
+        return $this
+            ->model
+            ->getSession()
+            ->getClient('hydrator', $this->model->getClientIdentifier())
+            ->hydrate(new HydrationPlan($this->projection, $values))
+            ;
     }
 
     /**
@@ -144,5 +133,50 @@ class CollectionIterator extends ResultIterator
         $this->filters = [];
 
         return $this;
+    }
+
+    /**
+     * slice
+     *
+     * see @ResultIterator
+     */
+    public function slice($name)
+    {
+        return $this->convertSlice(parent::slice($name), $name);
+    }
+
+    /**
+     * convertSlice
+     *
+     * Convert a slice.
+     *
+     * @access protected 
+     * @param  array $values
+     * @param  string $name
+     * @return array
+     */
+    protected function convertSlice(array $values, $name)
+    {
+        $type = $this->projection->getFieldType($name);
+
+        if ($this->projection->isArray($name)) {
+            $converter = $this
+                ->model
+                ->getSession()
+                ->getClientUsingPooler('converter', 'array')
+                ;
+        } else {
+            $converter = $this
+                ->model
+                ->getSession()
+                ->getClientUsingPooler('converter', $type);
+        }
+
+        return array_map(
+            function($val) use ($converter, $type) {
+                return $converter->fromPg($val, $type);
+            },
+            $values
+        );
     }
 }

@@ -37,13 +37,18 @@ abstract class Model implements ClientInterface
     /**
      * getSession
      *
-     * Return the current session.
+     * Return the current session. If session is not set, a ModelException is
+     * thrown.
      *
-     * @access protected
+     * @access public
      * @return Session
      */
-    protected function getSession()
+    public function getSession()
     {
+        if ($this->session === null) {
+            throw new ModelException(sprintf("Model class '%s' is not registered against the session.", get_class($this)));
+        }
+
         return $this->session;
     }
 
@@ -83,6 +88,14 @@ abstract class Model implements ClientInterface
         if ($this->flexible_entity_class == null) {
             throw new ModelException(sprintf("Flexible entity not set while initializing Model class '%s'.", get_class($this)));
         }
+
+        $this->session->registerClient(
+            new Hydrator(
+                get_class($this),
+                $this->flexible_entity_class,
+                $this->getStructure()->getPrimaryKey()
+            )
+        );
     }
 
     /**
@@ -114,9 +127,8 @@ abstract class Model implements ClientInterface
                 ->session
                 ->getClientUsingPooler('prepared_statement', $sql)
                 ->execute($values),
-            $this->session,
             $projection === null ? $this->createProjection() : $projection,
-            $this->flexible_entity_class
+            $this
         );
     }
 

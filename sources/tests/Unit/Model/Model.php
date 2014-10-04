@@ -11,7 +11,9 @@ namespace PommProject\ModelManager\Test\Unit\Model;
 
 use PommProject\Foundation\Where;
 use PommProject\Foundation\Query\QueryPooler;
+use PommProject\Foundation\Converter\ConverterPooler;
 use PommProject\Foundation\PreparedQuery\PreparedQueryPooler;
+
 use PommProject\Foundation\Test\Unit\Converter\BaseConverter;
 
 use PommProject\ModelManager\Test\Fixture\SimpleFixture;
@@ -45,8 +47,8 @@ class Model extends BaseConverter
         parent::registerClientPoolers();
         $this->session
             ->registerClientPooler(new PreparedQueryPooler())
-            ->registerClientPooler(new QueryPooler())
             ->registerClientPooler(new ModelPooler())
+            ->registerClientPooler(new ConverterPooler())
             ;
     }
 

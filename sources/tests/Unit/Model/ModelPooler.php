@@ -58,7 +58,7 @@ class ModelPooler extends Atoum
             ->withArguments('model', $identifier)
             ->once()
             ->call('registerClient')
-            ->once()
+            ->twice()
             ->assert('Client should be in the ClientHolder now.')
             ->object($client_pooler->getClient($model_class))
             ->isInstanceOf($model_class)

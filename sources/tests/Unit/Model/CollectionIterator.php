@@ -11,10 +11,23 @@ namespace PommProject\ModelManager\Test\Unit\Model;
 
 use Mock\PommProject\ModelManager\Model\Projection         as ProjectionMock;
 use Mock\PommProject\ModelManager\Model\CollectionIterator as CollectionIteratorMock;
+
+use PommProject\ModelManager\Model\ModelPooler;
+
 use PommProject\Foundation\Test\Unit\Converter\BaseConverter;
+use PommProject\Foundation\Converter\ConverterPooler;
+use PommProject\Foundation\Session;
 
 class CollectionIterator extends BaseConverter
 {
+    protected function registerClientPoolers()
+    {
+        $this->getSession()
+            ->registerClientPooler(new ModelPooler())
+            ->registerClientPooler(new ConverterPooler())
+            ;
+    }
+
     protected function getSql()
     {
         return <<<SQL
@@ -37,9 +50,8 @@ SQL;
     {
         return new CollectionIteratorMock(
             $this->getQueryResult($sql),
-            $this->getSession(),
             new ProjectionMock(['id' => 'int4', 'some_data' => 'varchar']),
-            '\PommProject\ModelManager\Test\Fixture\SimpleFixture'
+            $this->getSession()->getModel('\PommProject\ModelManager\Test\Fixture\SimpleFixtureModel')
         );
     }
 
