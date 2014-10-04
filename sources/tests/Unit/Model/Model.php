@@ -179,6 +179,14 @@ class Model extends BaseConverter
             ;
     }
 
+    public function testUseIdentityMapper()
+    {
+        $this
+            ->object($this->getReadFixtureModel()->findByPK(['id' => 1]))
+            ->isIdenticalTo($this->getReadFixtureModel()->findByPK(['id' => 1]))
+            ;
+    }
+
     public function testCountWhere()
     {
         $model = $this->getReadFixtureModel();
@@ -238,6 +246,8 @@ class Model extends BaseConverter
             ->isEqualTo(FlexibleEntityMock::EXIST)
             ->variable($model->updateByPk(['id' => PHP_INT_MAX], ['a_varchar' => 'whatever']))
             ->isNull()
+            ->object($entity)
+            ->isIdenticalTo($updated_entity)
             ;
     }
 
@@ -267,6 +277,8 @@ class Model extends BaseConverter
             ->isTrue()
             ->variable($model->deleteByPK(['id' => $entity['id']]))
             ->isNull()
+            ->object($entity)
+            ->isIdenticalTo($deleted_entity)
             ;
     }
 

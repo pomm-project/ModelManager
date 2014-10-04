@@ -14,6 +14,7 @@ use PommProject\Foundation\Client\ClientInterface;
 
 use PommProject\ModelManager\Model\HydrationPlan;
 use PommProject\ModelManager\Model\FlexibleEntity;
+use PommProject\ModelManager\Model\IdentityMapper;
 
 /**
  * Hydrator
@@ -43,11 +44,12 @@ class Hydrator extends Client
      * @param  array  $primary_key
      * @return void
      */
-    public function __construct($model_class, $entity_class, array $primary_key = [])
+    public function __construct($model_class, $entity_class, array $primary_key = [], IdentityMapper $identity_mapper = null)
     {
-        $this->model_class  = $model_class;
-        $this->entity_class = $entity_class;
-        $this->primary_key  = $primary_key;
+        $this->model_class     = $model_class;
+        $this->entity_class    = $entity_class;
+        $this->primary_key     = $primary_key;
+        $this->identity_mapper = $identity_mapper !== null ? $identity_mapper : new IdentityMapper();
     }
 
     /**
@@ -73,6 +75,7 @@ class Hydrator extends Client
      */
     public function shutdown()
     {
+        $this->identity_mapper = null;
     }
 
     /**
@@ -120,7 +123,10 @@ class Hydrator extends Client
     {
         $class_name = $this->entity_class;
 
-        return new $class_name($values);
+        return $this
+            ->identity_mapper
+            ->fetch(new $class_name($values), $this->primary_key)
+            ;
     }
 }
 
