@@ -32,6 +32,7 @@ class Hydrator extends Client
     protected $model_class ;
     protected $entity_class;
     protected $primary_key;
+    protected $identity_mapper;
 
     /**
      * __construct
