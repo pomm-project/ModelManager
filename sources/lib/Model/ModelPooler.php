@@ -12,7 +12,6 @@ namespace PommProject\ModelManager\Model;
 use PommProject\ModelManager\Exception\ModelException;
 use PommProject\Foundation\Client\ClientPoolerInterface;
 use PommProject\Foundation\Client\ClientPooler;
-use PommProject\Foundation\Session;
 
 /**
  * ModelPooler
@@ -48,11 +47,11 @@ class ModelPooler extends ClientPooler
     public function getClient($class)
     {
         $class   = trim($class, '\\');
-        $model = $this->session->getClient('model', $class);
+        $model = $this->getSession()->getClient('model', $class);
 
         if ($model === null) {
             $model = $this->createModel($class);
-            $this->session->registerClient($model);
+            $this->getSession()->registerClient($model);
         }
 
         return $model;

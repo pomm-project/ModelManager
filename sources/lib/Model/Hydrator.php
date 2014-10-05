@@ -95,13 +95,13 @@ class Hydrator extends Client
         foreach($hydration_plan->getIterator() as $field_name => $value) {
             if ($hydration_plan->isArray($field_name)) {
                 $values[$field_name] = $this
-                    ->session
+                    ->getSession()
                     ->getClientUsingPooler('converter', 'array')
                     ->fromPg($value, $hydration_plan->getFieldType($field_name))
                     ;
             } else {
                 $values[$field_name] = $this
-                    ->session
+                    ->getSession()
                     ->getClientUsingPooler('converter', $hydration_plan->getFieldType($field_name))
                     ->fromPg($value)
                     ;
