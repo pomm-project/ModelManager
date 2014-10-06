@@ -9,10 +9,9 @@
  */
 namespace PommProject\ModelManager\ModelLayer;
 
+use PommProject\Foundation\Connection;
 use PommProject\Foundation\Client\Client;
 use PommProject\Foundation\Client\ClientInterface;
-
-use PommProject\Foundation\Connection;
 
 /**
  * ModelLayer
@@ -29,6 +28,8 @@ use PommProject\Foundation\Connection;
 abstract class ModelLayer extends Client
 {
     /**
+     * getClientType
+     *
      * @see ClientInterface
      */
     public function getClientType()
@@ -37,6 +38,8 @@ abstract class ModelLayer extends Client
     }
 
     /**
+     * getClientIdentifier
+     *
      * @see ClientInterface
      */
     public function getClientIdentifier()
@@ -45,6 +48,8 @@ abstract class ModelLayer extends Client
     }
 
     /**
+     * shutdown
+     *
      * @see ClientInterface
      */
     public function shutdown()
@@ -240,6 +245,7 @@ abstract class ModelLayer extends Client
      *
      * Tell if a transaction is open or not.
      *
+     * @see    Cient
      * @access protected
      * @return bool
      */

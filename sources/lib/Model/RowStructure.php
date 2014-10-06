@@ -93,6 +93,23 @@ abstract class RowStructure implements \ArrayAccess
     }
 
     /**
+     * setPrimaryKey
+     *
+     * Set or change the primary key definition.
+     *
+     * @access public
+     * @param  array        $primary_key
+     * @return RowStructure $this
+     */
+    public function setPrimaryKey(array $primary_key)
+    {
+        $this->primary_key = $primary_key;
+
+        return $this;
+    }
+
+
+    /**
      * addField
      *
      * Add a new field structure.
