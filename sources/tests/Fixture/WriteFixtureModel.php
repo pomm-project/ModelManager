@@ -39,4 +39,9 @@ class WriteFixtureModel extends SimpleFixtureModel
     {
         $this->executeAnonymousQuery(sprintf("drop table %s", $this->getStructure()->getRelation()));
     }
+
+    public function truncate()
+    {
+        $this->executeAnonymousQuery(sprintf("truncate %s", $this->getStructure()->getRelation()));
+    }
 }
