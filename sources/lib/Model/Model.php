@@ -69,7 +69,7 @@ abstract class Model implements ClientInterface
      */
     public function getClientIdentifier()
     {
-        return get_class($this);
+        return trim(get_class($this), "\\");
     }
 
     /**

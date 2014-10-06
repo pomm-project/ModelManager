@@ -36,38 +36,12 @@ class ModelLayerPooler extends ClientPooler
     }
 
     /**
-     * getClient
+     * createClient
      *
-     * Get an existing ModelLayer from the pool. If the given ModelLayer does
-     * not exist, it is instanciated and registered to the pool.
-     *
-     * @see ClientPoolerInterface
-     */
-    public function getClient($identifier)
-    {
-        $model_layer = $this
-            ->getSession()
-            ->getClient($this->getPoolerType(), $identifier)
-            ;
-
-        if ($model_layer === null) {
-            $model_layer = $this->createModelLayerClass($identifier);
-            $this->getSession()->registerClient($model_layer);
-        }
-
-        return $model_layer;
-    }
-
-    /**
-     * createModelLayerClass
-     *
-     * Create an instance of the given class.
-     *
-     * @access protected
-     * @param  string $identifier
+     * @see    ClientPooler
      * @return ModelLayer
      */
-    protected function createModelLayerClass($identifier)
+    protected function createClient($identifier)
     {
         try {
             $reflection = new \ReflectionClass($identifier);

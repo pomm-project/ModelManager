@@ -35,41 +35,24 @@ class ModelPooler extends ClientPooler
     }
 
     /**
-     * The ModelPooler checks if the Session's ClientHolder has got
-     * the wanted instance. If so, it is returned. Otherwise, it checks if the
-     * wanted model class exists and try to instance it. It is then
-     * registered in the ClientHolder and sent back.
+     * getClientFromPool
      *
-     * @throw ModelException if class can not be loaded or does not implement
-     * the ClientInterface.
-     * @see ClientPoolerInterface
+     * @see    ClientPooler
+     * @return Model|null
      */
-    public function getClient($class)
+    protected function getClientFromPool($class)
     {
-        $class   = trim($class, '\\');
-        $model = $this->getSession()->getClient('model', $class);
-
-        if ($model === null) {
-            $model = $this->createModel($class);
-            $this->getSession()->registerClient($model);
-        }
-
-        return $model;
+        return $this->getSession()->getClient($this->getPoolerType(), trim($class, "\\"));
     }
 
     /**
      * createModel
      *
-     * Model instance builder.
-     * A ModelException is thrown if the class does not exist, does not
-     * implement ClientInterface or is not a child of Model.
-     *
-     * @access protected
-     * @param  string    $class
+     * @see    ClientPooler
      * @throw  ModelException if incorrect
      * @return Model
      */
-    protected function createModel($class)
+    protected function createClient($class)
     {
         try {
             $reflection = new \ReflectionClass($class);

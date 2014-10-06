@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pomm-project/Foundation.git",
-                "reference": "ca2582cb8014fd4ee3c839591e8ba9336b3bb925"
+                "reference": "4e1757c37e6b386ec415cd0108f85f9ae9a32f7d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pomm-project/Foundation/zipball/ca2582cb8014fd4ee3c839591e8ba9336b3bb925",
-                "reference": "ca2582cb8014fd4ee3c839591e8ba9336b3bb925",
+                "url": "https://api.github.com/repos/pomm-project/Foundation/zipball/4e1757c37e6b386ec415cd0108f85f9ae9a32f7d",
+                "reference": "4e1757c37e6b386ec415cd0108f85f9ae9a32f7d",
                 "shasum": ""
             },
             "require": {
@@ -52,7 +52,7 @@
                 "framework",
                 "postgresql"
             ],
-            "time": "2014-10-06 09:31:29"
+            "time": "2014-10-06 16:52:07"
         },
         {
             "name": "psr/log",

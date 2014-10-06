@@ -19,12 +19,14 @@ class ModelManagerDatabaseConfiguration extends DatabaseConfiguration
                 ->getParameterHolder()
                 ->getParameter('default:client_poolers'),
             [
-                'model' => '\PommProject\ModelManager\Model\ModelPooler',
+                'model'       => '\PommProject\ModelManager\Model\ModelPooler',
                 'model_layer' => '\PommProject\ModelManager\ModelLayer\ModelLayerPooler',
             ]
         );
-        $this->getParameterHolder()
-            ->setParameter('default:client_poolers', $default_poolers);
+        $this
+            ->getParameterHolder()
+            ->setParameter('default:client_poolers', $default_poolers)
+            ;
 
         return $this;
     }

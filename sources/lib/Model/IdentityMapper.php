@@ -38,7 +38,7 @@ class IdentityMapper
      * @param  array $primary_key
      * @return string
      */
-    static public function getSignature(FlexibleEntity $entity, array $primary_key)
+    public static function getSignature(FlexibleEntity $entity, array $primary_key)
     {
         if (count($primary_key) === 0) {
             return null;
