@@ -10,11 +10,12 @@
 namespace PommProject\ModelManager\Test\Unit\Model;
 
 use PommProject\Foundation\Where;
+use PommProject\Foundation\Session;
 use PommProject\Foundation\Query\QueryPooler;
 use PommProject\Foundation\Converter\ConverterPooler;
 use PommProject\Foundation\PreparedQuery\PreparedQueryPooler;
 
-use PommProject\Foundation\Test\Unit\Converter\BaseConverter;
+use PommProject\Foundation\Test\Unit\SessionAwareAtoum;
 
 use PommProject\ModelManager\Test\Fixture\SimpleFixture;
 use PommProject\ModelManager\Model\Model as PommModel;
@@ -23,7 +24,7 @@ use PommProject\ModelManager\Model\ModelPooler;
 use Mock\PommProject\ModelManager\Model\FlexibleEntity as FlexibleEntityMock;
 use Mock\PommProject\ModelManager\Model\RowStructure   as RowStructureMock;
 
-class Model extends BaseConverter
+class Model extends SessionAwareAtoum
 {
     public function setUp()
     {
@@ -42,10 +43,9 @@ class Model extends BaseConverter
             ->executeAnonymousQuery('drop schema pomm_test cascade;');
     }
 
-    protected function registerClientPoolers()
+    protected function initializeSession(Session $session)
     {
-        parent::registerClientPoolers();
-        $this->session
+        $session
             ->registerClientPooler(new PreparedQueryPooler())
             ->registerClientPooler(new ModelPooler())
             ->registerClientPooler(new ConverterPooler())

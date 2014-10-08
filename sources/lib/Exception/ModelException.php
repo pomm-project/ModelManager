@@ -9,7 +9,7 @@
  */
 namespace PommProject\ModelManager\Exception;
 
-use PommProject\Foundation\Exception\FoundationException;
+use PommProject\Foundation\Exception\PommException;
 
 /**
  * ModelException
@@ -20,8 +20,8 @@ use PommProject\Foundation\Exception\FoundationException;
  * @copyright 2014 Grégoire HUBERT
  * @author Grégoire HUBERT
  * @license X11 {@link http://opensource.org/licenses/mit-license.php}
- * @see FoundationException
+ * @see PommException
  */
-class ModelException extends FoundationException
+class ModelException extends PommException
 {
 }

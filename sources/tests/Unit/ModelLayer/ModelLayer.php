@@ -9,6 +9,7 @@
  */
 namespace PommProject\ModelManager\Test\Unit\ModelLayer;
 
+use PommProject\Foundation\Session;
 use PommProject\Foundation\Observer\ObserverPooler;
 use PommProject\Foundation\Test\Unit\SessionAwareAtoum;
 use PommProject\ModelManager\ModelLayer\ModelLayerPooler;
@@ -24,9 +25,9 @@ class ModelLayer extends SessionAwareAtoum
         $this->getModelLayer()->rollbackTransaction();
     }
 
-    protected function registerClientPoolers()
+    protected function initializeSession(Session $session)
     {
-        $this->session
+        $session
             ->registerClientPooler(new ObserverPooler())
             ->registerClientPooler(new ModelLayerPooler())
             ;

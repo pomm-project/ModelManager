@@ -14,15 +14,15 @@ use Mock\PommProject\ModelManager\Model\CollectionIterator as CollectionIterator
 
 use PommProject\ModelManager\Model\ModelPooler;
 
-use PommProject\Foundation\Test\Unit\Converter\BaseConverter;
+use PommProject\Foundation\Test\Unit\SessionAwareAtoum;
 use PommProject\Foundation\Converter\ConverterPooler;
 use PommProject\Foundation\Session;
 
-class CollectionIterator extends BaseConverter
+class CollectionIterator extends SessionAwareAtoum
 {
-    protected function registerClientPoolers()
+    protected function initializeSession(Session $session)
     {
-        $this->getSession()
+        $session
             ->registerClientPooler(new ModelPooler())
             ->registerClientPooler(new ConverterPooler())
             ;
