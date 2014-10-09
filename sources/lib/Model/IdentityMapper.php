@@ -67,6 +67,7 @@ class IdentityMapper
 
         if (!array_key_exists($signature, $this->instances)) {
             $this->instances[$signature] = $entity;
+            $entity->status(FlexibleEntity::EXIST);
         } else {
             $this->instances[$signature]->hydrate($entity->extract());
         }

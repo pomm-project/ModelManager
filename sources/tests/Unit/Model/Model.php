@@ -176,6 +176,8 @@ class Model extends SessionAwareAtoum
             ->isEqualTo(2)
             ->variable($this->getReadFixtureModel()->findByPK(['id' => 5]))
             ->isNull()
+            ->integer($this->getReadFixtureModel()->findByPK(['id' => 3])->status())
+            ->isEqualTo(FlexibleEntityMock::EXIST)
             ;
     }
 
@@ -279,6 +281,8 @@ class Model extends SessionAwareAtoum
             ->isNull()
             ->object($entity)
             ->isIdenticalTo($deleted_entity)
+            ->boolean($entity->isNew())
+            ->isTrue()
             ;
     }
 
@@ -289,8 +293,8 @@ class Model extends SessionAwareAtoum
         $this
             ->boolean($entity->has('id'))
             ->isTrue()
-            ->boolean($entity->isNew())
-            ->isFalse()
+            ->integer($entity->status())
+            ->isEqualTo(FlexibleEntityMock::EXIST)
             ->array($model->findWhere('id = $*', [$entity['id']])->current()->getIterator()->getArrayCopy())
             ->isIdenticalTo($entity->getIterator()->getArrayCopy())
             ;

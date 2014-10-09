@@ -126,10 +126,6 @@ trait WriteTrait
 
         $entity = $this->query($sql, $where->getValues())->current();
 
-        if ($entity !== null) {
-            $entity->status(FlexibleEntity::EXIST);
-        }
-
         return $entity;
     }
 
