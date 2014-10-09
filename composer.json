@@ -15,13 +15,16 @@
     "require-dev": {
         "atoum/atoum" : "dev-master"
     },
+    "suggest": {
+        "pomm-project/cli": "dev-master"
+    },
     "autoload": {
-        "psr-4": { 
+        "psr-4": {
             "PommProject\\ModelManager\\": "sources/lib"
         }
     },
     "autoload-dev": {
-        "psr-4": { 
+        "psr-4": {
             "PommProject\\ModelManager\\Test\\": "sources/tests"
         }
     },
