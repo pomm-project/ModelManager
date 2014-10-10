@@ -12,11 +12,11 @@ namespace PommProject\ModelManager\Test\Fixture;
 use PommProject\Foundation\Session;
 use PommProject\Foundation\Exception\SqlException;
 use PommProject\ModelManager\Test\Fixture\SimpleFixtureModel;
-use PommProject\ModelManager\Model\ModelTrait\WriteTrait;
+use PommProject\ModelManager\Model\ModelTrait\WriteQueries;
 
 class WriteFixtureModel extends SimpleFixtureModel
 {
-    use WriteTrait;
+    use WriteQueries;
 
     public function __construct()
     {

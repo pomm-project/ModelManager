@@ -15,7 +15,7 @@ use PommProject\ModelManager\Model\Model;
 use PommProject\Foundation\Where;
 
 /**
- * ReadTrait
+ * ReadQueries
  *
  * Basic read queries for model instances.
  *
@@ -24,7 +24,7 @@ use PommProject\Foundation\Where;
  * @author Grégoire HUBERT
  * @license X11 {@link http://opensource.org/licenses/mit-license.php}
  */
-trait ReadTrait
+trait ReadQueries
 {
     use BaseTrait;
 

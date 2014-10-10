@@ -10,24 +10,24 @@
 namespace PommProject\ModelManager\Model\ModelTrait;
 
 use PommProject\ModelManager\Exception\ModelException;
-use PommProject\ModelManager\Model\ModelTrait\ReadTrait;
+use PommProject\ModelManager\Model\ModelTrait\ReadQueries;
 use PommProject\ModelManager\Model\FlexibleEntity;
 use PommProject\ModelManager\Model\Model;
 use PommProject\Foundation\Where;
 
 /**
- * WriteTrait
+ * WriteQueries
  *
- * Basic read queries for model instances.
+ * Basic write queries for model instances.
  *
  * @package ModelManager
  * @copyright 2014 Grégoire HUBERT
  * @author Grégoire HUBERT
  * @license X11 {@link http://opensource.org/licenses/mit-license.php}
  */
-trait WriteTrait
+trait WriteQueries
 {
-    use ReadTrait;
+    use ReadQueries;
 
     /**
      * insertOne
