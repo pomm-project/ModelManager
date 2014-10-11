@@ -360,6 +360,22 @@ abstract class ModelLayer extends Client
     }
 
     /**
+     * getModel
+     *
+     * Proxy to Session::getModel();
+     *
+     * @access protected
+     * @param  string    model identifier
+     * @return Model
+     */
+    protected function getModel($identifier)
+    {
+        return $this
+            ->getSession()
+            ->getClientUsingPooler('model', $identifier);
+    }
+
+    /**
      * sendParameter
      *
      * Send a parameter to the server.
