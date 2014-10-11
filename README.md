@@ -2,9 +2,9 @@
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/pomm-project/ModelManager/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/pomm-project/ModelManager/?branch=master)
 
-Pomm's ModelManager package is the common model layer built upon the Foundation package. It makes developers able to create models against the database and get object oriented entities back. **It is not an ORM** it grants developers with the ability to perform native queries and use almost all types of Postgresql. This makes model layer to meet with performances while staying lean.
+Pomm's ModelManager package is the common model layer built upon the Foundation package. It makes developers able to create models against the database and get object oriented entities back. **It is not an ORM**, it grants developers with the ability to perform native queries using native real SQL and use almost all types of Postgresql. This makes model layer to meet with performances while staying lean.
 
-This package is still in early development stage and should be available soon. If you want to use Pomm in production now, look at [Pomm 1.x](http://www.pomm-project.org).
+**Important** This package is still in early development stage and should not being used in production. If you want to use Pomm in production now, look at [Pomm 1.x](http://www.pomm-project.org).
 
 ## Introduction
 
@@ -131,7 +131,7 @@ class DocumentModel extends Model
 
 Projection is the big difference between Pomm and an ORM. ORM define the relation through a static class definition whereas Pomm defines a [projection](http://en.wikipedia.org/wiki/Relational_algebra#Projection_.28.CF.80.29) (ie the fields list of a select or returning) from a database relation to a flexible instance.
 
-By default, a `Model` instance takes all the fields of its relation so `$model->findByPK(['document_id' => 2])` is equivalent to `select * from myschema.document where document_id = 2`. But it is possible to tune this projection in overloading the `createProjection()` method.
+By default, a `Model` instance takes all the fields of its relation so `$model->findByPK(['document_id' => 2])` is equivalent to `select * from myschema.document where document_id = 2`. But it is possible to tune this projection by overloading the `createProjection()` method.
 
 ```php
 function createProjection()
@@ -143,12 +143,12 @@ function createProjection()
 }
 ```
 
-Now, calling `findByPK` will issue a query like `select …, d.page / (d.modification + 1) as "quality_score", … from document d where …`. It is important to note that all queries are using the default projection so modifying it will change the values the entities are hydrated with. The third argument is the type associated with the added field. It makes the converter system to know how to convert the new value from its database representation to a usable PHP value.
+Now, calling `findByPK` will issue a query like `select …, d.page / (d.modification + 1) as "quality_score", … from document d where …`. It is important to note that all queries are using the default projection so modifying it will change the values the entities are hydrated with. The method's third argument is the type associated with the added field. It makes the converter system to know how to convert the new value from its database representation to a usable PHP value.
 
 
 ### Custom queries
 
-Even though the queries coming with the traits cover a broad range of what can be done on a relation, Pomm incites developers to write custom queries using the rich [Postgres's SQL language](http://www.postgresql.org/docs/9.4/static/sql.html). Since Pomm is not an ORM, it will never generate queries to fetch foreign information letting the developers to write neats queries and add the according indexes in the database. Let's see a simple custom query:
+Even though the queries coming with the traits are covering a broad range of what can be done on a relation, Pomm incites developers to write custom queries using the rich [Postgres's SQL language](http://www.postgresql.org/docs/9.4/static/sql.html). Since Pomm is not an ORM, it will never generate queries to fetch foreign information. Let's see a simple custom query:
 
 ```php
 class DocumentModel extends Model
@@ -198,7 +198,7 @@ SQL;
 }
 ```
 
-This way to issue write queries allow developers to focus on what the query actually does instead of managing list of fields and aliases. All the goodness of Postgres'SQL like window functions, CTE etc. are usable this way.
+This way to write queries allow developers to focus on what the query actually does instead of managing list of fields and aliases. All the goodness of Postgres'SQL like window functions, CTE etc. are usable.
 
 ## Collection & flexible entities
 
@@ -207,19 +207,88 @@ This way to issue write queries allow developers to focus on what the query actu
 ```php
 $iterator = $pomm['my_database']
     ->getModel('\Model\Database\Schema\Document')
-    ->findSecret()
+    ->findSecret(Where::create("content ~* $*", ['alien']))
     ;
 
 if ($iterator->isEmpty()) {
     printf("No document found.\n");
 } else {
     foreach ($iterator as $document) {
-        printf("Document '%s' is secret.\n", $document['title']);
+        printf("Document '%s' is matching.\n", $document['title']);
     }
 }
 ```
 
+Even though flexible entities may appear as stupid data containers they are in fact complex typed schemaless containers. It is possible to specify special getters and setters:
+
+```php
+class Document extends FlexibleEntity
+{
+    public function getTitle()
+    {
+        return ucword($this->get('title'));
+    }
+}
+```
+
+With example above, `printf("Document '%s' is matching.\n", $document['title']);` will display `Document 'Super secret document' is matching.`. Different kind of accessors can be created / overloaded:
+
+ * get
+ * has
+ * set
+ * add
+
+`add` is a special accessors to add values to an existing array.
+
 
 ## Model layer
 
-## Testing
+Even though the Model service is enough for small / medium applications, it becomes insufficient for applications with a need for complex business operations. Modern frameworks offer a code layer often referred as 'service layer' or 'transaction layer'. Pomm crafts a 'model layer' for this purpose. Here is an example:
+
+```php
+class DocumentModelLayer extends ModelLayer
+{
+    public function archiveDocument($document_id)
+    {
+        $this->startTransaction();
+        try {
+            $document = $this
+                ->getModel('\Model\Database\Schema\Document')
+                ->deleteByPK(['document_id' => $document_id])
+                ;
+
+            if (!$document) {
+                $this->rollbackTransaction();
+
+                throw new \InvalidArgumentException(
+                    sprintf("Could not find document '%d'.", $document_id)
+                );
+            }
+
+            $archived_document = $this
+                ->getModel('\Model\Database\Schema\ArchivedDocument')
+                ->archiveDocument($document)
+                ;
+            $this->sendNotify(
+                    'document',
+                    json_encode($archived_document->extract())
+                    );
+            $this->commitTransaction();
+        } catch(PommException $e) {
+            $this->rollbackTransaction();
+
+            throw new \RunTimeException(
+                "A technical error occured.",
+                1,
+                $e
+            );
+        }
+
+        return $archived_document;
+    }
+}
+```
+
+Thew example above shows how to embed model calls in a transaction and how to convert technical exceptions into business exceptions.
+
+Watchful readers may have noticed a call to a method `sendNotify()`. This is a use of [Postgresql's asynchronous messaging system](http://ledgersmbdev.blogspot.fr/2012/09/objectrelational-interlude-messaging-in.html).
