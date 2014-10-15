@@ -246,7 +246,7 @@ class Model extends SessionAwareAtoum
             ->isTrue()
             ->integer($updated_entity->status())
             ->isEqualTo(FlexibleEntityMock::EXIST)
-            ->variable($model->updateByPk(['id' => PHP_INT_MAX], ['a_varchar' => 'whatever']))
+            ->variable($model->updateByPk(['id' => 999999], ['a_varchar' => 'whatever']))
             ->isNull()
             ->object($entity)
             ->isIdenticalTo($updated_entity)
