@@ -1,5 +1,13 @@
 <?php
-define('PROJECT_DIR', dirname(__FILE__));
-$loader = require PROJECT_DIR . '/vendor/autoload.php';
-$loader->addPsr4("PommProject\\Foundation\\Test\\", PROJECT_DIR."/vendor/pomm-project/foundation/sources/tests");
-require PROJECT_DIR.'/sources/tests/config.php';
+$loader = require __DIR__ . '/vendor/autoload.php';
+$loader->addPsr4('PommProject\\Foundation\\Test\\', __DIR__.'/vendor/pomm-project/foundation/sources/tests/');
+$file = __DIR__.'/sources/tests/config.php';
+
+if (file_exists($file)) {
+    // custom configuration
+    require $file;
+} else {
+    // we are using travis configuration by default
+    require __DIR__.'/sources/tests/config.travis.php';
+}
+

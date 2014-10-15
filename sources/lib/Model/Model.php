@@ -125,7 +125,7 @@ abstract class Model implements ClientInterface
         return new CollectionIterator(
             $this
                 ->session
-                ->getClientUsingPooler('prepared_statement', $sql)
+                ->getClientUsingPooler('prepared_query', $sql)
                 ->execute($values),
             $projection === null ? $this->createProjection() : $projection,
             $this
