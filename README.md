@@ -1,6 +1,6 @@
 # Pomm ModelManager
 
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/pomm-project/ModelManager/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/pomm-project/ModelManager/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/pomm-project/ModelManager/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/pomm-project/ModelManager/?branch=master) [![Build Status](https://travis-ci.org/pomm-project/ModelManager.svg)](https://travis-ci.org/pomm-project/ModelManager)
 
 Pomm's ModelManager package is the common model layer built upon the Foundation package. It makes developers able to create models against the database and get object oriented entities back. **It is not an ORM**, it grants developers with the ability to perform native queries using native real SQL and use almost all types of Postgresql. This makes model layer to meet with performances while staying lean.
 
