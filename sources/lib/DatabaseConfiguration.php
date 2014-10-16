@@ -29,7 +29,7 @@ class DatabaseConfiguration extends FoundationDatabaseConfiguration
      *
      * @see FoundationDatabaseConfiguration
      */
-    protected function initalize()
+    protected function initialize()
     {
         parent::initialize();
         $default_poolers = array_merge(
