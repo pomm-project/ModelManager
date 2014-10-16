@@ -9,10 +9,10 @@
  */
 namespace PommProject\ModelManager;
 
-use PommProject\Foundation\DatabaseConfiguration;
+use PommProject\Foundation\DatabaseConfiguration as FoundationDatabaseConfiguration;
 
 /**
- * ModelManagerDatabaseConfiguration
+ * DatabaseConfiguration
  *
  * Default registration for poolers crafted with theses packages.
  *
@@ -20,14 +20,14 @@ use PommProject\Foundation\DatabaseConfiguration;
  * @copyright 2014 Grégoire HUBERT
  * @author Grégoire HUBERT
  * @license X11 {@link http://opensource.org/licenses/mit-license.php}
- * @see DatabaseConfiguration
+ * @see FoundationDatabaseConfiguration
  */
-class ModelManagerDatabaseConfiguration extends DatabaseConfiguration
+class DatabaseConfiguration extends FoundationDatabaseConfiguration
 {
     /**
      * initalize
      *
-     * @see DatabaseConfiguration
+     * @see FoundationDatabaseConfiguration
      */
     protected function initalize()
     {
