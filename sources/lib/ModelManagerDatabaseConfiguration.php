@@ -9,11 +9,29 @@
  */
 namespace PommProject\ModelManager;
 
+use PommProject\Foundation\DatabaseConfiguration;
+
+/**
+ * ModelManagerDatabaseConfiguration
+ *
+ * Default registration for poolers crafted with theses packages.
+ *
+ * @package ModelManager
+ * @copyright 2014 Grégoire HUBERT
+ * @author Grégoire HUBERT
+ * @license X11 {@link http://opensource.org/licenses/mit-license.php}
+ * @see DatabaseConfiguration
+ */
 class ModelManagerDatabaseConfiguration extends DatabaseConfiguration
 {
+    /**
+     * initalize
+     *
+     * @see DatabaseConfiguration
+     */
     protected function initalize()
     {
-        parent::__initialize();
+        parent::initialize();
         $default_poolers = array_merge(
             $this
                 ->getParameterHolder()
