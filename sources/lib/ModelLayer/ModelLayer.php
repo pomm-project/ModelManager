@@ -92,7 +92,7 @@ abstract class ModelLayer extends Client
         } else {
             $string = join(
                 ', ',
-                array_map(function($key) { $this->escapeIdentifier($key); }, $keys)
+                array_map(function ($key) { $this->escapeIdentifier($key); }, $keys)
             );
         }
 
@@ -119,7 +119,7 @@ abstract class ModelLayer extends Client
      * @see http://www.postgresql.org/docs/9.0/static/sql-set-transaction.html
      *
      * @access protected
-     * @param  string $state
+     * @param  string     $state
      * @throw  ModelLayerException if not valid isolation level
      * @return ModelLayer $this
      */
@@ -147,7 +147,7 @@ abstract class ModelLayer extends Client
      * @see http://www.postgresql.org/docs/9.0/static/sql-set-transaction.html
      *
      * @access protected
-     * @param  string $access_mode
+     * @param  string     $access_mode
      * @throw  ModelLayerException if not valid access mode
      * @return ModelLayer $this
      */
@@ -311,7 +311,7 @@ abstract class ModelLayer extends Client
      * Proxy to Connection::executeAnonymousQuery()
      *
      * @access protected
-     * @param  string $sql
+     * @param  string        $sql
      * @return ResultHandler
      */
     protected function executeAnonymousQuery($sql)

@@ -9,9 +9,6 @@
  */
 namespace PommProject\ModelManager\Model;
 
-use PommProject\ModelManager\Model\Projection;
-
-
 /**
  * HydrationPlan
  *

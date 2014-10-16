@@ -10,10 +10,8 @@
 namespace PommProject\ModelManager\Model;
 
 use PommProject\ModelManager\Exception\ModelException;
-use PommProject\ModelManager\Model\Projection;
 use PommProject\Foundation\ResultIterator;
 use PommProject\Foundation\ResultHandler;
-use PommProject\Foundation\Session;
 
 /**
  * CollectionIterator
@@ -61,7 +59,7 @@ class CollectionIterator extends ResultIterator
      * Convert values from Pg.
      *
      * @access protected
-     * @param  array $values
+     * @param  array          $values
      * @return FlexibleEntity
      * @see    ResultIterator
      */
@@ -88,7 +86,7 @@ class CollectionIterator extends ResultIterator
      */
     protected function launchFilters(array $values)
     {
-        foreach($this->filters as $filter) {
+        foreach ($this->filters as $filter) {
             $values = call_user_func($filter, $values);
 
             if (!is_array($values)) {
@@ -150,8 +148,8 @@ class CollectionIterator extends ResultIterator
      *
      * Convert a slice.
      *
-     * @access protected 
-     * @param  array $values
+     * @access protected
+     * @param  array  $values
      * @param  string $name
      * @return array
      */
@@ -173,7 +171,7 @@ class CollectionIterator extends ResultIterator
         }
 
         return array_map(
-            function($val) use ($converter, $type) {
+            function ($val) use ($converter, $type) {
                 return $converter->fromPg($val, $type);
             },
             $values

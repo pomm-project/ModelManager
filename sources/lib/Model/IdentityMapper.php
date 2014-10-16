@@ -9,8 +9,6 @@
  */
 namespace PommProject\ModelManager\Model;
 
-use PommProject\ModelManager\Model\FlexibleEntity;
-
 /**
  * IdentityMapper
  *
@@ -35,7 +33,7 @@ class IdentityMapper
      * @static
      * @access public
      * @param  FlexibleEntity $entity
-     * @param  array $primary_key
+     * @param  array          $primary_key
      * @return string
      */
     public static function getSignature(FlexibleEntity $entity, array $primary_key)

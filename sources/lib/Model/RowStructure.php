@@ -108,7 +108,6 @@ abstract class RowStructure implements \ArrayAccess
         return $this;
     }
 
-
     /**
      * addField
      *

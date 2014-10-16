@@ -9,8 +9,6 @@
  */
 namespace PommProject\ModelManager\Model;
 
-use PommProject\ModelManager\Model\RowStructure;
-use PommProject\ModelManager\Model\FlexibleEntity;
 use PommProject\ModelManager\Exception\ModelException;
 use PommProject\Foundation\Client\ClientInterface;
 use PommProject\Foundation\Session;
@@ -115,9 +113,9 @@ abstract class Model implements ClientInterface
      * createProjection() method.
      *
      * @access protected
-     * @param  sql        $sql
-     * @param  array      $values
-     * @param  Projection $projection
+     * @param  sql                $sql
+     * @param  array              $values
+     * @param  Projection         $projection
      * @return CollectionIterator
      */
     protected function query($sql, array $values = [], Projection $projection = null)
@@ -139,8 +137,8 @@ abstract class Model implements ClientInterface
      * structure.Overriding this method will change projection for all models.
      *
      * @access  public
-     * @param   array      $tructure
-     * @return  Projection
+     * @param  array      $tructure
+     * @return Projection
      */
     public function createProjection()
     {
@@ -160,7 +158,7 @@ abstract class Model implements ClientInterface
      */
     public function checkFlexibleEntity(FlexibleEntity $entity)
     {
-        if (!($entity instanceOf $this->flexible_entity_class)) {
+        if (!($entity instanceof $this->flexible_entity_class)) {
             throw new \InvalidArgumentException(sprintf(
                 "Entity class '%s' is not a '%s'.",
                 get_class($entity),

@@ -12,10 +12,6 @@ namespace PommProject\ModelManager\Model;
 use PommProject\Foundation\Client\Client;
 use PommProject\Foundation\Client\ClientInterface;
 
-use PommProject\ModelManager\Model\HydrationPlan;
-use PommProject\ModelManager\Model\FlexibleEntity;
-use PommProject\ModelManager\Model\IdentityMapper;
-
 /**
  * Hydrator
  *
@@ -92,7 +88,7 @@ class Hydrator extends Client
     public function hydrate(HydrationPlan $hydration_plan)
     {
         $values = [];
-        foreach($hydration_plan->getIterator() as $field_name => $value) {
+        foreach ($hydration_plan->getIterator() as $field_name => $value) {
             if ($hydration_plan->isArray($field_name)) {
                 $values[$field_name] = $this
                     ->getSession()
@@ -117,7 +113,7 @@ class Hydrator extends Client
      * Deal with the mapper to create or not the entity.
      *
      * @access protected
-     * @param  array $values
+     * @param  array          $values
      * @return FlexibleEntity
      */
     protected function createEntity(array $values)
@@ -130,4 +126,3 @@ class Hydrator extends Client
             ;
     }
 }
-

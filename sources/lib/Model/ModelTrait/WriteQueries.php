@@ -9,8 +9,6 @@
  */
 namespace PommProject\ModelManager\Model\ModelTrait;
 
-use PommProject\ModelManager\Exception\ModelException;
-use PommProject\ModelManager\Model\ModelTrait\ReadQueries;
 use PommProject\ModelManager\Model\FlexibleEntity;
 use PommProject\ModelManager\Model\Model;
 use PommProject\Foundation\Where;
@@ -43,7 +41,7 @@ trait WriteQueries
     {
         $values = [];
 
-        foreach($this->getStructure()->getDefinition() as $name => $type) {
+        foreach ($this->getStructure()->getDefinition() as $name => $type) {
             if ($entity->has($name)) {
                 $values[$name] = $this->convertValueToPg($entity->get($name), $type);
             }
@@ -97,8 +95,8 @@ trait WriteQueries
      * the given key, null is returned.
      *
      * @access public
-     * @param  array $primary_key
-     * @param  array $updates
+     * @param  array          $primary_key
+     * @param  array          $updates
      * @return FlexibleEntity
      */
     public function updateByPk(array $primary_key, array $updates)
@@ -106,7 +104,7 @@ trait WriteQueries
         $where = $this->getWhereFrom($primary_key);
         $update_strings = [];
 
-        foreach($updates as $field_name => $new_value) {
+        foreach ($updates as $field_name => $new_value) {
             $update_strings[] = sprintf(
                 "%s = %s",
                 $this->escapeIdentifier($field_name),
@@ -153,7 +151,7 @@ trait WriteQueries
      * null if not found.
      *
      * @access public
-     * @param  array $primary_key
+     * @param  array          $primary_key
      * @return FlexibleEntity
      */
     public function deleteByPK(array $primary_key)
@@ -183,7 +181,7 @@ trait WriteQueries
      * Create a new entity from given values and save it in the database.
      *
      * @access public
-     * @param  array $values
+     * @param  array          $values
      * @return FlexibleEntity
      */
     public function createAndSave(array $values)
@@ -202,8 +200,8 @@ trait WriteQueries
      * array or not and call the converter pooler.
      *
      * @access protected
-     * @param mixed  $value
-     * @param string $type
+     * @param  mixed  $value
+     * @param  string $type
      * @return string
      */
     protected function convertValueToPg($value, $type)
@@ -229,7 +227,7 @@ trait WriteQueries
      * Return a comma separated list with the given escaped field names.
      *
      * @access protected
-     * @param  array $fields
+     * @param  array  $fields
      * @return string
      */
     public function getEscapedFieldList(array $fields)
@@ -237,7 +235,7 @@ trait WriteQueries
         return join(
             ', ',
             array_map(
-                function($field) { return $this->escapeIdentifier($field); },
+                function ($field) { return $this->escapeIdentifier($field); },
                 $fields
             ));
     }

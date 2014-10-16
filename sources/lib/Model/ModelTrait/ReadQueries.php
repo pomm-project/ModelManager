@@ -10,7 +10,6 @@
 namespace PommProject\ModelManager\Model\ModelTrait;
 
 use PommProject\ModelManager\Exception\ModelException;
-use PommProject\ModelManager\Model\ModelTrait\BaseTrait;
 use PommProject\ModelManager\Model\Model;
 use PommProject\Foundation\Where;
 
@@ -37,7 +36,7 @@ trait ReadQueries
      * "where" condition nor any untrusted params.
      *
      * @access public
-     * @param  string     $suffix
+     * @param  string             $suffix
      * @return CollectionIterator
      */
     public function findAll($suffix = null)
@@ -62,9 +61,9 @@ trait ReadQueries
      * "where" condition nor any untrusted params.
      *
      * @access public
-     * @param  mixed      $where
-     * @param  array      $values
-     * @param  string     $suffix order by, limit, etc.
+     * @param  mixed              $where
+     * @param  array              $values
+     * @param  string             $suffix order by, limit, etc.
      * @return CollectionIterator
      */
     public function findWhere($where, array $values = [], $suffix = '')
@@ -93,7 +92,7 @@ trait ReadQueries
      * returned.
      *
      * @access public
-     * @param  array $primary_key
+     * @param  array          $primary_key
      * @return FlexibleEntity
      */
     public function findByPK(array $primary_key)
@@ -115,7 +114,7 @@ trait ReadQueries
      *
      * @access public
      * @param  string|Where $where
-     * @param  array $values
+     * @param  array        $values
      * @return int
      */
     public function countWhere($where, array $values = [])
@@ -148,7 +147,7 @@ trait ReadQueries
      */
     private function checkPrimaryKey(array $values)
     {
-        foreach($this->getStructure()->getPrimaryKey() as $key) {
+        foreach ($this->getStructure()->getPrimaryKey() as $key) {
             if (!isset($values[$key])) {
                 throw new ModelException(
                     sprintf(
@@ -176,7 +175,7 @@ trait ReadQueries
     {
         $where = new Where();
 
-        foreach($values as $field => $value) {
+        foreach ($values as $field => $value) {
             $where->andWhere(sprintf("%s = $*", $this->escapeIdentifier($field)), [$value]);
         }
 
