@@ -153,7 +153,7 @@ SQL;
         // 2.define the projection
         $projection = $this
             ->createProjection()
-            ->setField('count(a.*)', 'int4')
+            ->setField('attachment_count', 'count(a.*)', 'int4')
             ;
 
         // 3.replace placeholders
