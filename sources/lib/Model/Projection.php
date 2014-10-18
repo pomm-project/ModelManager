@@ -23,6 +23,7 @@ use PommProject\ModelManager\Exception\ModelException;
  */
 class Projection
 {
+    protected $flexible_entity_class;
     protected $fields = [];
     protected $types = [];
 
@@ -33,13 +34,28 @@ class Projection
      * @param  array $structure list of field names with types.
      * @return void
      */
-    public function __construct(array $structure = null)
+    public function __construct($flexible_entity_class, array $structure = null)
     {
+        $this->flexible_entity_class = $flexible_entity_class;
+
         if ($structure != null) {
             foreach ($structure as $field_name => $type) {
                 $this->setField($field_name, sprintf("%%%s", $field_name), $type);
             }
         }
+    }
+
+    /**
+     * getFlexibleEntityClass
+     *
+     * Get the flexible entity class associated with this projection.
+     *
+     * @access public
+     * @return string
+     */
+    public function getFlexibleEntityClass()
+    {
+        return $this->flexible_entity_class;
     }
 
     /**
@@ -161,6 +177,27 @@ class Projection
     public function getFieldNames()
     {
         return array_keys($this->fields);
+    }
+
+    /**
+     * getFieldTypes
+     *
+     * Return an array with the known types.
+     *
+     * @access public
+     * @return array
+     */
+    public function getFieldTypes()
+    {
+        $fields = [];
+        foreach (array_keys($this->fields) as $name) {
+            $fields[$name] = isset($this->types[$name])
+                ? $this->types[$name]
+                : null
+                ;
+        }
+
+        return $fields;
     }
 
     /**

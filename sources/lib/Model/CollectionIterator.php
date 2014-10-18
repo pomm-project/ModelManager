@@ -1,6 +1,6 @@
 <?php
 /*
- * This file is part of the PommProject/ModelManager package.
+ * This file is part of the PommProject's ModelManager package.
  *
  * (c) 2014 Grégoire HUBERT <hubert.greg@gmail.com>
  *
@@ -12,6 +12,7 @@ namespace PommProject\ModelManager\Model;
 use PommProject\ModelManager\Exception\ModelException;
 use PommProject\Foundation\ResultIterator;
 use PommProject\Foundation\ResultHandler;
+use PommProject\Foundation\Session;
 
 /**
  * CollectionIterator
@@ -25,7 +26,7 @@ use PommProject\Foundation\ResultHandler;
  */
 class CollectionIterator extends ResultIterator
 {
-    protected $model;
+    protected $session;
     protected $projection;
     protected $filters = [];
 
@@ -35,17 +36,16 @@ class CollectionIterator extends ResultIterator
      * Constructor
      *
      * @access public
-     * @param  ConverterHolder $converter_holder
-     * @param  resource        $result_resource
-     * @param  Projection      $projection
-     * @param  Model           $model
-     * @return void
+     * @param  ResultHandler    $result_handler
+     * @param  Session          $session
+     * @param  Projection       $projection
+     * @return null
      */
-    public function __construct(ResultHandler $result, Projection $projection, Model $model)
+    public function __construct(ResultHandler $result, Session $session, Projection $projection)
     {
         parent::__construct($result);
-        $this->projection = $projection;
-        $this->model      = $model;
+        $this->projection   = $projection;
+        $this->session      = $session;
     }
 
     public function get($index)
@@ -68,9 +68,8 @@ class CollectionIterator extends ResultIterator
         $values = $this->launchFilters($values);
 
         return $this
-            ->model
-            ->getSession()
-            ->getClient('hydrator', $this->model->getClientIdentifier())
+            ->session
+            ->getClient('hydrator', $this->projection->getFlexibleEntityClass())
             ->hydrate(new HydrationPlan($this->projection, $values))
             ;
     }
@@ -159,14 +158,12 @@ class CollectionIterator extends ResultIterator
 
         if ($this->projection->isArray($name)) {
             $converter = $this
-                ->model
-                ->getSession()
+                ->session
                 ->getClientUsingPooler('converter', 'array')
                 ;
         } else {
             $converter = $this
-                ->model
-                ->getSession()
+                ->session
                 ->getClientUsingPooler('converter', $type);
         }
 

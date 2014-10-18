@@ -89,7 +89,6 @@ abstract class Model implements ClientInterface
 
         $this->session->registerClient(
             new Hydrator(
-                get_class($this),
                 $this->flexible_entity_class,
                 $this->getStructure()->getPrimaryKey()
             )
@@ -120,14 +119,18 @@ abstract class Model implements ClientInterface
      */
     protected function query($sql, array $values = [], Projection $projection = null)
     {
-        return new CollectionIterator(
-            $this
-                ->session
-                ->getClientUsingPooler('prepared_query', $sql)
-                ->execute($values),
-            $projection === null ? $this->createProjection() : $projection,
-            $this
-        );
+        if ($projection === null) {
+            $projection = $this->createProjection();
+        }
+
+        return $this
+            ->getSession()
+            ->getClientUsingPooler(
+                'query',
+                '\PommProject\ModelManager\Model\CollectionQuery'
+            )
+            ->query($sql, $values, $projection)
+            ;
     }
 
     /**
@@ -136,13 +139,13 @@ abstract class Model implements ClientInterface
      * This is a helper to create a new projection according to the current
      * structure.Overriding this method will change projection for all models.
      *
-     * @access  public
-     * @param  array      $tructure
-     * @return Projection
+     * @access  protected
+     * @param   array       $tructure
+     * @return  Projection
      */
-    public function createProjection()
+    protected function createProjection()
     {
-        return new Projection($this->structure->getDefinition());
+        return new Projection($this->flexible_entity_class, $this->structure->getDefinition());
     }
 
     /**
@@ -151,12 +154,12 @@ abstract class Model implements ClientInterface
      * Check if the given entity is an instance of this model's flexible class.
      * If not an exception is thrown.
      *
-     * @access public
+     * @access protected
      * @param  FlexibleEntity $entity
      * @throw  InvalidArgumentException
      * @return Model          $this
      */
-    public function checkFlexibleEntity(FlexibleEntity $entity)
+    protected function checkFlexibleEntity(FlexibleEntity $entity)
     {
         if (!($entity instanceof $this->flexible_entity_class)) {
             throw new \InvalidArgumentException(sprintf(
@@ -174,10 +177,10 @@ abstract class Model implements ClientInterface
      *
      * Return the structure.
      *
-     * @access public
+     * @access protected
      * @return RowStructure
      */
-    public function getStructure()
+    protected function getStructure()
     {
         return $this->structure;
     }
@@ -188,10 +191,10 @@ abstract class Model implements ClientInterface
      * Return the according flexible entity class associate with this Model
      * instance.
      *
-     * @access public
+     * @access protected
      * @return string
      */
-    public function getFlexibleEntityClass()
+    protected function getFlexibleEntityClass()
     {
         return $this->flexible_entity_class;
     }
@@ -201,11 +204,11 @@ abstract class Model implements ClientInterface
      *
      * Handy method to escape strings.
      *
-     * @access public
+     * @access protected
      * @param  string $string
      * @return string
      */
-    public function escapeLiteral($string)
+    protected function escapeLiteral($string)
     {
         return $this
             ->getSession()
@@ -218,11 +221,11 @@ abstract class Model implements ClientInterface
      *
      * Handy method to escape strings.
      *
-     * @access public
+     * @access protected
      * @param  string $string
      * @return string
      */
-    public function escapeIdentifier($string)
+    protected function escapeIdentifier($string)
     {
         return $this
             ->getSession()
@@ -235,11 +238,11 @@ abstract class Model implements ClientInterface
      *
      * Handy method for DDL statments.
      *
-     * @access public
+     * @access protected
      * @param  string $sql
      * @return Model  $this
      */
-    public function executeAnonymousQuery($sql)
+    protected function executeAnonymousQuery($sql)
     {
         $this
             ->getSession()

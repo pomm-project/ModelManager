@@ -46,9 +46,10 @@ class Model extends SessionAwareAtoum
     protected function initializeSession(Session $session)
     {
         $session
-            ->registerClientPooler(new PreparedQueryPooler())
-            ->registerClientPooler(new ModelPooler())
-            ->registerClientPooler(new ConverterPooler())
+            ->registerClientPooler(new PreparedQueryPooler)
+            ->registerClientPooler(new ModelPooler)
+            ->registerClientPooler(new ConverterPooler)
+            ->registerClientPooler(new QueryPooler)
             ;
     }
 
@@ -124,14 +125,6 @@ class Model extends SessionAwareAtoum
             ->isEqualTo(4)
             ->integer($model->doSimpleQuery($where)->count())
             ->isEqualTo(2)
-            ;
-    }
-
-    public function testCreateProjection()
-    {
-        $this
-            ->object($this->getSimpleFixtureModel()->createProjection())
-            ->isInstanceOf('\PommProject\ModelManager\Model\Projection')
             ;
     }
 

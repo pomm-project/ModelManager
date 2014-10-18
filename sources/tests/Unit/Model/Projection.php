@@ -15,7 +15,7 @@ class Projection extends Atoum
 {
     public function testConstructorEmpty()
     {
-        $projection = $this->newTestedInstance();
+        $projection = $this->newTestedInstance('whatever');
         $this
             ->object($projection)
             ->isInstanceOf('PommProject\ModelManager\Model\Projection')
@@ -26,7 +26,7 @@ class Projection extends Atoum
 
     public function testConstructorWithParameter()
     {
-        $projection = $this->newTestedInstance(['pika' => 'int4']);
+        $projection = $this->newTestedInstance('whatever', ['pika' => 'int4']);
         $this
             ->object($projection)
             ->isInstanceOf('PommProject\ModelManager\Model\Projection')
@@ -39,7 +39,7 @@ class Projection extends Atoum
 
     public function testSetField()
     {
-        $projection = $this->newTestedInstance(['pika' => 'int4']);
+        $projection = $this->newTestedInstance('whatever', ['pika' => 'int4']);
         $this
             ->array($projection->setField('chu', '%chu', 'bool')->getFieldNames())
             ->isIdenticalTo(['pika', 'chu'])
@@ -64,7 +64,7 @@ class Projection extends Atoum
 
     public function testSetFieldType()
     {
-        $projection = $this->newTestedInstance(['pika' => 'int4']);
+        $projection = $this->newTestedInstance('whatever', ['pika' => 'int4']);
         $this
             ->string($projection->setFieldType('pika', 'bool')->getFieldType('pika'))
             ->isEqualTo('bool')
@@ -81,7 +81,7 @@ class Projection extends Atoum
 
     public function testUnsetField()
     {
-        $projection = $this->newTestedInstance(['pika' => 'int4']);
+        $projection = $this->newTestedInstance('whatever', ['pika' => 'int4']);
         $this
             ->array($projection->unsetField('pika')->getFieldNames())
             ->isEmpty()
@@ -99,7 +99,7 @@ class Projection extends Atoum
 
     public function testHasField()
     {
-        $projection = $this->newTestedInstance(['pika' => 'int4']);
+        $projection = $this->newTestedInstance('whatever', ['pika' => 'int4']);
         $this
             ->boolean($projection->hasField('pika'))
             ->isTrue()
@@ -113,7 +113,7 @@ class Projection extends Atoum
 
     public function testGetFieldType()
     {
-        $projection = $this->newTestedInstance(['pika' => 'int4']);
+        $projection = $this->newTestedInstance('whatever', ['pika' => 'int4']);
         $this
             ->string($projection->getFieldType('pika'))
             ->isEqualTo('int4')
@@ -128,7 +128,7 @@ class Projection extends Atoum
 
     public function testIsArray()
     {
-        $projection = $this->newTestedInstance(['pika' => 'int4']);
+        $projection = $this->newTestedInstance('whatever', ['pika' => 'int4']);
         $this->boolean($projection->isArray('pika'))
             ->isFalse()
             ->boolean($projection->setField('chu', '%chu', 'int4[]')->isArray('chu'))
@@ -144,7 +144,7 @@ class Projection extends Atoum
 
     public function testGetFieldNames()
     {
-        $projection = $this->newTestedInstance();
+        $projection = $this->newTestedInstance('whatever');
         $this->array($projection->getFieldNames())
             ->isEmpty()
             ->array($projection->setField('pika', '%pika', 'int4')->getFieldNames())
@@ -154,9 +154,22 @@ class Projection extends Atoum
             ;
     }
 
+    public function testGetFiedTypes()
+    {
+        $projection = $this->newTestedInstance('whatever', ['pika' => 'int4'])
+            ->setField('chu', 'expression(chu)')
+            ->setField('plop' , 'plop', 'string')
+            ;
+
+        $this
+            ->array($projection->getFieldTypes())
+            ->isIdenticalTo(['pika' => 'int4', 'chu' => null, 'plop' => 'string'])
+            ;
+    }
+
     public function testGetFieldWithTableAlias()
     {
-        $projection = $this->newTestedInstance(['pika' => 'int4']);
+        $projection = $this->newTestedInstance('whatever', ['pika' => 'int4']);
         $this->string($projection->getFieldWithTableAlias('pika'))
             ->isEqualTo('pika')
             ->string($projection->getFieldWithTableAlias('pika', 'my_table'))
@@ -174,7 +187,7 @@ class Projection extends Atoum
 
     public function testGetFieldsWithTableAlias()
     {
-        $projection = $this->newTestedInstance();
+        $projection = $this->newTestedInstance('whatever');
         $this->array($projection->getFieldsWithTableAlias())
             ->isEmpty()
             ->array($projection->getFieldsWithTableAlias('my_table'))
@@ -194,7 +207,7 @@ class Projection extends Atoum
 
     public function testFormatFields()
     {
-        $projection = $this->newTestedInstance();
+        $projection = $this->newTestedInstance('whatever');
         $this->string($projection->formatFields())
             ->isEmpty()
             ->string($projection->formatFields('my_table'))
@@ -216,7 +229,7 @@ class Projection extends Atoum
 
     public function testFormatFieldsWithTableAlias()
     {
-        $projection = $this->newTestedInstance();
+        $projection = $this->newTestedInstance('whatever');
         $this->string($projection->formatFieldsWithFieldAlias())
             ->isEmpty()
             ->string($projection->formatFieldsWithFieldAlias('my_table'))

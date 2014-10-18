@@ -18,13 +18,16 @@ use PommProject\Foundation\Test\Unit\SessionAwareAtoum;
 use PommProject\Foundation\Converter\ConverterPooler;
 use PommProject\Foundation\Session;
 
+use PommProject\ModelManager\Test\Fixture\SimpleFixtureModel;
+
 class CollectionIterator extends SessionAwareAtoum
 {
     protected function initializeSession(Session $session)
     {
         $session
-            ->registerClientPooler(new ModelPooler())
-            ->registerClientPooler(new ConverterPooler())
+            ->registerClientPooler(new ModelPooler)
+            ->registerClientPooler(new ConverterPooler)
+            ->registerClient(new SimpleFixtureModel)
             ;
     }
 
@@ -50,8 +53,8 @@ SQL;
     {
         return new CollectionIteratorMock(
             $this->getQueryResult($sql),
-            new ProjectionMock(['id' => 'int4', 'some_data' => 'varchar']),
-            $this->getSession()->getModel('\PommProject\ModelManager\Test\Fixture\SimpleFixtureModel')
+            $this->getSession(),
+            new ProjectionMock('\PommProject\ModelManager\Test\Fixture\SimpleFixture', ['id' => 'int4', 'some_data' => 'varchar'])
         );
     }
 
