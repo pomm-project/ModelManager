@@ -11,7 +11,7 @@ namespace PommProject\ModelManager\Test\Unit\Model;
 
 use Atoum;
 use PommProject\Foundation\DatabaseConfiguration;
-use Mock\PommProject\Foundation\Session;
+use Mock\PommProject\Foundation\Session\Session;
 
 class ModelPooler extends Atoum
 {

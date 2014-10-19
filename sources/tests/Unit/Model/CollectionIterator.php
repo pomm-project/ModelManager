@@ -14,19 +14,17 @@ use Mock\PommProject\ModelManager\Model\CollectionIterator as CollectionIterator
 
 use PommProject\ModelManager\Model\ModelPooler;
 
-use PommProject\Foundation\Test\Unit\SessionAwareAtoum;
+use PommProject\ModelManager\Test\Unit\ModelSessionAwareAtoum;
 use PommProject\Foundation\Converter\ConverterPooler;
-use PommProject\Foundation\Session;
+use PommProject\Foundation\Session\Session;
 
 use PommProject\ModelManager\Test\Fixture\SimpleFixtureModel;
 
-class CollectionIterator extends SessionAwareAtoum
+class CollectionIterator extends ModelSessionAwareAtoum
 {
     protected function initializeSession(Session $session)
     {
         $session
-            ->registerClientPooler(new ModelPooler)
-            ->registerClientPooler(new ConverterPooler)
             ->registerClient(new SimpleFixtureModel)
             ;
     }

@@ -11,7 +11,7 @@ namespace PommProject\ModelManager\Model;
 
 use PommProject\ModelManager\Exception\ModelException;
 use PommProject\Foundation\Client\ClientInterface;
-use PommProject\Foundation\Session;
+use PommProject\Foundation\Session\Session;
 
 /**
  * Model

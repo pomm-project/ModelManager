@@ -11,8 +11,8 @@ namespace PommProject\ModelManager\Model;
 
 use PommProject\ModelManager\Exception\ModelException;
 use PommProject\Foundation\ResultIterator;
-use PommProject\Foundation\ResultHandler;
-use PommProject\Foundation\Session;
+use PommProject\Foundation\Session\ResultHandler;
+use PommProject\Foundation\Session\Session;
 
 /**
  * CollectionIterator
