@@ -10,11 +10,12 @@
 namespace PommProject\ModelManager\Test\Unit\Model;
 
 use PommProject\Foundation\Where;
+use PommProject\Foundation\Session\Session;
 use PommProject\Foundation\Query\QueryPooler;
 use PommProject\Foundation\Converter\ConverterPooler;
 use PommProject\Foundation\PreparedQuery\PreparedQueryPooler;
 
-use PommProject\ModelManager\Test\Unit\ModelSessionAwareAtoum;
+use PommProject\ModelManager\Tester\ModelSessionAtoum;
 
 use PommProject\ModelManager\Test\Fixture\SimpleFixture;
 use PommProject\ModelManager\Model\Model as PommModel;
@@ -23,8 +24,23 @@ use PommProject\ModelManager\Model\ModelPooler;
 use Mock\PommProject\ModelManager\Model\FlexibleEntity as FlexibleEntityMock;
 use Mock\PommProject\ModelManager\Model\RowStructure   as RowStructureMock;
 
-class Model extends ModelSessionAwareAtoum
+class Model extends ModelSessionAtoum
 {
+    protected $session;
+
+    protected function initializeSession(Session $session)
+    {
+    }
+
+    protected function getSession()
+    {
+        if ($this->session === null) {
+            $this->session = $this->buildSession();
+        }
+
+        return $this->session;
+    }
+
     public function setUp()
     {
         $connection = $this

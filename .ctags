@@ -1,0 +1,251 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+BaseTrait	sources/lib/Model/ModelTrait/BaseTrait.php	/^trait BaseTrait$/;"	c
+CollectionIterator	sources/lib/Model/CollectionIterator.php	/^class CollectionIterator extends ResultIterator$/;"	c
+CollectionQuery	sources/lib/Model/CollectionQuery.php	/^class CollectionQuery extends Client implements ListenerAwareInterface$/;"	c
+FlexibleEntity	sources/lib/Model/FlexibleEntity.php	/^abstract class FlexibleEntity implements \\ArrayAccess, \\IteratorAggregate$/;"	c
+HydrationPlan	sources/lib/Model/HydrationPlan.php	/^class HydrationPlan implements \\IteratorAggregate$/;"	c
+Hydrator	sources/lib/Model/Hydrator.php	/^class Hydrator extends Client$/;"	c
+IdentityMapper	sources/lib/Model/IdentityMapper.php	/^class IdentityMapper$/;"	c
+Model	sources/lib/Model/Model.php	/^abstract class Model implements ClientInterface$/;"	c
+ModelException	sources/lib/Exception/ModelException.php	/^class ModelException extends PommException$/;"	c
+ModelLayer	sources/lib/ModelLayer/ModelLayer.php	/^abstract class ModelLayer extends Client$/;"	c
+ModelLayerPooler	sources/lib/ModelLayer/ModelLayerPooler.php	/^class ModelLayerPooler extends ClientPooler$/;"	c
+ModelPooler	sources/lib/Model/ModelPooler.php	/^class ModelPooler extends ClientPooler$/;"	c
+Projection	sources/lib/Model/Projection.php	/^class Projection$/;"	c
+ReadQueries	sources/lib/Model/ModelTrait/ReadQueries.php	/^trait ReadQueries$/;"	c
+RowStructure	sources/lib/Model/RowStructure.php	/^abstract class RowStructure implements \\ArrayAccess$/;"	c
+SessionBuilder	sources/lib/SessionBuilder.php	/^class SessionBuilder extends FoundationSessionBuilder$/;"	c
+WriteQueries	sources/lib/Model/ModelTrait/WriteQueries.php	/^trait WriteQueries$/;"	c
+__call	sources/lib/Model/FlexibleEntity.php	/^    public function __call($method, $arguments)$/;"	f
+__construct	sources/lib/Model/CollectionIterator.php	/^    public function __construct(ResultHandler $result, Session $session, Projection $projection)$/;"	f
+__construct	sources/lib/Model/FlexibleEntity.php	/^    public function __construct(array $values = null)$/;"	f
+__construct	sources/lib/Model/HydrationPlan.php	/^    public function __construct(Projection $projection, array $values)$/;"	f
+__construct	sources/lib/Model/Hydrator.php	/^    public function __construct($entity_class, array $primary_key = [], IdentityMapper $identity_mapper = null)$/;"	f
+__construct	sources/lib/Model/Projection.php	/^    public function __construct($flexible_entity_class, array $structure = null)$/;"	f
+__construct	sources/lib/Model/RowStructure.php	/^    public function __construct()$/;"	f
+__get	sources/lib/Model/FlexibleEntity.php	/^    public function __get($var)$/;"	f
+__set	sources/lib/Model/FlexibleEntity.php	/^    public function __set($var, $value)$/;"	f
+add	sources/lib/Model/FlexibleEntity.php	/^    public function add($var, $value)$/;"	f
+addField	sources/lib/Model/RowStructure.php	/^    public function addField($name, $type)$/;"	f
+array_recurse	sources/lib/Model/FlexibleEntity.php	/^        $array_recurse = function ($val) use (&$array_recurse) {$/;"	v
+attribute	sources/lib/Model/FlexibleEntity.php	/^        $attribute = Inflector::underscore($split[1]);$/;"	v
+checkExist	sources/lib/Model/RowStructure.php	/^    private function checkExist($name)$/;"	f
+checkField	sources/lib/Model/Projection.php	/^    private function checkField($name)$/;"	f
+checkFieldExist	sources/lib/Model/Projection.php	/^    private function checkFieldExist($name)$/;"	f
+checkFlexibleEntity	sources/lib/Model/Model.php	/^    protected function checkFlexibleEntity(FlexibleEntity $entity)$/;"	f
+checkNotNull	sources/lib/Model/RowStructure.php	/^    private function checkNotNull($val, $name)$/;"	f
+checkPrimaryKey	sources/lib/Model/ModelTrait/ReadQueries.php	/^    private function checkPrimaryKey(array $values)$/;"	f
+class_name	sources/lib/Model/Hydrator.php	/^        $class_name = $this->entity_class;$/;"	v
+class_name	sources/lib/Model/ModelTrait/WriteQueries.php	/^        $class_name = $this->getFlexibleEntityClass();$/;"	v
+clear	sources/lib/Model/FlexibleEntity.php	/^    final public function clear($offset)$/;"	f
+clearFilters	sources/lib/Model/CollectionIterator.php	/^    public function clearFilters()$/;"	f
+collection	sources/lib/Model/CollectionQuery.php	/^        $collection = new CollectionIterator($/;"	v
+commitTransaction	sources/lib/ModelLayer/ModelLayer.php	/^    protected function commitTransaction()$/;"	f
+convert	sources/lib/Model/FlexibleEntity.php	/^    public function convert(array $values)$/;"	f
+convertSlice	sources/lib/Model/CollectionIterator.php	/^    protected function convertSlice(array $values, $name)$/;"	f
+convertValueToPg	sources/lib/Model/ModelTrait/WriteQueries.php	/^    protected function convertValueToPg($value, $type)$/;"	f
+converter	sources/lib/Model/CollectionIterator.php	/^            $converter = $this$/;"	v
+countWhere	sources/lib/Model/ModelTrait/ReadQueries.php	/^    public function countWhere($where, array $values = [])$/;"	f
+createAndSave	sources/lib/Model/ModelTrait/WriteQueries.php	/^    public function createAndSave(array $values)$/;"	f
+createClient	sources/lib/Model/ModelPooler.php	/^    protected function createClient($class)$/;"	f
+createClient	sources/lib/ModelLayer/ModelLayerPooler.php	/^    protected function createClient($identifier)$/;"	f
+createEntity	sources/lib/Model/Hydrator.php	/^    protected function createEntity(array $values)$/;"	f
+createProjection	sources/lib/Model/Model.php	/^    protected function createProjection()$/;"	f
+createProjection	sources/lib/Model/ModelTrait/BaseTrait.php	/^    abstract public function createProjection();$/;"	f
+custom_fields	sources/lib/Model/FlexibleEntity.php	/^        $custom_fields = array();$/;"	v
+custom_methods	sources/lib/Model/FlexibleEntity.php	/^        $custom_methods = array_filter(get_class_methods(get_class($this)), function ($val) { return preg_match('\/^has[A-Z]\/', $val); });$/;"	v
+deleteByPK	sources/lib/Model/ModelTrait/WriteQueries.php	/^    public function deleteByPK(array $primary_key)$/;"	f
+deleteOne	sources/lib/Model/ModelTrait/WriteQueries.php	/^    public function deleteOne(FlexibleEntity &$entity)$/;"	f
+doQuery	sources/lib/Model/CollectionQuery.php	/^    protected function doQuery($sql, array $parameters)$/;"	f
+end	sources/lib/Model/CollectionQuery.php	/^        $end = microtime(true);$/;"	v
+entity	sources/lib/Model/ModelTrait/WriteQueries.php	/^        $entity = $this$/;"	v
+entity	sources/lib/Model/ModelTrait/WriteQueries.php	/^        $entity = $this->deleteByPK($entity->get($this->getStructure()->getPrimaryKey()));$/;"	v
+entity	sources/lib/Model/ModelTrait/WriteQueries.php	/^        $entity = $this->query($sql, $where->getValues())->current();$/;"	v
+entity	sources/lib/Model/ModelTrait/WriteQueries.php	/^        $entity = $this->updateByPk($/;"	v
+entity	sources/lib/Model/ModelTrait/WriteQueries.php	/^        $entity = new $class_name($values);$/;"	v
+entity_class	sources/lib/Model/Hydrator.php	/^        $this->entity_class    = $entity_class;$/;"	v
+entity_class	sources/lib/Model/Hydrator.php	/^    protected $entity_class;$/;"	v
+escapeIdentifier	sources/lib/Model/Model.php	/^    protected function escapeIdentifier($string)$/;"	f
+escapeIdentifier	sources/lib/Model/ModelTrait/BaseTrait.php	/^    abstract public function escapeIdentifier($string);$/;"	f
+escapeIdentifier	sources/lib/ModelLayer/ModelLayer.php	/^    protected function escapeIdentifier($string)$/;"	f
+escapeLiteral	sources/lib/Model/Model.php	/^    protected function escapeLiteral($string)$/;"	f
+escapeLiteral	sources/lib/Model/ModelTrait/BaseTrait.php	/^    abstract public function escapeLiteral($string);$/;"	f
+escapeLiteral	sources/lib/ModelLayer/ModelLayer.php	/^    protected function escapeLiteral($string)$/;"	f
+executeAnonymousQuery	sources/lib/Model/Model.php	/^    protected function executeAnonymousQuery($sql)$/;"	f
+executeAnonymousQuery	sources/lib/Model/ModelTrait/BaseTrait.php	/^    abstract public function executeAnonymousQuery($sql);$/;"	f
+executeAnonymousQuery	sources/lib/ModelLayer/ModelLayer.php	/^    protected function executeAnonymousQuery($sql)$/;"	f
+extract	sources/lib/Model/FlexibleEntity.php	/^    public function extract()$/;"	f
+fetch	sources/lib/Model/IdentityMapper.php	/^    public function fetch(FlexibleEntity $entity, array $primary_key)$/;"	f
+field	sources/lib/Model/FlexibleEntity.php	/^                $field = Inflector::underscore($matchs[1]);$/;"	v
+field_definitions	sources/lib/Model/RowStructure.php	/^    protected $field_definitions = [];$/;"	v
+fields	sources/lib/Model/FlexibleEntity.php	/^        $this->fields = array_merge($this->fields, $values);$/;"	v
+fields	sources/lib/Model/FlexibleEntity.php	/^    private $fields = [];$/;"	v
+fields	sources/lib/Model/FlexibleEntity.php	/^    public function fields()$/;"	f
+fields	sources/lib/Model/Projection.php	/^        $fields = $this->getFieldsWithTableAlias($table_alias);$/;"	v
+fields	sources/lib/Model/Projection.php	/^        $fields = [];$/;"	v
+fields	sources/lib/Model/Projection.php	/^    protected $fields = [];$/;"	v
+filters	sources/lib/Model/CollectionIterator.php	/^        $this->filters = [];$/;"	v
+filters	sources/lib/Model/CollectionIterator.php	/^    protected $filters = [];$/;"	v
+findAll	sources/lib/Model/ModelTrait/ReadQueries.php	/^    public function findAll($suffix = null)$/;"	f
+findByPK	sources/lib/Model/ModelTrait/ReadQueries.php	/^    public function findByPK(array $primary_key)$/;"	f
+findWhere	sources/lib/Model/ModelTrait/ReadQueries.php	/^    public function findWhere($where, array $values = [], $suffix = '')$/;"	f
+flexible_entity_class	sources/lib/Model/Model.php	/^    protected $flexible_entity_class;$/;"	v
+flexible_entity_class	sources/lib/Model/Projection.php	/^        $this->flexible_entity_class = $flexible_entity_class;$/;"	v
+flexible_entity_class	sources/lib/Model/Projection.php	/^    protected $flexible_entity_class;$/;"	v
+formatFields	sources/lib/Model/Projection.php	/^    public function formatFields($table_alias = null)$/;"	f
+formatFieldsWithFieldAlias	sources/lib/Model/Projection.php	/^    public function formatFieldsWithFieldAlias($table_alias = null)$/;"	f
+get	sources/lib/Model/CollectionIterator.php	/^    public function get($index)$/;"	f
+get	sources/lib/Model/FlexibleEntity.php	/^    final public function get($var)$/;"	f
+getClientFromPool	sources/lib/Model/ModelPooler.php	/^    protected function getClientFromPool($class)$/;"	f
+getClientIdentifier	sources/lib/Model/CollectionQuery.php	/^    public function getClientIdentifier()$/;"	f
+getClientIdentifier	sources/lib/Model/Hydrator.php	/^    public function getClientIdentifier()$/;"	f
+getClientIdentifier	sources/lib/Model/Model.php	/^    public function getClientIdentifier()$/;"	f
+getClientIdentifier	sources/lib/ModelLayer/ModelLayer.php	/^    public function getClientIdentifier()$/;"	f
+getClientType	sources/lib/Model/CollectionQuery.php	/^    public function getClientType()$/;"	f
+getClientType	sources/lib/Model/Hydrator.php	/^    public function getClientType()$/;"	f
+getClientType	sources/lib/Model/Model.php	/^    public function getClientType()$/;"	f
+getClientType	sources/lib/ModelLayer/ModelLayer.php	/^    public function getClientType()$/;"	f
+getDefinition	sources/lib/Model/RowStructure.php	/^    public function getDefinition()$/;"	f
+getEscapedFieldList	sources/lib/Model/ModelTrait/WriteQueries.php	/^    public function getEscapedFieldList(array $fields)$/;"	f
+getFieldNames	sources/lib/Model/Projection.php	/^    public function getFieldNames()$/;"	f
+getFieldNames	sources/lib/Model/RowStructure.php	/^    public function getFieldNames()$/;"	f
+getFieldType	sources/lib/Model/HydrationPlan.php	/^    public function getFieldType($name)$/;"	f
+getFieldType	sources/lib/Model/Projection.php	/^    public function getFieldType($name)$/;"	f
+getFieldTypes	sources/lib/Model/Projection.php	/^    public function getFieldTypes()$/;"	f
+getFieldWithTableAlias	sources/lib/Model/Projection.php	/^    public function getFieldWithTableAlias($name, $table_alias = null)$/;"	f
+getFieldsWithTableAlias	sources/lib/Model/Projection.php	/^    public function getFieldsWithTableAlias($table_alias = null)$/;"	f
+getFlexibleEntityClass	sources/lib/Model/Model.php	/^    protected function getFlexibleEntityClass()$/;"	f
+getFlexibleEntityClass	sources/lib/Model/ModelTrait/BaseTrait.php	/^    abstract public function getFlexibleEntityClass();$/;"	f
+getFlexibleEntityClass	sources/lib/Model/Projection.php	/^    public function getFlexibleEntityClass()$/;"	f
+getIterator	sources/lib/Model/FlexibleEntity.php	/^    public function getIterator()$/;"	f
+getIterator	sources/lib/Model/HydrationPlan.php	/^    public function getIterator()$/;"	f
+getModel	sources/lib/ModelLayer/ModelLayer.php	/^    protected function getModel($identifier)$/;"	f
+getPoolerType	sources/lib/Model/ModelPooler.php	/^    public function getPoolerType()$/;"	f
+getPoolerType	sources/lib/ModelLayer/ModelLayerPooler.php	/^    public function getPoolerType()$/;"	f
+getPrimaryKey	sources/lib/Model/RowStructure.php	/^    public function getPrimaryKey()$/;"	f
+getRelation	sources/lib/Model/RowStructure.php	/^    public function getRelation()$/;"	f
+getSession	sources/lib/Model/Model.php	/^    public function getSession()$/;"	f
+getSession	sources/lib/Model/ModelTrait/BaseTrait.php	/^    abstract protected function getSession();$/;"	f
+getSignature	sources/lib/Model/IdentityMapper.php	/^    public static function getSignature(FlexibleEntity $entity, array $primary_key)$/;"	f
+getStructure	sources/lib/Model/Model.php	/^    protected function getStructure()$/;"	f
+getStructure	sources/lib/Model/ModelTrait/BaseTrait.php	/^    abstract public function getStructure();$/;"	f
+getTypeFor	sources/lib/Model/RowStructure.php	/^    public function getTypeFor($name)$/;"	f
+getWhereFrom	sources/lib/Model/ModelTrait/ReadQueries.php	/^    protected function getWhereFrom(array $values)$/;"	f
+has	sources/lib/Model/FlexibleEntity.php	/^    final public function has($var)$/;"	f
+hasField	sources/lib/Model/Projection.php	/^    public function hasField($name)$/;"	f
+hasField	sources/lib/Model/RowStructure.php	/^    public function hasField($name)$/;"	f
+hydrate	sources/lib/Model/FlexibleEntity.php	/^    final public function hydrate(array $values)$/;"	f
+hydrate	sources/lib/Model/Hydrator.php	/^    public function hydrate(HydrationPlan $hydration_plan)$/;"	f
+identity_mapper	sources/lib/Model/Hydrator.php	/^        $this->identity_mapper = $identity_mapper !== null ? $identity_mapper : new IdentityMapper();$/;"	v
+identity_mapper	sources/lib/Model/Hydrator.php	/^        $this->identity_mapper = null;$/;"	v
+identity_mapper	sources/lib/Model/Hydrator.php	/^    protected $identity_mapper;$/;"	v
+inherits	sources/lib/Model/RowStructure.php	/^    public function inherits(RowStructure $structure)$/;"	f
+initialize	sources/lib/Model/Model.php	/^    public function initialize(Session $session)$/;"	f
+initialize	sources/lib/Model/RowStructure.php	/^    abstract protected function initialize();$/;"	f
+insertOne	sources/lib/Model/ModelTrait/WriteQueries.php	/^    public function insertOne(FlexibleEntity &$entity)$/;"	f
+instances	sources/lib/Model/IdentityMapper.php	/^    protected $instances = [];$/;"	v
+isArray	sources/lib/Model/HydrationPlan.php	/^    public function isArray($name)$/;"	f
+isArray	sources/lib/Model/Projection.php	/^    public function isArray($name)$/;"	f
+isInTransaction	sources/lib/ModelLayer/ModelLayer.php	/^    protected function isInTransaction()$/;"	f
+isModified	sources/lib/Model/FlexibleEntity.php	/^    public function isModified()$/;"	f
+isNew	sources/lib/Model/FlexibleEntity.php	/^    public function isNew()$/;"	f
+isTransactionOk	sources/lib/ModelLayer/ModelLayer.php	/^    protected function isTransactionOk()$/;"	f
+iterator	sources/lib/Model/ModelTrait/ReadQueries.php	/^        $iterator = $this->findWhere($where);$/;"	v
+launchFilters	sources/lib/Model/CollectionIterator.php	/^    protected function launchFilters(array $values)$/;"	f
+method_name	sources/lib/Model/FlexibleEntity.php	/^        $method_name = "get".Inflector::studlyCaps($var);$/;"	v
+method_name	sources/lib/Model/FlexibleEntity.php	/^        $method_name = "has".Inflector::studlyCaps($offset);$/;"	v
+method_name	sources/lib/Model/FlexibleEntity.php	/^        $method_name = "set".Inflector::studlyCaps($var);$/;"	v
+offsetExists	sources/lib/Model/FlexibleEntity.php	/^    public function offsetExists($offset)$/;"	f
+offsetExists	sources/lib/Model/RowStructure.php	/^    public function offsetExists($name)$/;"	f
+offsetGet	sources/lib/Model/FlexibleEntity.php	/^    public function offsetGet($offset)$/;"	f
+offsetGet	sources/lib/Model/RowStructure.php	/^    public function offsetGet($name)$/;"	f
+offsetSet	sources/lib/Model/FlexibleEntity.php	/^    public function offsetSet($offset, $value)$/;"	f
+offsetSet	sources/lib/Model/RowStructure.php	/^    public function offsetSet($name, $type)$/;"	f
+offsetUnset	sources/lib/Model/FlexibleEntity.php	/^    public function offsetUnset($offset)$/;"	f
+offsetUnset	sources/lib/Model/RowStructure.php	/^    public function offsetUnset($name)$/;"	f
+operation	sources/lib/Model/FlexibleEntity.php	/^        $operation = $split[0];$/;"	v
+parseRow	sources/lib/Model/CollectionIterator.php	/^    public function parseRow(array $values)$/;"	f
+postConfigure	sources/lib/SessionBuilder.php	/^    protected function postConfigure(Session $session)$/;"	f
+primary_key	sources/lib/Model/Hydrator.php	/^        $this->primary_key     = $primary_key;$/;"	v
+primary_key	sources/lib/Model/Hydrator.php	/^    protected $primary_key;$/;"	v
+primary_key	sources/lib/Model/RowStructure.php	/^        $this->primary_key = $primary_key;$/;"	v
+primary_key	sources/lib/Model/RowStructure.php	/^    protected $primary_key = [];$/;"	v
+projection	sources/lib/Model/CollectionIterator.php	/^        $this->projection   = $projection;$/;"	v
+projection	sources/lib/Model/CollectionIterator.php	/^    protected $projection;$/;"	v
+projection	sources/lib/Model/HydrationPlan.php	/^        $this->projection = $projection;$/;"	v
+projection	sources/lib/Model/HydrationPlan.php	/^    protected $projection = [];$/;"	v
+projection	sources/lib/Model/Model.php	/^            $projection = $this->createProjection();$/;"	v
+query	sources/lib/Model/CollectionQuery.php	/^    public function query($sql, array $parameters = [], Projection $projection)$/;"	f
+query	sources/lib/Model/Model.php	/^    protected function query($sql, array $values = [], Projection $projection = null)$/;"	f
+query	sources/lib/Model/ModelTrait/BaseTrait.php	/^    abstract protected function query($sql, array $values = [], Projection $projection = null);$/;"	f
+reflection	sources/lib/Model/ModelPooler.php	/^            $reflection = new \\ReflectionClass($class);$/;"	v
+reflection	sources/lib/ModelLayer/ModelLayerPooler.php	/^            $reflection = new \\ReflectionClass($identifier);$/;"	v
+registerFilter	sources/lib/Model/CollectionIterator.php	/^    public function registerFilter($callable)$/;"	f
+relation	sources/lib/Model/RowStructure.php	/^        $this->relation = $relation;$/;"	v
+relation	sources/lib/Model/RowStructure.php	/^    protected $relation;$/;"	v
+releaseSavepoint	sources/lib/ModelLayer/ModelLayer.php	/^    protected function releaseSavepoint($name)$/;"	f
+replace	sources/lib/Model/Projection.php	/^        $replace = $table_alias === null ? '' : sprintf("%s.", $table_alias);$/;"	v
+result	sources/lib/Model/CollectionQuery.php	/^        $result = $this->doQuery($sql, $parameters);$/;"	v
+rollbackTransaction	sources/lib/ModelLayer/ModelLayer.php	/^    protected function rollbackTransaction($name = null)$/;"	f
+sendNotify	sources/lib/ModelLayer/ModelLayer.php	/^    protected function sendNotify($channel, $data = '')$/;"	f
+sendParameter	sources/lib/ModelLayer/ModelLayer.php	/^    private function sendParameter($sql, $identifier, $parameter = null)$/;"	f
+session	sources/lib/Model/CollectionIterator.php	/^        $this->session      = $session;$/;"	v
+session	sources/lib/Model/CollectionIterator.php	/^    protected $session;$/;"	v
+session	sources/lib/Model/Model.php	/^        $this->session = $session;$/;"	v
+session	sources/lib/Model/Model.php	/^    protected $session;$/;"	v
+set	sources/lib/Model/FlexibleEntity.php	/^    final public function set($var, $value)$/;"	f
+setDeferrable	sources/lib/ModelLayer/ModelLayer.php	/^    protected function setDeferrable(array $keys = [], $state)$/;"	f
+setField	sources/lib/Model/Projection.php	/^    public function setField($name, $content, $type = null)$/;"	f
+setFieldType	sources/lib/Model/Projection.php	/^    public function setFieldType($name, $type)$/;"	f
+setPrimaryKey	sources/lib/Model/RowStructure.php	/^    public function setPrimaryKey(array $primary_key)$/;"	f
+setRelation	sources/lib/Model/RowStructure.php	/^    public function setRelation($relation)$/;"	f
+setSavepoint	sources/lib/ModelLayer/ModelLayer.php	/^    protected function setSavepoint($name)$/;"	f
+setTransactionAccessMode	sources/lib/ModelLayer/ModelLayer.php	/^    protected function setTransactionAccessMode($access_mode)$/;"	f
+setTransactionIsolationLevel	sources/lib/ModelLayer/ModelLayer.php	/^    protected function setTransactionIsolationLevel($isolaton_level)$/;"	f
+shutdown	sources/lib/Model/Hydrator.php	/^    public function shutdown()$/;"	f
+shutdown	sources/lib/Model/Model.php	/^    public function shutdown()$/;"	f
+shutdown	sources/lib/ModelLayer/ModelLayer.php	/^    public function shutdown()$/;"	f
+signature	sources/lib/Model/IdentityMapper.php	/^        $signature = self::getSignature($entity, $primary_key);$/;"	v
+slice	sources/lib/Model/CollectionIterator.php	/^    public function slice($name)$/;"	f
+split	sources/lib/Model/FlexibleEntity.php	/^        $split = preg_split('\/(?=[A-Z])\/', $method, 2);$/;"	v
+sql	sources/lib/Model/ModelTrait/ReadQueries.php	/^        $sql = sprintf("select count(*) as count from :table where %s", (string) $where);$/;"	v
+sql	sources/lib/Model/ModelTrait/ReadQueries.php	/^        $sql = strtr($/;"	v
+sql	sources/lib/Model/ModelTrait/ReadQueries.php	/^        $sql = strtr($sql, [$/;"	v
+sql	sources/lib/Model/ModelTrait/WriteQueries.php	/^        $sql = strtr($/;"	v
+sql	sources/lib/ModelLayer/ModelLayer.php	/^            $sql = "rollback transaction";$/;"	v
+sql	sources/lib/ModelLayer/ModelLayer.php	/^            $sql = sprintf("rollback to savepoint %s", $this->escapeIdentifier($name));$/;"	v
+start	sources/lib/Model/CollectionQuery.php	/^        $start = microtime(true);$/;"	v
+startTransaction	sources/lib/ModelLayer/ModelLayer.php	/^    protected function startTransaction()$/;"	f
+status	sources/lib/Model/FlexibleEntity.php	/^            $this->status = $status;$/;"	v
+status	sources/lib/Model/FlexibleEntity.php	/^            $this->status = $this->status | self::MODIFIED;$/;"	v
+status	sources/lib/Model/FlexibleEntity.php	/^        $this->status = $this->status | self::MODIFIED;$/;"	v
+status	sources/lib/Model/FlexibleEntity.php	/^    private $status = self::NONE;$/;"	v
+status	sources/lib/Model/FlexibleEntity.php	/^    public function status($status = null)$/;"	f
+status	sources/lib/ModelLayer/ModelLayer.php	/^        $status = $this$/;"	v
+strict	sources/lib/Model/FlexibleEntity.php	/^    public static $strict = true;$/;"	v
+string	sources/lib/ModelLayer/ModelLayer.php	/^            $string = 'ALL';$/;"	v
+string	sources/lib/ModelLayer/ModelLayer.php	/^            $string = join($/;"	v
+structure	sources/lib/Model/Model.php	/^    protected $structure;$/;"	v
+tmp	sources/lib/Model/FlexibleEntity.php	/^        $tmp = [];$/;"	v
+type	sources/lib/Model/CollectionIterator.php	/^        $type = $this->projection->getFieldType($name);$/;"	v
+types	sources/lib/Model/Projection.php	/^    protected $types = [];$/;"	v
+unsetField	sources/lib/Model/Projection.php	/^    public function unsetField($name)$/;"	f
+updateByPk	sources/lib/Model/ModelTrait/WriteQueries.php	/^    public function updateByPk(array $primary_key, array $updates)$/;"	f
+updateOne	sources/lib/Model/ModelTrait/WriteQueries.php	/^    public function updateOne(FlexibleEntity &$entity, array $fields)$/;"	f
+update_strings	sources/lib/Model/ModelTrait/WriteQueries.php	/^        $update_strings = [];$/;"	v
+vals	sources/lib/Model/Projection.php	/^        $vals = [];$/;"	v
+values	sources/lib/Model/CollectionIterator.php	/^            $values = call_user_func($filter, $values);$/;"	v
+values	sources/lib/Model/CollectionIterator.php	/^        $values = $this->launchFilters($values);$/;"	v
+values	sources/lib/Model/HydrationPlan.php	/^        $this->values     = $values;$/;"	v
+values	sources/lib/Model/HydrationPlan.php	/^    protected $values = [];$/;"	v
+values	sources/lib/Model/Hydrator.php	/^        $values = [];$/;"	v
+values	sources/lib/Model/ModelTrait/ReadQueries.php	/^            $values = $where->getValues();$/;"	v
+values	sources/lib/Model/ModelTrait/WriteQueries.php	/^        $values = [];$/;"	v
+where	sources/lib/Model/ModelTrait/ReadQueries.php	/^        $where = $this$/;"	v
+where	sources/lib/Model/ModelTrait/ReadQueries.php	/^        $where = new Where();$/;"	v
+where	sources/lib/Model/ModelTrait/WriteQueries.php	/^        $where = $this->getWhereFrom($primary_key);$/;"	v

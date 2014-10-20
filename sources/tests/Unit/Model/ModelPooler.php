@@ -9,64 +9,40 @@
  */
 namespace PommProject\ModelManager\Test\Unit\Model;
 
-use Atoum;
-use PommProject\Foundation\DatabaseConfiguration;
-use Mock\PommProject\Foundation\Session\Session;
+use PommProject\Foundation\Session\Session;
+use PommProject\Foundation\Tester\VanillaSessionAtoum;
 
-class ModelPooler extends Atoum
+
+class ModelPooler extends VanillaSessionAtoum
 {
-    protected $session;
-
-    protected function getSession()
+    protected function initializeSession(Session $session)
     {
-        if ($this->session === null) {
-            $this->session = new Session(new DatabaseConfiguration($GLOBALS['pomm_db1']));
-        }
-
-        return $this->session;
-    }
-
-    protected function getClientPooler()
-    {
-        $pooler = $this->newTestedInstance();
-        $this->getSession()->registerClientPooler($pooler);
-
-        return $pooler;
+        $session
+            ->registerClientPooler($this->newTestedInstance())
+            ;
     }
 
     public function testGetPoolerType()
     {
         $this
-            ->string($this->getClientPooler()->getPoolerType())
+            ->string($this->newTestedInstance()->getPoolerType())
             ->isEqualTo('model')
             ;
     }
 
     public function testGetClient()
     {
-        $client_pooler = $this->getClientPooler();
-        $session = $this->getSession();
+        $session = $this->buildSession();
         $model_class = '\PommProject\ModelManager\Test\Fixture\SimpleFixtureModel';
         $identifier  = 'PommProject\ModelManager\Test\Fixture\SimpleFixtureModel';
+        $model_instance = $session->getClientUsingPooler('model', $model_class);
 
         $this
             ->assert('Client is not in the ClientHolder.')
-            ->object($client_pooler->getClient($model_class))
+            ->object($model_instance)
             ->isInstanceOf($model_class)
-            ->mock($session)
-            ->call('getClient')
-            ->withArguments('model', $identifier)
-            ->once()
-            ->call('registerClient')
-            ->twice()
-            ->assert('Client should be in the ClientHolder now.')
-            ->object($client_pooler->getClient($model_class))
-            ->isInstanceOf($model_class)
-            ->mock($session)
-            ->call('getClient')
-            ->withArguments('model', $identifier)
-            ->call('registerClient')
-            ->never()
+            ->object($session->getClientUsingPooler('model', $model_class))
+            ->isIdenticalTo($model_instance)
             ;
     }
 }

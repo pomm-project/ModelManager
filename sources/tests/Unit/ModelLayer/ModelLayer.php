@@ -11,10 +11,11 @@ namespace PommProject\ModelManager\Test\Unit\ModelLayer;
 
 use PommProject\Foundation\Session\Session;
 use PommProject\Foundation\Observer\ObserverPooler;
-use PommProject\Foundation\Test\Unit\SessionAwareAtoum;
+
+use PommProject\ModelManager\Tester\ModelSessionAtoum;
 use PommProject\ModelManager\ModelLayer\ModelLayerPooler;
 
-class ModelLayer extends SessionAwareAtoum
+class ModelLayer extends ModelSessionAtoum
 {
     public function afterTestMethod($method)
     {
@@ -27,15 +28,11 @@ class ModelLayer extends SessionAwareAtoum
 
     protected function initializeSession(Session $session)
     {
-        $session
-            ->registerClientPooler(new ObserverPooler())
-            ->registerClientPooler(new ModelLayerPooler())
-            ;
     }
 
     public function getModelLayer()
     {
-        $model_layer = $this->getSession()->getModelLayer('PommProject\ModelManager\Test\Fixture\SimpleModelLayer');
+        $model_layer = $this->buildSession()->getModelLayer('PommProject\ModelManager\Test\Fixture\SimpleModelLayer');
         $this
             ->object($model_layer)
             ->isInstanceOf('\PommProject\ModelManager\ModelLayer\ModelLayer')
