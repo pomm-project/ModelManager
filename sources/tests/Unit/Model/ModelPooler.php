@@ -10,7 +10,9 @@
 namespace PommProject\ModelManager\Test\Unit\Model;
 
 use PommProject\Foundation\Session\Session;
+use PommProject\Foundation\Converter\ConverterPooler;
 use PommProject\Foundation\Tester\VanillaSessionAtoum;
+use PommProject\Foundation\Converter\ConverterHolder;
 
 
 class ModelPooler extends VanillaSessionAtoum
@@ -18,6 +20,7 @@ class ModelPooler extends VanillaSessionAtoum
     protected function initializeSession(Session $session)
     {
         $session
+            ->registerClientPooler(new ConverterPooler(new ConverterHolder))
             ->registerClientPooler($this->newTestedInstance())
             ;
     }

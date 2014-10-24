@@ -9,9 +9,8 @@
  */
 namespace PommProject\ModelManager\Model;
 
-use PommProject\Foundation\Query\ListenerAwareInterface;
-use PommProject\Foundation\Query\ListenerTrait;
 use PommProject\Foundation\Client\Client;
+use PommProject\Foundation\Listener\SendNotificationTrait;
 
 use PommProject\ModelManager\Model\Projection;
 
@@ -25,11 +24,10 @@ use PommProject\ModelManager\Model\Projection;
  * @author Grégoire HUBERT
  * @license X11 {@link http://opensource.org/licenses/mit-license.php}
  * @see Client
- * @see ListenerAwareInterface
  */
-class CollectionQuery extends Client implements ListenerAwareInterface
+class CollectionQuery extends Client
 {
-    use ListenerTrait;
+    use SendNotificationTrait;
 
     public function getClientType()
     {
@@ -55,7 +53,7 @@ class CollectionQuery extends Client implements ListenerAwareInterface
     public function query($sql, array $parameters = [], Projection $projection)
     {
         $this->sendNotification(
-            'pre',
+            'query:pre',
             [
                 'sql'        => $sql,
                 'parameters' => $parameters,
@@ -74,7 +72,7 @@ class CollectionQuery extends Client implements ListenerAwareInterface
         );
 
         $this->sendNotification(
-            'post',
+            'query:post',
             [
                 'result_count'      => $collection->count(),
                 'time_ms'           => sprintf("%03.1f", ($end - $start) * 1000),

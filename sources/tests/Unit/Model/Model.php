@@ -17,72 +17,88 @@ use PommProject\Foundation\PreparedQuery\PreparedQueryPooler;
 
 use PommProject\ModelManager\Tester\ModelSessionAtoum;
 
-use PommProject\ModelManager\Test\Fixture\SimpleFixture;
-use PommProject\ModelManager\Model\Model as PommModel;
 use PommProject\ModelManager\Model\ModelPooler;
+use PommProject\ModelManager\Model\Model                as PommModel;
+use PommProject\ModelManager\Test\Fixture\SimpleFixture;
+use PommProject\ModelManager\Test\Fixture\ComplexFixture;
+use PommProject\ModelManager\Test\Fixture\ModelSchemaClient;
+use PommProject\ModelManager\Test\Fixture\ComplexNumberStructure;
+use PommProject\ModelManager\Converter\PgEntity;
 
-use Mock\PommProject\ModelManager\Model\FlexibleEntity as FlexibleEntityMock;
-use Mock\PommProject\ModelManager\Model\RowStructure   as RowStructureMock;
+use Mock\PommProject\ModelManager\Model\FlexibleEntity  as FlexibleEntityMock;
+use Mock\PommProject\ModelManager\Model\RowStructure    as RowStructureMock;
 
 class Model extends ModelSessionAtoum
 {
-    protected $session;
-
-    protected function initializeSession(Session $session)
-    {
-    }
-
-    protected function getSession()
-    {
-        if ($this->session === null) {
-            $this->session = $this->buildSession();
-        }
-
-        return $this->session;
-    }
-
     public function setUp()
     {
-        $connection = $this
-            ->getSession()
-            ->getConnection()
-            ;
-        $connection->executeAnonymousQuery('drop schema if exists pomm_test cascade; create schema pomm_test');
+        $session = $this->buildSession();
+        $sql =
+            [
+                "drop schema if exists pomm_test cascade",
+                "begin",
+                "create schema pomm_test",
+                "create type pomm_test.complex_number as (real float8, imaginary float8)",
+                "commit",
+            ];
+
+        try {
+            $session->getConnection()->executeAnonymousQuery(join(';', $sql));
+        } catch (SqlException $e) {
+            $session->getConnection()->executeAnonymousQuery('rollback');
+            throw $e;
+        }
     }
 
     public function tearDown()
     {
-        $this
-            ->getSession()
-            ->getConnection()
-            ->executeAnonymousQuery('drop schema pomm_test cascade;');
+        $this->buildSession()->getConnection()->executeAnonymousQuery('drop schema if exists pomm_test cascade');
     }
 
-    protected function getSimpleFixtureModel()
+    protected function initializeSession(Session $session)
     {
-        return $this->getSession()
+        $session
+            ->getPoolerForType('converter')
+            ->getConverterHolder()
+            ->registerConverter(
+                'ComplexNumber',
+                new PgEntity('\PommProject\ModelManager\Test\Fixture\ComplexNumber', new ComplexNumberStructure()),
+                ['pomm_test.complex_number']
+            )
+            ;
+    }
+
+    protected function getSimpleFixtureModel(Session $session)
+    {
+        return $session
             ->getModel('PommProject\ModelManager\Test\Fixture\SimpleFixtureModel')
             ;
     }
 
-    protected function getReadFixtureModel()
+    protected function getReadFixtureModel(Session $session)
     {
-        return $this->getSession()
+        return $session
             ->getModel('PommProject\ModelManager\Test\Fixture\ReadFixtureModel')
             ;
     }
 
-    protected function getWriteFixtureModel()
+    protected function getWriteFixtureModel(Session $session)
     {
-        return $this->getSession()
+        return $session
             ->getModel('PommProject\ModelManager\Test\Fixture\WriteFixtureModel')
             ;
+    }
+
+    protected function getComplexFixtureModel(Session $session)
+    {
+        return $session
+            ->getModel('PommProject\ModelManager\Test\Fixture\ComplexFixtureModel');
     }
 
     public function testGetClientType()
     {
         $this
-            ->string($this->getSimpleFixtureModel()->getClientType())
+            ->string($this->getSimpleFixtureModel($this->buildSession())->getClientType())
             ->isEqualTo('model')
             ;
     }
@@ -90,14 +106,14 @@ class Model extends ModelSessionAtoum
     public function getClientIdentifier()
     {
         $this
-            ->string($this->getSimpleFixtureModel()->getClientIdentifier())
+            ->string($this->getSimpleFixtureModel($this->buildSession())->getClientIdentifier())
             ->isEqualTo('PommProject\ModelManager\Test\Fixture\SimpleFixtureModel')
             ;
     }
 
     public function testInitialize()
     {
-        $session = $this->getSession();
+        $session = $this->buildSession();
         $this
             ->exception(function() use ($session) {
                     $model = new NoStructureNoFlexibleEntityModel();
@@ -119,7 +135,8 @@ class Model extends ModelSessionAtoum
 
     public function testQuery()
     {
-        $model = $this->getSimpleFixtureModel();
+        $session = $this->buildSession();
+        $model = $this->getSimpleFixtureModel($session);
         $where = new Where('id % $* = 0', [2]);
         $this
             ->object($model->doSimpleQuery())
@@ -135,7 +152,8 @@ class Model extends ModelSessionAtoum
 
     public function testFindAll()
     {
-        $model = $this->getReadFixtureModel();
+        $session = $this->buildSession();
+        $model = $this->getReadFixtureModel($session);
         $this
             ->object($model->findAll())
             ->isInstanceOf('\PommProject\ModelManager\Model\CollectionIterator')
@@ -146,11 +164,18 @@ class Model extends ModelSessionAtoum
             ->array($model->findAll('limit 3')->slice('id'))
             ->isIdenticalTo([1, 2, 3,])
             ;
+        $complex_model = $this->getComplexFixtureModel($session);
+        $entity = $complex_model->findAll('order by id asc limit 1')->current();
+        $this
+            ->object($entity)
+            ->isInstanceOf('\PommProject\ModelManager\Test\Fixture\ComplexFixture')
+            ;
+
     }
 
     public function testFindWhere()
     {
-        $model = $this->getReadFixtureModel();
+        $model = $this->getReadFixtureModel($this->buildSession());
         $condition = 'id % $* = 0';
         $where = new Where($condition, [2]);
         $this
@@ -167,29 +192,31 @@ class Model extends ModelSessionAtoum
 
     public function testFindByPK()
     {
+        $model = $this->getReadFixtureModel($this->buildSession());
         $this
-            ->object($this->getReadFixtureModel()->findByPK(['id' => 1]))
+            ->object($model->findByPK(['id' => 1]))
             ->isInstanceOf('\PommProject\ModelManager\Test\Fixture\SimpleFixture')
-            ->integer($this->getReadFixtureModel()->findByPK(['id' => 2])['id'])
+            ->integer($model->findByPK(['id' => 2])['id'])
             ->isEqualTo(2)
-            ->variable($this->getReadFixtureModel()->findByPK(['id' => 5]))
+            ->variable($model->findByPK(['id' => 5]))
             ->isNull()
-            ->integer($this->getReadFixtureModel()->findByPK(['id' => 3])->status())
+            ->integer($model->findByPK(['id' => 3])->status())
             ->isEqualTo(FlexibleEntityMock::EXIST)
             ;
     }
 
     public function testUseIdentityMapper()
     {
+        $model = $this->getReadFixtureModel($this->buildSession());
         $this
-            ->object($this->getReadFixtureModel()->findByPK(['id' => 1]))
-            ->isIdenticalTo($this->getReadFixtureModel()->findByPK(['id' => 1]))
+            ->object($model->findByPK(['id' => 1]))
+            ->isIdenticalTo($model->findByPK(['id' => 1]))
             ;
     }
 
     public function testCountWhere()
     {
-        $model = $this->getReadFixtureModel();
+        $model = $this->getReadFixtureModel($this->buildSession());
         $condition = 'id % $* = 0';
         $where = new Where($condition, [2]);
         $this
@@ -204,7 +231,7 @@ class Model extends ModelSessionAtoum
 
     public function testInsertOne()
     {
-        $model = $this->getWriteFixtureModel();
+        $model = $this->getWriteFixtureModel($this->buildSession());
         $entity = new SimpleFixture(['a_varchar' => 'e']);
         $this
             ->object($model->insertOne($entity))
@@ -218,7 +245,7 @@ class Model extends ModelSessionAtoum
 
     public function testUpdateOne()
     {
-        $model  = $this->getWriteFixtureModel();
+        $model = $this->getWriteFixtureModel($this->buildSession());
         $entity = $model->createAndSave(['a_varchar' => 'qwerty', 'a_boolean' => false]);
         $entity->set('a_varchar', 'azerty')->set('a_boolean', true);
         $this
@@ -234,7 +261,7 @@ class Model extends ModelSessionAtoum
 
     public function testUpdateByPK()
     {
-        $model  = $this->getWriteFixtureModel();
+        $model = $this->getWriteFixtureModel($this->buildSession());
         $entity = $model->createAndSave(['a_varchar' => 'qwerty', 'a_boolean' => false]);
         $updated_entity = $model->updateByPk(['id' => $entity['id']], ['a_boolean' => true]);
         $this
@@ -253,7 +280,7 @@ class Model extends ModelSessionAtoum
 
     public function testDeleteOne()
     {
-        $model  = $this->getWriteFixtureModel();
+        $model = $this->getWriteFixtureModel($this->buildSession());
         $entity = $model->createAndSave(['a_varchar' => 'mlkjhgf']);
         $this
             ->object($model->deleteOne($entity))
@@ -267,7 +294,7 @@ class Model extends ModelSessionAtoum
 
     public function testDeleteByPK()
     {
-        $model  = $this->getWriteFixtureModel();
+        $model = $this->getWriteFixtureModel($this->buildSession());
         $entity = $model->createAndSave(['a_varchar' => 'qwerty', 'a_boolean' => false]);
         $deleted_entity = $model->deleteByPK(['id' => $entity['id']]);
         $this
@@ -286,8 +313,9 @@ class Model extends ModelSessionAtoum
 
     public function testCreateAndSave()
     {
-        $model  = $this->getWriteFixtureModel();
-        $entity = $model->createAndSave(['a_varchar' => 'wxcvbn', 'a_boolean' => true]);
+        $session = $this->buildSession();
+        $model   = $this->getWriteFixtureModel($session);
+        $entity  = $model->createAndSave(['a_varchar' => 'wxcvbn', 'a_boolean' => true]);
         $this
             ->boolean($entity->has('id'))
             ->isTrue()

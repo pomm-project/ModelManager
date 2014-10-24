@@ -27,21 +27,45 @@ class WriteFixtureModel extends SimpleFixtureModel
     public function initialize(Session $session)
     {
         parent::initialize($session);
+        $this
+            ->dropTable()
+            ->createTable()
+            ;
+    }
+
+    public function shutdown()
+    {
+        $this->dropTable();
+    }
+
+    protected function createTable()
+    {
         $this->executeAnonymousQuery(
             sprintf(
                 "create temporary table %s (id serial primary key, a_varchar varchar, a_boolean boolean)",
                 $this->getStructure()->getRelation()
             )
         );
-    }
 
-    public function shutdown()
-    {
-        $this->executeAnonymousQuery(sprintf("drop table %s", $this->getStructure()->getRelation()));
+        return $this;
     }
 
     public function truncate()
     {
         $this->executeAnonymousQuery(sprintf("truncate %s", $this->getStructure()->getRelation()));
+    }
+
+    protected function dropTable()
+    {
+        $this
+            ->executeAnonymousQuery(
+                sprintf(
+                    "drop table if exists %s",
+                    $this->getStructure()->getRelation()
+                )
+            )
+            ;
+
+        return $this;
     }
 }

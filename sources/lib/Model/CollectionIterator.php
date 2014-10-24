@@ -48,6 +48,11 @@ class CollectionIterator extends ResultIterator
         $this->session      = $session;
     }
 
+    /**
+     * get
+     *
+     * @see ResultIterator
+     */
     public function get($index)
     {
         return $this->parseRow(parent::get($index));
@@ -66,11 +71,15 @@ class CollectionIterator extends ResultIterator
     public function parseRow(array $values)
     {
         $values = $this->launchFilters($values);
+        $entity = (new HydrationPlan($this->projection, $values))
+            ->hydrate($this->session)
+            ;
 
         return $this
             ->session
-            ->getClient('hydrator', $this->projection->getFlexibleEntityClass())
-            ->hydrate(new HydrationPlan($this->projection, $values))
+            ->getClientUsingPooler('converter', $this->projection->getFlexibleEntityClass())
+            ->getConverter()
+            ->cacheEntity($entity)
             ;
     }
 

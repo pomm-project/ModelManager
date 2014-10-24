@@ -9,6 +9,9 @@
  */
 namespace PommProject\ModelManager\Model;
 
+use PommProject\ModelManager\Model\FlexibleEntity;
+use PommProject\Foundation\Session\Session;
+
 /**
  * HydrationPlan
  *
@@ -25,7 +28,7 @@ namespace PommProject\ModelManager\Model;
 class HydrationPlan implements \IteratorAggregate
 {
     protected $values = [];
-    protected $projection = [];
+    protected $projection;
 
     /**
      * __construct
@@ -75,6 +78,84 @@ class HydrationPlan implements \IteratorAggregate
      */
     public function isArray($name)
     {
-        return (bool) preg_match('/\[\]$/', $this->getFieldType($name));
+        return $this->projection->isArray($name);
+    }
+
+
+    /**
+     * hydrate
+     *
+     * Take values fetched from the database, launch conversion system and
+     * hydrate the FlexibleEntity through the mapper.
+     *
+     * @access public
+     * @param  Session          $session
+     * @return FlexibleEntity
+     */
+    public function hydrate(Session $session)
+    {
+        $values = $this->convert('fromPg', $session);
+
+        return $this->createEntity($values);
+    }
+
+    /**
+     * dry
+     *
+     * Return values converted to Pg.
+     *
+     * @access public
+     * @param  Session $session
+     * @return array
+     */
+    public function dry(Session $session)
+    {
+        return $this->convert('toPg', $session);
+    }
+
+    /**
+     * convert
+     *
+     * Convert values from / to postgres.
+     *
+     * @access protected
+     * @param  string   $from_to
+     * @param  Session  $session
+     * @return array
+     */
+    protected function convert($from_to, Session $session)
+    {
+        $values = [];
+        foreach ($this->getIterator() as $field_name => $value) {
+            if ($this->isArray($field_name)) {
+                $values[$field_name] = $session
+                    ->getClientUsingPooler('converter', 'array')
+                    ->$from_to($value, $this->getFieldType($field_name))
+                    ;
+            } else {
+                $values[$field_name] = $session
+                    ->getClientUsingPooler('converter', $this->getFieldType($field_name))
+                    ->$from_to($value)
+                    ;
+            }
+        }
+
+        return $values;
+    }
+
+    /**
+     * createEntity
+     *
+     * Instanciate FlexibleEntity from converted values.
+     *
+     * @access protected
+     * @param  array $values
+     * @return FlexibleEntity
+     */
+    protected function createEntity(array $values)
+    {
+        $class = $this->projection->getFlexibleEntityClass();
+
+        return new $class($values);
     }
 }

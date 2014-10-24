@@ -10,6 +10,8 @@
 namespace PommProject\ModelManager\Model;
 
 use PommProject\ModelManager\Exception\ModelException;
+use PommProject\ModelManager\Converter\PgEntity;
+
 use PommProject\Foundation\Client\ClientInterface;
 use PommProject\Foundation\Session\Session;
 
@@ -87,11 +89,18 @@ abstract class Model implements ClientInterface
             throw new ModelException(sprintf("Flexible entity not set while initializing Model class '%s'.", get_class($this)));
         }
 
-        $this->session->registerClient(
-            new Hydrator(
+        $session->getPoolerForType('converter')
+            ->getConverterHolder()
+            ->registerConverter(
                 $this->flexible_entity_class,
-                $this->getStructure()->getPrimaryKey()
-            )
+                new PgEntity(
+                    $this->flexible_entity_class,
+                    $this->getStructure()
+                ),
+                [
+                    $this->getStructure()->getRelation(),
+                    $this->flexible_entity_class,
+                ]
         );
     }
 
