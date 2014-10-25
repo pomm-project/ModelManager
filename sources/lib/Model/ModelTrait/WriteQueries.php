@@ -11,6 +11,8 @@ namespace PommProject\ModelManager\Model\ModelTrait;
 
 use PommProject\ModelManager\Model\FlexibleEntity;
 use PommProject\ModelManager\Model\Model;
+
+use PommProject\Foundation\RawString;
 use PommProject\Foundation\Where;
 
 /**
@@ -43,7 +45,10 @@ trait WriteQueries
 
         foreach ($this->getStructure()->getDefinition() as $name => $type) {
             if ($entity->has($name)) {
-                $values[$name] = $this->convertValueToPg($entity->get($name), $type);
+                $values[$name] = $entity->get($name) instanceOf RawString
+                    ? $entity->get($name)->__toString()
+                    : $this->convertValueToPg($entity->get($name), $type)
+                    ;
             }
         }
 
@@ -108,7 +113,9 @@ trait WriteQueries
             $update_strings[] = sprintf(
                 "%s = %s",
                 $this->escapeIdentifier($field_name),
-                $this->convertValueToPg($new_value, $this->getStructure()->getTypeFor($field_name))
+                $new_value instanceOf RawString
+                ? $new_value->__toString()
+                : $this->convertValueToPg($new_value, $this->getStructure()->getTypeFor($field_name))
             );
         }
 
@@ -122,9 +129,13 @@ trait WriteQueries
             ]
         );
 
-        $entity = $this->query($sql, $where->getValues())->current();
+        $iterator = $this->query($sql, $where->getValues());
 
-        return $entity;
+        if ($iterator->isEmpty()) {
+            return null;
+        }
+
+        return $iterator->current()->status(FlexibleEntity::EXIST);
     }
 
     /**
