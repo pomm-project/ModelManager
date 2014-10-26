@@ -13,7 +13,7 @@ use PommProject\ModelManager\Model\RowStructure;
 
 class ComplexNumberStructure extends RowStructure
 {
-    protected function initialize()
+    public function __construct()
     {
         $this
             ->setRelation('pomm_test.complex_number')

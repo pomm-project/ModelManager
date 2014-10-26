@@ -22,41 +22,27 @@ use PommProject\ModelManager\Exception\ModelException;
  * @author Grégoire HUBERT <hubert.greg@gmail.com>
  * @license MIT/X11 {@link http://opensource.org/licenses/mit-license.php}
  */
-abstract class RowStructure implements \ArrayAccess
+class RowStructure implements \ArrayAccess
 {
+    protected $primary_key       = [];
     protected $field_definitions = [];
     protected $relation;
-    protected $primary_key = [];
 
     /**
-     * __construct
+     * setDefinition
+     *
+     * Add a complete definition.
      *
      * @access public
-     * @return void
+     * @param  array        $definition
+     * @return RowStructure $this
      */
-    public function __construct()
+    public function setDefinition(array $definition)
     {
-        $this->initialize();
+        $this->field_definitions = $definition;
 
-        if (!is_array($this->field_definitions) || count($this->field_definitions) === 0) {
-            throw new ModelException(sprintf("Incorrect field definition after initialization in class '%s'.", get_class($this)));
-        }
-
-        if ($this->relation === null || $this->relation === '') {
-            throw new ModelException(sprintf("Invalid relation name after initialization in class '%s'.", get_class($this)));
-        }
+        return $this;
     }
-
-    /**
-     * initialize
-     *
-     * Method to be overloaded by user's structures.
-     * It must defines 'field_definitions' & 'relation'.
-     *
-     * @access protected
-     * @return void
-     */
-    abstract protected function initialize();
 
     /**
      * inherits

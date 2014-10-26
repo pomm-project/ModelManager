@@ -13,7 +13,7 @@ use PommProject\ModelManager\Model\RowStructure;
 
 class SimpleFixtureStructure extends RowStructure
 {
-    protected function initialize()
+    public function __construct()
     {
         $this->relation = <<<_
 (values

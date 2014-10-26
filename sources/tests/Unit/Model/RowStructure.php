@@ -14,25 +14,6 @@ use Atoum;
 
 class RowStructure extends Atoum
 {
-    public function testConstructor()
-    {
-        $this->exception(function() { new FailingRelationStructure(); })
-            ->isinstanceof('\PommProject\ModelManager\Exception\ModelException')
-            ->message->contains('relation name')
-            ;
-
-        $this->exception(function() { new FailingFieldDefinitionStructure(); })
-            ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
-            ->message->contains('field definition')
-            ;
-
-        $structure = new GoodStructure();
-        $this->object($structure)
-            ->isInstanceOf('\PommProject\ModelManager\Model\RowStructure')
-            ->isInstanceOf('\ArrayAccess')
-            ;
-    }
-
     public function testInherits()
     {
         $structure = new GoodStructure();
@@ -143,25 +124,9 @@ class RowStructure extends Atoum
     }
 }
 
-class FailingFieldDefinitionStructure extends PommRowStructure
-{
-    protected function initialize()
-    {
-        $this->relation = 'plop';
-    }
-}
-
-class FailingRelationStructure extends PommRowStructure
-{
-    protected function initialize()
-    {
-        $this->field_definitions['pika'] = 'int4';
-    }
-}
-
 class GoodStructure extends PommRowStructure
 {
-    protected function initialize()
+    public function __construct()
     {
         $this->relation                  = 'pika';
         $this->field_definitions['pika'] = 'int4';
@@ -170,7 +135,7 @@ class GoodStructure extends PommRowStructure
 
 class ChuStructure extends PommRowStructure
 {
-    protected function initialize()
+    public function __construct()
     {
         $this->relation                 = 'chu';
         $this->field_definitions['chu'] = 'bool';
