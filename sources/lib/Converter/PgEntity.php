@@ -101,7 +101,7 @@ class PgEntity implements ConverterInterface
      */
     private function transformData($data, Projection $projection)
     {
-        $data = str_replace("\\", "", $data);
+        $data = stripcslashes($data);
         $values = str_getcsv($data);
         $definition = $projection->getFieldNames();
         $out_values = [];
