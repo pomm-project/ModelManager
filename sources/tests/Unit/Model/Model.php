@@ -230,6 +230,20 @@ class Model extends ModelSessionAtoum
             ;
     }
 
+    public function testPaginateFindWhere()
+    {
+        $model = $this->getReadFixtureModel($this->buildSession());
+        $pager = $model->paginateFindWhere(new Where, 2);
+        $this
+            ->object($pager)
+            ->isInstanceOf('\PommProject\Foundation\Pager')
+            ->array($pager->getIterator()->slice('id'))
+            ->isIdenticalTo([1, 2])
+            ->array($model->paginateFindWhere(new Where, 2, 2, 'order by id desc')->getIterator()->slice('id'))
+            ->isIdenticalTo([2, 1])
+            ;
+    }
+
     public function testInsertOne()
     {
         $model = $this->getWriteFixtureModel($this->buildSession());

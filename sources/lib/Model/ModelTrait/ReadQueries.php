@@ -11,6 +11,8 @@ namespace PommProject\ModelManager\Model\ModelTrait;
 
 use PommProject\ModelManager\Exception\ModelException;
 use PommProject\ModelManager\Model\Model;
+
+use PommProject\Foundation\Pager;
 use PommProject\Foundation\Where;
 
 /**
@@ -133,6 +135,43 @@ trait ReadQueries
             ->getClientUsingPooler('prepared_query', $sql)
             ->execute($values)
             ->fetchColumn('count')[0];
+    }
+
+    /**
+     * paginateFindWhere
+     *
+     * Paginate a query.
+     *
+     * @access public
+     * @param  Where    $where
+     * @param  int      $item_per_page
+     * @param  int      $page
+     * @param  string   $suffix
+     * @return Pager
+     */
+    public function paginateFindWhere(Where $where, $item_per_page, $page = 1, $suffix = '')
+    {
+        if ($page < 1) {
+            throw new \InvalidArgumentException(
+                sprintf("Page cannot be < 1. (%d given)", $page)
+            );
+        }
+
+        if ($item_per_page <= 0) {
+            throw new \InvalidArgumentException(
+                sprintf("'item_per_page' must be strictly positive (%d given).", $item_per_page)
+            );
+        }
+
+        $offset = $item_per_page * ($page - 1);
+        $limit  = $item_per_page;
+
+        return new Pager(
+            $this->findWhere($where, [], sprintf("%s offset %d limit %d", $suffix, $offset, $limit)),
+            $this->countWhere($where),
+            $item_per_page,
+            $page
+        );
     }
 
     /**
