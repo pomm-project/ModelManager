@@ -73,21 +73,18 @@ class PgEntity implements ConverterInterface
 
 
         if ($type instanceOf Projection) {
-            $values = $this->transformData($data, $type);
-            $hydration_plan = new HydrationPlan($type, $values);
+            $projection = $type;
         } else {
             $projection = new Projection(
                 $this->flexible_entity_class,
                 $this->row_structure->getDefinition()
             );
-            $values = $this->transformData($data, $projection);
-            $hydration_plan = new HydrationPlan(
-                $projection,
-                $values
-            );
         }
 
-        $entity = $hydration_plan->hydrate($session);
+        $entity = (new HydrationPlan(
+            $projection,
+            $this->transformData($data, $projection)
+        ))->hydrate($session);
 
         return $this->cacheEntity($entity);
     }
@@ -104,6 +101,7 @@ class PgEntity implements ConverterInterface
      */
     private function transformData($data, Projection $projection)
     {
+        $data = str_replace("\\", "", $data);
         $values = str_getcsv($data);
         $definition = $projection->getFieldNames();
         $out_values = [];

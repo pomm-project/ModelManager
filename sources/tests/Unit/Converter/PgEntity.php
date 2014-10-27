@@ -31,7 +31,7 @@ class PgEntity extends ModelSessionAtoum
                     'PommProject\ModelManager\Test\Fixture\ComplexNumber',
                     new ComplexNumberStructure()
                 ),
-                ['complex_number', 'pomm_test.complex_number']
+                ['pomm_test.complex_number']
             )
             ;
     }
@@ -91,6 +91,17 @@ class PgEntity extends ModelSessionAtoum
             ->hasSize(2)
             ->variable($converter->fromPg(null, 'complex_fixture', $session))
             ->isNull()
+            ;
+        $converter = $this->newTestedInstance(
+            'PommProject\ModelManager\Test\Fixture\ComplexFixture',
+            (new RowStructure())
+            ->setRelation('some_type')
+            ->addField('a_field', 'int4')
+            ->addField('a_null_field', 'int4')
+            ->addField('some_fields', 'int4[]')
+        );
+        $this
+            ->object($converter->fromPg('(500,,\"{7200,300}\")', 'some_type', $session))
             ;
     }
 
