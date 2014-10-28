@@ -10,6 +10,7 @@
 namespace PommProject\ModelManager\Model\ModelTrait;
 
 use PommProject\ModelManager\Exception\ModelException;
+use PommProject\ModelManager\Model\Projection;
 use PommProject\ModelManager\Model\Model;
 
 use PommProject\Foundation\Pager;
@@ -70,21 +71,11 @@ trait ReadQueries
      */
     public function findWhere($where, array $values = [], $suffix = '')
     {
-        if ($where instanceof Where) {
-            $values = $where->getValues();
+        if (!$where instanceof Where) {
+            $where = new Where($where, $values);
         }
 
-        $sql = strtr(
-            "select :fields from :table where :condition :suffix",
-            [
-                ':fields'    => $this->createProjection()->formatFieldsWithFieldAlias(),
-                ':table'     => $this->getStructure()->getRelation(),
-                ':condition' => (string) $where,
-                ':suffix'    => $suffix,
-            ]
-        );
-
-        return $this->query($sql, $values);
+        return $this->query($this->getFindWhereSql($where, $this->createProjection(), $suffix), $where->getValues());
     }
 
     /**
@@ -151,6 +142,37 @@ trait ReadQueries
      */
     public function paginateFindWhere(Where $where, $item_per_page, $page = 1, $suffix = '')
     {
+        $projection = $this->createProjection();
+
+        return $this->paginateQuery(
+            $this->getFindWhereSql($where, $projection, $suffix),
+            $where->getValues(),
+            $this->countWhere($where),
+            $item_per_page,
+            $page,
+            $projection
+        );
+    }
+
+    /**
+     * paginateQuery
+     *
+     * Paginate a SQL query.
+     * It is important to note it adds limit and offset at the end of the given
+     * query.
+     *
+     * @access protected
+     * @param  string       $sql
+     * @param  array        $values parameters
+     * @param  int          $count
+     * @param  int          $item_per_page
+     * @param  int          $page
+     * @param  Projection   $projection
+     * @throw  \InvalidArgumentException if pager args are invalid.
+     * @return Pager
+     */
+    protected function paginateQuery($sql, array $values, $count, $item_per_page, $page = 1, Projection $projection = null)
+    {
         if ($page < 1) {
             throw new \InvalidArgumentException(
                 sprintf("Page cannot be < 1. (%d given)", $page)
@@ -167,10 +189,39 @@ trait ReadQueries
         $limit  = $item_per_page;
 
         return new Pager(
-            $this->findWhere($where, [], sprintf("%s offset %d limit %d", $suffix, $offset, $limit)),
-            $this->countWhere($where),
+            $this->query(
+                sprintf("%s offset %d limit %d", $sql, $offset, $limit),
+                $values,
+                $projection
+            ),
+            $count,
             $item_per_page,
             $page
+        );
+    }
+
+    /**
+     * getFindWhereSql
+     *
+     * This is the standard SQL query to fetch instances from the current
+     * relation.
+     *
+     * @access protected
+     * @param  Where        $where
+     * @param  Projection   $projection
+     * @param  string       $suffix
+     * @return string
+     */
+    protected function getFindWhereSql(Where $where, Projection $projection, $suffix = '')
+    {
+        return strtr(
+            'select :projection from :relation where :condition :suffix',
+            [
+                ':projection' => $projection->formatFieldsWithFieldAlias(),
+                ':relation'   => $this->getStructure()->getRelation(),
+                ':condition'  => $where->__toString(),
+                ':suffix'     => $suffix,
+            ]
         );
     }
 

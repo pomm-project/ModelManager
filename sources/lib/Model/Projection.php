@@ -282,6 +282,19 @@ class Projection
     }
 
     /**
+     * __toString
+     *
+     * String representation = formatFieldsWithFieldAlias().
+     *
+     * @access public
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->formatFieldsWithFieldAlias();
+    }
+
+    /**
      * checkField
      *
      * Check if $name is not null
