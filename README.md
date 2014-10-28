@@ -8,7 +8,7 @@ Pomm's ModelManager package is the common model layer built upon the Foundation 
 
 ## Installation
 
-Pomm components are available on [packagist](https://packagist.org/packages/pomm-project/) using [composer](https://packagist.org/). To install and use Pomm's model manager, add a require line to `"pomm-project/model-manager"` in your `composer.json` file.
+Pomm components are available on [packagist](https://packagist.org/packages/pomm-project/) using [composer](https://packagist.org/). To install and use Pomm's model manager, add a require line to `"pomm-project/model-manager"` in your `composer.json` file. It is advised to install the [CLI package](https://github.com/pomm-project/Cli) as well.
 
 ## Introduction
 
@@ -29,13 +29,19 @@ class DocumentModel extends Model
 
     protected function __construct()
     {
-        $this->structure = new DocumentStructure;
+        $this->structure = (new RowStructure())
+            ->setRelation('document')
+            ->setPrimaryKey(['document_id', 'version_id'])
+            ->addField('document_id', 'uuid')
+            ->addField('version_id', 'int4')
+            ...
+            ;
         $this->flexible_entity_class = "\Model\PommTest\PyloneSchema\Document";
     }
 }
 ```
 
-The class shown above uses the `DocumentStructure` seen before and a `Document` entity. As the `document` relation is a table, the class imports the `WriteQueries` trait that contains read and write predefined queries like `findWhere()`, `createAndSave()` and many more methods. As soon as this file is available in the project, it is possible to use the model layer from a controller using the `Model client pooler` (see the [Foundation package](https://github.com/pomm-project/Foundation)):
+The class shown above defines a structure using the `RowStructure` class for the example's sake. It is a good practice to define a dedicated structure class for each Model as the CLI package does. Since the `document` relation is a table, the class imports the `WriteQueries` trait that contains read and write predefined queries like `findWhere()`, `createAndSave()` and many more methods. As soon as this file is available in the project, it is possible to use the model layer from a controller using the `Model client pooler` (see the [Foundation package](https://github.com/pomm-project/Foundation)):
 
 ```php
 function touchDocumentController($document_id)
@@ -107,9 +113,9 @@ class DocumentModel extends Model
 
 ### Projection
 
-Projection is the big difference between Pomm and an ORM. ORM define the relation through a static class definition whereas Pomm defines a [projection](http://en.wikipedia.org/wiki/Relational_algebra#Projection_.28.CF.80.29) (ie the fields list of a select or returning) from a database relation to a flexible instance.
+Projection is the big difference between Pomm and ORM. ORM define the relation through a static class definition whereas Pomm defines a [projection](http://en.wikipedia.org/wiki/Relational_algebra#Projection_.28.CF.80.29) (ie the fields list of a select or returning) between a database relation and a flexible instance.
 
-By default, a `Model` instance takes all the fields of its relation so `$model->findByPK(['document_id' => 2])` is equivalent to `select * from myschema.document where document_id = 2`. But it is possible to tune this projection by overloading the `createProjection()` method.
+By default, a `Model` instance takes all the fields of its relation hence `$model->findByPK(['document_id' => 2])` is equivalent to `select d.* from myschema.document d where d.document_id = 2`. But it is possible to tune this projection by overloading the `createProjection()` method:
 
 ```php
 function createProjection()
@@ -119,14 +125,16 @@ function createProjection()
         ->setField('quality_score', '%page / (%modification + 1)', 'float4')
         ;
 }
-```
+``
 
-Now, calling `findByPK` will issue a query like `select …, d.page / (d.modification + 1) as "quality_score", … from document d where …`. It is important to note that all queries are using the default projection so modifying it will change the values the entities are hydrated with. The method's third argument is the type associated with the added field. It makes the converter system to know how to convert the new value from its database representation to a usable PHP value.
+Now, calling `findByPK` will issue a query like `select …, d.page / (d.modification + 1) as "quality_score", … from document d where …`.
+
+It is important to note that all queries are using the default projection so modifying it will change the values the entities are hydrated with. The method's third argument is the type associated with the added field. It makes the converter system to know how to convert the new value from its database representation to a usable PHP value.
 
 
 ### Custom queries
 
-Even though the queries coming with the traits are covering a broad range of what can be done on a relation, Pomm incites developers to write custom queries using the rich [Postgres's SQL language](http://www.postgresql.org/docs/9.4/static/sql.html). Since Pomm is not an ORM, it will never generate queries to fetch foreign information. Let's see a simple custom query:
+Even though the queries coming with the traits are covering a broad range of what can be done on a relation, Pomm incites developers to write custom queries using the rich [Postgres's SQL language](http://www.postgresql.org/docs/9.4/static/sql.html). Since Pomm is not an ORM, it does not generate queries to fetch foreign information. Let's see a simple custom query:
 
 ```php
 class DocumentModel extends Model
@@ -225,12 +233,13 @@ Structure class is a very simple component, it binds fields with types. They are
 ```php
 class DocumentStructure extends RowStructure
 {
-    protected function initialize()
+    public function __construct()
     {
         $this
             ->setRelation('document')
-            ->setPrimaryKey(['document_id'])
+            ->setPrimaryKey(['document_id', 'version_id'])
             ->addField('document_id', 'uuid')
+            ->addField('version_id', 'int4')
             ->addField('title', 'varchar')
             ->addField('updated_at', 'timestamp')
             ->addField('creator_id', 'uuid')
@@ -310,3 +319,41 @@ class DocumentModelLayer extends ModelLayer
 Thew example above shows how to embed model calls in a transaction and how to convert technical exceptions into business exceptions.
 
 Watchful readers may have noticed a call to a method `sendNotify()`. This is a use of [Postgresql's asynchronous messaging system](http://ledgersmbdev.blogspot.fr/2012/09/objectrelational-interlude-messaging-in.html).
+
+## Session configuration and PgEntity converter
+
+The `ModelManager` package comes with its own `SessionBuilder` (see [Foundation](https://github.com/pomm-project/Foundation/blob/master/README.md)) that adds `Model` and `ModelLayer` session poolers to the session. Extend this class to benefit from these features. Use this class to declare custom converters. The ModelManager package ships an extra converter to transform composite types (types, tables and views structure) into a `FlexibleEntity` instance: the `PgEntity` converter.
+
+```php
+<?php
+
+namespace MyApplication\Model;
+
+use PommProject\ModelManager\SessionBuilder;
+use PommProject\ModelManager\Converter\PgEntity;
+
+use PommProject\Foundation\Session\Session;
+
+class MyApplicationSessionBuilder extends SessionBuilder
+{
+    protected function postConfigure(Session $session)
+    {
+        parent::postConfigure($session);
+        $converter_holder = $session
+            ->getPoolerForType('converter')
+            ->getConverterHolder()
+            ;
+
+        $converter_holder
+            ->registerConverter(
+                'MyCompositeType',
+                new PgEntity(
+                    '\Model\MyApplication\MySchema\Type\MyCompositeFlexibleEntity',
+                    new MyCompositeStructure()
+                ),
+                ['my_schema.composite_type', '\Model\MyApplication\MySchema\Type\MyCompositeFlexibleEntity']
+            )
+            ;
+    }
+}
+```
