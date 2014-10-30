@@ -125,7 +125,7 @@ function createProjection()
         ->setField('quality_score', '%page / (%modification + 1)', 'float4')
         ;
 }
-``
+```
 
 Now, calling `findByPK` will issue a query like `select …, d.page / (d.modification + 1) as "quality_score", … from document d where …`.
 
