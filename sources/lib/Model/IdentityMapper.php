@@ -42,7 +42,7 @@ class IdentityMapper
             return null;
         }
 
-        return sha1(sprintf("%s|%s", join('', $entity->get($primary_key)), get_class($entity)));
+        return sha1(sprintf("%s|%s", serialize($entity->get($primary_key)), get_class($entity)));
     }
 
     /**
@@ -71,5 +71,20 @@ class IdentityMapper
         }
 
         return $this->instances[$signature];
+    }
+
+    /**
+     * clear
+     *
+     * Flush instances from the identity mapper.
+     *
+     * @access public
+     * @return IdentityMapper $this
+     */
+    public function clear()
+    {
+        $this->instances = [];
+
+        return $this;
     }
 }
