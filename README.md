@@ -270,7 +270,7 @@ In the example above, the native document structure is augmented with a `Authent
 
 ## Model layer
 
-Even though the Model service is enough for small / medium applications, it becomes insufficient for applications with a need for complex business operations. Modern frameworks offer a code layer often referred as 'service layer' or 'transaction layer'. Pomm crafts a 'model layer' for this purpose. Here is an example:
+Even though the Model service is enough for small / medium applications, it becomes insufficient for applications with a need for complex business operations. Modern frameworks offer a code layer often referred as ['service layer'](http://martinfowler.com/eaaCatalog/serviceLayer.html) or 'transaction layer'. Pomm crafts a 'model layer' for this purpose. Here is an example:
 
 ```php
 class DocumentModelLayer extends ModelLayer

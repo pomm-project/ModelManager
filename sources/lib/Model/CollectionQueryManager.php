@@ -15,9 +15,9 @@ use PommProject\Foundation\Listener\SendNotificationTrait;
 use PommProject\ModelManager\Model\Projection;
 
 /**
- * CollectionQuery
+ * CollectionQueryManager
  *
- * Query manager for CollectionIterator.
+ * Query manager client for CollectionIterator.
  *
  * @package ModelManager.
  * @copyright 2014 Grégoire HUBERT
@@ -25,13 +25,13 @@ use PommProject\ModelManager\Model\Projection;
  * @license X11 {@link http://opensource.org/licenses/mit-license.php}
  * @see Client
  */
-class CollectionQuery extends Client
+class CollectionQueryManager extends Client
 {
     use SendNotificationTrait;
 
     public function getClientType()
     {
-        return 'query';
+        return 'query_manager';
     }
 
     public function getClientIdentifier()
@@ -61,9 +61,9 @@ class CollectionQuery extends Client
             ]
         );
 
-        $start = microtime(true);
+        $start  = microtime(true);
         $result = $this->doQuery($sql, $parameters);
-        $end = microtime(true);
+        $end    = microtime(true);
 
         $collection = new CollectionIterator(
             $result,

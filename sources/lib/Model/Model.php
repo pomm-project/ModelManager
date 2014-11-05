@@ -135,8 +135,8 @@ abstract class Model implements ClientInterface
         return $this
             ->getSession()
             ->getClientUsingPooler(
-                'query',
-                '\PommProject\ModelManager\Model\CollectionQuery'
+                'query_manager',
+                '\PommProject\ModelManager\Model\CollectionQueryManager'
             )
             ->query($sql, $values, $projection)
             ;
