@@ -52,6 +52,7 @@ class CollectionIterator extends ResultIterator
      * get
      *
      * @see ResultIterator
+     * @return FlexibleEntity
      */
     public function get($index)
     {
