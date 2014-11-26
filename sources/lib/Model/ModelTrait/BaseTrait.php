@@ -63,4 +63,9 @@ trait BaseTrait
      * @see Model
      */
     abstract public function executeAnonymousQuery($sql);
+
+    /**
+     * @see Model
+     */
+    abstract public function createEntity(array $values = []);
 }

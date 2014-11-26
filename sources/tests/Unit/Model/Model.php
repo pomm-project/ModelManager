@@ -350,6 +350,16 @@ class Model extends ModelSessionAtoum
             ->isIdenticalTo($entity)
             ;
     }
+
+    public function testCreateEntity()
+    {
+        $session = $this->buildSession();
+        $model   = $this->getSimpleFixtureModel($session);
+        $entity  = $model->createEntity();
+        $this
+            ->object($entity)
+            ->isInstanceOf('PommProject\ModelManager\Test\Fixture\SimpleFixture');
+    }
 }
 
 class NoStructureNoFlexibleEntityModel extends PommModel

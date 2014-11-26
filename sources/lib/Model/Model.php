@@ -114,6 +114,21 @@ abstract class Model implements ClientInterface
     }
 
     /**
+     * createEntity
+     *
+     * Create a new entity.
+     *
+     * @access public
+     * @param array $values
+     * @return Flexibleentity
+     */
+    public function createEntity(array $values = [])
+    {
+        $class_name = $this->getFlexibleEntityClass();
+        return new $class_name($values);
+    }
+
+    /**
      * query
      *
      * Execute the given query and return a Collection iterator on results. If

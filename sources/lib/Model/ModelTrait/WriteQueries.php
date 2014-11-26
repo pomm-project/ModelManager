@@ -197,8 +197,7 @@ trait WriteQueries
      */
     public function createAndSave(array $values)
     {
-        $class_name = $this->getFlexibleEntityClass();
-        $entity = new $class_name($values);
+        $entity = $this->createEntity($values);
         $this->insertOne($entity);
 
         return $entity;
