@@ -166,7 +166,6 @@ abstract class Model implements ClientInterface
      * structure.Overriding this method will change projection for all models.
      *
      * @access  protected
-     * @param   array       $tructure
      * @return  Projection
      */
     protected function createProjection()

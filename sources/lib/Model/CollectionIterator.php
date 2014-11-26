@@ -151,6 +151,17 @@ class CollectionIterator extends ResultIterator
         return $this->convertSlice(parent::slice($name), $name);
     }
 
+    public function extract()
+    {
+        $results = [];
+
+        foreach ($this as $result) {
+            $results[] = $result->extract();
+        }
+
+        return $results;
+    }
+
     /**
      * convertSlice
      *

@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pomm-project/Foundation.git",
-                "reference": "6646378dcec42113aa2d7c331f5ceac86cc65a03"
+                "reference": "6556ce0068160ecfb5c226a0e9f242904c5802c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pomm-project/Foundation/zipball/6646378dcec42113aa2d7c331f5ceac86cc65a03",
-                "reference": "6646378dcec42113aa2d7c331f5ceac86cc65a03",
+                "url": "https://api.github.com/repos/pomm-project/Foundation/zipball/6556ce0068160ecfb5c226a0e9f242904c5802c9",
+                "reference": "6556ce0068160ecfb5c226a0e9f242904c5802c9",
                 "shasum": ""
             },
             "require": {
@@ -52,7 +52,7 @@
                 "framework",
                 "postgresql"
             ],
-            "time": "2014-11-07 15:21:48"
+            "time": "2014-11-26 00:10:10"
         },
         {
             "name": "psr/log",
@@ -105,12 +105,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/atoum/atoum.git",
-                "reference": "2ecade7d2829d89fce1961a0f46cc38d4b8192e2"
+                "reference": "9b87d03f0a8dbb7ee6bd434c06e3b9d8971ad1ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/atoum/atoum/zipball/2ecade7d2829d89fce1961a0f46cc38d4b8192e2",
-                "reference": "2ecade7d2829d89fce1961a0f46cc38d4b8192e2",
+                "url": "https://api.github.com/repos/atoum/atoum/zipball/9b87d03f0a8dbb7ee6bd434c06e3b9d8971ad1ba",
+                "reference": "9b87d03f0a8dbb7ee6bd434c06e3b9d8971ad1ba",
                 "shasum": ""
             },
             "require": {
@@ -171,7 +171,7 @@
                 "test",
                 "unit testing"
             ],
-            "time": "2014-11-09 10:10:43"
+            "time": "2014-11-21 14:50:10"
         }
     ],
     "aliases": [],
