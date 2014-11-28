@@ -31,6 +31,7 @@ abstract class FlexibleEntity implements \ArrayAccess, \IteratorAggregate
 
     public static $strict = true;
 
+    protected static  $has_methods;
     private $fields = [];
     private $status = self::NONE;
 
@@ -400,17 +401,39 @@ abstract class FlexibleEntity implements \ArrayAccess, \IteratorAggregate
      */
     public function getIterator()
     {
-        $custom_methods = array_filter(get_class_methods(get_class($this)), function ($val) { return preg_match('/^has[A-Z]/', $val); });
-        $custom_fields = array();
+        if (static::$has_methods === null) {
+            static::fillHasMethods($this);
+        }
+        $custom_fields = [];
 
-        foreach ($custom_methods as $method) {
-            if (call_user_func(array($this, $method)) === true) {
-                preg_match('/^has([A-Z].*)/', $method, $matchs);
-                $field = Inflector::underscore($matchs[1]);
-                $custom_fields[$field] = $this[$matchs[1]];
+        foreach (static::$has_methods as $method) {
+            if (call_user_func([$this, sprintf("has%s", $method)]) === true) {
+                $custom_fields[Inflector::underscore(lcfirst($method))] = call_user_func([$this, sprintf("get%s", $method)]);
             }
         }
 
         return new \ArrayIterator(array_merge($this->fields, $custom_fields));
+    }
+
+
+    /**
+     * fillHasMethods
+     *
+     * When getIterator is called the first time, the list of "has" methods is
+     * set in a static attributes to boost performances.
+     *
+     * @access protected
+     * @param  FlexibleEntity   $entity
+     * @return null
+     */
+    protected static function fillHasMethods(FlexibleEntity $entity)
+    {
+        static::$has_methods = [];
+
+        foreach (get_class_methods($entity) as $method) {
+            if (preg_match('/^has([A-Z].*)$/', $method, $matchs)) {
+                static::$has_methods[] = $matchs[1];
+            }
+        }
     }
 }
