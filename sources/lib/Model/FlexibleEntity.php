@@ -420,7 +420,7 @@ abstract class FlexibleEntity implements \ArrayAccess, \IteratorAggregate
      * fillHasMethods
      *
      * When getIterator is called the first time, the list of "has" methods is
-     * set in a static attributes to boost performances.
+     * set in a static attribute to boost performances.
      *
      * @access protected
      * @param  FlexibleEntity   $entity
