@@ -47,7 +47,7 @@ trait ReadQueries
         $sql = strtr(
             "select :fields from :table :suffix",
             [
-                ':fields' => $this->createProjection()->formatFields(),
+                ':fields' => $this->createProjection()->formatFieldsWithFieldAlias(),
                 ':table'  => $this->getStructure()->getRelation(),
                 ':suffix' => $suffix,
             ]
