@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pomm-project/Foundation.git",
-                "reference": "faba2a5cc4c2af87331394afd4b7b0a7bc710fe6"
+                "reference": "111ad8af3ad6e6bd439f2d93b5072b0014820f6e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pomm-project/Foundation/zipball/faba2a5cc4c2af87331394afd4b7b0a7bc710fe6",
-                "reference": "faba2a5cc4c2af87331394afd4b7b0a7bc710fe6",
+                "url": "https://api.github.com/repos/pomm-project/Foundation/zipball/111ad8af3ad6e6bd439f2d93b5072b0014820f6e",
+                "reference": "111ad8af3ad6e6bd439f2d93b5072b0014820f6e",
                 "shasum": ""
             },
             "require": {
@@ -57,7 +57,7 @@
                 "framework",
                 "postgresql"
             ],
-            "time": "2014-11-29 12:59:40"
+            "time": "2014-12-15 07:45:50"
         },
         {
             "name": "psr/log",
@@ -110,12 +110,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/atoum/atoum.git",
-                "reference": "9b87d03f0a8dbb7ee6bd434c06e3b9d8971ad1ba"
+                "reference": "f70d90155768a2d8552f3d0b473f6731652edfde"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/atoum/atoum/zipball/9b87d03f0a8dbb7ee6bd434c06e3b9d8971ad1ba",
-                "reference": "9b87d03f0a8dbb7ee6bd434c06e3b9d8971ad1ba",
+                "url": "https://api.github.com/repos/atoum/atoum/zipball/f70d90155768a2d8552f3d0b473f6731652edfde",
+                "reference": "f70d90155768a2d8552f3d0b473f6731652edfde",
                 "shasum": ""
             },
             "require": {
@@ -136,6 +136,11 @@
                 "bin/atoum"
             ],
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
             "autoload": {
                 "classmap": [
                     "classes/"
@@ -176,7 +181,7 @@
                 "test",
                 "unit testing"
             ],
-            "time": "2014-11-21 14:50:10"
+            "time": "2014-12-10 09:22:13"
         }
     ],
     "aliases": [],
