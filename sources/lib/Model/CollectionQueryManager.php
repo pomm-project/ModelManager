@@ -58,6 +58,7 @@ class CollectionQueryManager extends Client
                 'sql'        => $sql,
                 'parameters' => $parameters,
                 'types'      => $projection->getFieldTypes(),
+                'session_stamp' => $this->getSession()->getStamp(),
             ]
         );
 

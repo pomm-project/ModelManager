@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d58b4964d0b241f55896df9e8158ecc4",
+    "hash": "e5f0aee9349dcb1e04048a184934f11c",
     "packages": [
         {
             "name": "pomm-project/foundation",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pomm-project/Foundation.git",
-                "reference": "111ad8af3ad6e6bd439f2d93b5072b0014820f6e"
+                "reference": "6663dd98343aed0988018406a24c29662aac0cb0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pomm-project/Foundation/zipball/111ad8af3ad6e6bd439f2d93b5072b0014820f6e",
-                "reference": "111ad8af3ad6e6bd439f2d93b5072b0014820f6e",
+                "url": "https://api.github.com/repos/pomm-project/Foundation/zipball/6663dd98343aed0988018406a24c29662aac0cb0",
+                "reference": "6663dd98343aed0988018406a24c29662aac0cb0",
                 "shasum": ""
             },
             "require": {
@@ -55,9 +55,10 @@
             "keywords": [
                 "database",
                 "framework",
+                "pomm",
                 "postgresql"
             ],
-            "time": "2014-12-15 07:45:50"
+            "time": "2014-12-30 13:33:02"
         },
         {
             "name": "psr/log",
@@ -110,12 +111,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/atoum/atoum.git",
-                "reference": "f70d90155768a2d8552f3d0b473f6731652edfde"
+                "reference": "d87b00b0b89a43b515b7342452957ff5b87c46f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/atoum/atoum/zipball/f70d90155768a2d8552f3d0b473f6731652edfde",
-                "reference": "f70d90155768a2d8552f3d0b473f6731652edfde",
+                "url": "https://api.github.com/repos/atoum/atoum/zipball/d87b00b0b89a43b515b7342452957ff5b87c46f0",
+                "reference": "d87b00b0b89a43b515b7342452957ff5b87c46f0",
                 "shasum": ""
             },
             "require": {
@@ -181,7 +182,7 @@
                 "test",
                 "unit testing"
             ],
-            "time": "2014-12-10 09:22:13"
+            "time": "2014-12-28 14:16:27"
         }
     ],
     "aliases": [],
