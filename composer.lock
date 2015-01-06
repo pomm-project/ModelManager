@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pomm-project/Foundation.git",
-                "reference": "6663dd98343aed0988018406a24c29662aac0cb0"
+                "reference": "86a7fd9e1f72d8076f782aff978300bf6fa139aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pomm-project/Foundation/zipball/6663dd98343aed0988018406a24c29662aac0cb0",
-                "reference": "6663dd98343aed0988018406a24c29662aac0cb0",
+                "url": "https://api.github.com/repos/pomm-project/Foundation/zipball/86a7fd9e1f72d8076f782aff978300bf6fa139aa",
+                "reference": "86a7fd9e1f72d8076f782aff978300bf6fa139aa",
                 "shasum": ""
             },
             "require": {
@@ -58,7 +58,7 @@
                 "pomm",
                 "postgresql"
             ],
-            "time": "2014-12-30 13:33:02"
+            "time": "2015-01-05 20:17:15"
         },
         {
             "name": "psr/log",
@@ -111,12 +111,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/atoum/atoum.git",
-                "reference": "d87b00b0b89a43b515b7342452957ff5b87c46f0"
+                "reference": "a2360270079f314b545b04f9e8d558734fd1e890"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/atoum/atoum/zipball/d87b00b0b89a43b515b7342452957ff5b87c46f0",
-                "reference": "d87b00b0b89a43b515b7342452957ff5b87c46f0",
+                "url": "https://api.github.com/repos/atoum/atoum/zipball/a2360270079f314b545b04f9e8d558734fd1e890",
+                "reference": "a2360270079f314b545b04f9e8d558734fd1e890",
                 "shasum": ""
             },
             "require": {
@@ -182,7 +182,7 @@
                 "test",
                 "unit testing"
             ],
-            "time": "2014-12-28 14:16:27"
+            "time": "2015-01-02 22:33:27"
         }
     ],
     "aliases": [],
@@ -192,6 +192,7 @@
         "atoum/atoum": 20
     },
     "prefer-stable": false,
+    "prefer-lowest": false,
     "platform": {
         "php": ">=5.4.4",
         "ext-pgsql": "*"
