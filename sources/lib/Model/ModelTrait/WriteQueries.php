@@ -42,12 +42,13 @@ trait WriteQueries
     public function insertOne(FlexibleEntityInterface &$entity)
     {
         $values = [];
+        $fields = $entity->fields();
 
         foreach ($this->getStructure()->getDefinition() as $name => $type) {
-            if ($entity->has($name)) {
-                $values[$name] = $entity->get($name) instanceOf RawString
-                    ? $entity->get($name)->__toString()
-                    : $this->convertValueToPg($entity->get($name), $type)
+            if (isset($fields[$name])) {
+                $values[$name] = $fields[$name] instanceOf RawString
+                    ? $fields[$name]->__toString()
+                    : $this->convertValueToPg($fields[$name], $type)
                     ;
             }
         }
@@ -86,8 +87,8 @@ trait WriteQueries
     public function updateOne(FlexibleEntityInterface &$entity, array $fields)
     {
         $entity = $this->updateByPk(
-            $entity->get($this->getStructure()->getPrimaryKey()),
-            $entity->get($fields)
+            $entity->fields($this->getStructure()->getPrimaryKey()),
+            $entity->fields($fields)
         );
 
         return $this;
@@ -150,7 +151,7 @@ trait WriteQueries
      */
     public function deleteOne(FlexibleEntityInterface &$entity)
     {
-        $entity = $this->deleteByPK($entity->get($this->getStructure()->getPrimaryKey()));
+        $entity = $this->deleteByPK($entity->fields($this->getStructure()->getPrimaryKey()));
 
         return $this;
     }
