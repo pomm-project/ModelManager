@@ -9,7 +9,7 @@
  */
 namespace PommProject\ModelManager\Model;
 
-use PommProject\ModelManager\Model\FlexibleEntity;
+use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
 use PommProject\Foundation\Session\Session;
 
 /**
@@ -86,11 +86,11 @@ class HydrationPlan implements \IteratorAggregate
      * hydrate
      *
      * Take values fetched from the database, launch conversion system and
-     * hydrate the FlexibleEntity through the mapper.
+     * hydrate the FlexibleEntityInterface through the mapper.
      *
      * @access public
      * @param  Session          $session
-     * @return FlexibleEntity
+     * @return FlexibleEntityInterface
      */
     public function hydrate(Session $session)
     {
@@ -146,16 +146,18 @@ class HydrationPlan implements \IteratorAggregate
     /**
      * createEntity
      *
-     * Instanciate FlexibleEntity from converted values.
+     * Instanciate FlexibleEntityInterface from converted values.
      *
      * @access protected
      * @param  array $values
-     * @return FlexibleEntity
+     * @return FlexibleEntityInterface
      */
     protected function createEntity(array $values)
     {
         $class = $this->projection->getFlexibleEntityClass();
 
-        return new $class($values);
+        return (new $class())
+            ->hydrate($values)
+            ;
     }
 }

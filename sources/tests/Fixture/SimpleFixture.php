@@ -9,7 +9,7 @@
  */
 namespace PommProject\ModelManager\Test\Fixture;
 
-use PommProject\ModelManager\Model\FlexibleEntity;
+use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntity;
 
 class SimpleFixture extends FlexibleEntity
 {

@@ -20,13 +20,14 @@ use PommProject\ModelManager\Tester\ModelSessionAtoum;
 
 use PommProject\ModelManager\Model\ModelPooler;
 use PommProject\ModelManager\Model\Model                as PommModel;
+use PommProject\ModelManager\Converter\PgEntity;
 use PommProject\ModelManager\Test\Fixture\SimpleFixture;
 use PommProject\ModelManager\Test\Fixture\ComplexFixture;
 use PommProject\ModelManager\Test\Fixture\ModelSchemaClient;
 use PommProject\ModelManager\Test\Fixture\ComplexNumberStructure;
-use PommProject\ModelManager\Converter\PgEntity;
+use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
 
-use Mock\PommProject\ModelManager\Model\FlexibleEntity  as FlexibleEntityMock;
+use Mock\PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntity  as FlexibleEntityMock;
 use Mock\PommProject\ModelManager\Model\RowStructure    as RowStructureMock;
 
 class Model extends ModelSessionAtoum
@@ -202,7 +203,7 @@ class Model extends ModelSessionAtoum
             ->variable($model->findByPK(['id' => 5]))
             ->isNull()
             ->integer($model->findByPK(['id' => 3])->status())
-            ->isEqualTo(FlexibleEntityMock::EXIST)
+            ->isEqualTo(FlexibleEntityInterface::STATUS_EXIST)
             ;
     }
 
@@ -253,7 +254,7 @@ class Model extends ModelSessionAtoum
             ->isIdenticalTo($model)
             ->boolean($entity->hasId())
             ->isTrue()
-            ->boolean($entity->status() === FlexibleEntityMock::EXIST)
+            ->boolean($entity->status() === FlexibleEntityInterface::STATUS_EXIST)
             ->isTrue()
             ;
     }
@@ -271,7 +272,7 @@ class Model extends ModelSessionAtoum
             ->isEqualTo('azerty')
             ->boolean($entity->get('a_boolean'))
             ->isFalse()
-            ->boolean($entity->status() === FlexibleEntityMock::EXIST)
+            ->boolean($entity->status() === FlexibleEntityInterface::STATUS_EXIST)
             ->isTrue()
             ;
         $entity->set('a_boolean', new RawString('not a_boolean'));
@@ -293,7 +294,7 @@ class Model extends ModelSessionAtoum
             ->boolean($updated_entity['a_boolean'])
             ->isTrue()
             ->integer($updated_entity->status())
-            ->isEqualTo(FlexibleEntityMock::EXIST)
+            ->isEqualTo(FlexibleEntityInterface::STATUS_EXIST)
             ->variable($model->updateByPk(['id' => 999999], ['a_varchar' => 'whatever']))
             ->isNull()
             ->object($entity)
@@ -345,7 +346,7 @@ class Model extends ModelSessionAtoum
             ->string($entity->get('a_varchar'))
             ->isEqualTo('abcdef')
             ->integer($entity->status())
-            ->isEqualTo(FlexibleEntityMock::EXIST)
+            ->isEqualTo(FlexibleEntityInterface::STATUS_EXIST)
             ->object($model->findWhere('id = $*', [$entity['id']])->current())
             ->isIdenticalTo($entity)
             ;

@@ -15,8 +15,8 @@ use PommProject\Foundation\Session\Session;
 use PommProject\ModelManager\Model\Projection;
 use PommProject\ModelManager\Model\RowStructure;
 use PommProject\ModelManager\Model\IdentityMapper;
-use PommProject\ModelManager\Model\FlexibleEntity;
 use PommProject\ModelManager\Model\HydrationPlan;
+use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
 
 /**
  * PgEntity
@@ -119,10 +119,10 @@ class PgEntity implements ConverterInterface
      * Check entity against the cache.
      *
      * @access public
-     * @param  FlexibleEntity   $entity
-     * @return FlexibleEntity
+     * @param  FlexibleEntityInterface   $entity
+     * @return FlexibleEntityInterface
      */
-    public function cacheEntity(FlexibleEntity $entity)
+    public function cacheEntity(FlexibleEntityInterface $entity)
     {
         return $this
             ->identity_mapper

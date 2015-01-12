@@ -7,8 +7,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace PommProject\ModelManager\Model;
+namespace PommProject\ModelManager\Model\FlexibleEntity;
 
+use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
 use PommProject\ModelManager\Exception\ModelException;
 use PommProject\Foundation\Inflector;
 
@@ -23,17 +24,16 @@ use PommProject\Foundation\Inflector;
  * @author Grégoire HUBERT <hubert.greg@gmail.com>
  * @license MIT/X11 {@link http://opensource.org/licenses/mit-license.php}
  */
-abstract class FlexibleEntity implements \ArrayAccess, \IteratorAggregate
-{
-    const NONE     = 0;
-    const EXIST    = 1;
-    const MODIFIED = 2;
+abstract class FlexibleEntity implements
+    \ArrayAccess,
+    \IteratorAggregate,
+    FlexibleEntityInterface {
 
     public static $strict = true;
 
     protected static  $has_methods;
     private $fields = [];
-    private $status = self::NONE;
+    private $status = FlexibleEntityInterface::STATUS_NONE;
 
     /**
      * __construct
@@ -104,7 +104,7 @@ abstract class FlexibleEntity implements \ArrayAccess, \IteratorAggregate
     final public function set($var, $value)
     {
         $this->fields[$var] = $value;
-        $this->status = $this->status | self::MODIFIED;
+        $this->status = $this->status | FlexibleEntityInterface::STATUS_MODIFIED;
 
         return $this;
     }
@@ -149,7 +149,7 @@ abstract class FlexibleEntity implements \ArrayAccess, \IteratorAggregate
     {
         if ($this->has($offset)) {
             unset($this->fields[$offset]);
-            $this->status = $this->status | self::MODIFIED;
+            $this->status = $this->status | FlexibleEntityInterface::STATUS_MODIFIED;
         }
 
         return $this;
@@ -196,13 +196,9 @@ abstract class FlexibleEntity implements \ArrayAccess, \IteratorAggregate
     /**
      * hydrate
      *
-     * Merge internal values with given $values in the object.
-     *
-     * @access public
-     * @param  Array          $values
-     * @return FlexibleEntity $this
+     * @see FlexibleEntityInterface
      */
-    final public function hydrate(array $values)
+    public function hydrate(array $values)
     {
         $this->fields = array_merge($this->fields, $values);
 
@@ -238,8 +234,7 @@ abstract class FlexibleEntity implements \ArrayAccess, \IteratorAggregate
      * in arrays are the same type, we check only its first value to know if we need
      * to traverse it or not.
      *
-     * @access public
-     * @return Array
+     * @see FlexibleEntityInterface
      */
     public function extract()
     {
@@ -269,14 +264,35 @@ abstract class FlexibleEntity implements \ArrayAccess, \IteratorAggregate
     /**
      * fields
      *
-     * Return the fields array.
+     * Return the fields array. If a given field does not exist, an exception
+     * is thrown.
      *
-     * @access public
-     * @return Array
+     * @throw   InvalidArgumentException
+     * @see     FlexibleEntityInterface
      */
-    public function fields()
+    public function fields(array $fields = null)
     {
-        return $this->fields;
+        if ($fields === null) {
+            return $this->fields;
+        }
+
+        $output = [];
+
+        foreach ($fields as $name) {
+            if (isset($this->fields[$name])) {
+                $output[$name] = $this->fields[$name];
+            } else {
+                throw new \InvalidArgumentException(
+                    sprintf(
+                        "No such field '%s'. Existing fields are {%s}",
+                        $name,
+                        join(', ', array_keys($this->fields))
+                    )
+                );
+            }
+        }
+
+        return $output;
     }
 
     /**
@@ -314,16 +330,7 @@ abstract class FlexibleEntity implements \ArrayAccess, \IteratorAggregate
     }
 
     /**
-     * status
-     *
-     * Return or set the current status of the instance. Status can be
-     * self::NONE, self::EXIST and SELF::MODIFIED.
-     * If a status is set, it returns itself. If no status are provided, it
-     * returns the current status.
-     *
-     * @access public
-     * @param  int (null)
-     * @return int|FlexibleEntity
+     * @see FlexibleEntityInterface
      */
     public function status($status = null)
     {
@@ -339,14 +346,15 @@ abstract class FlexibleEntity implements \ArrayAccess, \IteratorAggregate
     /**
      * isNew
      *
-     * is the current object self::NEW (does not it exist in the database already ?).
+     * is the current object FlexibleEntityInterface::STATUS_NEW (does not it
+     * exist in the database already ?).
      *
      * @access public
      * @return boolean
      */
     public function isNew()
     {
-        return (boolean) !($this->status & self::EXIST);
+        return (boolean) !($this->status & FlexibleEntityInterface::STATUS_EXIST);
     }
 
     /**
@@ -359,7 +367,7 @@ abstract class FlexibleEntity implements \ArrayAccess, \IteratorAggregate
      */
     public function isModified()
     {
-        return (boolean) ($this->status & self::MODIFIED);
+        return (boolean) ($this->status & FlexibleEntityInterface::STATUS_MODIFIED);
     }
 
     /**
@@ -404,6 +412,7 @@ abstract class FlexibleEntity implements \ArrayAccess, \IteratorAggregate
         if (static::$has_methods === null) {
             static::fillHasMethods($this);
         }
+
         $custom_fields = [];
 
         foreach (static::$has_methods as $method) {

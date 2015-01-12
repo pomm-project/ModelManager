@@ -9,7 +9,7 @@
  */
 namespace PommProject\ModelManager\Model\ModelTrait;
 
-use PommProject\ModelManager\Model\FlexibleEntity;
+use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
 use PommProject\ModelManager\Model\Model;
 
 use PommProject\Foundation\RawString;
@@ -36,10 +36,10 @@ trait WriteQueries
      * It is updated with values returned by the database (ie, default values).
      *
      * @access public
-     * @param  FlexibleEntity $entity
-     * @return Model          $this
+     * @param  FlexibleEntityInterface  $entity
+     * @return Model                    $this
      */
-    public function insertOne(FlexibleEntity &$entity)
+    public function insertOne(FlexibleEntityInterface &$entity)
     {
         $values = [];
 
@@ -64,7 +64,7 @@ trait WriteQueries
         $entity = $this
             ->query($sql)
             ->current()
-            ->status(FlexibleEntity::EXIST);
+            ->status(FlexibleEntityInterface::STATUS_EXIST);
 
         return $this;
     }
@@ -79,11 +79,11 @@ trait WriteQueries
      * primary key is not fully set, an exception is thrown.
      *
      * @access public
-     * @param  FlexibleEntity $entity
-     * @param  array          $fields
-     * @return Model          $this
+     * @param  FlexibleEntityInterface  $entity
+     * @param  array                    $fields
+     * @return Model                    $this
      */
-    public function updateOne(FlexibleEntity &$entity, array $fields)
+    public function updateOne(FlexibleEntityInterface &$entity, array $fields)
     {
         $entity = $this->updateByPk(
             $entity->get($this->getStructure()->getPrimaryKey()),
@@ -102,7 +102,7 @@ trait WriteQueries
      * @access public
      * @param  array          $primary_key
      * @param  array          $updates
-     * @return FlexibleEntity
+     * @return FlexibleEntityInterface
      */
     public function updateByPk(array $primary_key, array $updates)
     {
@@ -135,7 +135,7 @@ trait WriteQueries
             return null;
         }
 
-        return $iterator->current()->status(FlexibleEntity::EXIST);
+        return $iterator->current()->status(FlexibleEntityInterface::STATUS_EXIST);
     }
 
     /**
@@ -145,10 +145,10 @@ trait WriteQueries
      * updated with the values fetched from the deleted record.
      *
      * @access public
-     * @param  FlexibleEntity $entity
-     * @return Model          $this
+     * @param  FlexibleEntityInterface  $entity
+     * @return Model                    $this
      */
-    public function deleteOne(FlexibleEntity &$entity)
+    public function deleteOne(FlexibleEntityInterface &$entity)
     {
         $entity = $this->deleteByPK($entity->get($this->getStructure()->getPrimaryKey()));
 
@@ -163,7 +163,7 @@ trait WriteQueries
      *
      * @access public
      * @param  array          $primary_key
-     * @return FlexibleEntity
+     * @return FlexibleEntityInterface
      */
     public function deleteByPK(array $primary_key)
     {
@@ -180,7 +180,7 @@ trait WriteQueries
         $entity = $this->query($sql, $where->getValues())->current();
 
         if ($entity !== null) {
-            $entity->status(FlexibleEntity::NONE);
+            $entity->status(FlexibleEntityInterface::STATUS_NONE);
         }
 
         return $entity;
@@ -193,7 +193,7 @@ trait WriteQueries
      *
      * @access public
      * @param  array          $values
-     * @return FlexibleEntity
+     * @return FlexibleEntityInterface
      */
     public function createAndSave(array $values)
     {

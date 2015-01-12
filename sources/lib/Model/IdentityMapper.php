@@ -9,10 +9,12 @@
  */
 namespace PommProject\ModelManager\Model;
 
+use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
+
 /**
  * IdentityMapper
  *
- * Cache for FlexibleEntity instances to ensure there are no different
+ * Cache for FlexibleEntityInterface instances to ensure there are no different
  * instances for the same data.
  *
  * @package ModelManager
@@ -32,30 +34,30 @@ class IdentityMapper
      *
      * @static
      * @access public
-     * @param  FlexibleEntity $entity
-     * @param  array          $primary_key
+     * @param  FlexibleEntityInterface  $entity
+     * @param  array                    $primary_key
      * @return string
      */
-    public static function getSignature(FlexibleEntity $entity, array $primary_key)
+    public static function getSignature(FlexibleEntityInterface $entity, array $primary_key)
     {
         if (count($primary_key) === 0) {
             return null;
         }
 
-        return sha1(sprintf("%s|%s", serialize($entity->get($primary_key)), get_class($entity)));
+        return sha1(sprintf("%s|%s", serialize($entity->fields($primary_key)), get_class($entity)));
     }
 
     /**
      * fetch
      *
-     * Pool FlexibleEntity instances and update them if necessary.
+     * Pool FlexibleEntityInterface instances and update them if necessary.
      *
      * @access public
-     * @param  FlexibleEntity $entity
-     * @param  array          $primary_key
-     * @return FlexibleEntity
+     * @param  FlexibleEntityInterface  $entity
+     * @param  array                    $primary_key
+     * @return FlexibleEntityInterface
      */
-    public function fetch(FlexibleEntity $entity, array $primary_key)
+    public function fetch(FlexibleEntityInterface $entity, array $primary_key)
     {
         $signature = self::getSignature($entity, $primary_key);
 
@@ -65,9 +67,9 @@ class IdentityMapper
 
         if (!array_key_exists($signature, $this->instances)) {
             $this->instances[$signature] = $entity;
-            $entity->status(FlexibleEntity::EXIST);
+            $entity->status(FlexibleEntityInterface::STATUS_EXIST);
         } else {
-            $this->instances[$signature]->hydrate($entity->extract());
+            $this->instances[$signature]->hydrate($entity->fields());
         }
 
         return $this->instances[$signature];

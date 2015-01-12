@@ -7,9 +7,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace PommProject\ModelManager\Test\Unit\Model;
+namespace PommProject\ModelManager\Test\Unit\Model\FlexibleEntity;
 
-use PommProject\ModelManager\Model\FlexibleEntity as PommFlexibleEntity;
+use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntity as PommFlexibleEntity;
+use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
+
 use Atoum;
 
 class FlexibleEntity extends Atoum
@@ -19,7 +21,7 @@ class FlexibleEntity extends Atoum
         $entity = new PikaEntity();
         $this
             ->object($entity)
-            ->isInstanceOf('\PommProject\ModelManager\Model\FlexibleEntity')
+            ->isInstanceOf('\PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntity')
             ->array($entity->fields())
             ->isEmpty()
             ;
@@ -79,7 +81,7 @@ class FlexibleEntity extends Atoum
             ->string($entity->set('chu', 'whatever')->get('chu'))
             ->isEqualTo('whatever')
             ->integer($entity->status())
-            ->isEqualTo(PommFlexibleEntity::MODIFIED)
+            ->isEqualTo(FlexibleEntityInterface::STATUS_MODIFIED)
             ->string($entity->set('chu', 'pika')->get('chu'))
             ->isEqualTo('pika')
             ->array($entity->set('an_array', [1, 2])->get('an_array'))
@@ -259,9 +261,9 @@ class FlexibleEntity extends Atoum
         $entity = new PikaEntity();
         $this
             ->integer($entity->status())
-            ->isEqualTo(PommFlexibleEntity::NONE)
-            ->integer($entity->status(PommFlexibleEntity::MODIFIED)->status())
-            ->isEqualTo(PommFlexibleEntity::MODIFIED)
+            ->isEqualTo(FlexibleEntityInterface::STATUS_NONE)
+            ->integer($entity->status(FlexibleEntityInterface::STATUS_MODIFIED)->status())
+            ->isEqualTo(FlexibleEntityInterface::STATUS_MODIFIED)
             ;
     }
 
@@ -271,11 +273,11 @@ class FlexibleEntity extends Atoum
         $this
             ->boolean($entity->isNew())
             ->isTrue()
-            ->boolean($entity->status(PommFlexibleEntity::MODIFIED)->isNew())
+            ->boolean($entity->status(FlexibleEntityInterface::STATUS_MODIFIED)->isNew())
             ->isTrue()
-            ->boolean($entity->status(PommFlexibleEntity::EXIST)->isNew())
+            ->boolean($entity->status(FlexibleEntityInterface::STATUS_EXIST)->isNew())
             ->isFalse()
-            ->boolean($entity->status(PommFlexibleEntity::EXIST + PommFlexibleEntity::MODIFIED)->isNew())
+            ->boolean($entity->status(FlexibleEntityInterface::STATUS_EXIST + FlexibleEntityInterface::STATUS_MODIFIED)->isNew())
             ->isFalse()
             ;
     }
@@ -286,11 +288,11 @@ class FlexibleEntity extends Atoum
         $this
             ->boolean($entity->isModified())
             ->isFalse()
-            ->boolean($entity->status(PommFlexibleEntity::MODIFIED)->isModified())
+            ->boolean($entity->status(FlexibleEntityInterface::STATUS_MODIFIED)->isModified())
             ->isTrue()
-            ->boolean($entity->status(PommFlexibleEntity::EXIST)->isModified())
+            ->boolean($entity->status(FlexibleEntityInterface::STATUS_EXIST)->isModified())
             ->isFalse()
-            ->boolean($entity->status(PommFlexibleEntity::EXIST + PommFlexibleEntity::MODIFIED)->isModified())
+            ->boolean($entity->status(FlexibleEntityInterface::STATUS_EXIST + FlexibleEntityInterface::STATUS_MODIFIED)->isModified())
             ->isTrue()
             ;
     }
@@ -335,7 +337,7 @@ class FlexibleEntity extends Atoum
             ->array($entity->setPika('chu')->getIterator()->getArrayCopy())
             ->isIdenticalTo(['pika' => 'chu', 'pika_hash' => 'cbcefaf71b4677cb8bcc006e0aeaa34a'])
             ->object($entity->set('an_entity', new ChuEntity())->getIterator()->getArrayCopy()['an_entity'])
-            ->isInstanceOf('\PommProject\ModelManager\Model\FlexibleEntity')
+            ->isInstanceOf('\PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntity')
             ->array($entity->set('an_array', [1, 2])->getIterator()->getArrayCopy()['an_array'])
             ->isIdenticalTo([1, 2])
             ;

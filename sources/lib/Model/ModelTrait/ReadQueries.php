@@ -86,7 +86,7 @@ trait ReadQueries
      *
      * @access public
      * @param  array          $primary_key
-     * @return FlexibleEntity
+     * @return FlexibleEntityInterface
      */
     public function findByPK(array $primary_key)
     {

@@ -9,10 +9,11 @@
  */
 namespace PommProject\ModelManager\Model;
 
+use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
 use PommProject\ModelManager\Exception\ModelException;
-use PommProject\Foundation\ResultIterator;
 use PommProject\Foundation\Session\ResultHandler;
 use PommProject\Foundation\Session\Session;
+use PommProject\Foundation\ResultIterator;
 
 /**
  * CollectionIterator
@@ -52,7 +53,7 @@ class CollectionIterator extends ResultIterator
      * get
      *
      * @see ResultIterator
-     * @return FlexibleEntity
+     * @return FlexibleEntityInterface
      */
     public function get($index)
     {
@@ -66,7 +67,7 @@ class CollectionIterator extends ResultIterator
      *
      * @access protected
      * @param  array          $values
-     * @return FlexibleEntity
+     * @return FlexibleEntityInterface
      * @see    ResultIterator
      */
     public function parseRow(array $values)

@@ -9,9 +9,9 @@
  */
 namespace PommProject\ModelManager\Model;
 
+use PommProject\ModelManager\FlexibleEntity\FlexibleEntityInterface;
 use PommProject\ModelManager\Exception\ModelException;
 use PommProject\ModelManager\Converter\PgEntity;
-
 use PommProject\Foundation\Client\ClientInterface;
 use PommProject\Foundation\Session\Session;
 
@@ -87,6 +87,10 @@ abstract class Model implements ClientInterface
 
         if ($this->flexible_entity_class == null) {
             throw new ModelException(sprintf("Flexible entity not set while initializing Model class '%s'.", get_class($this)));
+        } elseif (!(new \ReflectionClass($this->flexible_entity_class))
+            ->implementsInterface('\PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface')
+        ) {
+            throw new ModelException(sprintf("Flexible entity must implement FlexibleEntityInterface."));
         }
 
         $session->getPoolerForType('converter')
@@ -120,12 +124,15 @@ abstract class Model implements ClientInterface
      *
      * @access public
      * @param array $values
-     * @return Flexibleentity
+     * @return FlexibleEntityInterface
      */
     public function createEntity(array $values = [])
     {
         $class_name = $this->getFlexibleEntityClass();
-        return new $class_name($values);
+
+        return (new $class_name)
+            ->hydrate($values)
+            ;
     }
 
     /**
@@ -195,11 +202,11 @@ abstract class Model implements ClientInterface
      * If not an exception is thrown.
      *
      * @access protected
-     * @param  FlexibleEntity $entity
+     * @param  FlexibleEntityInterface $entity
      * @throw  InvalidArgumentException
      * @return Model          $this
      */
-    protected function checkFlexibleEntity(FlexibleEntity $entity)
+    protected function checkFlexibleEntity(FlexibleEntityInterface $entity)
     {
         if (!($entity instanceof $this->flexible_entity_class)) {
             throw new \InvalidArgumentException(sprintf(
