@@ -267,36 +267,6 @@ class FlexibleEntity extends Atoum
             ;
     }
 
-    public function testIsNew()
-    {
-        $entity = new PikaEntity();
-        $this
-            ->boolean($entity->isNew())
-            ->isTrue()
-            ->boolean($entity->status(FlexibleEntityInterface::STATUS_MODIFIED)->isNew())
-            ->isTrue()
-            ->boolean($entity->status(FlexibleEntityInterface::STATUS_EXIST)->isNew())
-            ->isFalse()
-            ->boolean($entity->status(FlexibleEntityInterface::STATUS_EXIST + FlexibleEntityInterface::STATUS_MODIFIED)->isNew())
-            ->isFalse()
-            ;
-    }
-
-    public function testIsModified()
-    {
-        $entity = new PikaEntity();
-        $this
-            ->boolean($entity->isModified())
-            ->isFalse()
-            ->boolean($entity->status(FlexibleEntityInterface::STATUS_MODIFIED)->isModified())
-            ->isTrue()
-            ->boolean($entity->status(FlexibleEntityInterface::STATUS_EXIST)->isModified())
-            ->isFalse()
-            ->boolean($entity->status(FlexibleEntityInterface::STATUS_EXIST + FlexibleEntityInterface::STATUS_MODIFIED)->isModified())
-            ->isTrue()
-            ;
-    }
-
     public function testArrayAccess()
     {
         $entity = new PikaEntity();

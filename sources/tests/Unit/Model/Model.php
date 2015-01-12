@@ -311,8 +311,8 @@ class Model extends ModelSessionAtoum
             ->isInstanceOf('\PommProject\ModelManager\Test\Fixture\WriteFixtureModel')
             ->variable($model->findByPK(['id' => $entity['id']]))
             ->isNull()
-            ->boolean($entity->isNew())
-            ->isTrue()
+            ->integer($entity->status())
+            ->isEqualTo(FlexibleEntityInterface::STATUS_NONE)
             ;
     }
 
@@ -324,14 +324,14 @@ class Model extends ModelSessionAtoum
         $this
             ->object($deleted_entity)
             ->isInstanceOf('\PommProject\ModelManager\Test\Fixture\SimpleFixture')
-            ->boolean($deleted_entity->isNew())
-            ->isTrue()
+            ->integer($deleted_entity->status())
+            ->isEqualTo(FlexibleEntityInterface::STATUS_NONE)
             ->variable($model->deleteByPK(['id' => $entity['id']]))
             ->isNull()
             ->object($entity)
             ->isIdenticalTo($deleted_entity)
-            ->boolean($entity->isNew())
-            ->isTrue()
+            ->integer($entity->status())
+            ->isEqualTo(FlexibleEntityInterface::STATUS_NONE)
             ;
     }
 

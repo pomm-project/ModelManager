@@ -24,16 +24,14 @@ use PommProject\Foundation\Inflector;
  * @author Grégoire HUBERT <hubert.greg@gmail.com>
  * @license MIT/X11 {@link http://opensource.org/licenses/mit-license.php}
  */
-abstract class FlexibleEntity implements
+abstract class FlexibleEntity extends StatefullEntity implements
     \ArrayAccess,
-    \IteratorAggregate,
-    FlexibleEntityInterface {
+    \IteratorAggregate {
 
     public static $strict = true;
 
     protected static  $has_methods;
     private $fields = [];
-    private $status = FlexibleEntityInterface::STATUS_NONE;
 
     /**
      * __construct
@@ -104,7 +102,7 @@ abstract class FlexibleEntity implements
     final public function set($var, $value)
     {
         $this->fields[$var] = $value;
-        $this->status = $this->status | FlexibleEntityInterface::STATUS_MODIFIED;
+        $this->touch();
 
         return $this;
     }
@@ -149,7 +147,7 @@ abstract class FlexibleEntity implements
     {
         if ($this->has($offset)) {
             unset($this->fields[$offset]);
-            $this->status = $this->status | FlexibleEntityInterface::STATUS_MODIFIED;
+            $this->touch();
         }
 
         return $this;
@@ -327,47 +325,6 @@ abstract class FlexibleEntity implements
         $method_name = "get".Inflector::studlyCaps($var);
 
         return $this->$method_name();
-    }
-
-    /**
-     * @see FlexibleEntityInterface
-     */
-    public function status($status = null)
-    {
-        if ($status !== null) {
-            $this->status = $status;
-
-            return $this;
-        }
-
-        return $this->status;
-    }
-
-    /**
-     * isNew
-     *
-     * is the current object FlexibleEntityInterface::STATUS_NEW (does not it
-     * exist in the database already ?).
-     *
-     * @access public
-     * @return boolean
-     */
-    public function isNew()
-    {
-        return (boolean) !($this->status & FlexibleEntityInterface::STATUS_EXIST);
-    }
-
-    /**
-     * isModified
-     *
-     * Has the object been modified since we know it ?
-     *
-     * @access public
-     * @return boolean
-     */
-    public function isModified()
-    {
-        return (boolean) ($this->status & FlexibleEntityInterface::STATUS_MODIFIED);
     }
 
     /**
