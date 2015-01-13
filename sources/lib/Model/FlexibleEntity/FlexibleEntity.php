@@ -10,6 +10,7 @@
 namespace PommProject\ModelManager\Model\FlexibleEntity;
 
 use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
+use PommProject\ModelManager\Model\FlexibleEntity\StatefullEntityTrait;
 use PommProject\ModelManager\Exception\ModelException;
 use PommProject\Foundation\Inflector;
 
@@ -24,9 +25,12 @@ use PommProject\Foundation\Inflector;
  * @author Grégoire HUBERT <hubert.greg@gmail.com>
  * @license MIT/X11 {@link http://opensource.org/licenses/mit-license.php}
  */
-abstract class FlexibleEntity extends StatefullEntity implements
+abstract class FlexibleEntity implements
     \ArrayAccess,
-    \IteratorAggregate {
+    \IteratorAggregate,
+    FlexibleEntityInterface {
+
+    use StatefullEntityTrait;
 
     public static $strict = true;
 
