@@ -7,9 +7,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace PommProject\ModelManager\Test\Unit\Model\FlexibleEntity;
+namespace PommProject\ModelManager\Test\Unit\Model;
 
-use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntity as PommFlexibleEntity;
+use PommProject\ModelManager\Model\FlexibleEntity as PommFlexibleEntity;
 use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
 
 use Atoum;
@@ -21,7 +21,7 @@ class FlexibleEntity extends Atoum
         $entity = new PikaEntity();
         $this
             ->object($entity)
-            ->isInstanceOf('\PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntity')
+            ->isInstanceOf('\PommProject\ModelManager\Model\FlexibleEntity')
             ->array($entity->fields())
             ->isEmpty()
             ;
@@ -307,7 +307,7 @@ class FlexibleEntity extends Atoum
             ->array($entity->setPika('chu')->getIterator()->getArrayCopy())
             ->isIdenticalTo(['pika' => 'chu', 'pika_hash' => 'cbcefaf71b4677cb8bcc006e0aeaa34a'])
             ->object($entity->set('an_entity', new ChuEntity())->getIterator()->getArrayCopy()['an_entity'])
-            ->isInstanceOf('\PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntity')
+            ->isInstanceOf('\PommProject\ModelManager\Model\FlexibleEntity')
             ->array($entity->set('an_array', [1, 2])->getIterator()->getArrayCopy()['an_array'])
             ->isIdenticalTo([1, 2])
             ;
