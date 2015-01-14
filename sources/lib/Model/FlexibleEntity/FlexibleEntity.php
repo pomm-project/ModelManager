@@ -163,14 +163,7 @@ abstract class FlexibleEntity extends FlexibleContainer implements \ArrayAccess
      */
     public function __call($method, $arguments)
     {
-        $split = preg_split('/(?=[A-Z])/', $method, 2);
-
-        if (count($split) != 2) {
-            throw new ModelException(sprintf('No such method "%s:%s()"', get_class($this), $method));
-        }
-
-        $operation = $split[0];
-        $attribute = Inflector::underscore($split[1]);
+        list($operation, $attribute) = $this->extractMethodName($method);
 
         switch ($operation) {
         case 'set':

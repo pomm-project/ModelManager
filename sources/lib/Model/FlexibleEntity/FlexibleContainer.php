@@ -110,20 +110,13 @@ abstract class FlexibleContainer implements FlexibleEntityInterface, \IteratorAg
      */
     public function __call($method, $arguments)
     {
-        $split = preg_split('/(?=[A-Z])/', $method, 2);
-
-        if (count($split) != 2) {
-            throw new ModelException(sprintf('No such method "%s:%s()"', get_class($this), $method));
-        }
-
-        $operation = $split[0];
-        $attribute = Inflector::underscore($split[1]);
+        list($operation, $attribute) = $this->extractMethodName($method);
 
         switch ($operation) {
         case 'set':
             return $this->container[$attribute] = $arguments[0];
         case 'get':
-            return $this->container([$attribute]);
+            return $this->container[$attribute];
         case 'has':
             isset($this->container[$attribute]);
             return $this;
@@ -143,5 +136,27 @@ abstract class FlexibleContainer implements FlexibleEntityInterface, \IteratorAg
         default:
             throw new ModelException(sprintf('No such method "%s:%s()"', get_class($this), $method));
         }
+    }
+
+    /**
+     * extractMethodName
+     *
+     * Get container field name from method name.
+     * It returns an array with the operation (get, set, etc.) as first member
+     * and the name of the attribute as second member.
+     *
+     * @access protected
+     * @param  string   $argument
+     * @return array
+     */
+    protected function extractMethodName($argument)
+    {
+        $split = preg_split('/(?=[A-Z])/', $argument, 2);
+
+        if (count($split) !== 2) {
+            throw new ModelException(sprintf('No such argument "%s:%s()"', get_class($this), $argument));
+        }
+
+        return [$split[0], Inflector::underscore($split[1])];
     }
 }
