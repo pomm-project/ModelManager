@@ -9,7 +9,7 @@
  */
 namespace PommProject\ModelManager\Model;
 
-use PommProject\ModelManager\FlexibleEntity\FlexibleEntityInterface;
+use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
 use PommProject\ModelManager\Exception\ModelException;
 use PommProject\ModelManager\Converter\PgEntity;
 use PommProject\Foundation\Client\ClientInterface;
