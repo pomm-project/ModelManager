@@ -10,7 +10,6 @@
 namespace PommProject\ModelManager\Model;
 
 use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
-use PommProject\ModelManager\Model\FlexibleEntity\StatefullEntityTrait;
 use PommProject\ModelManager\Model\FlexibleEntity\FlexibleContainer;
 use PommProject\ModelManager\Exception\ModelException;
 use PommProject\Foundation\Inflector;

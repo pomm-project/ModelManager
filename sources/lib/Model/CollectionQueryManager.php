@@ -9,7 +9,6 @@
  */
 namespace PommProject\ModelManager\Model;
 
-use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
 use PommProject\ModelManager\Model\Projection;
 use PommProject\Foundation\Listener\SendNotificationTrait;
 use PommProject\Foundation\Client\Client;
