@@ -114,28 +114,47 @@ abstract class FlexibleContainer implements FlexibleEntityInterface, \IteratorAg
 
         switch ($operation) {
         case 'set':
-            return $this->container[$attribute] = $arguments[0];
-        case 'get':
-            return $this->container[$attribute];
-        case 'has':
-            isset($this->container[$attribute]);
-            return $this;
-        case 'clear':
-            if (!isset($this->container[$attribute])) {
-                throw new ModelException(
-                    sprintf(
-                        "Could not unset unexisting attribute '%s'.",
-                        $attribute
-                    )
-                );
-            }
+            $this->container[$attribute] = $arguments[0];
 
-            unset($this->container[$attribute]);
+            return $this;
+        case 'get':
+            return $this
+                ->checkAttribute($attribute)
+                ->container[$attribute]
+                ;
+        case 'has':
+            return (bool) isset($this->container[$attribute]);
+        case 'clear':
+            unset ($this->checkAttribute($attribute)->container[$attribute]);
 
             return $this;
         default:
             throw new ModelException(sprintf('No such method "%s:%s()"', get_class($this), $method));
         }
+    }
+
+    /**
+     * checkAttribute
+     *
+     * Check if the attribute exist. Throw an exception if not.
+     *
+     * @access protected
+     * @param  string $attribute
+     * @return FlexibleContainer    $this
+     */
+    protected function checkAttribute($attribute)
+    {
+        if (!isset($this->container[$attribute])) {
+            throw new ModelException(
+                sprintf(
+                    "No such attribute '%s'. Available attributes are {%s}",
+                    $attribute,
+                    join(", ", array_keys($this->fields()))
+                )
+            );
+        }
+
+        return $this;
     }
 
     /**
