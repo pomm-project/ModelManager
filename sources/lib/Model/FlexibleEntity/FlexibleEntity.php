@@ -25,17 +25,10 @@ use PommProject\Foundation\Inflector;
  * @author Grégoire HUBERT <hubert.greg@gmail.com>
  * @license MIT/X11 {@link http://opensource.org/licenses/mit-license.php}
  */
-abstract class FlexibleEntity implements
-    \ArrayAccess,
-    \IteratorAggregate,
-    FlexibleEntityInterface {
-
-    use StatefullEntityTrait;
-
-    public static $strict = true;
-
-    protected static  $has_methods;
-    private $fields = [];
+abstract class FlexibleEntity extends FlexibleContainer implements \ArrayAccess
+{
+    public    static $strict = true;
+    protected static $has_methods;
 
     /**
      * __construct
@@ -68,12 +61,12 @@ abstract class FlexibleEntity implements
     {
         if (is_scalar($var)) {
             if ($this->has($var)) {
-                return $this->fields[$var];
+                return $this->container[$var];
             } elseif (static::$strict === true) {
                 throw new ModelException(sprintf("No such key '%s'.", $var));
             }
         } elseif (is_array($var)) {
-            return array_intersect_key($this->fields, array_flip($var));
+            return array_intersect_key($this->container, array_flip($var));
         }
     }
 
@@ -89,7 +82,7 @@ abstract class FlexibleEntity implements
      */
     final public function has($var)
     {
-        return array_key_exists($var, $this->fields);
+        return array_key_exists($var, $this->container);
     }
 
     /**
@@ -105,7 +98,7 @@ abstract class FlexibleEntity implements
      */
     final public function set($var, $value)
     {
-        $this->fields[$var] = $value;
+        $this->container[$var] = $value;
         $this->touch();
 
         return $this;
@@ -125,13 +118,13 @@ abstract class FlexibleEntity implements
     public function add($var, $value)
     {
         if ($this->has($var)) {
-           if (is_array($this->fields[$var])) {
-               $this->fields[$var][] = $value;
+           if (is_array($this->container[$var])) {
+               $this->container[$var][] = $value;
            } else {
                throw new ModelException(sprintf("Field '%s' exists and is not an array.", $var));
            }
         } else {
-            $this->fields[$var] = array($value);
+            $this->container[$var] = array($value);
         }
 
         return $this;
@@ -150,7 +143,7 @@ abstract class FlexibleEntity implements
     final public function clear($offset)
     {
         if ($this->has($offset)) {
-            unset($this->fields[$offset]);
+            unset($this->container[$offset]);
             $this->touch();
         }
 
@@ -196,18 +189,6 @@ abstract class FlexibleEntity implements
     }
 
     /**
-     * hydrate
-     *
-     * @see FlexibleEntityInterface
-     */
-    public function hydrate(array $values)
-    {
-        $this->fields = array_merge($this->fields, $values);
-
-        return $this;
-    }
-
-    /**
      * convert
      *
      * Make all keys lowercase and hydrate the object.
@@ -246,55 +227,57 @@ abstract class FlexibleEntity implements
             }
 
             if (is_array($val)) {
-                if (is_array(current($val)) || (is_object(current($val)) && current($val) instanceof FlexibleEntity)) {
+                if (is_array(current($val)) || (is_object(current($val)) && current($val) instanceof FlexibleEntityInterface)) {
                     return array_map($array_recurse, $val);
                 } else {
                     return $val;
                 }
             }
 
-            if (is_object($val) && $val instanceof FlexibleEntity) {
+            if (is_object($val) && $val instanceof FlexibleEntityInterface) {
                 return $val->extract();
             }
 
             return $val;
         };
 
-        return array_map($array_recurse, $this->getIterator()->getArrayCopy());
+
+        return array_map($array_recurse, array_merge($this->container, $this->getCustomFields()));
     }
 
     /**
-     * fields
+     * getCustomFields
      *
-     * Return the fields array. If a given field does not exist, an exception
-     * is thrown.
+     * Return a list of custom methods with has() accessor.
      *
-     * @throw   InvalidArgumentException
-     * @see     FlexibleEntityInterface
+     * @access private
+     * @return array
      */
-    public function fields(array $fields = null)
+    private function getCustomFields()
     {
-        if ($fields === null) {
-            return $this->fields;
+        if (static::$has_methods === null) {
+            static::fillHasMethods($this);
         }
 
-        $output = [];
+        $custom_fields = [];
 
-        foreach ($fields as $name) {
-            if (isset($this->fields[$name])) {
-                $output[$name] = $this->fields[$name];
-            } else {
-                throw new \InvalidArgumentException(
-                    sprintf(
-                        "No such field '%s'. Existing fields are {%s}",
-                        $name,
-                        join(', ', array_keys($this->fields))
-                    )
-                );
+        foreach (static::$has_methods as $method) {
+            if (call_user_func([$this, sprintf("has%s", $method)]) === true) {
+                $custom_fields[Inflector::underscore(lcfirst($method))] = call_user_func([$this, sprintf("get%s", $method)]);
             }
         }
 
-        return $output;
+        return $custom_fields;
+    }
+
+    /**
+     * getIterator
+     *
+     * @see FlexibleEntityInterface
+     */
+    public function getIterator()
+    {
+        return new \ArrayIterator(array_merge($this->container, $this->getCustomFields()));
     }
 
     /**
@@ -332,6 +315,38 @@ abstract class FlexibleEntity implements
     }
 
     /**
+     * __isset
+     *
+     * Easy value check.
+     *
+     * @access public
+     * @param  string $var
+     * @return bool
+     */
+    public function __isset($var)
+    {
+        $method_name = "has".Inflector::studlyCaps($var);
+
+        return $this->$method_name;
+    }
+
+    /**
+     * __unset
+     *
+     * Clear an attribute.
+     *
+     * @access public
+     * @param  string $var
+     * @return FlexibleEntity   $this
+     */
+    public function __unset($var)
+    {
+        $method_name = "clear".Inflector::studlyCaps($var);
+
+        return $this->$method_name;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function offsetExists($offset)
@@ -364,27 +379,6 @@ abstract class FlexibleEntity implements
     {
         $this->clear($offset);
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getIterator()
-    {
-        if (static::$has_methods === null) {
-            static::fillHasMethods($this);
-        }
-
-        $custom_fields = [];
-
-        foreach (static::$has_methods as $method) {
-            if (call_user_func([$this, sprintf("has%s", $method)]) === true) {
-                $custom_fields[Inflector::underscore(lcfirst($method))] = call_user_func([$this, sprintf("get%s", $method)]);
-            }
-        }
-
-        return new \ArrayIterator(array_merge($this->fields, $custom_fields));
-    }
-
 
     /**
      * fillHasMethods
