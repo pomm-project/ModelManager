@@ -1,0 +1,11 @@
+== VERSION 2.0.0-beta.2
+
+ * Moved FlexibleEntity to Model.
+ * Added test file for FlexibleContainer.
+ * Added FlexibleContainer.
+ * Made stateful entity a trait.
+ * StatefullEntity base class.
+ * Added FlexibleEntityInterface.
+ * Stamp query notification.
+
+== VERSION 2.0.0-beta.1
