@@ -33,15 +33,15 @@ class FlexibleContainer extends Atoum
     public function testFields()
     {
         $container = $this->newTestedInstance()
-            ->hydrate(["a" => "one", "b" => "two", "c" => "three"])
+            ->hydrate(["a" => "one", "b" => "two", "c" => null])
             ;
         $this
             ->array($container->fields())
-            ->isIdenticalTo(["a" => "one", "b" => "two", "c" => "three"])
+            ->isIdenticalTo(["a" => "one", "b" => "two", "c" => null])
             ->array($container->fields(["a"]))
             ->isIdenticalTo(["a" => "one"])
             ->array($container->fields(["a", "c"]))
-            ->isIdenticalTo(["a" => "one", "c" => "three"])
+            ->isIdenticalTo(["a" => "one", "c" => null])
             ->array($container->fields([]))
             ->isIdenticalTo([])
             ->exception(function() use ($container) { return $container->fields(["d"]); })
@@ -112,13 +112,15 @@ class FlexibleContainer extends Atoum
     public function testGenericHas()
     {
         $container = $this->newTestedInstance()
-            ->hydrate(["a" => "one", "b" => "two", "c" => "three"])
+            ->hydrate(["a" => "one", "b" => "two", "c" => null])
             ;
         $this
             ->boolean($container->hasA())
             ->isTrue()
             ->boolean($container->hasPika())
             ->isFalse()
+            ->boolean($container->hasC())
+            ->isTrue()
             ;
     }
 
