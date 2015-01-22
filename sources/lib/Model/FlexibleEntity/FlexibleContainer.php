@@ -60,7 +60,7 @@ abstract class FlexibleContainer implements FlexibleEntityInterface, \IteratorAg
         $output = [];
 
         foreach ($fields as $name) {
-            if (isset($this->container[$name])) {
+            if (array_key_exists($name, $this->container)) {
                 $output[$name] = $this->container[$name];
             } else {
                 throw new \InvalidArgumentException(
@@ -123,7 +123,7 @@ abstract class FlexibleContainer implements FlexibleEntityInterface, \IteratorAg
                 ->container[$attribute]
                 ;
         case 'has':
-            return (bool) isset($this->container[$attribute]);
+            return array_key_exists($attribute, $this->container);
         case 'clear':
             unset ($this->checkAttribute($attribute)->container[$attribute]);
 
@@ -144,7 +144,7 @@ abstract class FlexibleContainer implements FlexibleEntityInterface, \IteratorAg
      */
     protected function checkAttribute($attribute)
     {
-        if (!isset($this->container[$attribute])) {
+        if (!array_key_exists($attribute, $this->container)) {
             throw new ModelException(
                 sprintf(
                     "No such attribute '%s'. Available attributes are {%s}",
