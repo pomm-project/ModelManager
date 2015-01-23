@@ -25,10 +25,11 @@ use PommProject\Foundation\Session\Session;
  *
  * @see \IteratorAggregate
  */
-class HydrationPlan implements \IteratorAggregate
+class HydrationPlan
 {
-    protected $values = [];
+    protected $session;
     protected $projection;
+    protected $converters = [];
 
     /**
      * __construct
@@ -39,19 +40,41 @@ class HydrationPlan implements \IteratorAggregate
      * @param  Projection $projection
      * @return void
      */
-    public function __construct(Projection $projection, array $values)
+    public function __construct(Projection $projection, Session $session)
     {
         $this->projection = $projection;
-        $this->values     = $values;
+        $this->session    = $session;
+
+        $this->loadConverters();
     }
 
     /**
-     * see \IteratorAggregate
+     * loadConverters
+     *
+     * Cache converters needed for this result set.
+     *
+     * @access protected
+     * @return HydrationPlan    $this
      */
-    public function getIterator()
+    protected function loadConverters()
     {
-        return new \ArrayIterator($this->values);
+        foreach ($this->projection as $name => $type) {
+            if ($this->isArray($name)) {
+                $this->converters[$name] = $this
+                    ->session
+                    ->getClientUsingPooler('converter', 'array')
+                    ;
+            } else {
+                $this->converters[$name] = $this
+                    ->session
+                    ->getClientUsingPooler('converter', $type)
+                    ;
+            }
+        }
+
+        return $this;
     }
+
 
     /**
      * getFieldType
@@ -89,12 +112,11 @@ class HydrationPlan implements \IteratorAggregate
      * hydrate the FlexibleEntityInterface through the mapper.
      *
      * @access public
-     * @param  Session          $session
      * @return FlexibleEntityInterface
      */
-    public function hydrate(Session $session)
+    public function hydrate(array $values)
     {
-        $values = $this->convert('fromPg', $session);
+        $values = $this->convert('fromPg', $values);
 
         return $this->createEntity($values);
     }
@@ -108,9 +130,9 @@ class HydrationPlan implements \IteratorAggregate
      * @param  Session $session
      * @return array
      */
-    public function dry(Session $session)
+    public function dry($values)
     {
-        return $this->convert('toPg', $session);
+        return $this->convert('toPg', $values);
     }
 
     /**
@@ -123,24 +145,26 @@ class HydrationPlan implements \IteratorAggregate
      * @param  Session  $session
      * @return array
      */
-    protected function convert($from_to, Session $session)
+    protected function convert($from_to, array $values)
     {
-        $values = [];
-        foreach ($this->getIterator() as $field_name => $value) {
-            if ($this->isArray($field_name)) {
-                $values[$field_name] = $session
-                    ->getClientUsingPooler('converter', 'array')
-                    ->$from_to($value, $this->getFieldType($field_name))
-                    ;
-            } else {
-                $values[$field_name] = $session
-                    ->getClientUsingPooler('converter', $this->getFieldType($field_name))
-                    ->$from_to($value)
-                    ;
+        $out_values = [];
+
+        foreach ($values as $field_name => $value) {
+            if (!isset($this->converters[$field_name])) {
+                throw new \RuntimeException(
+                    sprintf(
+                        "Error, '%s' field has no converters registered. Fields are {%s}.",
+                        $field_name,
+                        join(', ', array_keys($this->converters))
+                    )
+                );
             }
+            $out_values[$field_name] = $this->converters[$field_name]
+                ->$from_to($value, $this->getFieldType($field_name))
+                ;
         }
 
-        return $values;
+        return $out_values;
     }
 
     /**

@@ -21,7 +21,7 @@ use PommProject\ModelManager\Exception\ModelException;
  * @author Grégoire HUBERT
  * @license X11 {@link http://opensource.org/licenses/mit-license.php}
  */
-class Projection
+class Projection implements \IteratorAggregate
 {
     protected $flexible_entity_class;
     protected $fields = [];
@@ -43,6 +43,21 @@ class Projection
                 $this->setField($field_name, sprintf("%%%s", $field_name), $type);
             }
         }
+    }
+
+    /**
+     * getIterator
+     *
+     * This returns an ArrayIterator using the name => type association of the
+     * projection.
+     * @see IteratorAggregate
+     *
+     * @access public
+     * @return \ArrayIterator
+     */
+    public function getIterator()
+    {
+        return new \ArrayIterator($this->types);
     }
 
     /**

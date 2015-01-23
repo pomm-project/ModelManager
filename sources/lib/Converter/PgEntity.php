@@ -61,6 +61,8 @@ class PgEntity implements ConverterInterface
     /**
      * fromPg
      *
+     * Embedable entities are converted here.
+     *
      * @see ConverterInterface
      */
     public function fromPg($data, $type, Session $session)
@@ -83,8 +85,8 @@ class PgEntity implements ConverterInterface
 
         $entity = (new HydrationPlan(
             $projection,
-            $this->transformData($data, $projection)
-        ))->hydrate($session);
+            $session
+        ))->hydrate($this->transformData($data, $projection));
 
         return $this->cacheEntity($entity);
     }
@@ -152,12 +154,12 @@ class PgEntity implements ConverterInterface
 
         $hydration_plan = new HydrationPlan(
             new Projection($this->flexible_entity_class, $this->row_structure->getDefinition()),
-            $data->getIterator()->getArrayCopy()
+            $session
         );
 
         return sprintf(
             "row(%s)::%s",
-            join(',', $hydration_plan->dry($session)),
+            join(',', $hydration_plan->dry($data->fields())),
             $type
         );
     }
