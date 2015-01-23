@@ -30,6 +30,9 @@ class CollectionIterator extends ResultIterator
     protected $session;
     protected $projection;
     protected $filters = [];
+    protected $hydration_plan;
+
+    private $entity_converter;
 
     /**
      * __construct
@@ -45,8 +48,14 @@ class CollectionIterator extends ResultIterator
     public function __construct(ResultHandler $result, Session $session, Projection $projection)
     {
         parent::__construct($result);
-        $this->projection   = $projection;
-        $this->session      = $session;
+        $this->projection       = $projection;
+        $this->session          = $session;
+        $this->hydration_plan   = new HydrationPlan($projection, $session);
+        $this->entity_converter = $this
+          ->session
+          ->getClientUsingPooler('converter', $this->projection->getFlexibleEntityClass())
+          ->getConverter()
+          ;
     }
 
     /**
@@ -73,16 +82,9 @@ class CollectionIterator extends ResultIterator
     public function parseRow(array $values)
     {
         $values = $this->launchFilters($values);
-        $entity = (new HydrationPlan($this->projection, $values))
-            ->hydrate($this->session)
-            ;
+        $entity = $this->hydration_plan->hydrate($values);
 
-        return $this
-            ->session
-            ->getClientUsingPooler('converter', $this->projection->getFlexibleEntityClass())
-            ->getConverter()
-            ->cacheEntity($entity)
-            ;
+        return $this->entity_converter->cacheEntity($entity);
     }
 
     /**
