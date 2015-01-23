@@ -82,7 +82,7 @@ abstract class FlexibleEntity extends FlexibleContainer implements \ArrayAccess
      */
     final public function has($var)
     {
-        return array_key_exists($var, $this->container);
+        return isset($this->container[$var]) || array_key_exists($var, $this->container);
     }
 
     /**
