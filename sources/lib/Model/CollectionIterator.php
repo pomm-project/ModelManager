@@ -146,15 +146,13 @@ class CollectionIterator extends ResultIterator
     }
 
     /**
-     * slice
+     * extract
      *
-     * see @ResultIterator
+     * Return an array of entities extractd as arrays.
+     *
+     * @access public
+     * @return array
      */
-    public function slice($name)
-    {
-        return $this->convertSlice(parent::slice($name), $name);
-    }
-
     public function extract()
     {
         $results = [];
@@ -165,6 +163,21 @@ class CollectionIterator extends ResultIterator
 
         return $results;
     }
+
+    /**
+     * slice
+     *
+     * see @ResultIterator
+     *
+     * @access public
+     * @param  string   $name
+     * @return array
+     */
+    public function slice($name)
+    {
+      return $this->convertSlice(parent::slice($name), $name);
+    }
+
 
     /**
      * convertSlice
@@ -179,17 +192,7 @@ class CollectionIterator extends ResultIterator
     protected function convertSlice(array $values, $name)
     {
         $type = $this->projection->getFieldType($name);
-
-        if ($this->projection->isArray($name)) {
-            $converter = $this
-                ->session
-                ->getClientUsingPooler('converter', 'array')
-                ;
-        } else {
-            $converter = $this
-                ->session
-                ->getClientUsingPooler('converter', $type);
-        }
+        $converter = $this->hydration_plan->getConverterForField($name);
 
         return array_map(
             function ($val) use ($converter, $type) {
@@ -198,4 +201,5 @@ class CollectionIterator extends ResultIterator
             $values
         );
     }
+
 }

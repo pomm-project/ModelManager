@@ -144,4 +144,20 @@ SQL;
                 ]
             );
     }
+
+    public function testSlice()
+    {
+        $collection = $this->getCollectionMock();
+
+        $this
+            ->array($collection->slice('some_data'))
+            ->isIdenticalTo(
+                [
+                    'one',
+                    'two',
+                    'three',
+                    'four',
+                ]
+            );
+    }
 }

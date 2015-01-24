@@ -59,7 +59,7 @@ class HydrationPlan
     protected function loadConverters()
     {
         foreach ($this->projection as $name => $type) {
-            if ($this->isArray($name)) {
+            if ($this->projection->isArray($name)) {
                 $this->converters[$name] = $this
                     ->session
                     ->getClientUsingPooler('converter', 'array')
@@ -127,10 +127,10 @@ class HydrationPlan
      * Return values converted to Pg.
      *
      * @access public
-     * @param  Session $session
+     * @param  array    values
      * @return array
      */
-    public function dry($values)
+    public function dry(array $values)
     {
         return $this->convert('toPg', $values);
     }
@@ -142,7 +142,7 @@ class HydrationPlan
      *
      * @access protected
      * @param  string   $from_to
-     * @param  Session  $session
+     * @param  array    $values
      * @return array
      */
     protected function convert($from_to, array $values)
@@ -150,15 +150,6 @@ class HydrationPlan
         $out_values = [];
 
         foreach ($values as $field_name => $value) {
-            if (!isset($this->converters[$field_name])) {
-                throw new \RuntimeException(
-                    sprintf(
-                        "Error, '%s' field has no converters registered. Fields are {%s}.",
-                        $field_name,
-                        join(', ', array_keys($this->converters))
-                    )
-                );
-            }
             $out_values[$field_name] = $this->converters[$field_name]
                 ->$from_to($value, $this->getFieldType($field_name))
                 ;
@@ -183,5 +174,29 @@ class HydrationPlan
         return (new $class())
             ->hydrate($values)
             ;
+    }
+
+    /**
+     * getConverterForField
+     *
+     * Return the converter client associated with a field.
+     *
+     * @access public
+     * @param  string $name
+     * @return ConverterClient
+     */
+    public function getConverterForField($field_name)
+    {
+        if (!isset($this->converters[$field_name])) {
+            throw new \RuntimeException(
+                sprintf(
+                    "Error, '%s' field has no converters registered. Fields are {%s}.",
+                    $field_name,
+                    join(', ', array_keys($this->converters))
+                )
+            );
+        }
+
+        return $this->converters[$field_name];
     }
 }

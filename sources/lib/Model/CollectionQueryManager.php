@@ -28,11 +28,21 @@ class CollectionQueryManager extends Client
 {
     use SendNotificationTrait;
 
+    /**
+     * getClientType
+     *
+     * @see ClientInterface
+     */
     public function getClientType()
     {
         return 'query_manager';
     }
 
+    /**
+     * getClientType
+     *
+     * @see ClientInterface
+     */
     public function getClientIdentifier()
     {
         return get_class($this);
