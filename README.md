@@ -10,6 +10,17 @@ This package is still is beta, this means code can change without notice but sho
 
 Pomm components are available on [packagist](https://packagist.org/packages/pomm-project/) using [composer](https://packagist.org/). To install and use Pomm's model manager, add a require line to `"pomm-project/model-manager"` in your `composer.json` file. It is advised to install the [CLI package](https://github.com/pomm-project/Cli) as well.
 
+In order to load the model manager's poolers at start up, it is possible to use the provided `SessionBuilder` in Pomm's configuration:
+
+```php
+    $pomm = new Pomm([
+        'project_name' => ['dsn' => …, 'class:session_builder' => '\PommProject\ModelManager\SessionBuilder'],
+        …
+        ]);
+```
+
+It is better to provide dedicated session builders with your project.
+
 ## Introduction
 
 The model manager links classes with database relation through structure (relation physical ) and projection (fields returned to the application) to hydrate entity instances manipulated by web applications.
