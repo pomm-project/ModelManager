@@ -4,248 +4,1050 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+BaseGenerator	sources/lib/Generator/BaseGenerator.php	/^abstract class BaseGenerator$/;"	c
+BaseRange	vendor/pomm-project/foundation/sources/lib/Converter/Type/BaseRange.php	/^abstract class BaseRange$/;"	c
 BaseTrait	sources/lib/Model/ModelTrait/BaseTrait.php	/^trait BaseTrait$/;"	c
+Circle	vendor/pomm-project/foundation/sources/lib/Converter/Type/Circle.php	/^class Circle$/;"	c
+Client	vendor/pomm-project/foundation/sources/lib/Client/Client.php	/^abstract class Client implements ClientInterface$/;"	c
+ClientHolder	vendor/pomm-project/foundation/sources/lib/Client/ClientHolder.php	/^class ClientHolder$/;"	c
+ClientInterface	vendor/pomm-project/foundation/sources/lib/Client/ClientInterface.php	/^interface ClientInterface$/;"	c
+ClientInterface	vendor/pomm-project/foundation/sources/lib/Client/ClientInterface.php	/^interface ClientInterface$/;"	i
+ClientPooler	vendor/pomm-project/foundation/sources/lib/Client/ClientPooler.php	/^abstract class ClientPooler implements ClientPoolerInterface$/;"	c
+ClientPoolerInterface	vendor/pomm-project/foundation/sources/lib/Client/ClientPoolerInterface.php	/^interface ClientPoolerInterface$/;"	c
+ClientPoolerInterface	vendor/pomm-project/foundation/sources/lib/Client/ClientPoolerInterface.php	/^interface ClientPoolerInterface$/;"	i
+ClientPoolerTrait	vendor/pomm-project/foundation/sources/lib/Client/ClientPoolerTrait.php	/^trait ClientPoolerTrait$/;"	c
+ClientTrait	vendor/pomm-project/foundation/sources/lib/Client/ClientTrait.php	/^trait ClientTrait$/;"	c
 CollectionIterator	sources/lib/Model/CollectionIterator.php	/^class CollectionIterator extends ResultIterator$/;"	c
 CollectionQuery	sources/lib/Model/CollectionQuery.php	/^class CollectionQuery extends Client implements ListenerAwareInterface$/;"	c
+CollectionQueryManager	sources/lib/Model/CollectionQueryManager.php	/^class CollectionQueryManager extends Client$/;"	c
+Connection	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^class Connection$/;"	c
+ConnectionConfigurator	vendor/pomm-project/foundation/sources/lib/Session/ConnectionConfigurator.php	/^class ConnectionConfigurator$/;"	c
+ConnectionException	vendor/pomm-project/foundation/sources/lib/Exception/ConnectionException.php	/^class ConnectionException extends FoundationException$/;"	c
+ConvertedResultIterator	vendor/pomm-project/foundation/sources/lib/ConvertedResultIterator.php	/^class ConvertedResultIterator extends ResultIterator$/;"	c
+ConverterClient	vendor/pomm-project/foundation/sources/lib/Converter/ConverterClient.php	/^class ConverterClient extends Client$/;"	c
+ConverterException	vendor/pomm-project/foundation/sources/lib/Exception/ConverterException.php	/^class ConverterException extends FoundationException$/;"	c
+ConverterHolder	vendor/pomm-project/foundation/sources/lib/Converter/ConverterHolder.php	/^class ConverterHolder$/;"	c
+ConverterInterface	vendor/pomm-project/foundation/sources/lib/Converter/ConverterInterface.php	/^interface ConverterInterface$/;"	c
+ConverterInterface	vendor/pomm-project/foundation/sources/lib/Converter/ConverterInterface.php	/^interface ConverterInterface$/;"	i
+ConverterPooler	vendor/pomm-project/foundation/sources/lib/Converter/ConverterPooler.php	/^class ConverterPooler extends ClientPooler$/;"	c
+EntityGenerator	sources/lib/Generator/EntityGenerator.php	/^class EntityGenerator extends BaseGenerator$/;"	c
+FlexibleContainer	sources/lib/Model/FlexibleEntity/FlexibleContainer.php	/^abstract class FlexibleContainer implements FlexibleEntityInterface, \\IteratorAggregate$/;"	c
+FlexibleEntity	sources/lib/Model/FlexibleEntity.php	/^abstract class FlexibleEntity extends FlexibleContainer implements \\ArrayAccess$/;"	c
 FlexibleEntity	sources/lib/Model/FlexibleEntity.php	/^abstract class FlexibleEntity implements \\ArrayAccess, \\IteratorAggregate$/;"	c
+FlexibleEntityInterface	sources/lib/Model/FlexibleEntity/FlexibleEntityInterface.php	/^interface FlexibleEntityInterface$/;"	c
+FlexibleEntityInterface	sources/lib/Model/FlexibleEntity/FlexibleEntityInterface.php	/^interface FlexibleEntityInterface$/;"	i
+FoundationException	vendor/pomm-project/foundation/sources/lib/Exception/FoundationException.php	/^class FoundationException extends PommException$/;"	c
+FoundationSessionAtoum	vendor/pomm-project/foundation/sources/lib/Tester/FoundationSessionAtoum.php	/^abstract class FoundationSessionAtoum extends VanillaSessionAtoum$/;"	c
 HydrationPlan	sources/lib/Model/HydrationPlan.php	/^class HydrationPlan implements \\IteratorAggregate$/;"	c
+HydrationPlan	sources/lib/Model/HydrationPlan.php	/^class HydrationPlan$/;"	c
 Hydrator	sources/lib/Model/Hydrator.php	/^class Hydrator extends Client$/;"	c
 IdentityMapper	sources/lib/Model/IdentityMapper.php	/^class IdentityMapper$/;"	c
+Inflector	vendor/pomm-project/foundation/sources/lib/Inflector.php	/^class Inflector$/;"	c
+Inspector	vendor/pomm-project/foundation/sources/lib/Inspector/Inspector.php	/^class Inspector extends Client$/;"	c
+InspectorPooler	vendor/pomm-project/foundation/sources/lib/Inspector/InspectorPooler.php	/^class InspectorPooler extends ClientPooler$/;"	c
+Listener	vendor/pomm-project/foundation/sources/lib/Listener/Listener.php	/^class Listener extends Client$/;"	c
+ListenerPooler	vendor/pomm-project/foundation/sources/lib/Listener/ListenerPooler.php	/^class ListenerPooler extends ClientPooler$/;"	c
 Model	sources/lib/Model/Model.php	/^abstract class Model implements ClientInterface$/;"	c
 ModelException	sources/lib/Exception/ModelException.php	/^class ModelException extends PommException$/;"	c
+ModelGenerator	sources/lib/Generator/ModelGenerator.php	/^class ModelGenerator extends BaseGenerator$/;"	c
 ModelLayer	sources/lib/ModelLayer/ModelLayer.php	/^abstract class ModelLayer extends Client$/;"	c
 ModelLayerPooler	sources/lib/ModelLayer/ModelLayerPooler.php	/^class ModelLayerPooler extends ClientPooler$/;"	c
 ModelPooler	sources/lib/Model/ModelPooler.php	/^class ModelPooler extends ClientPooler$/;"	c
+ModelSessionAtoum	sources/lib/Tester/ModelSessionAtoum.php	/^abstract class ModelSessionAtoum extends FoundationSessionAtoum$/;"	c
+NotificationException	vendor/pomm-project/foundation/sources/lib/Exception/NotificationException.php	/^class NotificationException extends FoundationException$/;"	c
+NumRange	vendor/pomm-project/foundation/sources/lib/Converter/Type/NumRange.php	/^class NumRange extends BaseRange$/;"	c
+Observer	vendor/pomm-project/foundation/sources/lib/Observer/Observer.php	/^class Observer extends Client$/;"	c
+ObserverPooler	vendor/pomm-project/foundation/sources/lib/Observer/ObserverPooler.php	/^class ObserverPooler extends ClientPooler$/;"	c
+Pager	vendor/pomm-project/foundation/sources/lib/Pager.php	/^class Pager$/;"	c
+ParameterHolder	vendor/pomm-project/foundation/sources/lib/ParameterHolder.php	/^class ParameterHolder implements \\ArrayAccess, \\IteratorAggregate, \\Countable$/;"	c
+PgArray	vendor/pomm-project/foundation/sources/lib/Converter/PgArray.php	/^class PgArray implements ConverterInterface$/;"	c
+PgBoolean	vendor/pomm-project/foundation/sources/lib/Converter/PgBoolean.php	/^class PgBoolean implements ConverterInterface$/;"	c
+PgBytea	vendor/pomm-project/foundation/sources/lib/Converter/PgBytea.php	/^class PgBytea implements ConverterInterface$/;"	c
+PgCircle	vendor/pomm-project/foundation/sources/lib/Converter/Geometry/PgCircle.php	/^class PgCircle extends TypeConverter$/;"	c
+PgEntity	sources/lib/Converter/PgEntity.php	/^class PgEntity implements ConverterInterface$/;"	c
+PgHstore	vendor/pomm-project/foundation/sources/lib/Converter/PgHstore.php	/^class PgHstore implements ConverterInterface$/;"	c
+PgInterval	vendor/pomm-project/foundation/sources/lib/Converter/PgInterval.php	/^class PgInterval implements ConverterInterface$/;"	c
+PgJson	vendor/pomm-project/foundation/sources/lib/Converter/PgJson.php	/^class PgJson implements ConverterInterface$/;"	c
+PgLtree	vendor/pomm-project/foundation/sources/lib/Converter/PgLtree.php	/^class PgLtree implements ConverterInterface$/;"	c
+PgNumRange	vendor/pomm-project/foundation/sources/lib/Converter/PgNumRange.php	/^class PgNumRange extends TypeConverter$/;"	c
+PgNumber	vendor/pomm-project/foundation/sources/lib/Converter/PgNumber.php	/^class PgNumber implements ConverterInterface$/;"	c
+PgPoint	vendor/pomm-project/foundation/sources/lib/Converter/Geometry/PgPoint.php	/^class PgPoint extends TypeConverter$/;"	c
+PgString	vendor/pomm-project/foundation/sources/lib/Converter/PgString.php	/^class PgString implements ConverterInterface$/;"	c
+PgTimestamp	vendor/pomm-project/foundation/sources/lib/Converter/PgTimestamp.php	/^class PgTimestamp implements ConverterInterface$/;"	c
+PgTsRange	vendor/pomm-project/foundation/sources/lib/Converter/PgTsRange.php	/^class PgTsRange extends TypeConverter$/;"	c
+Point	vendor/pomm-project/foundation/sources/lib/Converter/Type/Point.php	/^class Point$/;"	c
+Pomm	vendor/pomm-project/foundation/sources/lib/Pomm.php	/^class Pomm implements \\ArrayAccess, LoggerAwareInterface$/;"	c
+PommException	vendor/pomm-project/foundation/sources/lib/Exception/PommException.php	/^class PommException extends \\Exception$/;"	c
+PreparedQuery	vendor/pomm-project/foundation/sources/lib/PreparedQuery/PreparedQuery.php	/^class PreparedQuery extends Client$/;"	c
+PreparedQueryManager	vendor/pomm-project/foundation/sources/lib/PreparedQuery/PreparedQueryManager.php	/^class PreparedQueryManager extends SimpleQueryManager$/;"	c
+PreparedQueryPooler	vendor/pomm-project/foundation/sources/lib/PreparedQuery/PreparedQueryPooler.php	/^class PreparedQueryPooler extends ClientPooler$/;"	c
+Projection	sources/lib/Model/Projection.php	/^class Projection implements \\IteratorAggregate$/;"	c
 Projection	sources/lib/Model/Projection.php	/^class Projection$/;"	c
+QueryManagerPooler	vendor/pomm-project/foundation/sources/lib/QueryManager/QueryManagerPooler.php	/^class QueryManagerPooler extends ClientPooler$/;"	c
+QueryParameterExpander	vendor/pomm-project/foundation/sources/lib/QueryParameterExpander.php	/^class QueryParameterExpander$/;"	c
+RawString	vendor/pomm-project/foundation/sources/lib/RawString.php	/^class RawString$/;"	c
 ReadQueries	sources/lib/Model/ModelTrait/ReadQueries.php	/^trait ReadQueries$/;"	c
+ResultHandler	vendor/pomm-project/foundation/sources/lib/Session/ResultHandler.php	/^class ResultHandler$/;"	c
+ResultIterator	vendor/pomm-project/foundation/sources/lib/ResultIterator.php	/^class ResultIterator implements \\Iterator, \\Countable, \\JsonSerializable$/;"	c
 RowStructure	sources/lib/Model/RowStructure.php	/^abstract class RowStructure implements \\ArrayAccess$/;"	c
+RowStructure	sources/lib/Model/RowStructure.php	/^class RowStructure implements \\ArrayAccess$/;"	c
+SendNotificationTrait	vendor/pomm-project/foundation/sources/lib/Listener/SendNotificationTrait.php	/^trait SendNotificationTrait$/;"	c
+Session	vendor/pomm-project/foundation/sources/lib/Session/Session.php	/^class Session implements LoggerAwareInterface$/;"	c
 SessionBuilder	sources/lib/SessionBuilder.php	/^class SessionBuilder extends FoundationSessionBuilder$/;"	c
+SessionBuilder	vendor/pomm-project/foundation/sources/lib/Session/SessionBuilder.php	/^class SessionBuilder$/;"	c
+SessionBuilder	vendor/pomm-project/foundation/sources/lib/SessionBuilder.php	/^class SessionBuilder extends VanillaSessionBuilder$/;"	c
+SimpleQueryManager	vendor/pomm-project/foundation/sources/lib/QueryManager/SimpleQueryManager.php	/^class SimpleQueryManager extends Client$/;"	c
+SqlException	vendor/pomm-project/foundation/sources/lib/Exception/SqlException.php	/^class SqlException extends FoundationException$/;"	c
+StatefullEntityTrait	sources/lib/Model/FlexibleEntity/StatefullEntityTrait.php	/^trait StatefullEntityTrait$/;"	c
+StructureGenerator	sources/lib/Generator/StructureGenerator.php	/^class StructureGenerator extends BaseGenerator$/;"	c
+TsRange	vendor/pomm-project/foundation/sources/lib/Converter/Type/TsRange.php	/^class TsRange extends BaseRange$/;"	c
+TypeConverter	vendor/pomm-project/foundation/sources/lib/Converter/TypeConverter.php	/^abstract class TypeConverter implements ConverterInterface$/;"	c
+VanillaSessionAtoum	vendor/pomm-project/foundation/sources/lib/Tester/VanillaSessionAtoum.php	/^abstract class VanillaSessionAtoum extends Atoum$/;"	c
+Where	vendor/pomm-project/foundation/sources/lib/Where.php	/^class Where$/;"	c
 WriteQueries	sources/lib/Model/ModelTrait/WriteQueries.php	/^trait WriteQueries$/;"	c
 __call	sources/lib/Model/FlexibleEntity.php	/^    public function __call($method, $arguments)$/;"	f
+__call	sources/lib/Model/FlexibleEntity/FlexibleContainer.php	/^    public function __call($method, $arguments)$/;"	f
+__call	vendor/pomm-project/foundation/sources/lib/Session/Session.php	/^    public function __call($method, $arguments)$/;"	f
+__construct	sources/lib/Converter/PgEntity.php	/^    public function __construct($/;"	f
+__construct	sources/lib/Generator/BaseGenerator.php	/^    public function __construct(Session $session, $schema, $relation, $filename, $namespace, $flexible_container = null)$/;"	f
+__construct	sources/lib/Generator/ModelGenerator.php	/^    public function __construct()$/;"	f
+__construct	sources/lib/Generator/StructureGenerator.php	/^    public function __construct()$/;"	f
 __construct	sources/lib/Model/CollectionIterator.php	/^    public function __construct(ResultHandler $result, Session $session, Projection $projection)$/;"	f
 __construct	sources/lib/Model/FlexibleEntity.php	/^    public function __construct(array $values = null)$/;"	f
+__construct	sources/lib/Model/HydrationPlan.php	/^    public function __construct(Projection $projection, Session $session)$/;"	f
 __construct	sources/lib/Model/HydrationPlan.php	/^    public function __construct(Projection $projection, array $values)$/;"	f
 __construct	sources/lib/Model/Hydrator.php	/^    public function __construct($entity_class, array $primary_key = [], IdentityMapper $identity_mapper = null)$/;"	f
 __construct	sources/lib/Model/Projection.php	/^    public function __construct($flexible_entity_class, array $structure = null)$/;"	f
 __construct	sources/lib/Model/RowStructure.php	/^    public function __construct()$/;"	f
+__construct	vendor/pomm-project/foundation/sources/lib/ConvertedResultIterator.php	/^    public function __construct(ResultHandler $result, Session $session)$/;"	f
+__construct	vendor/pomm-project/foundation/sources/lib/Converter/ConverterClient.php	/^    public function __construct($name, ConverterInterface $converter)$/;"	f
+__construct	vendor/pomm-project/foundation/sources/lib/Converter/ConverterPooler.php	/^    public function __construct(ConverterHolder $converter_holder)$/;"	f
+__construct	vendor/pomm-project/foundation/sources/lib/Converter/Type/BaseRange.php	/^    public function __construct($description)$/;"	f
+__construct	vendor/pomm-project/foundation/sources/lib/Converter/Type/Circle.php	/^    public function __construct($description)$/;"	f
+__construct	vendor/pomm-project/foundation/sources/lib/Converter/Type/Point.php	/^    public function __construct($description)$/;"	f
+__construct	vendor/pomm-project/foundation/sources/lib/Converter/TypeConverter.php	/^    public function __construct($class_name = null)$/;"	f
+__construct	vendor/pomm-project/foundation/sources/lib/Exception/NotificationException.php	/^    public function __construct(array $notification)$/;"	f
+__construct	vendor/pomm-project/foundation/sources/lib/Exception/SqlException.php	/^    public function __construct($result_resource, $sql, $code = null, \\Exception $e = null)$/;"	f
+__construct	vendor/pomm-project/foundation/sources/lib/Listener/Listener.php	/^    public function __construct($name)$/;"	f
+__construct	vendor/pomm-project/foundation/sources/lib/Observer/Observer.php	/^    public function __construct($channel)$/;"	f
+__construct	vendor/pomm-project/foundation/sources/lib/Pager.php	/^    public function __construct(ResultIterator $iterator, $count, $max_per_page, $page)$/;"	f
+__construct	vendor/pomm-project/foundation/sources/lib/ParameterHolder.php	/^    public function __construct(array $parameters = array())$/;"	f
+__construct	vendor/pomm-project/foundation/sources/lib/Pomm.php	/^    public function __construct(array $configurations = [])$/;"	f
+__construct	vendor/pomm-project/foundation/sources/lib/PreparedQuery/PreparedQuery.php	/^    public function __construct($sql)$/;"	f
+__construct	vendor/pomm-project/foundation/sources/lib/RawString.php	/^    public function __construct($expression)$/;"	f
+__construct	vendor/pomm-project/foundation/sources/lib/ResultIterator.php	/^    public function __construct(ResultHandler $result)$/;"	f
+__construct	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^    public function __construct($dsn, array $configuration = [])$/;"	f
+__construct	vendor/pomm-project/foundation/sources/lib/Session/ConnectionConfigurator.php	/^    public function __construct($dsn)$/;"	f
+__construct	vendor/pomm-project/foundation/sources/lib/Session/ResultHandler.php	/^    public function __construct($result_resource)$/;"	f
+__construct	vendor/pomm-project/foundation/sources/lib/Session/Session.php	/^    public function __construct($/;"	f
+__construct	vendor/pomm-project/foundation/sources/lib/Session/SessionBuilder.php	/^    public function __construct(array $configuration, ConverterHolder $converter_holder = null)$/;"	f
+__construct	vendor/pomm-project/foundation/sources/lib/Where.php	/^    public function __construct($element = null, array $values = [])$/;"	f
+__destruct	vendor/pomm-project/foundation/sources/lib/ResultIterator.php	/^    public function __destruct()$/;"	f
+__destruct	vendor/pomm-project/foundation/sources/lib/Session/ResultHandler.php	/^    public function __destruct()$/;"	f
+__destruct	vendor/pomm-project/foundation/sources/lib/Session/Session.php	/^    public function __destruct()$/;"	f
 __get	sources/lib/Model/FlexibleEntity.php	/^    public function __get($var)$/;"	f
+__isset	sources/lib/Model/FlexibleEntity.php	/^    public function __isset($var)$/;"	f
 __set	sources/lib/Model/FlexibleEntity.php	/^    public function __set($var, $value)$/;"	f
+__toString	sources/lib/Model/Projection.php	/^    public function __toString()$/;"	f
+__toString	vendor/pomm-project/foundation/sources/lib/Converter/Type/BaseRange.php	/^    public function __toString()$/;"	f
+__toString	vendor/pomm-project/foundation/sources/lib/Converter/Type/Circle.php	/^    public function __toString()$/;"	f
+__toString	vendor/pomm-project/foundation/sources/lib/Converter/Type/Point.php	/^    public function __toString()$/;"	f
+__toString	vendor/pomm-project/foundation/sources/lib/RawString.php	/^    public function __toString()$/;"	f
+__toString	vendor/pomm-project/foundation/sources/lib/Where.php	/^    public function __toString()$/;"	f
+__unset	sources/lib/Model/FlexibleEntity.php	/^    public function __unset($var)$/;"	f
+actions	vendor/pomm-project/foundation/sources/lib/Listener/Listener.php	/^    protected $actions = [];$/;"	v
+adapter	vendor/pomm-project/foundation/sources/lib/Session/ConnectionConfigurator.php	/^        $adapter = $matchs[1];$/;"	v
 add	sources/lib/Model/FlexibleEntity.php	/^    public function add($var, $value)$/;"	f
+add	vendor/pomm-project/foundation/sources/lib/Client/ClientHolder.php	/^    public function add(ClientInterface $client)$/;"	f
+addBuilder	vendor/pomm-project/foundation/sources/lib/Pomm.php	/^    public function addBuilder($builder_name, VanillaSessionBuilder $builder)$/;"	f
+addConfiguration	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^    public function addConfiguration(array $configuration)$/;"	f
+addConfiguration	vendor/pomm-project/foundation/sources/lib/Session/ConnectionConfigurator.php	/^    public function addConfiguration(array $configuration)$/;"	f
+addConfigurationSetting	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^    public function addConfigurationSetting($name, $value)$/;"	f
+addConverter	vendor/pomm-project/foundation/sources/lib/Converter/ConverterHolder.php	/^    protected function addConverter($name, ConverterInterface $converter)$/;"	f
 addField	sources/lib/Model/RowStructure.php	/^    public function addField($name, $type)$/;"	f
+addParameter	vendor/pomm-project/foundation/sources/lib/Session/SessionBuilder.php	/^    public function addParameter($name, $value)$/;"	f
+addPostConfiguration	vendor/pomm-project/foundation/sources/lib/Pomm.php	/^    public function addPostConfiguration($name, callable $callable)$/;"	f
+addTypeToConverter	vendor/pomm-project/foundation/sources/lib/Converter/ConverterHolder.php	/^    public function addTypeToConverter($name, $type)$/;"	f
+addWhere	vendor/pomm-project/foundation/sources/lib/Where.php	/^    public function addWhere($element, array $values, $operator)$/;"	f
+andWhere	vendor/pomm-project/foundation/sources/lib/Where.php	/^    public function andWhere($element, array $values = [])$/;"	f
+array	vendor/pomm-project/foundation/sources/lib/Where.php	/^                $array = [];$/;"	v
 array_recurse	sources/lib/Model/FlexibleEntity.php	/^        $array_recurse = function ($val) use (&$array_recurse) {$/;"	v
+attachAction	vendor/pomm-project/foundation/sources/lib/Listener/Listener.php	/^    public function attachAction(callable $action)$/;"	f
 attribute	sources/lib/Model/FlexibleEntity.php	/^        $attribute = Inflector::underscore($split[1]);$/;"	v
+buildSession	vendor/pomm-project/foundation/sources/lib/Session/SessionBuilder.php	/^   final public function buildSession($stamp = null)$/;"	f
+buildSession	vendor/pomm-project/foundation/sources/lib/Tester/VanillaSessionAtoum.php	/^    protected function buildSession($stamp = null)$/;"	f
+builderMustExist	vendor/pomm-project/foundation/sources/lib/Pomm.php	/^    private function builderMustExist($name)$/;"	f
+builder_class	vendor/pomm-project/foundation/sources/lib/Pomm.php	/^                $builder_class = $configuration['class:session_builder'];$/;"	v
+builder_class	vendor/pomm-project/foundation/sources/lib/Pomm.php	/^                $builder_class = '\\PommProject\\Foundation\\SessionBuilder';$/;"	v
+builders	vendor/pomm-project/foundation/sources/lib/Pomm.php	/^    protected $builders = [];$/;"	v
+cacheEntity	sources/lib/Converter/PgEntity.php	/^    public function cacheEntity(FlexibleEntityInterface $entity)$/;"	f
+center	vendor/pomm-project/foundation/sources/lib/Converter/Type/Circle.php	/^        $this->center = $this->createPointFrom($elts[0]);$/;"	v
+center	vendor/pomm-project/foundation/sources/lib/Converter/Type/Circle.php	/^    public $center;$/;"	v
+channel	vendor/pomm-project/foundation/sources/lib/Exception/NotificationException.php	/^        $this->channel = $notification['message'];$/;"	v
+channel	vendor/pomm-project/foundation/sources/lib/Exception/NotificationException.php	/^    protected $channel;$/;"	v
+channel	vendor/pomm-project/foundation/sources/lib/Observer/Observer.php	/^        $this->channel = $channel;$/;"	v
+channel	vendor/pomm-project/foundation/sources/lib/Observer/Observer.php	/^    protected $channel;$/;"	v
+checkArray	vendor/pomm-project/foundation/sources/lib/Converter/PgArray.php	/^    protected function checkArray($data)$/;"	f
+checkAttribute	sources/lib/Model/FlexibleEntity/FlexibleContainer.php	/^    protected function checkAttribute($attribute)$/;"	f
+checkConnectionUp	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^    private function checkConnectionUp($error_message = '')$/;"	f
+checkData	vendor/pomm-project/foundation/sources/lib/Converter/TypeConverter.php	/^    public function checkData($data)$/;"	f
 checkExist	sources/lib/Model/RowStructure.php	/^    private function checkExist($name)$/;"	f
 checkField	sources/lib/Model/Projection.php	/^    private function checkField($name)$/;"	f
 checkFieldExist	sources/lib/Model/Projection.php	/^    private function checkFieldExist($name)$/;"	f
 checkFlexibleEntity	sources/lib/Model/Model.php	/^    protected function checkFlexibleEntity(FlexibleEntity $entity)$/;"	f
+checkFlexibleEntity	sources/lib/Model/Model.php	/^    protected function checkFlexibleEntity(FlexibleEntityInterface $entity)$/;"	f
 checkNotNull	sources/lib/Model/RowStructure.php	/^    private function checkNotNull($val, $name)$/;"	f
 checkPrimaryKey	sources/lib/Model/ModelTrait/ReadQueries.php	/^    private function checkPrimaryKey(array $values)$/;"	f
+checkRelationInformation	sources/lib/Generator/StructureGenerator.php	/^    private function checkRelationInformation()$/;"	f
+class	sources/lib/Model/HydrationPlan.php	/^        $class = $this->projection->getFlexibleEntityClass();$/;"	v
 class_name	sources/lib/Model/Hydrator.php	/^        $class_name = $this->entity_class;$/;"	v
+class_name	sources/lib/Model/Model.php	/^        $class_name = $this->getFlexibleEntityClass();$/;"	v
 class_name	sources/lib/Model/ModelTrait/WriteQueries.php	/^        $class_name = $this->getFlexibleEntityClass();$/;"	v
+class_name	vendor/pomm-project/foundation/sources/lib/Converter/TypeConverter.php	/^            $class_name === null$/;"	v
+class_name	vendor/pomm-project/foundation/sources/lib/Converter/TypeConverter.php	/^        $class_name = $this->class_name;$/;"	v
+class_name	vendor/pomm-project/foundation/sources/lib/Converter/TypeConverter.php	/^        $class_name = $this->getTypeClassName();$/;"	v
+class_name	vendor/pomm-project/foundation/sources/lib/Converter/TypeConverter.php	/^        $this->class_name =$/;"	v
+class_name	vendor/pomm-project/foundation/sources/lib/Converter/TypeConverter.php	/^    protected $class_name;$/;"	v
 clear	sources/lib/Model/FlexibleEntity.php	/^    final public function clear($offset)$/;"	f
+clear	sources/lib/Model/IdentityMapper.php	/^    public function clear()$/;"	f
+clear	vendor/pomm-project/foundation/sources/lib/Client/ClientHolder.php	/^    public function clear($type, $name)$/;"	f
 clearFilters	sources/lib/Model/CollectionIterator.php	/^    public function clearFilters()$/;"	f
+client	vendor/pomm-project/foundation/sources/lib/Client/ClientPoolerTrait.php	/^            $client = $this->createClient($identifier);$/;"	v
+client	vendor/pomm-project/foundation/sources/lib/Client/ClientPoolerTrait.php	/^        $client = $this->getClientFromPool($identifier);$/;"	v
+client	vendor/pomm-project/foundation/sources/lib/Listener/ListenerPooler.php	/^            $client = $this$/;"	v
+client	vendor/pomm-project/foundation/sources/lib/QueryManager/QueryManagerPooler.php	/^            $client = '\\PommProject\\Foundation\\QueryManager\\SimpleQueryManager';$/;"	v
+client_holder	vendor/pomm-project/foundation/sources/lib/Session/Session.php	/^        $this->client_holder = $client_holder === null$/;"	v
+client_holder	vendor/pomm-project/foundation/sources/lib/Session/Session.php	/^    protected $client_holder;$/;"	v
+client_instance	vendor/pomm-project/foundation/sources/lib/QueryManager/QueryManagerPooler.php	/^        $client_instance = new $client();$/;"	v
+client_name	vendor/pomm-project/foundation/sources/lib/Listener/ListenerPooler.php	/^            $client_name = strpos($identifier, ':') !== false$/;"	v
+client_poolers	vendor/pomm-project/foundation/sources/lib/Session/Session.php	/^        $this->client_poolers = [];$/;"	v
+client_poolers	vendor/pomm-project/foundation/sources/lib/Session/Session.php	/^    protected $client_poolers = [];$/;"	v
+clients	vendor/pomm-project/foundation/sources/lib/Client/ClientHolder.php	/^        $this->clients = [];$/;"	v
+clients	vendor/pomm-project/foundation/sources/lib/Client/ClientHolder.php	/^    protected $clients = [];$/;"	v
+close	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^    public function close()$/;"	f
 collection	sources/lib/Model/CollectionQuery.php	/^        $collection = new CollectionIterator($/;"	v
+collection	sources/lib/Model/CollectionQueryManager.php	/^        $collection = new CollectionIterator($/;"	v
+comment	sources/lib/Generator/StructureGenerator.php	/^        $comment = $this$/;"	v
+comments	sources/lib/Generator/StructureGenerator.php	/^        $comments = [];$/;"	v
 commitTransaction	sources/lib/ModelLayer/ModelLayer.php	/^    protected function commitTransaction()$/;"	f
+condition	vendor/pomm-project/foundation/sources/lib/Inspector/Inspector.php	/^        $condition = (new Where())->andWhere($condition);$/;"	v
+condition	vendor/pomm-project/foundation/sources/lib/Inspector/Inspector.php	/^        $condition = Where::create("t.typname = $*", [$type_name]);$/;"	v
+condition	vendor/pomm-project/foundation/sources/lib/Inspector/Inspector.php	/^        $condition = Where::create('relnamespace = $*', [$schema_oid])$/;"	v
+condition	vendor/pomm-project/foundation/sources/lib/Inspector/Inspector.php	/^        $condition = new Where('n.nspname !~ $* and n.nspname <> $*', ['^pg_', 'information_schema']);$/;"	v
+condition	vendor/pomm-project/foundation/sources/lib/Inspector/Inspector.php	/^        $condition =$/;"	v
+configuration	vendor/pomm-project/foundation/sources/lib/Session/ConnectionConfigurator.php	/^        $configuration = $this->configuration->getParameter('configuration');$/;"	v
+configuration	vendor/pomm-project/foundation/sources/lib/Session/ConnectionConfigurator.php	/^        $this->configuration = new ParameterHolder($/;"	v
+configuration	vendor/pomm-project/foundation/sources/lib/Session/ConnectionConfigurator.php	/^    protected $configuration;$/;"	v
+configuration	vendor/pomm-project/foundation/sources/lib/Session/SessionBuilder.php	/^        $this->configuration = new ParameterHolder($/;"	v
+configuration	vendor/pomm-project/foundation/sources/lib/Session/SessionBuilder.php	/^    protected $configuration;$/;"	v
+configurator	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^        $this->configurator = new ConnectionConfigurator($dsn);$/;"	v
+configurator	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^    protected $configurator;$/;"	v
+connect_parameters	vendor/pomm-project/foundation/sources/lib/Session/ConnectionConfigurator.php	/^        $connect_parameters = [sprintf("user=%s dbname=%s", $this->configuration['user'], $this->configuration['database'])];$/;"	v
+connection	vendor/pomm-project/foundation/sources/lib/Session/Session.php	/^        $this->connection    = $connection;$/;"	v
+connection	vendor/pomm-project/foundation/sources/lib/Session/Session.php	/^    protected $connection;$/;"	v
+connection_configuration	vendor/pomm-project/foundation/sources/lib/Session/SessionBuilder.php	/^        $connection_configuration =$/;"	v
+container	sources/lib/Model/FlexibleEntity/FlexibleContainer.php	/^        $this->container = array_merge($this->container, $values);$/;"	v
+container	sources/lib/Model/FlexibleEntity/FlexibleContainer.php	/^    protected $container = [];$/;"	v
 convert	sources/lib/Model/FlexibleEntity.php	/^    public function convert(array $values)$/;"	f
+convert	sources/lib/Model/HydrationPlan.php	/^    protected function convert($from_to, array $values)$/;"	f
+convertField	vendor/pomm-project/foundation/sources/lib/ConvertedResultIterator.php	/^    protected function convertField($name, $value)$/;"	f
 convertSlice	sources/lib/Model/CollectionIterator.php	/^    protected function convertSlice(array $values, $name)$/;"	f
 convertValueToPg	sources/lib/Model/ModelTrait/WriteQueries.php	/^    protected function convertValueToPg($value, $type)$/;"	f
 converter	sources/lib/Model/CollectionIterator.php	/^            $converter = $this$/;"	v
+converter	sources/lib/Model/CollectionIterator.php	/^        $converter = $this->hydration_plan->getConverterForField($name);$/;"	v
+converter	vendor/pomm-project/foundation/sources/lib/Converter/ConverterClient.php	/^        $this->converter = $converter;$/;"	v
+converter	vendor/pomm-project/foundation/sources/lib/Converter/ConverterClient.php	/^    protected $converter;$/;"	v
+converter	vendor/pomm-project/foundation/sources/lib/Converter/PgArray.php	/^            $converter = $this->getSubtypeConverter($type, $session);$/;"	v
+converter	vendor/pomm-project/foundation/sources/lib/Converter/PgArray.php	/^        $converter = $this->getSubtypeConverter($type, $session);$/;"	v
+converter_holder	vendor/pomm-project/foundation/sources/lib/Converter/ConverterPooler.php	/^        $this->converter_holder = $converter_holder;$/;"	v
+converter_holder	vendor/pomm-project/foundation/sources/lib/Converter/ConverterPooler.php	/^    protected $converter_holder;$/;"	v
+converter_holder	vendor/pomm-project/foundation/sources/lib/Session/SessionBuilder.php	/^        $converter_holder = $converter_holder === null$/;"	v
+converter_holder	vendor/pomm-project/foundation/sources/lib/Session/SessionBuilder.php	/^        $this->converter_holder = $converter_holder;$/;"	v
+converter_holder	vendor/pomm-project/foundation/sources/lib/Session/SessionBuilder.php	/^    protected $converter_holder;$/;"	v
+converters	sources/lib/Model/HydrationPlan.php	/^    protected $converters = [];$/;"	v
+converters	vendor/pomm-project/foundation/sources/lib/Converter/ConverterHolder.php	/^    protected $converters = [];$/;"	v
+count	vendor/pomm-project/foundation/sources/lib/Pager.php	/^        $this->count        = $count;$/;"	v
+count	vendor/pomm-project/foundation/sources/lib/Pager.php	/^    protected $count;$/;"	v
+count	vendor/pomm-project/foundation/sources/lib/ParameterHolder.php	/^    public function count()$/;"	f
+count	vendor/pomm-project/foundation/sources/lib/ResultIterator.php	/^    public function count()$/;"	f
+countFields	vendor/pomm-project/foundation/sources/lib/Session/ResultHandler.php	/^    public function countFields()$/;"	f
+countRows	vendor/pomm-project/foundation/sources/lib/Session/ResultHandler.php	/^    public function countRows()$/;"	f
 countWhere	sources/lib/Model/ModelTrait/ReadQueries.php	/^    public function countWhere($where, array $values = [])$/;"	f
+create	vendor/pomm-project/foundation/sources/lib/Where.php	/^    public static function create($element = null, array $values = [])$/;"	f
 createAndSave	sources/lib/Model/ModelTrait/WriteQueries.php	/^    public function createAndSave(array $values)$/;"	f
 createClient	sources/lib/Model/ModelPooler.php	/^    protected function createClient($class)$/;"	f
 createClient	sources/lib/ModelLayer/ModelLayerPooler.php	/^    protected function createClient($identifier)$/;"	f
+createClient	vendor/pomm-project/foundation/sources/lib/Client/ClientPoolerTrait.php	/^    abstract protected function createClient($identifier);$/;"	f
+createClient	vendor/pomm-project/foundation/sources/lib/Converter/ConverterPooler.php	/^    public function createClient($identifier)$/;"	f
+createClient	vendor/pomm-project/foundation/sources/lib/Inspector/InspectorPooler.php	/^    protected function createClient($identifier)$/;"	f
+createClient	vendor/pomm-project/foundation/sources/lib/Listener/ListenerPooler.php	/^    protected function createClient($identifier)$/;"	f
+createClient	vendor/pomm-project/foundation/sources/lib/Observer/ObserverPooler.php	/^    protected function createClient($channel)$/;"	f
+createClient	vendor/pomm-project/foundation/sources/lib/PreparedQuery/PreparedQueryPooler.php	/^    public function createClient($sql)$/;"	f
+createClient	vendor/pomm-project/foundation/sources/lib/QueryManager/QueryManagerPooler.php	/^    protected function createClient($client)$/;"	f
+createClientHolder	vendor/pomm-project/foundation/sources/lib/Session/SessionBuilder.php	/^    protected function createClientHolder()$/;"	f
+createConnection	vendor/pomm-project/foundation/sources/lib/Session/SessionBuilder.php	/^    protected function createConnection($dsn, $connection_configuration)$/;"	f
+createDefaultProjection	sources/lib/Model/Model.php	/^    final protected function createDefaultProjection()$/;"	f
+createEntity	sources/lib/Model/HydrationPlan.php	/^    protected function createEntity(array $values)$/;"	f
 createEntity	sources/lib/Model/Hydrator.php	/^    protected function createEntity(array $values)$/;"	f
+createEntity	sources/lib/Model/Model.php	/^    public function createEntity(array $values = [])$/;"	f
+createEntity	sources/lib/Model/ModelTrait/BaseTrait.php	/^    abstract public function createEntity(array $values = []);$/;"	f
+createObjectFrom	vendor/pomm-project/foundation/sources/lib/Converter/TypeConverter.php	/^    protected function createObjectFrom($data)$/;"	f
+createPhpDocBlockFromText	sources/lib/Generator/StructureGenerator.php	/^    protected function createPhpDocBlockFromText($text)$/;"	f
+createPointFrom	vendor/pomm-project/foundation/sources/lib/Converter/Type/Circle.php	/^    protected function createPointFrom($description)$/;"	f
 createProjection	sources/lib/Model/Model.php	/^    protected function createProjection()$/;"	f
 createProjection	sources/lib/Model/ModelTrait/BaseTrait.php	/^    abstract public function createProjection();$/;"	f
+createSession	vendor/pomm-project/foundation/sources/lib/Pomm.php	/^    public function createSession($name)$/;"	f
+createSession	vendor/pomm-project/foundation/sources/lib/Session/SessionBuilder.php	/^    protected function createSession(Connection $connection, ClientHolder $client_holder, $stamp)$/;"	f
+createSessionBuilder	sources/lib/Tester/ModelSessionAtoum.php	/^    protected function createSessionBuilder($configuration)$/;"	f
+createSessionBuilder	vendor/pomm-project/foundation/sources/lib/Tester/FoundationSessionAtoum.php	/^    protected function createSessionBuilder($configuration)$/;"	f
+createSessionBuilder	vendor/pomm-project/foundation/sources/lib/Tester/VanillaSessionAtoum.php	/^    protected function createSessionBuilder($configuration)$/;"	f
+createWhereIn	vendor/pomm-project/foundation/sources/lib/Where.php	/^    public static function createWhereIn($element, array $values)$/;"	f
+current	vendor/pomm-project/foundation/sources/lib/ResultIterator.php	/^    public function current()$/;"	f
+custom_fields	sources/lib/Model/FlexibleEntity.php	/^        $custom_fields = [];$/;"	v
 custom_fields	sources/lib/Model/FlexibleEntity.php	/^        $custom_fields = array();$/;"	v
 custom_methods	sources/lib/Model/FlexibleEntity.php	/^        $custom_methods = array_filter(get_class_methods(get_class($this)), function ($val) { return preg_match('\/^has[A-Z]\/', $val); });$/;"	v
+data	sources/lib/Converter/PgEntity.php	/^        $data = stripcslashes($data);$/;"	v
+data	sources/lib/Converter/PgEntity.php	/^        $data = trim($data, '()');$/;"	v
+data	vendor/pomm-project/foundation/sources/lib/Converter/Geometry/PgCircle.php	/^        $data = $this->checkData($data);$/;"	v
+data	vendor/pomm-project/foundation/sources/lib/Converter/Geometry/PgPoint.php	/^        $data = $this->checkData($data);$/;"	v
+data	vendor/pomm-project/foundation/sources/lib/Converter/PgArray.php	/^        $data = $this->checkArray($data);$/;"	v
+data	vendor/pomm-project/foundation/sources/lib/Converter/PgBoolean.php	/^        $data = trim($data);$/;"	v
+data	vendor/pomm-project/foundation/sources/lib/Converter/PgLtree.php	/^        $data = trim($data);$/;"	v
+data	vendor/pomm-project/foundation/sources/lib/Converter/PgNumber.php	/^        $data = trim($data);$/;"	v
+data	vendor/pomm-project/foundation/sources/lib/Converter/PgTimestamp.php	/^            $data = new \\DateTime($data);$/;"	v
+data	vendor/pomm-project/foundation/sources/lib/Converter/PgTimestamp.php	/^        $data = trim($data);$/;"	v
+data	vendor/pomm-project/foundation/sources/lib/Converter/TypeConverter.php	/^            $data = $this->createObjectFrom($data);$/;"	v
+data	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^        $data = pg_get_notify($this->handler, \\PGSQL_ASSOC);$/;"	v
+database	vendor/pomm-project/foundation/sources/lib/Session/ConnectionConfigurator.php	/^        $database = $matchs[6];$/;"	v
+definition	sources/lib/Converter/PgEntity.php	/^        $definition = $projection->getFieldNames();$/;"	v
 deleteByPK	sources/lib/Model/ModelTrait/WriteQueries.php	/^    public function deleteByPK(array $primary_key)$/;"	f
 deleteOne	sources/lib/Model/ModelTrait/WriteQueries.php	/^    public function deleteOne(FlexibleEntity &$entity)$/;"	f
+deleteOne	sources/lib/Model/ModelTrait/WriteQueries.php	/^    public function deleteOne(FlexibleEntityInterface &$entity)$/;"	f
+description	vendor/pomm-project/foundation/sources/lib/Converter/Type/BaseRange.php	/^        $this->description = $description;$/;"	v
+description	vendor/pomm-project/foundation/sources/lib/Converter/Type/BaseRange.php	/^    protected $description;$/;"	v
+description	vendor/pomm-project/foundation/sources/lib/Converter/Type/Circle.php	/^        $description = trim($description, ' <>');$/;"	v
+description	vendor/pomm-project/foundation/sources/lib/Converter/Type/Point.php	/^        $description = trim($description, ' ()');$/;"	v
 doQuery	sources/lib/Model/CollectionQuery.php	/^    protected function doQuery($sql, array $parameters)$/;"	f
+doQuery	sources/lib/Model/CollectionQueryManager.php	/^    protected function doQuery($sql, array $parameters)$/;"	f
+doQuery	vendor/pomm-project/foundation/sources/lib/PreparedQuery/PreparedQueryManager.php	/^    protected function doQuery($sql, array $parameters)$/;"	f
+doQuery	vendor/pomm-project/foundation/sources/lib/QueryManager/SimpleQueryManager.php	/^    protected function doQuery($sql, array $parameters)$/;"	f
+dry	sources/lib/Model/HydrationPlan.php	/^    public function dry(array $values)$/;"	f
+dsn	vendor/pomm-project/foundation/sources/lib/Session/ConnectionConfigurator.php	/^        $dsn = $this->configuration->mustHave('dsn')->getParameter('dsn');$/;"	v
+dsn	vendor/pomm-project/foundation/sources/lib/Session/SessionBuilder.php	/^        $dsn = $this$/;"	v
+element	vendor/pomm-project/foundation/sources/lib/Where.php	/^            $element = new self($element, $values);$/;"	v
+element	vendor/pomm-project/foundation/sources/lib/Where.php	/^            $this->element = $element;$/;"	v
+element	vendor/pomm-project/foundation/sources/lib/Where.php	/^            $this->element = null;$/;"	v
+element	vendor/pomm-project/foundation/sources/lib/Where.php	/^        $this->element  = $where->element;$/;"	v
+element	vendor/pomm-project/foundation/sources/lib/Where.php	/^    public $element;$/;"	v
+elts	vendor/pomm-project/foundation/sources/lib/Converter/Type/Circle.php	/^        $elts = preg_split('\/[,\\s]*(\\([^\\)]+\\))[,\\s]*|[,\\s]+\/', $description, 0, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);$/;"	v
+encoding	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^        $encoding = pg_client_encoding($this->getHandler());$/;"	v
 end	sources/lib/Model/CollectionQuery.php	/^        $end = microtime(true);$/;"	v
+end	sources/lib/Model/CollectionQueryManager.php	/^        $end    = microtime(true);$/;"	v
+end	vendor/pomm-project/foundation/sources/lib/QueryManager/SimpleQueryManager.php	/^        $end      = microtime(true);$/;"	v
+end_incl	vendor/pomm-project/foundation/sources/lib/Converter/Type/BaseRange.php	/^        $this->end_incl    = (bool) ($matchs[4] === ']');$/;"	v
+end_incl	vendor/pomm-project/foundation/sources/lib/Converter/Type/BaseRange.php	/^    public $end_incl;$/;"	v
+end_limit	vendor/pomm-project/foundation/sources/lib/Converter/Type/BaseRange.php	/^        $this->end_limit   = $this->getSubElement($matchs[3]);$/;"	v
+end_limit	vendor/pomm-project/foundation/sources/lib/Converter/Type/BaseRange.php	/^    public $end_limit;$/;"	v
+entity	sources/lib/Converter/PgEntity.php	/^        $entity = (new HydrationPlan($/;"	v
+entity	sources/lib/Model/CollectionIterator.php	/^        $entity = $this->hydration_plan->hydrate($values);$/;"	v
 entity	sources/lib/Model/ModelTrait/WriteQueries.php	/^        $entity = $this$/;"	v
+entity	sources/lib/Model/ModelTrait/WriteQueries.php	/^        $entity = $this->createEntity($values);$/;"	v
+entity	sources/lib/Model/ModelTrait/WriteQueries.php	/^        $entity = $this->deleteByPK($entity->fields($this->getStructure()->getPrimaryKey()));$/;"	v
 entity	sources/lib/Model/ModelTrait/WriteQueries.php	/^        $entity = $this->deleteByPK($entity->get($this->getStructure()->getPrimaryKey()));$/;"	v
 entity	sources/lib/Model/ModelTrait/WriteQueries.php	/^        $entity = $this->query($sql, $where->getValues())->current();$/;"	v
 entity	sources/lib/Model/ModelTrait/WriteQueries.php	/^        $entity = $this->updateByPk($/;"	v
 entity	sources/lib/Model/ModelTrait/WriteQueries.php	/^        $entity = new $class_name($values);$/;"	v
 entity_class	sources/lib/Model/Hydrator.php	/^        $this->entity_class    = $entity_class;$/;"	v
 entity_class	sources/lib/Model/Hydrator.php	/^    protected $entity_class;$/;"	v
+entity_converter	sources/lib/Model/CollectionIterator.php	/^        $this->entity_converter = $this$/;"	v
+entity_converter	sources/lib/Model/CollectionIterator.php	/^    private $entity_converter;$/;"	v
+error_message	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^            $error_message == null ? "Connection is already made with the server" : $error_message;$/;"	v
+escape	vendor/pomm-project/foundation/sources/lib/Where.php	/^        $escape = function ($values) use (&$escape) {$/;"	v
+escapeBytea	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^    public function escapeBytea($word)$/;"	f
 escapeIdentifier	sources/lib/Model/Model.php	/^    protected function escapeIdentifier($string)$/;"	f
 escapeIdentifier	sources/lib/Model/ModelTrait/BaseTrait.php	/^    abstract public function escapeIdentifier($string);$/;"	f
 escapeIdentifier	sources/lib/ModelLayer/ModelLayer.php	/^    protected function escapeIdentifier($string)$/;"	f
+escapeIdentifier	vendor/pomm-project/foundation/sources/lib/Observer/Observer.php	/^    protected function escapeIdentifier($string)$/;"	f
+escapeIdentifier	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^    public function escapeIdentifier($string)$/;"	f
 escapeLiteral	sources/lib/Model/Model.php	/^    protected function escapeLiteral($string)$/;"	f
 escapeLiteral	sources/lib/Model/ModelTrait/BaseTrait.php	/^    abstract public function escapeLiteral($string);$/;"	f
 escapeLiteral	sources/lib/ModelLayer/ModelLayer.php	/^    protected function escapeLiteral($string)$/;"	f
+escapeLiteral	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^    public function escapeLiteral($string)$/;"	f
+escaped_values	vendor/pomm-project/foundation/sources/lib/Where.php	/^                $escaped_values = [];$/;"	v
+exception	vendor/pomm-project/foundation/sources/lib/Client/ClientHolder.php	/^                    $exception = $exception === null$/;"	v
+exception	vendor/pomm-project/foundation/sources/lib/Client/ClientHolder.php	/^        $exception = null;$/;"	v
+execute	vendor/pomm-project/foundation/sources/lib/PreparedQuery/PreparedQuery.php	/^    public function execute(array $values = [])$/;"	f
 executeAnonymousQuery	sources/lib/Model/Model.php	/^    protected function executeAnonymousQuery($sql)$/;"	f
 executeAnonymousQuery	sources/lib/Model/ModelTrait/BaseTrait.php	/^    abstract public function executeAnonymousQuery($sql);$/;"	f
 executeAnonymousQuery	sources/lib/ModelLayer/ModelLayer.php	/^    protected function executeAnonymousQuery($sql)$/;"	f
+executeAnonymousQuery	vendor/pomm-project/foundation/sources/lib/Observer/Observer.php	/^    protected function executeAnonymousQuery($sql)$/;"	f
+executeAnonymousQuery	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^    public function executeAnonymousQuery($sql)$/;"	f
+executeSql	vendor/pomm-project/foundation/sources/lib/Inspector/Inspector.php	/^    protected function executeSql($sql, Where $condition = null)$/;"	f
+expression	vendor/pomm-project/foundation/sources/lib/RawString.php	/^        $this->expression = $expression;$/;"	v
+expression	vendor/pomm-project/foundation/sources/lib/RawString.php	/^    protected $expression;$/;"	v
+extract	sources/lib/Model/CollectionIterator.php	/^    public function extract()$/;"	f
 extract	sources/lib/Model/FlexibleEntity.php	/^    public function extract()$/;"	f
+extract	sources/lib/Model/FlexibleEntity/FlexibleContainer.php	/^    public function extract()$/;"	f
+extract	sources/lib/Model/FlexibleEntity/FlexibleEntityInterface.php	/^    public function extract();$/;"	f
+extract	vendor/pomm-project/foundation/sources/lib/ResultIterator.php	/^    public function extract()$/;"	f
+extractMethodName	sources/lib/Model/FlexibleEntity/FlexibleContainer.php	/^    protected function extractMethodName($argument)$/;"	f
 fetch	sources/lib/Model/IdentityMapper.php	/^    public function fetch(FlexibleEntity $entity, array $primary_key)$/;"	f
+fetch	sources/lib/Model/IdentityMapper.php	/^    public function fetch(FlexibleEntityInterface $entity, array $primary_key)$/;"	f
+fetchColumn	vendor/pomm-project/foundation/sources/lib/Session/ResultHandler.php	/^    public function fetchColumn($name)$/;"	f
+fetchRow	vendor/pomm-project/foundation/sources/lib/Session/ResultHandler.php	/^    public function fetchRow($index)$/;"	f
 field	sources/lib/Model/FlexibleEntity.php	/^                $field = Inflector::underscore($matchs[1]);$/;"	v
+fieldExist	vendor/pomm-project/foundation/sources/lib/Session/ResultHandler.php	/^    public function fieldExist($name)$/;"	f
+field_definitions	sources/lib/Model/RowStructure.php	/^        $this->field_definitions = $definition;$/;"	v
 field_definitions	sources/lib/Model/RowStructure.php	/^    protected $field_definitions = [];$/;"	v
+field_informations	sources/lib/Generator/StructureGenerator.php	/^        $field_informations = $this->getFieldInformation($table_oid);$/;"	v
 fields	sources/lib/Model/FlexibleEntity.php	/^        $this->fields = array_merge($this->fields, $values);$/;"	v
 fields	sources/lib/Model/FlexibleEntity.php	/^    private $fields = [];$/;"	v
 fields	sources/lib/Model/FlexibleEntity.php	/^    public function fields()$/;"	f
+fields	sources/lib/Model/FlexibleEntity/FlexibleContainer.php	/^    public function fields(array $fields = null)$/;"	f
+fields	sources/lib/Model/FlexibleEntity/FlexibleEntityInterface.php	/^    public function fields(array $fields = null);$/;"	f
+fields	sources/lib/Model/ModelTrait/WriteQueries.php	/^        $fields = $entity->fields();$/;"	v
 fields	sources/lib/Model/Projection.php	/^        $fields = $this->getFieldsWithTableAlias($table_alias);$/;"	v
 fields	sources/lib/Model/Projection.php	/^        $fields = [];$/;"	v
 fields	sources/lib/Model/Projection.php	/^    protected $fields = [];$/;"	v
+fields_info	sources/lib/Generator/StructureGenerator.php	/^        $fields_info = $this$/;"	v
+filename	sources/lib/Generator/BaseGenerator.php	/^        $this->filename  = $filename;$/;"	v
+filename	sources/lib/Generator/BaseGenerator.php	/^    protected $filename;$/;"	v
+fillHasMethods	sources/lib/Model/FlexibleEntity.php	/^    protected static function fillHasMethods(FlexibleEntity $entity)$/;"	f
 filters	sources/lib/Model/CollectionIterator.php	/^        $this->filters = [];$/;"	v
 filters	sources/lib/Model/CollectionIterator.php	/^    protected $filters = [];$/;"	v
 findAll	sources/lib/Model/ModelTrait/ReadQueries.php	/^    public function findAll($suffix = null)$/;"	f
 findByPK	sources/lib/Model/ModelTrait/ReadQueries.php	/^    public function findByPK(array $primary_key)$/;"	f
 findWhere	sources/lib/Model/ModelTrait/ReadQueries.php	/^    public function findWhere($where, array $values = [], $suffix = '')$/;"	f
+flexibe_container	sources/lib/Generator/BaseGenerator.php	/^        $this->flexibe_container = $flexible_container;$/;"	v
+flexibe_container	sources/lib/Generator/BaseGenerator.php	/^    protected $flexibe_container;$/;"	v
+flexible_entity_class	sources/lib/Converter/PgEntity.php	/^        $this->flexible_entity_class    = $flexible_entity_class;$/;"	v
+flexible_entity_class	sources/lib/Converter/PgEntity.php	/^    protected $flexible_entity_class;$/;"	v
+flexible_entity_class	sources/lib/Generator/ModelGenerator.php	/^        $this->flexible_entity_class = "\\{:namespace:}\\{:entity:}";$/;"	v
 flexible_entity_class	sources/lib/Model/Model.php	/^    protected $flexible_entity_class;$/;"	v
 flexible_entity_class	sources/lib/Model/Projection.php	/^        $this->flexible_entity_class = $flexible_entity_class;$/;"	v
 flexible_entity_class	sources/lib/Model/Projection.php	/^    protected $flexible_entity_class;$/;"	v
+for	vendor/pomm-project/foundation/sources/lib/Client/ClientInterface.php	/^ * An interface for classes to be registered as Session clients.$/;"	c
+formatAddFields	sources/lib/Generator/StructureGenerator.php	/^    protected function formatAddFields(ConvertedResultIterator $field_informations)$/;"	f
 formatFields	sources/lib/Model/Projection.php	/^    public function formatFields($table_alias = null)$/;"	f
+formatFieldsComment	sources/lib/Generator/StructureGenerator.php	/^    protected function formatFieldsComment(ConvertedResultIterator $field_informations)$/;"	f
 formatFieldsWithFieldAlias	sources/lib/Model/Projection.php	/^    public function formatFieldsWithFieldAlias($table_alias = null)$/;"	f
+free	vendor/pomm-project/foundation/sources/lib/Session/ResultHandler.php	/^    public function free()$/;"	f
+fromPg	sources/lib/Converter/PgEntity.php	/^    public function fromPg($data, $type, Session $session)$/;"	f
+fromPg	vendor/pomm-project/foundation/sources/lib/Converter/ConverterClient.php	/^    public function fromPg($value, $type = null)$/;"	f
+fromPg	vendor/pomm-project/foundation/sources/lib/Converter/ConverterInterface.php	/^    public function fromPg($data, $type, Session $session);$/;"	f
+fromPg	vendor/pomm-project/foundation/sources/lib/Converter/PgArray.php	/^    public function fromPg($data, $type, Session $session)$/;"	f
+fromPg	vendor/pomm-project/foundation/sources/lib/Converter/PgBoolean.php	/^    public function fromPg($data, $type, Session $session)$/;"	f
+fromPg	vendor/pomm-project/foundation/sources/lib/Converter/PgBytea.php	/^    public function fromPg($data, $type, Session $session)$/;"	f
+fromPg	vendor/pomm-project/foundation/sources/lib/Converter/PgHstore.php	/^    public function fromPg($data, $type, Session $session)$/;"	f
+fromPg	vendor/pomm-project/foundation/sources/lib/Converter/PgInterval.php	/^    public function fromPg($data, $type, Session $session)$/;"	f
+fromPg	vendor/pomm-project/foundation/sources/lib/Converter/PgJson.php	/^    public function fromPg($data, $type, Session $session)$/;"	f
+fromPg	vendor/pomm-project/foundation/sources/lib/Converter/PgLtree.php	/^    public function fromPg($data, $type, Session $session)$/;"	f
+fromPg	vendor/pomm-project/foundation/sources/lib/Converter/PgNumber.php	/^    public function fromPg($data, $type, Session $session)$/;"	f
+fromPg	vendor/pomm-project/foundation/sources/lib/Converter/PgString.php	/^    public function fromPg($data, $type, Session $session)$/;"	f
+fromPg	vendor/pomm-project/foundation/sources/lib/Converter/PgTimestamp.php	/^    public function fromPg($data, $type, Session $session)$/;"	f
+fromPg	vendor/pomm-project/foundation/sources/lib/Converter/TypeConverter.php	/^    public function fromPg($data, $type, Session $session)$/;"	f
+generate	sources/lib/Generator/BaseGenerator.php	/^    abstract public function generate(ParameterHolder $input, array $output = []);$/;"	f
+generate	sources/lib/Generator/EntityGenerator.php	/^    public function generate(ParameterHolder $input, array $output = [])$/;"	f
+generate	sources/lib/Generator/ModelGenerator.php	/^    public function generate(InputInterface $input, OutputInterface $output)$/;"	f
+generate	sources/lib/Generator/StructureGenerator.php	/^    public function generate(InputInterface $input, OutputInterface $output)$/;"	f
 get	sources/lib/Model/CollectionIterator.php	/^    public function get($index)$/;"	f
 get	sources/lib/Model/FlexibleEntity.php	/^    final public function get($var)$/;"	f
+get	vendor/pomm-project/foundation/sources/lib/Client/ClientHolder.php	/^    public function get($type, $name)$/;"	f
+get	vendor/pomm-project/foundation/sources/lib/ConvertedResultIterator.php	/^    public function get($index)$/;"	f
+get	vendor/pomm-project/foundation/sources/lib/ResultIterator.php	/^    public function get($index)$/;"	f
+getAllClientForType	vendor/pomm-project/foundation/sources/lib/Session/Session.php	/^    public function getAllClientForType($type)$/;"	f
+getAllFor	vendor/pomm-project/foundation/sources/lib/Client/ClientHolder.php	/^    public function getAllFor($type)$/;"	f
+getBuilder	vendor/pomm-project/foundation/sources/lib/Pomm.php	/^    public function getBuilder($name)$/;"	f
+getChannel	vendor/pomm-project/foundation/sources/lib/Exception/NotificationException.php	/^    public function getChannel()$/;"	f
+getClient	vendor/pomm-project/foundation/sources/lib/Client/ClientPoolerInterface.php	/^    public function getClient($name);$/;"	f
+getClient	vendor/pomm-project/foundation/sources/lib/Client/ClientPoolerTrait.php	/^    public function getClient($identifier)$/;"	f
+getClient	vendor/pomm-project/foundation/sources/lib/Inspector/InspectorPooler.php	/^    public function getClient($identifier = null)$/;"	f
+getClient	vendor/pomm-project/foundation/sources/lib/QueryManager/QueryManagerPooler.php	/^    public function getClient($client = null)$/;"	f
+getClient	vendor/pomm-project/foundation/sources/lib/Session/Session.php	/^    public function getClient($type, $identifier)$/;"	f
+getClientEncoding	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^    public function getClientEncoding()$/;"	f
 getClientFromPool	sources/lib/Model/ModelPooler.php	/^    protected function getClientFromPool($class)$/;"	f
+getClientFromPool	vendor/pomm-project/foundation/sources/lib/Client/ClientPoolerTrait.php	/^    protected function getClientFromPool($identifier)$/;"	f
+getClientFromPool	vendor/pomm-project/foundation/sources/lib/PreparedQuery/PreparedQueryPooler.php	/^    protected function getClientFromPool($sql)$/;"	f
+getClientFromPool	vendor/pomm-project/foundation/sources/lib/QueryManager/QueryManagerPooler.php	/^    protected function getClientFromPool($client)$/;"	f
 getClientIdentifier	sources/lib/Model/CollectionQuery.php	/^    public function getClientIdentifier()$/;"	f
+getClientIdentifier	sources/lib/Model/CollectionQueryManager.php	/^    public function getClientIdentifier()$/;"	f
 getClientIdentifier	sources/lib/Model/Hydrator.php	/^    public function getClientIdentifier()$/;"	f
 getClientIdentifier	sources/lib/Model/Model.php	/^    public function getClientIdentifier()$/;"	f
 getClientIdentifier	sources/lib/ModelLayer/ModelLayer.php	/^    public function getClientIdentifier()$/;"	f
+getClientIdentifier	vendor/pomm-project/foundation/sources/lib/Client/ClientInterface.php	/^    public function getClientIdentifier();$/;"	f
+getClientIdentifier	vendor/pomm-project/foundation/sources/lib/Converter/ConverterClient.php	/^    public function getClientIdentifier()$/;"	f
+getClientIdentifier	vendor/pomm-project/foundation/sources/lib/Inspector/Inspector.php	/^    public function getClientIdentifier()$/;"	f
+getClientIdentifier	vendor/pomm-project/foundation/sources/lib/Listener/Listener.php	/^    public function getClientIdentifier()$/;"	f
+getClientIdentifier	vendor/pomm-project/foundation/sources/lib/Observer/Observer.php	/^    public function getClientIdentifier()$/;"	f
+getClientIdentifier	vendor/pomm-project/foundation/sources/lib/PreparedQuery/PreparedQuery.php	/^    public function getClientIdentifier()$/;"	f
+getClientIdentifier	vendor/pomm-project/foundation/sources/lib/QueryManager/SimpleQueryManager.php	/^    public function getClientIdentifier()$/;"	f
 getClientType	sources/lib/Model/CollectionQuery.php	/^    public function getClientType()$/;"	f
+getClientType	sources/lib/Model/CollectionQueryManager.php	/^    public function getClientType()$/;"	f
 getClientType	sources/lib/Model/Hydrator.php	/^    public function getClientType()$/;"	f
 getClientType	sources/lib/Model/Model.php	/^    public function getClientType()$/;"	f
 getClientType	sources/lib/ModelLayer/ModelLayer.php	/^    public function getClientType()$/;"	f
+getClientType	vendor/pomm-project/foundation/sources/lib/Client/ClientInterface.php	/^    public function getClientType();$/;"	f
+getClientType	vendor/pomm-project/foundation/sources/lib/Converter/ConverterClient.php	/^    public function getClientType()$/;"	f
+getClientType	vendor/pomm-project/foundation/sources/lib/Inspector/Inspector.php	/^    public function getClientType()$/;"	f
+getClientType	vendor/pomm-project/foundation/sources/lib/Listener/Listener.php	/^    public function getClientType()$/;"	f
+getClientType	vendor/pomm-project/foundation/sources/lib/Observer/Observer.php	/^    public function getClientType()$/;"	f
+getClientType	vendor/pomm-project/foundation/sources/lib/PreparedQuery/PreparedQuery.php	/^    public function getClientType()$/;"	f
+getClientType	vendor/pomm-project/foundation/sources/lib/QueryManager/SimpleQueryManager.php	/^    public function getClientType()$/;"	f
+getClientUsingPooler	vendor/pomm-project/foundation/sources/lib/Session/Session.php	/^    public function getClientUsingPooler($type, $identifier)$/;"	f
+getCodeTemplate	sources/lib/Generator/BaseGenerator.php	/^    abstract protected function getCodeTemplate();$/;"	f
+getCodeTemplate	sources/lib/Generator/EntityGenerator.php	/^    protected function getCodeTemplate()$/;"	f
+getCodeTemplate	sources/lib/Generator/ModelGenerator.php	/^    protected function getCodeTemplate()$/;"	f
+getCodeTemplate	sources/lib/Generator/StructureGenerator.php	/^    protected function getCodeTemplate()$/;"	f
+getCompositeInformation	vendor/pomm-project/foundation/sources/lib/Inspector/Inspector.php	/^    public function getCompositeInformation($oid)$/;"	f
+getConfiguration	vendor/pomm-project/foundation/sources/lib/Session/ConnectionConfigurator.php	/^    public function getConfiguration()$/;"	f
+getConnection	vendor/pomm-project/foundation/sources/lib/Session/Session.php	/^    public function getConnection()$/;"	f
+getConnectionStatus	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^    public function getConnectionStatus()$/;"	f
+getConnectionString	vendor/pomm-project/foundation/sources/lib/Session/ConnectionConfigurator.php	/^    public function getConnectionString()$/;"	f
+getConverter	vendor/pomm-project/foundation/sources/lib/Converter/ConverterClient.php	/^    public function getConverter()$/;"	f
+getConverter	vendor/pomm-project/foundation/sources/lib/Converter/ConverterHolder.php	/^    public function getConverter($name)$/;"	f
+getConverterForField	sources/lib/Model/HydrationPlan.php	/^    public function getConverterForField($field_name)$/;"	f
+getConverterForType	vendor/pomm-project/foundation/sources/lib/Converter/ConverterHolder.php	/^    public function getConverterForType($type)$/;"	f
+getConverterHolder	vendor/pomm-project/foundation/sources/lib/Converter/ConverterPooler.php	/^    public function getConverterHolder()$/;"	f
+getConverterHolder	vendor/pomm-project/foundation/sources/lib/Session/SessionBuilder.php	/^    public function getConverterHolder()$/;"	f
+getConverterNames	vendor/pomm-project/foundation/sources/lib/Converter/ConverterHolder.php	/^    public function getConverterNames()$/;"	f
+getCount	vendor/pomm-project/foundation/sources/lib/Pager.php	/^    public function getCount()$/;"	f
+getCustomFields	sources/lib/Model/FlexibleEntity.php	/^    private function getCustomFields()$/;"	f
+getDefaultConfiguration	vendor/pomm-project/foundation/sources/lib/Session/ConnectionConfigurator.php	/^    protected function getDefaultConfiguration()$/;"	f
+getDefaultConfiguration	vendor/pomm-project/foundation/sources/lib/Session/SessionBuilder.php	/^    protected function getDefaultConfiguration()$/;"	f
 getDefinition	sources/lib/Model/RowStructure.php	/^    public function getDefinition()$/;"	f
+getElement	vendor/pomm-project/foundation/sources/lib/Where.php	/^    public function getElement()$/;"	f
 getEscapedFieldList	sources/lib/Model/ModelTrait/WriteQueries.php	/^    public function getEscapedFieldList(array $fields)$/;"	f
+getFieldInformation	sources/lib/Generator/StructureGenerator.php	/^    protected function getFieldInformation($table_oid)$/;"	f
+getFieldName	vendor/pomm-project/foundation/sources/lib/Session/ResultHandler.php	/^    public function getFieldName($field_no)$/;"	f
 getFieldNames	sources/lib/Model/Projection.php	/^    public function getFieldNames()$/;"	f
 getFieldNames	sources/lib/Model/RowStructure.php	/^    public function getFieldNames()$/;"	f
+getFieldNames	vendor/pomm-project/foundation/sources/lib/Session/ResultHandler.php	/^    public function getFieldNames()$/;"	f
+getFieldNumber	vendor/pomm-project/foundation/sources/lib/Session/ResultHandler.php	/^    protected function getFieldNumber($name)$/;"	f
 getFieldType	sources/lib/Model/HydrationPlan.php	/^    public function getFieldType($name)$/;"	f
 getFieldType	sources/lib/Model/Projection.php	/^    public function getFieldType($name)$/;"	f
+getFieldType	vendor/pomm-project/foundation/sources/lib/Session/ResultHandler.php	/^    public function getFieldType($name)$/;"	f
 getFieldTypes	sources/lib/Model/Projection.php	/^    public function getFieldTypes()$/;"	f
 getFieldWithTableAlias	sources/lib/Model/Projection.php	/^    public function getFieldWithTableAlias($name, $table_alias = null)$/;"	f
 getFieldsWithTableAlias	sources/lib/Model/Projection.php	/^    public function getFieldsWithTableAlias($table_alias = null)$/;"	f
+getFindWhereSql	sources/lib/Model/ModelTrait/ReadQueries.php	/^    protected function getFindWhereSql(Where $where, Projection $projection, $suffix = '')$/;"	f
 getFlexibleEntityClass	sources/lib/Model/Model.php	/^    protected function getFlexibleEntityClass()$/;"	f
 getFlexibleEntityClass	sources/lib/Model/ModelTrait/BaseTrait.php	/^    abstract public function getFlexibleEntityClass();$/;"	f
 getFlexibleEntityClass	sources/lib/Model/Projection.php	/^    public function getFlexibleEntityClass()$/;"	f
+getHandler	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^    protected function getHandler()$/;"	f
+getInspector	sources/lib/Generator/BaseGenerator.php	/^    protected function getInspector()$/;"	f
 getIterator	sources/lib/Model/FlexibleEntity.php	/^    public function getIterator()$/;"	f
+getIterator	sources/lib/Model/FlexibleEntity/FlexibleContainer.php	/^    public function getIterator()$/;"	f
 getIterator	sources/lib/Model/HydrationPlan.php	/^    public function getIterator()$/;"	f
+getIterator	sources/lib/Model/Projection.php	/^    public function getIterator()$/;"	f
+getIterator	vendor/pomm-project/foundation/sources/lib/Pager.php	/^    public function getIterator()$/;"	f
+getIterator	vendor/pomm-project/foundation/sources/lib/ParameterHolder.php	/^    public function getIterator()$/;"	f
+getLastPage	vendor/pomm-project/foundation/sources/lib/Pager.php	/^    public function getLastPage()$/;"	f
+getLogger	vendor/pomm-project/foundation/sources/lib/Session/Session.php	/^    public function getLogger()$/;"	f
+getMaxPerPage	vendor/pomm-project/foundation/sources/lib/Pager.php	/^    public function getMaxPerPage()$/;"	f
 getModel	sources/lib/ModelLayer/ModelLayer.php	/^    protected function getModel($identifier)$/;"	f
+getNotification	vendor/pomm-project/foundation/sources/lib/Observer/Observer.php	/^    public function getNotification()$/;"	f
+getNotification	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^    public function getNotification()$/;"	f
+getOddEven	vendor/pomm-project/foundation/sources/lib/ResultIterator.php	/^    public function getOddEven()$/;"	f
+getPage	vendor/pomm-project/foundation/sources/lib/Pager.php	/^    public function getPage()$/;"	f
+getParameter	vendor/pomm-project/foundation/sources/lib/ParameterHolder.php	/^    public function getParameter($name, $default = null)$/;"	f
+getPid	vendor/pomm-project/foundation/sources/lib/Exception/NotificationException.php	/^    public function getPid()$/;"	f
+getPointConverter	vendor/pomm-project/foundation/sources/lib/Converter/Geometry/PgCircle.php	/^    protected function getPointConverter(Session $session)$/;"	f
+getPoolerForType	vendor/pomm-project/foundation/sources/lib/Session/Session.php	/^    public function getPoolerForType($type)$/;"	f
 getPoolerType	sources/lib/Model/ModelPooler.php	/^    public function getPoolerType()$/;"	f
 getPoolerType	sources/lib/ModelLayer/ModelLayerPooler.php	/^    public function getPoolerType()$/;"	f
+getPoolerType	vendor/pomm-project/foundation/sources/lib/Client/ClientPoolerInterface.php	/^    public function getPoolerType();$/;"	f
+getPoolerType	vendor/pomm-project/foundation/sources/lib/Client/ClientPoolerTrait.php	/^    abstract public function getPoolerType();$/;"	f
+getPoolerType	vendor/pomm-project/foundation/sources/lib/Converter/ConverterPooler.php	/^    public function getPoolerType()$/;"	f
+getPoolerType	vendor/pomm-project/foundation/sources/lib/Inspector/InspectorPooler.php	/^    public function getPoolerType()$/;"	f
+getPoolerType	vendor/pomm-project/foundation/sources/lib/Listener/ListenerPooler.php	/^    public function getPoolerType()$/;"	f
+getPoolerType	vendor/pomm-project/foundation/sources/lib/Observer/ObserverPooler.php	/^    public function getPoolerType()$/;"	f
+getPoolerType	vendor/pomm-project/foundation/sources/lib/PreparedQuery/PreparedQueryPooler.php	/^    public function getPoolerType()$/;"	f
+getPoolerType	vendor/pomm-project/foundation/sources/lib/QueryManager/QueryManagerPooler.php	/^    public function getPoolerType()$/;"	f
+getPrimaryKey	sources/lib/Generator/StructureGenerator.php	/^    protected function getPrimaryKey($table_oid)$/;"	f
 getPrimaryKey	sources/lib/Model/RowStructure.php	/^    public function getPrimaryKey()$/;"	f
+getPrimaryKey	vendor/pomm-project/foundation/sources/lib/Inspector/Inspector.php	/^    public function getPrimaryKey($table_oid)$/;"	f
+getQueryResult	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^    protected function getQueryResult($sql = null)$/;"	f
+getRegexp	vendor/pomm-project/foundation/sources/lib/Converter/Type/BaseRange.php	/^    abstract protected function getRegexp();$/;"	f
+getRegexp	vendor/pomm-project/foundation/sources/lib/Converter/Type/NumRange.php	/^    protected function getRegexp()$/;"	f
+getRegexp	vendor/pomm-project/foundation/sources/lib/Converter/Type/TsRange.php	/^    protected function getRegexp()$/;"	f
+getRegisterPoolersNames	vendor/pomm-project/foundation/sources/lib/Session/Session.php	/^    public function getRegisterPoolersNames()$/;"	f
 getRelation	sources/lib/Model/RowStructure.php	/^    public function getRelation()$/;"	f
+getResultCount	vendor/pomm-project/foundation/sources/lib/Pager.php	/^    public function getResultCount()$/;"	f
+getResultMax	vendor/pomm-project/foundation/sources/lib/Pager.php	/^    public function getResultMax()$/;"	f
+getResultMin	vendor/pomm-project/foundation/sources/lib/Pager.php	/^    public function getResultMin()$/;"	f
+getSQLDetailedErrorMessage	vendor/pomm-project/foundation/sources/lib/Exception/SqlException.php	/^    public function getSQLDetailedErrorMessage()$/;"	f
+getSQLErrorSeverity	vendor/pomm-project/foundation/sources/lib/Exception/SqlException.php	/^    public function getSQLErrorSeverity()$/;"	f
+getSQLErrorState	vendor/pomm-project/foundation/sources/lib/Exception/SqlException.php	/^    public function getSQLErrorState()$/;"	f
+getSchemaOid	vendor/pomm-project/foundation/sources/lib/Inspector/Inspector.php	/^    public function getSchemaOid($schema, Where $where = null)$/;"	f
+getSchemaRelations	vendor/pomm-project/foundation/sources/lib/Inspector/Inspector.php	/^    public function getSchemaRelations($schema_oid, Where $where = null)$/;"	f
+getSchemas	vendor/pomm-project/foundation/sources/lib/Inspector/Inspector.php	/^    public function getSchemas()$/;"	f
+getSession	sources/lib/Generator/BaseGenerator.php	/^    protected function getSession()$/;"	f
 getSession	sources/lib/Model/Model.php	/^    public function getSession()$/;"	f
 getSession	sources/lib/Model/ModelTrait/BaseTrait.php	/^    abstract protected function getSession();$/;"	f
+getSession	vendor/pomm-project/foundation/sources/lib/Client/ClientPoolerTrait.php	/^    protected function getSession()$/;"	f
+getSession	vendor/pomm-project/foundation/sources/lib/Client/ClientTrait.php	/^    protected function getSession()$/;"	f
+getSession	vendor/pomm-project/foundation/sources/lib/Listener/SendNotificationTrait.php	/^    abstract protected function getSession();$/;"	f
+getSession	vendor/pomm-project/foundation/sources/lib/Pomm.php	/^    public function getSession($name)$/;"	f
+getSessionBuilder	vendor/pomm-project/foundation/sources/lib/Tester/VanillaSessionAtoum.php	/^    private function getSessionBuilder()$/;"	f
+getSessionBuilders	vendor/pomm-project/foundation/sources/lib/Pomm.php	/^    public function getSessionBuilders()$/;"	f
 getSignature	sources/lib/Model/IdentityMapper.php	/^    public static function getSignature(FlexibleEntity $entity, array $primary_key)$/;"	f
+getSignature	sources/lib/Model/IdentityMapper.php	/^    public static function getSignature(FlexibleEntityInterface $entity, array $primary_key)$/;"	f
+getSignatureFor	vendor/pomm-project/foundation/sources/lib/PreparedQuery/PreparedQuery.php	/^    public static function getSignatureFor($sql)$/;"	f
+getSql	vendor/pomm-project/foundation/sources/lib/PreparedQuery/PreparedQuery.php	/^    public function getSql()$/;"	f
+getSqlErrorMessage	vendor/pomm-project/foundation/sources/lib/Exception/SqlException.php	/^    public function getSqlErrorMessage()$/;"	f
+getStamp	vendor/pomm-project/foundation/sources/lib/Session/Session.php	/^    public function getStamp()$/;"	f
 getStructure	sources/lib/Model/Model.php	/^    protected function getStructure()$/;"	f
 getStructure	sources/lib/Model/ModelTrait/BaseTrait.php	/^    abstract public function getStructure();$/;"	f
+getSubElement	vendor/pomm-project/foundation/sources/lib/Converter/Type/BaseRange.php	/^    abstract protected function getSubElement($element);$/;"	f
+getSubElement	vendor/pomm-project/foundation/sources/lib/Converter/Type/NumRange.php	/^    protected function getSubElement($element)$/;"	f
+getSubElement	vendor/pomm-project/foundation/sources/lib/Converter/Type/TsRange.php	/^    protected function getSubElement($element)$/;"	f
+getSubtypeConverter	vendor/pomm-project/foundation/sources/lib/Converter/PgArray.php	/^    protected function getSubtypeConverter($type, Session $session)$/;"	f
+getTableComment	sources/lib/Generator/StructureGenerator.php	/^    protected function getTableComment($table_oid)$/;"	f
+getTableComment	vendor/pomm-project/foundation/sources/lib/Inspector/Inspector.php	/^    public function getTableComment($table_oid)$/;"	f
+getTableFieldInformation	vendor/pomm-project/foundation/sources/lib/Inspector/Inspector.php	/^    public function getTableFieldInformation($oid)$/;"	f
+getTableOid	vendor/pomm-project/foundation/sources/lib/Inspector/Inspector.php	/^    public function getTableOid($schema, $table)$/;"	f
+getTransactionStatus	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^    public function getTransactionStatus()$/;"	f
+getTypeCategory	vendor/pomm-project/foundation/sources/lib/Inspector/Inspector.php	/^    public function getTypeCategory($oid)$/;"	f
+getTypeClassName	vendor/pomm-project/foundation/sources/lib/Converter/Geometry/PgCircle.php	/^    protected function getTypeClassName()$/;"	f
+getTypeClassName	vendor/pomm-project/foundation/sources/lib/Converter/Geometry/PgPoint.php	/^    public function getTypeClassName()$/;"	f
+getTypeClassName	vendor/pomm-project/foundation/sources/lib/Converter/PgNumRange.php	/^    public function getTypeClassName()$/;"	f
+getTypeClassName	vendor/pomm-project/foundation/sources/lib/Converter/PgTsRange.php	/^    public function getTypeClassName()$/;"	f
+getTypeClassName	vendor/pomm-project/foundation/sources/lib/Converter/TypeConverter.php	/^    abstract protected function getTypeClassName();$/;"	f
+getTypeEnumValues	vendor/pomm-project/foundation/sources/lib/Inspector/Inspector.php	/^    public function getTypeEnumValues($oid)$/;"	f
 getTypeFor	sources/lib/Model/RowStructure.php	/^    public function getTypeFor($name)$/;"	f
+getTypeInformation	vendor/pomm-project/foundation/sources/lib/Inspector/Inspector.php	/^    public function getTypeInformation($type_name, $type_schema = null)$/;"	f
+getTypeOid	vendor/pomm-project/foundation/sources/lib/Session/ResultHandler.php	/^    public function getTypeOid($name)$/;"	f
+getTypes	vendor/pomm-project/foundation/sources/lib/Converter/ConverterHolder.php	/^    public function getTypes()$/;"	f
+getTypesWithConverterName	vendor/pomm-project/foundation/sources/lib/Converter/ConverterHolder.php	/^    public function getTypesWithConverterName()$/;"	f
+getValues	vendor/pomm-project/foundation/sources/lib/Where.php	/^    public function getValues()$/;"	f
+getVersion	vendor/pomm-project/foundation/sources/lib/Inspector/Inspector.php	/^    public function getVersion()$/;"	f
 getWhereFrom	sources/lib/Model/ModelTrait/ReadQueries.php	/^    protected function getWhereFrom(array $values)$/;"	f
+get_values	vendor/pomm-project/foundation/sources/lib/Where.php	/^        $get_values = function ($values) {$/;"	v
+handler	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^            $this->handler = $handler;$/;"	v
+handler	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^        $handler = pg_connect($string, \\PGSQL_CONNECT_FORCE_NEW);$/;"	v
+handler	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^    protected $handler = null;$/;"	v
+handler	vendor/pomm-project/foundation/sources/lib/Session/ResultHandler.php	/^        $this->handler = $result_resource;$/;"	v
+handler	vendor/pomm-project/foundation/sources/lib/Session/ResultHandler.php	/^    protected $handler;$/;"	v
 has	sources/lib/Model/FlexibleEntity.php	/^    final public function has($var)$/;"	f
+has	vendor/pomm-project/foundation/sources/lib/Client/ClientHolder.php	/^    public function has($type, $name)$/;"	f
+has	vendor/pomm-project/foundation/sources/lib/ResultIterator.php	/^    public function has($index)$/;"	f
+hasBuilder	vendor/pomm-project/foundation/sources/lib/Pomm.php	/^    public function hasBuilder($name)$/;"	f
+hasClient	vendor/pomm-project/foundation/sources/lib/Session/Session.php	/^    public function hasClient($type, $name)$/;"	f
+hasConverterName	vendor/pomm-project/foundation/sources/lib/Converter/ConverterHolder.php	/^    public function hasConverterName($name)$/;"	f
+hasElement	vendor/pomm-project/foundation/sources/lib/Where.php	/^    public function hasElement()$/;"	f
 hasField	sources/lib/Model/Projection.php	/^    public function hasField($name)$/;"	f
 hasField	sources/lib/Model/RowStructure.php	/^    public function hasField($name)$/;"	f
+hasHandler	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^    protected function hasHandler()$/;"	f
+hasLogger	vendor/pomm-project/foundation/sources/lib/Session/Session.php	/^    public function hasLogger()$/;"	f
+hasParameter	vendor/pomm-project/foundation/sources/lib/ParameterHolder.php	/^    public function hasParameter($name)$/;"	f
+hasPoolerForType	vendor/pomm-project/foundation/sources/lib/Session/Session.php	/^    public function hasPoolerForType($type)$/;"	f
+hasSession	vendor/pomm-project/foundation/sources/lib/Pomm.php	/^    public function hasSession($name)$/;"	f
+hasType	vendor/pomm-project/foundation/sources/lib/Converter/ConverterHolder.php	/^    public function hasType($type)$/;"	f
+has_methods	sources/lib/Model/FlexibleEntity.php	/^    protected static $has_methods;$/;"	v
+host	vendor/pomm-project/foundation/sources/lib/Session/ConnectionConfigurator.php	/^            $host = $host_matchs[1];$/;"	v
+host	vendor/pomm-project/foundation/sources/lib/Session/ConnectionConfigurator.php	/^            $host = $matchs[4];$/;"	v
 hydrate	sources/lib/Model/FlexibleEntity.php	/^    final public function hydrate(array $values)$/;"	f
+hydrate	sources/lib/Model/FlexibleEntity/FlexibleContainer.php	/^    public function hydrate(array $values)$/;"	f
+hydrate	sources/lib/Model/FlexibleEntity/FlexibleEntityInterface.php	/^    public function hydrate(array $fields);$/;"	f
+hydrate	sources/lib/Model/HydrationPlan.php	/^    public function hydrate(array $values)$/;"	f
 hydrate	sources/lib/Model/Hydrator.php	/^    public function hydrate(HydrationPlan $hydration_plan)$/;"	f
+hydration_plan	sources/lib/Converter/PgEntity.php	/^        $hydration_plan = new HydrationPlan($/;"	v
+hydration_plan	sources/lib/Model/CollectionIterator.php	/^        $this->hydration_plan   = new HydrationPlan($projection, $session);$/;"	v
+hydration_plan	sources/lib/Model/CollectionIterator.php	/^    protected $hydration_plan;$/;"	v
+identifier	vendor/pomm-project/foundation/sources/lib/Inspector/InspectorPooler.php	/^            $identifier = '\\PommProject\\Foundation\\Inspector\\Inspector';$/;"	v
+identifier	vendor/pomm-project/foundation/sources/lib/PreparedQuery/PreparedQuery.php	/^        $this->identifier = static::getSignatureFor($sql);$/;"	v
+identifier	vendor/pomm-project/foundation/sources/lib/PreparedQuery/PreparedQuery.php	/^    private $identifier;$/;"	v
+identifiers	vendor/pomm-project/foundation/sources/lib/Listener/ListenerPooler.php	/^            $identifiers = [ $identifiers ];$/;"	v
+identity_mapper	sources/lib/Converter/PgEntity.php	/^        $this->identity_mapper          = $identity_mapper === null$/;"	v
+identity_mapper	sources/lib/Converter/PgEntity.php	/^    protected $identity_mapper;$/;"	v
 identity_mapper	sources/lib/Model/Hydrator.php	/^        $this->identity_mapper = $identity_mapper !== null ? $identity_mapper : new IdentityMapper();$/;"	v
 identity_mapper	sources/lib/Model/Hydrator.php	/^        $this->identity_mapper = null;$/;"	v
 identity_mapper	sources/lib/Model/Hydrator.php	/^    protected $identity_mapper;$/;"	v
 inherits	sources/lib/Model/RowStructure.php	/^    public function inherits(RowStructure $structure)$/;"	f
+initTypes	vendor/pomm-project/foundation/sources/lib/ConvertedResultIterator.php	/^    protected function initTypes()$/;"	f
 initialize	sources/lib/Model/Model.php	/^    public function initialize(Session $session)$/;"	f
 initialize	sources/lib/Model/RowStructure.php	/^    abstract protected function initialize();$/;"	f
+initialize	vendor/pomm-project/foundation/sources/lib/Client/ClientInterface.php	/^    public function initialize(Session $session);$/;"	f
+initialize	vendor/pomm-project/foundation/sources/lib/Client/ClientTrait.php	/^    public function initialize(Session $session)$/;"	f
+initialize	vendor/pomm-project/foundation/sources/lib/Observer/Observer.php	/^    public function initialize(Session $session)$/;"	f
+initializeConverterHolder	vendor/pomm-project/foundation/sources/lib/Session/SessionBuilder.php	/^    protected function initializeConverterHolder(ConverterHolder $converter_holder)$/;"	f
+initializeConverterHolder	vendor/pomm-project/foundation/sources/lib/SessionBuilder.php	/^    protected function initializeConverterHolder(ConverterHolder $converter_holder)$/;"	f
+initializeSession	vendor/pomm-project/foundation/sources/lib/Tester/VanillaSessionAtoum.php	/^    abstract protected function initializeSession(Session $session);$/;"	f
 insertOne	sources/lib/Model/ModelTrait/WriteQueries.php	/^    public function insertOne(FlexibleEntity &$entity)$/;"	f
+insertOne	sources/lib/Model/ModelTrait/WriteQueries.php	/^    public function insertOne(FlexibleEntityInterface &$entity)$/;"	f
+insert_values	vendor/pomm-project/foundation/sources/lib/Converter/PgHstore.php	/^        $insert_values = [];$/;"	v
+instances	sources/lib/Model/IdentityMapper.php	/^        $this->instances = [];$/;"	v
 instances	sources/lib/Model/IdentityMapper.php	/^    protected $instances = [];$/;"	v
 isArray	sources/lib/Model/HydrationPlan.php	/^    public function isArray($name)$/;"	f
 isArray	sources/lib/Model/Projection.php	/^    public function isArray($name)$/;"	f
+isEmpty	vendor/pomm-project/foundation/sources/lib/ResultIterator.php	/^    public function isEmpty()$/;"	f
+isEmpty	vendor/pomm-project/foundation/sources/lib/Where.php	/^    public function isEmpty()$/;"	f
+isEven	vendor/pomm-project/foundation/sources/lib/ResultIterator.php	/^    public function isEven()$/;"	f
+isFirst	vendor/pomm-project/foundation/sources/lib/ResultIterator.php	/^    public function isFirst()$/;"	f
 isInTransaction	sources/lib/ModelLayer/ModelLayer.php	/^    protected function isInTransaction()$/;"	f
+isLast	vendor/pomm-project/foundation/sources/lib/ResultIterator.php	/^    public function isLast()$/;"	f
 isModified	sources/lib/Model/FlexibleEntity.php	/^    public function isModified()$/;"	f
 isNew	sources/lib/Model/FlexibleEntity.php	/^    public function isNew()$/;"	f
+isNextPage	vendor/pomm-project/foundation/sources/lib/Pager.php	/^    public function isNextPage()$/;"	f
+isOdd	vendor/pomm-project/foundation/sources/lib/ResultIterator.php	/^    public function isOdd()$/;"	f
+isPreviousPage	vendor/pomm-project/foundation/sources/lib/Pager.php	/^    public function isPreviousPage()$/;"	f
 isTransactionOk	sources/lib/ModelLayer/ModelLayer.php	/^    protected function isTransactionOk()$/;"	f
+is_prepared	vendor/pomm-project/foundation/sources/lib/PreparedQuery/PreparedQuery.php	/^        $this->is_prepared = false;$/;"	v
+is_prepared	vendor/pomm-project/foundation/sources/lib/PreparedQuery/PreparedQuery.php	/^        $this->is_prepared = true;$/;"	v
+is_prepared	vendor/pomm-project/foundation/sources/lib/PreparedQuery/PreparedQuery.php	/^    private $is_prepared = false;$/;"	v
 iterator	sources/lib/Model/ModelTrait/ReadQueries.php	/^        $iterator = $this->findWhere($where);$/;"	v
+iterator	sources/lib/Model/ModelTrait/WriteQueries.php	/^        $iterator = $this->query($sql, $where->getValues());$/;"	v
+iterator	vendor/pomm-project/foundation/sources/lib/Inspector/Inspector.php	/^        $iterator = $this->executeSql($sql, $condition);$/;"	v
+iterator	vendor/pomm-project/foundation/sources/lib/Inspector/Inspector.php	/^        $iterator = $this->executeSql($sql, $where);$/;"	v
+iterator	vendor/pomm-project/foundation/sources/lib/Inspector/Inspector.php	/^        $iterator = $this->executeSql($sql, Where::create('t.oid = $*', [$oid]));$/;"	v
+iterator	vendor/pomm-project/foundation/sources/lib/Pager.php	/^        $this->iterator     = $iterator;$/;"	v
+iterator	vendor/pomm-project/foundation/sources/lib/Pager.php	/^    protected $iterator;$/;"	v
+iterator	vendor/pomm-project/foundation/sources/lib/QueryManager/SimpleQueryManager.php	/^        $iterator = new ConvertedResultIterator($/;"	v
+jsonSerialize	vendor/pomm-project/foundation/sources/lib/ResultIterator.php	/^    public function jsonSerialize()$/;"	f
+key	vendor/pomm-project/foundation/sources/lib/ResultIterator.php	/^    public function key()$/;"	f
+launch	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^    private function launch()$/;"	f
 launchFilters	sources/lib/Model/CollectionIterator.php	/^    protected function launchFilters(array $values)$/;"	f
+limit	sources/lib/Model/ModelTrait/ReadQueries.php	/^        $limit  = $item_per_page;$/;"	v
+listen	vendor/pomm-project/foundation/sources/lib/Observer/Observer.php	/^    protected function listen($channel)$/;"	f
+listeners	vendor/pomm-project/foundation/sources/lib/QueryManager/QueryManagerPooler.php	/^    protected $listeners = [];$/;"	v
+loadConverters	sources/lib/Model/HydrationPlan.php	/^    protected function loadConverters()$/;"	f
+make	vendor/pomm-project/foundation/sources/lib/Client/ClientPoolerInterface.php	/^ * This interface make your pooler able to deal with Session's clients$/;"	c
+max_per_page	vendor/pomm-project/foundation/sources/lib/Pager.php	/^        $this->max_per_page = $max_per_page;$/;"	v
+max_per_page	vendor/pomm-project/foundation/sources/lib/Pager.php	/^    protected $max_per_page;$/;"	v
+mergeTemplate	sources/lib/Generator/BaseGenerator.php	/^    protected function mergeTemplate(array $variables)$/;"	f
+message	vendor/pomm-project/foundation/sources/lib/Exception/NotificationException.php	/^        $this->message = $notification['payload'];$/;"	v
+method_name	sources/lib/Model/FlexibleEntity.php	/^        $method_name = "clear".Inflector::studlyCaps($var);$/;"	v
 method_name	sources/lib/Model/FlexibleEntity.php	/^        $method_name = "get".Inflector::studlyCaps($var);$/;"	v
 method_name	sources/lib/Model/FlexibleEntity.php	/^        $method_name = "has".Inflector::studlyCaps($offset);$/;"	v
+method_name	sources/lib/Model/FlexibleEntity.php	/^        $method_name = "has".Inflector::studlyCaps($var);$/;"	v
 method_name	sources/lib/Model/FlexibleEntity.php	/^        $method_name = "set".Inflector::studlyCaps($var);$/;"	v
+mustBeOneOf	vendor/pomm-project/foundation/sources/lib/ParameterHolder.php	/^    public function mustBeOneOf($name, array $values)$/;"	f
+mustHave	vendor/pomm-project/foundation/sources/lib/ParameterHolder.php	/^    public function mustHave($name)$/;"	f
+name	vendor/pomm-project/foundation/sources/lib/Converter/ConverterClient.php	/^        $this->name      = $name;$/;"	v
+name	vendor/pomm-project/foundation/sources/lib/Converter/ConverterClient.php	/^    protected $name;$/;"	v
+name	vendor/pomm-project/foundation/sources/lib/Listener/Listener.php	/^        $this->name = $name;$/;"	v
+name	vendor/pomm-project/foundation/sources/lib/Listener/Listener.php	/^    protected $name;$/;"	v
+names	vendor/pomm-project/foundation/sources/lib/Session/ResultHandler.php	/^        $names = [];$/;"	v
+namespace	sources/lib/Generator/BaseGenerator.php	/^        $this->namespace = $namespace;$/;"	v
+namespace	sources/lib/Generator/BaseGenerator.php	/^    protected $namespace;$/;"	v
+next	vendor/pomm-project/foundation/sources/lib/ResultIterator.php	/^    public function next()$/;"	f
+no	vendor/pomm-project/foundation/sources/lib/Session/ResultHandler.php	/^        $no = pg_field_num($this->handler, sprintf('"%s"', $name));$/;"	v
+notification	vendor/pomm-project/foundation/sources/lib/Observer/Observer.php	/^        $notification = $this->getNotification();$/;"	v
+notify	vendor/pomm-project/foundation/sources/lib/Listener/Listener.php	/^    public function notify($name, array $data)$/;"	f
+notify	vendor/pomm-project/foundation/sources/lib/Listener/ListenerPooler.php	/^    public function notify($identifiers, array $data)$/;"	f
+notifyAll	vendor/pomm-project/foundation/sources/lib/Listener/ListenerPooler.php	/^    protected function notifyAll(array $data)$/;"	f
+notifyClients	vendor/pomm-project/foundation/sources/lib/Listener/ListenerPooler.php	/^    protected function notifyClients(array $identifiers, array $data)$/;"	f
+offset	sources/lib/Model/ModelTrait/ReadQueries.php	/^        $offset = $item_per_page * ($page - 1);$/;"	v
 offsetExists	sources/lib/Model/FlexibleEntity.php	/^    public function offsetExists($offset)$/;"	f
 offsetExists	sources/lib/Model/RowStructure.php	/^    public function offsetExists($name)$/;"	f
+offsetExists	vendor/pomm-project/foundation/sources/lib/ParameterHolder.php	/^    public function offsetExists($name)$/;"	f
+offsetExists	vendor/pomm-project/foundation/sources/lib/Pomm.php	/^    public function offsetExists($offset)$/;"	f
 offsetGet	sources/lib/Model/FlexibleEntity.php	/^    public function offsetGet($offset)$/;"	f
 offsetGet	sources/lib/Model/RowStructure.php	/^    public function offsetGet($name)$/;"	f
+offsetGet	vendor/pomm-project/foundation/sources/lib/ParameterHolder.php	/^    public function offsetGet($name)$/;"	f
+offsetGet	vendor/pomm-project/foundation/sources/lib/Pomm.php	/^    public function offsetGet($offset)$/;"	f
 offsetSet	sources/lib/Model/FlexibleEntity.php	/^    public function offsetSet($offset, $value)$/;"	f
 offsetSet	sources/lib/Model/RowStructure.php	/^    public function offsetSet($name, $type)$/;"	f
+offsetSet	vendor/pomm-project/foundation/sources/lib/ParameterHolder.php	/^    public function offsetSet($name, $value)$/;"	f
+offsetSet	vendor/pomm-project/foundation/sources/lib/Pomm.php	/^    public function offsetSet($offset, $value)$/;"	f
 offsetUnset	sources/lib/Model/FlexibleEntity.php	/^    public function offsetUnset($offset)$/;"	f
 offsetUnset	sources/lib/Model/RowStructure.php	/^    public function offsetUnset($name)$/;"	f
+offsetUnset	vendor/pomm-project/foundation/sources/lib/ParameterHolder.php	/^    public function offsetUnset($name)$/;"	f
+offsetUnset	vendor/pomm-project/foundation/sources/lib/Pomm.php	/^    public function offsetUnset($offset)$/;"	f
 operation	sources/lib/Model/FlexibleEntity.php	/^        $operation = $split[0];$/;"	v
+operator	vendor/pomm-project/foundation/sources/lib/Where.php	/^        $this->operator = $operator;$/;"	v
+operator	vendor/pomm-project/foundation/sources/lib/Where.php	/^        $this->operator = $where->operator;$/;"	v
+operator	vendor/pomm-project/foundation/sources/lib/Where.php	/^    public $operator;$/;"	v
+orWhere	vendor/pomm-project/foundation/sources/lib/Where.php	/^    public function orWhere($element, array $values = [])$/;"	f
+order	vendor/pomm-project/foundation/sources/lib/QueryParameterExpander.php	/^    public static function order($string)$/;"	f
+out_values	sources/lib/Converter/PgEntity.php	/^        $out_values = [];$/;"	v
+out_values	sources/lib/Model/HydrationPlan.php	/^        $out_values = [];$/;"	v
+output	sources/lib/Model/FlexibleEntity/FlexibleContainer.php	/^        $output = [];$/;"	v
+outputFileCreation	sources/lib/Generator/BaseGenerator.php	/^    protected function outputFileCreation(array $output = [])$/;"	f
+output_values	vendor/pomm-project/foundation/sources/lib/ConvertedResultIterator.php	/^        $output_values = [];$/;"	v
+page	vendor/pomm-project/foundation/sources/lib/Pager.php	/^        $this->page         = $page;$/;"	v
+page	vendor/pomm-project/foundation/sources/lib/Pager.php	/^    protected $page;$/;"	v
+paginateFindWhere	sources/lib/Model/ModelTrait/ReadQueries.php	/^    public function paginateFindWhere(Where $where, $item_per_page, $page = 1, $suffix = '')$/;"	f
+paginateQuery	sources/lib/Model/ModelTrait/ReadQueries.php	/^    protected function paginateQuery($sql, array $values, $count, $item_per_page, $page = 1, Projection $projection = null)$/;"	f
+parameters	vendor/pomm-project/foundation/sources/lib/ParameterHolder.php	/^        $this->parameters = $parameters;$/;"	v
+parameters	vendor/pomm-project/foundation/sources/lib/ParameterHolder.php	/^    protected $parameters;$/;"	v
+parse	vendor/pomm-project/foundation/sources/lib/Where.php	/^    protected function parse()$/;"	f
+parseDsn	vendor/pomm-project/foundation/sources/lib/Session/ConnectionConfigurator.php	/^    private function parseDsn()$/;"	f
 parseRow	sources/lib/Model/CollectionIterator.php	/^    public function parseRow(array $values)$/;"	f
+parseRow	vendor/pomm-project/foundation/sources/lib/ConvertedResultIterator.php	/^    protected function parseRow(array $values)$/;"	f
+pass	vendor/pomm-project/foundation/sources/lib/Session/ConnectionConfigurator.php	/^        $pass = $matchs[3];$/;"	v
+pid	vendor/pomm-project/foundation/sources/lib/Exception/NotificationException.php	/^        $this->pid     = $notification['pid'];$/;"	v
+pid	vendor/pomm-project/foundation/sources/lib/Exception/NotificationException.php	/^    protected $pid;$/;"	v
+pk	vendor/pomm-project/foundation/sources/lib/Inspector/Inspector.php	/^        $pk = $this->executeSql($sql, $condition)->current();$/;"	v
+point_converter	vendor/pomm-project/foundation/sources/lib/Converter/Geometry/PgCircle.php	/^            $this->point_converter = $session$/;"	v
+point_converter	vendor/pomm-project/foundation/sources/lib/Converter/Geometry/PgCircle.php	/^    protected $point_converter;$/;"	v
+port	vendor/pomm-project/foundation/sources/lib/Session/ConnectionConfigurator.php	/^        $port = $matchs[5];$/;"	v
+position	vendor/pomm-project/foundation/sources/lib/ResultIterator.php	/^        $this->position = 0;$/;"	v
+position	vendor/pomm-project/foundation/sources/lib/ResultIterator.php	/^    private   $position;$/;"	v
 postConfigure	sources/lib/SessionBuilder.php	/^    protected function postConfigure(Session $session)$/;"	f
+postConfigure	vendor/pomm-project/foundation/sources/lib/Session/SessionBuilder.php	/^    protected function postConfigure(Session $session)$/;"	f
+postConfigure	vendor/pomm-project/foundation/sources/lib/SessionBuilder.php	/^    protected function postConfigure(Session $session)$/;"	f
+post_configurations	vendor/pomm-project/foundation/sources/lib/Pomm.php	/^    protected $post_configurations = [];$/;"	v
+preConfigure	vendor/pomm-project/foundation/sources/lib/Session/SessionBuilder.php	/^    protected function preConfigure()$/;"	f
+prepare	vendor/pomm-project/foundation/sources/lib/PreparedQuery/PreparedQuery.php	/^    protected function prepare()$/;"	f
+prepareValues	vendor/pomm-project/foundation/sources/lib/QueryParameterExpander.php	/^    public static function prepareValues(array $values)$/;"	f
+prepared_variables	sources/lib/Generator/BaseGenerator.php	/^        $prepared_variables = [];$/;"	v
+primary_key	sources/lib/Generator/StructureGenerator.php	/^        $primary_key        = $this->getPrimaryKey($table_oid);$/;"	v
+primary_key	sources/lib/Generator/StructureGenerator.php	/^        $primary_key = $this$/;"	v
 primary_key	sources/lib/Model/Hydrator.php	/^        $this->primary_key     = $primary_key;$/;"	v
 primary_key	sources/lib/Model/Hydrator.php	/^    protected $primary_key;$/;"	v
 primary_key	sources/lib/Model/RowStructure.php	/^        $this->primary_key = $primary_key;$/;"	v
+primary_key	sources/lib/Model/RowStructure.php	/^    protected $primary_key       = [];$/;"	v
 primary_key	sources/lib/Model/RowStructure.php	/^    protected $primary_key = [];$/;"	v
+projection	sources/lib/Converter/PgEntity.php	/^            $projection = $type;$/;"	v
+projection	sources/lib/Converter/PgEntity.php	/^            $projection = new Projection($/;"	v
+projection	sources/lib/Model/CollectionIterator.php	/^        $this->projection       = $projection;$/;"	v
 projection	sources/lib/Model/CollectionIterator.php	/^        $this->projection   = $projection;$/;"	v
 projection	sources/lib/Model/CollectionIterator.php	/^    protected $projection;$/;"	v
 projection	sources/lib/Model/HydrationPlan.php	/^        $this->projection = $projection;$/;"	v
 projection	sources/lib/Model/HydrationPlan.php	/^    protected $projection = [];$/;"	v
+projection	sources/lib/Model/HydrationPlan.php	/^    protected $projection;$/;"	v
 projection	sources/lib/Model/Model.php	/^            $projection = $this->createProjection();$/;"	v
+projection	sources/lib/Model/ModelTrait/ReadQueries.php	/^        $projection = $this->createProjection();$/;"	v
 query	sources/lib/Model/CollectionQuery.php	/^    public function query($sql, array $parameters = [], Projection $projection)$/;"	f
+query	sources/lib/Model/CollectionQueryManager.php	/^    public function query($sql, array $parameters = [], Projection $projection)$/;"	f
 query	sources/lib/Model/Model.php	/^    protected function query($sql, array $values = [], Projection $projection = null)$/;"	f
 query	sources/lib/Model/ModelTrait/BaseTrait.php	/^    abstract protected function query($sql, array $values = [], Projection $projection = null);$/;"	f
+query	vendor/pomm-project/foundation/sources/lib/QueryManager/SimpleQueryManager.php	/^    public function query($sql, array $parameters = [])$/;"	f
+radius	vendor/pomm-project/foundation/sources/lib/Converter/Type/Circle.php	/^        $this->radius = (float) $elts[1];$/;"	v
+radius	vendor/pomm-project/foundation/sources/lib/Converter/Type/Circle.php	/^    public $radius;$/;"	v
 reflection	sources/lib/Model/ModelPooler.php	/^            $reflection = new \\ReflectionClass($class);$/;"	v
 reflection	sources/lib/ModelLayer/ModelLayerPooler.php	/^            $reflection = new \\ReflectionClass($identifier);$/;"	v
+reflection	vendor/pomm-project/foundation/sources/lib/Pomm.php	/^                    $reflection = new \\ReflectionClass($builder_class);$/;"	v
+register	vendor/pomm-project/foundation/sources/lib/Client/ClientPoolerInterface.php	/^    public function register(Session $session);$/;"	f
+register	vendor/pomm-project/foundation/sources/lib/Client/ClientPoolerTrait.php	/^    public function register(Session $session)$/;"	f
+registerClient	vendor/pomm-project/foundation/sources/lib/Session/Session.php	/^    public function registerClient(ClientInterface $client)$/;"	f
+registerClientPooler	vendor/pomm-project/foundation/sources/lib/Session/Session.php	/^    public function registerClientPooler(ClientPoolerInterface $client_pooler)$/;"	f
+registerConverter	vendor/pomm-project/foundation/sources/lib/Converter/ConverterHolder.php	/^    public function registerConverter($name, ConverterInterface $converter, array $types)$/;"	f
 registerFilter	sources/lib/Model/CollectionIterator.php	/^    public function registerFilter($callable)$/;"	f
+relation	sources/lib/Generator/BaseGenerator.php	/^        $this->relation  = $relation;$/;"	v
+relation	sources/lib/Generator/BaseGenerator.php	/^    protected $relation;$/;"	v
 relation	sources/lib/Model/RowStructure.php	/^        $this->relation = $relation;$/;"	v
 relation	sources/lib/Model/RowStructure.php	/^    protected $relation;$/;"	v
+relations_info	sources/lib/Generator/ModelGenerator.php	/^        $relations_info = $this$/;"	v
 releaseSavepoint	sources/lib/ModelLayer/ModelLayer.php	/^    protected function releaseSavepoint($name)$/;"	f
+removeBuilder	vendor/pomm-project/foundation/sources/lib/Pomm.php	/^    public function removeBuilder($name)$/;"	f
 replace	sources/lib/Model/Projection.php	/^        $replace = $table_alias === null ? '' : sprintf("%s.", $table_alias);$/;"	v
+res	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^        $res = pg_send_query_params($/;"	v
+resource	vendor/pomm-project/foundation/sources/lib/QueryManager/SimpleQueryManager.php	/^        $resource = $this->doQuery($sql, QueryParameterExpander::prepareValues($parameters));$/;"	v
+restartListening	vendor/pomm-project/foundation/sources/lib/Observer/Observer.php	/^    public function restartListening()$/;"	f
 result	sources/lib/Model/CollectionQuery.php	/^        $result = $this->doQuery($sql, $parameters);$/;"	v
+result	sources/lib/Model/CollectionQueryManager.php	/^        $result = $this->doQuery($sql, $parameters);$/;"	v
+result	vendor/pomm-project/foundation/sources/lib/Inspector/Inspector.php	/^        $result = $this$/;"	v
+result	vendor/pomm-project/foundation/sources/lib/ResultIterator.php	/^        $this->result   = $result;$/;"	v
+result	vendor/pomm-project/foundation/sources/lib/ResultIterator.php	/^    protected $result;$/;"	v
+result	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^        $result = pg_set_client_encoding($this->getHandler(), $encoding);$/;"	v
+result_resource	vendor/pomm-project/foundation/sources/lib/Exception/SqlException.php	/^        $this->result_resource = $result_resource;$/;"	v
+result_resource	vendor/pomm-project/foundation/sources/lib/Exception/SqlException.php	/^    protected $result_resource;$/;"	v
+results	sources/lib/Model/CollectionIterator.php	/^        $results = [];$/;"	v
+results	vendor/pomm-project/foundation/sources/lib/ResultIterator.php	/^        $results = [];$/;"	v
+results	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^        $results = [];$/;"	v
+ret	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^        $ret = pg_send_execute($this->getHandler(), $identifier, $parameters);$/;"	v
+ret	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^        $ret = pg_send_query($this->getHandler(), $sql);$/;"	v
+ret	vendor/pomm-project/foundation/sources/lib/Session/ResultHandler.php	/^        $ret = pg_field_type_oid($this->handler, $name);$/;"	v
+return	vendor/pomm-project/foundation/sources/lib/Converter/PgJson.php	/^        $return = json_decode($data, true);$/;"	v
+rewind	vendor/pomm-project/foundation/sources/lib/ResultIterator.php	/^    public function rewind()$/;"	f
 rollbackTransaction	sources/lib/ModelLayer/ModelLayer.php	/^    protected function rollbackTransaction($name = null)$/;"	f
+row	vendor/pomm-project/foundation/sources/lib/Inspector/Inspector.php	/^        $row = $this->executeSql($sql)->current();$/;"	v
+row_structure	sources/lib/Converter/PgEntity.php	/^        $this->row_structure            = $structure;$/;"	v
+row_structure	sources/lib/Converter/PgEntity.php	/^    protected $row_structure;$/;"	v
+saveFile	sources/lib/Generator/BaseGenerator.php	/^    protected function saveFile($filename, $content)$/;"	f
+schema	sources/lib/Generator/BaseGenerator.php	/^        $this->schema    = $schema;$/;"	v
+schema	sources/lib/Generator/BaseGenerator.php	/^    protected $schema;$/;"	v
+schema_oid	sources/lib/Generator/ModelGenerator.php	/^        $schema_oid = $this$/;"	v
+sendConfiguration	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^    protected function sendConfiguration()$/;"	f
+sendExecuteQuery	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^    public function sendExecuteQuery($identifier, array $parameters = [], $sql = '')$/;"	f
+sendNotification	vendor/pomm-project/foundation/sources/lib/Listener/SendNotificationTrait.php	/^    protected function sendNotification($name, array $data)$/;"	f
 sendNotify	sources/lib/ModelLayer/ModelLayer.php	/^    protected function sendNotify($channel, $data = '')$/;"	f
 sendParameter	sources/lib/ModelLayer/ModelLayer.php	/^    private function sendParameter($sql, $identifier, $parameter = null)$/;"	f
+sendPrepareQuery	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^    public function sendPrepareQuery($identifier, $sql)$/;"	f
+sendQueryWithParameters	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^    public function sendQueryWithParameters($query, array $parameters = [])$/;"	f
+session	sources/lib/Generator/BaseGenerator.php	/^        $this->session   = $session;$/;"	v
+session	sources/lib/Generator/BaseGenerator.php	/^        $this->session = $session;$/;"	v
+session	sources/lib/Generator/BaseGenerator.php	/^    private $session;$/;"	v
+session	sources/lib/Model/CollectionIterator.php	/^        $this->session          = $session;$/;"	v
 session	sources/lib/Model/CollectionIterator.php	/^        $this->session      = $session;$/;"	v
 session	sources/lib/Model/CollectionIterator.php	/^    protected $session;$/;"	v
+session	sources/lib/Model/HydrationPlan.php	/^        $this->session    = $session;$/;"	v
+session	sources/lib/Model/HydrationPlan.php	/^    protected $session;$/;"	v
 session	sources/lib/Model/Model.php	/^        $this->session = $session;$/;"	v
 session	sources/lib/Model/Model.php	/^    protected $session;$/;"	v
+session	vendor/pomm-project/foundation/sources/lib/Client/ClientPoolerTrait.php	/^        $this->session = $session;$/;"	v
+session	vendor/pomm-project/foundation/sources/lib/Client/ClientPoolerTrait.php	/^    private $session;$/;"	v
+session	vendor/pomm-project/foundation/sources/lib/Client/ClientTrait.php	/^        $this->session = $session;$/;"	v
+session	vendor/pomm-project/foundation/sources/lib/Client/ClientTrait.php	/^    private $session;$/;"	v
+session	vendor/pomm-project/foundation/sources/lib/ConvertedResultIterator.php	/^        $this->session = $session;$/;"	v
+session	vendor/pomm-project/foundation/sources/lib/ConvertedResultIterator.php	/^    protected $session;$/;"	v
+session	vendor/pomm-project/foundation/sources/lib/Pomm.php	/^        $session = $this->sessions[$name];$/;"	v
+session	vendor/pomm-project/foundation/sources/lib/Session/SessionBuilder.php	/^        $session    = $this->createSession($/;"	v
+session	vendor/pomm-project/foundation/sources/lib/Tester/VanillaSessionAtoum.php	/^        $session = $this->getSessionBuilder()->buildSession($stamp);$/;"	v
+session_builder	vendor/pomm-project/foundation/sources/lib/Tester/VanillaSessionAtoum.php	/^            $this->session_builder = $this->createSessionBuilder($GLOBALS['pomm_db1']);$/;"	v
+session_builder	vendor/pomm-project/foundation/sources/lib/Tester/VanillaSessionAtoum.php	/^    private $session_builder;$/;"	v
+sessions	vendor/pomm-project/foundation/sources/lib/Pomm.php	/^    protected $sessions = [];$/;"	v
 set	sources/lib/Model/FlexibleEntity.php	/^    final public function set($var, $value)$/;"	f
+set	vendor/pomm-project/foundation/sources/lib/Session/ConnectionConfigurator.php	/^    public function set($name, $value)$/;"	f
+setClientEncoding	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^    public function setClientEncoding($encoding)$/;"	f
+setDefaultValue	vendor/pomm-project/foundation/sources/lib/ParameterHolder.php	/^    public function setDefaultValue($name, $value)$/;"	f
 setDeferrable	sources/lib/ModelLayer/ModelLayer.php	/^    protected function setDeferrable(array $keys = [], $state)$/;"	f
+setDefinition	sources/lib/Model/RowStructure.php	/^    public function setDefinition(array $definition)$/;"	f
 setField	sources/lib/Model/Projection.php	/^    public function setField($name, $content, $type = null)$/;"	f
 setFieldType	sources/lib/Model/Projection.php	/^    public function setFieldType($name, $type)$/;"	f
+setOperator	vendor/pomm-project/foundation/sources/lib/Where.php	/^    public function setOperator($operator)$/;"	f
+setParameter	vendor/pomm-project/foundation/sources/lib/ParameterHolder.php	/^    public function setParameter($name, $value)$/;"	f
 setPrimaryKey	sources/lib/Model/RowStructure.php	/^    public function setPrimaryKey(array $primary_key)$/;"	f
 setRelation	sources/lib/Model/RowStructure.php	/^    public function setRelation($relation)$/;"	f
 setSavepoint	sources/lib/ModelLayer/ModelLayer.php	/^    protected function setSavepoint($name)$/;"	f
+setSession	sources/lib/Generator/BaseGenerator.php	/^    protected function setSession(Session $session)$/;"	f
+setStack	vendor/pomm-project/foundation/sources/lib/Where.php	/^    public function setStack(array $stack)$/;"	f
 setTransactionAccessMode	sources/lib/ModelLayer/ModelLayer.php	/^    protected function setTransactionAccessMode($access_mode)$/;"	f
 setTransactionIsolationLevel	sources/lib/ModelLayer/ModelLayer.php	/^    protected function setTransactionIsolationLevel($isolaton_level)$/;"	f
 shutdown	sources/lib/Model/Hydrator.php	/^    public function shutdown()$/;"	f
 shutdown	sources/lib/Model/Model.php	/^    public function shutdown()$/;"	f
 shutdown	sources/lib/ModelLayer/ModelLayer.php	/^    public function shutdown()$/;"	f
+shutdown	vendor/pomm-project/foundation/sources/lib/Client/ClientHolder.php	/^    public function shutdown()$/;"	f
+shutdown	vendor/pomm-project/foundation/sources/lib/Client/ClientInterface.php	/^    public function shutdown();$/;"	f
+shutdown	vendor/pomm-project/foundation/sources/lib/Client/ClientTrait.php	/^    public function shutdown()$/;"	f
+shutdown	vendor/pomm-project/foundation/sources/lib/Observer/Observer.php	/^    public function shutdown()$/;"	f
+shutdown	vendor/pomm-project/foundation/sources/lib/PreparedQuery/PreparedQuery.php	/^    public function shutdown()$/;"	f
 signature	sources/lib/Model/IdentityMapper.php	/^        $signature = self::getSignature($entity, $primary_key);$/;"	v
 slice	sources/lib/Model/CollectionIterator.php	/^    public function slice($name)$/;"	f
+slice	vendor/pomm-project/foundation/sources/lib/ConvertedResultIterator.php	/^    public function slice($name)$/;"	f
+slice	vendor/pomm-project/foundation/sources/lib/ResultIterator.php	/^    public function slice($field)$/;"	f
 split	sources/lib/Model/FlexibleEntity.php	/^        $split = preg_split('\/(?=[A-Z])\/', $method, 2);$/;"	v
+split	sources/lib/Model/FlexibleEntity/FlexibleContainer.php	/^        $split = preg_split('\/(?=[A-Z])\/', $argument, 2);$/;"	v
 sql	sources/lib/Model/ModelTrait/ReadQueries.php	/^        $sql = sprintf("select count(*) as count from :table where %s", (string) $where);$/;"	v
 sql	sources/lib/Model/ModelTrait/ReadQueries.php	/^        $sql = strtr($/;"	v
 sql	sources/lib/Model/ModelTrait/ReadQueries.php	/^        $sql = strtr($sql, [$/;"	v
 sql	sources/lib/Model/ModelTrait/WriteQueries.php	/^        $sql = strtr($/;"	v
 sql	sources/lib/ModelLayer/ModelLayer.php	/^            $sql = "rollback transaction";$/;"	v
 sql	sources/lib/ModelLayer/ModelLayer.php	/^            $sql = sprintf("rollback to savepoint %s", $this->escapeIdentifier($name));$/;"	v
+sql	vendor/pomm-project/foundation/sources/lib/Exception/SqlException.php	/^        $this->sql = $sql;$/;"	v
+sql	vendor/pomm-project/foundation/sources/lib/Exception/SqlException.php	/^    protected $sql;$/;"	v
+sql	vendor/pomm-project/foundation/sources/lib/Inspector/Inspector.php	/^            $sql = strtr($sql, [':join' => '']);$/;"	v
+sql	vendor/pomm-project/foundation/sources/lib/Inspector/Inspector.php	/^            $sql = strtr($sql, [':join' => 'join pg_namespace n on n.oid = t.typnamespace']);$/;"	v
+sql	vendor/pomm-project/foundation/sources/lib/Inspector/Inspector.php	/^        $sql      = <<<SQL$/;"	v
+sql	vendor/pomm-project/foundation/sources/lib/Inspector/Inspector.php	/^        $sql = "select version()";$/;"	v
+sql	vendor/pomm-project/foundation/sources/lib/Inspector/Inspector.php	/^        $sql = <<<SQL$/;"	v
+sql	vendor/pomm-project/foundation/sources/lib/Inspector/Inspector.php	/^        $sql = strtr($sql, [':condition' => $condition]);$/;"	v
+sql	vendor/pomm-project/foundation/sources/lib/PreparedQuery/PreparedQuery.php	/^        $this->sql        = $sql;$/;"	v
+sql	vendor/pomm-project/foundation/sources/lib/PreparedQuery/PreparedQuery.php	/^    protected $sql;$/;"	v
+sql	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^        $sql=[];$/;"	v
+stack	vendor/pomm-project/foundation/sources/lib/Where.php	/^                $this->stack = [$/;"	v
+stack	vendor/pomm-project/foundation/sources/lib/Where.php	/^            $this->stack = [new self($this->getElement(), $this->values), $element];$/;"	v
+stack	vendor/pomm-project/foundation/sources/lib/Where.php	/^        $stack = [];$/;"	v
+stack	vendor/pomm-project/foundation/sources/lib/Where.php	/^        $this->stack    = $where->stack;$/;"	v
+stack	vendor/pomm-project/foundation/sources/lib/Where.php	/^        $this->stack = $stack;$/;"	v
+stack	vendor/pomm-project/foundation/sources/lib/Where.php	/^    public $stack = [];$/;"	v
+stamp	vendor/pomm-project/foundation/sources/lib/Session/Session.php	/^        $stamp = null$/;"	v
+stamp	vendor/pomm-project/foundation/sources/lib/Session/Session.php	/^        $this->stamp = $stamp;$/;"	v
+stamp	vendor/pomm-project/foundation/sources/lib/Session/Session.php	/^    protected $stamp;$/;"	v
 start	sources/lib/Model/CollectionQuery.php	/^        $start = microtime(true);$/;"	v
+start	sources/lib/Model/CollectionQueryManager.php	/^        $start  = microtime(true);$/;"	v
+start	vendor/pomm-project/foundation/sources/lib/QueryManager/SimpleQueryManager.php	/^        $start    = microtime(true);$/;"	v
 startTransaction	sources/lib/ModelLayer/ModelLayer.php	/^    protected function startTransaction()$/;"	f
+start_incl	vendor/pomm-project/foundation/sources/lib/Converter/Type/BaseRange.php	/^        $this->start_incl  = (bool) ($matchs[1] === '[');$/;"	v
+start_incl	vendor/pomm-project/foundation/sources/lib/Converter/Type/BaseRange.php	/^    public $start_incl;$/;"	v
+start_limit	vendor/pomm-project/foundation/sources/lib/Converter/Type/BaseRange.php	/^        $this->start_limit = $this->getSubElement($matchs[2]);$/;"	v
+start_limit	vendor/pomm-project/foundation/sources/lib/Converter/Type/BaseRange.php	/^    public $start_limit;$/;"	v
 status	sources/lib/Model/FlexibleEntity.php	/^            $this->status = $status;$/;"	v
 status	sources/lib/Model/FlexibleEntity.php	/^            $this->status = $this->status | self::MODIFIED;$/;"	v
 status	sources/lib/Model/FlexibleEntity.php	/^        $this->status = $this->status | self::MODIFIED;$/;"	v
 status	sources/lib/Model/FlexibleEntity.php	/^    private $status = self::NONE;$/;"	v
 status	sources/lib/Model/FlexibleEntity.php	/^    public function status($status = null)$/;"	f
+status	sources/lib/Model/FlexibleEntity/FlexibleEntityInterface.php	/^    public function status($status = null);$/;"	f
+status	sources/lib/Model/FlexibleEntity/StatefullEntityTrait.php	/^            $this->status = $status;$/;"	v
+status	sources/lib/Model/FlexibleEntity/StatefullEntityTrait.php	/^        $this->status = $this->status | FlexibleEntityInterface::STATUS_MODIFIED;$/;"	v
+status	sources/lib/Model/FlexibleEntity/StatefullEntityTrait.php	/^    private $status = FlexibleEntityInterface::STATUS_NONE;$/;"	v
+status	sources/lib/Model/FlexibleEntity/StatefullEntityTrait.php	/^    public function status($status = null)$/;"	f
 status	sources/lib/ModelLayer/ModelLayer.php	/^        $status = $this$/;"	v
+status	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^            $status = pg_result_status($result, \\PGSQL_STATUS_LONG);$/;"	v
+strict	sources/lib/Model/FlexibleEntity.php	/^    public    static $strict = true;$/;"	v
 strict	sources/lib/Model/FlexibleEntity.php	/^    public static $strict = true;$/;"	v
 string	sources/lib/ModelLayer/ModelLayer.php	/^            $string = 'ALL';$/;"	v
 string	sources/lib/ModelLayer/ModelLayer.php	/^            $string = join($/;"	v
+string	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^        $string = $this->configurator->getConnectionString();$/;"	v
+strings	sources/lib/Generator/StructureGenerator.php	/^        $strings = [];$/;"	v
+structure	sources/lib/Generator/ModelGenerator.php	/^        $this->structure = new {:entity:}Structure;$/;"	v
 structure	sources/lib/Model/Model.php	/^    protected $structure;$/;"	v
+studlyCaps	vendor/pomm-project/foundation/sources/lib/Inflector.php	/^    public static function studlyCaps($string = null)$/;"	f
+subtype_converter	vendor/pomm-project/foundation/sources/lib/Converter/PgArray.php	/^    protected $subtype_converter = [];$/;"	v
+table_comment	sources/lib/Generator/StructureGenerator.php	/^            $table_comment = <<<TEXT$/;"	v
+table_comment	sources/lib/Generator/StructureGenerator.php	/^        $table_comment      = $this->getTableComment($table_oid);$/;"	v
+table_oid	sources/lib/Generator/StructureGenerator.php	/^        $table_oid          = $this->checkRelationInformation();$/;"	v
+table_oid	sources/lib/Generator/StructureGenerator.php	/^        $table_oid = $this->getInspector()->getTableOid($this->schema, $this->relation);$/;"	v
+testQuery	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^    protected function testQuery($query_return, $sql)$/;"	f
+throwNotification	vendor/pomm-project/foundation/sources/lib/Observer/Observer.php	/^    public function throwNotification()$/;"	f
 tmp	sources/lib/Model/FlexibleEntity.php	/^        $tmp = [];$/;"	v
+toPg	sources/lib/Converter/PgEntity.php	/^    public function toPg($data, $type, Session $session)$/;"	f
+toPg	vendor/pomm-project/foundation/sources/lib/Converter/ConverterClient.php	/^    public function toPg($value, $type = null)$/;"	f
+toPg	vendor/pomm-project/foundation/sources/lib/Converter/ConverterInterface.php	/^    public function toPg($data, $type, Session $session);$/;"	f
+toPg	vendor/pomm-project/foundation/sources/lib/Converter/Geometry/PgCircle.php	/^    public function toPg($data, $type, Session $session)$/;"	f
+toPg	vendor/pomm-project/foundation/sources/lib/Converter/Geometry/PgPoint.php	/^    public function toPg($data, $type, Session $session)$/;"	f
+toPg	vendor/pomm-project/foundation/sources/lib/Converter/PgArray.php	/^    public function toPg($data, $type, Session $session)$/;"	f
+toPg	vendor/pomm-project/foundation/sources/lib/Converter/PgBoolean.php	/^    public function toPg($data, $type, Session $session)$/;"	f
+toPg	vendor/pomm-project/foundation/sources/lib/Converter/PgBytea.php	/^    public function toPg($data, $type, Session $session)$/;"	f
+toPg	vendor/pomm-project/foundation/sources/lib/Converter/PgHstore.php	/^    public function toPg($data, $type, Session $session)$/;"	f
+toPg	vendor/pomm-project/foundation/sources/lib/Converter/PgInterval.php	/^    public function toPg($data, $type, Session $session)$/;"	f
+toPg	vendor/pomm-project/foundation/sources/lib/Converter/PgJson.php	/^    public function toPg($data, $type, Session $session)$/;"	f
+toPg	vendor/pomm-project/foundation/sources/lib/Converter/PgLtree.php	/^    public function toPg($data, $type, Session $session)$/;"	f
+toPg	vendor/pomm-project/foundation/sources/lib/Converter/PgNumber.php	/^    public function toPg($data, $type, Session $session)$/;"	f
+toPg	vendor/pomm-project/foundation/sources/lib/Converter/PgString.php	/^    public function toPg($data, $type, Session $session)$/;"	f
+toPg	vendor/pomm-project/foundation/sources/lib/Converter/PgTimestamp.php	/^    public function toPg($data, $type, Session $session)$/;"	f
+toPg	vendor/pomm-project/foundation/sources/lib/Converter/TypeConverter.php	/^    public function toPg($data, $type, Session $session)$/;"	f
+touch	sources/lib/Model/FlexibleEntity/StatefullEntityTrait.php	/^    public function touch()$/;"	f
+transformData	sources/lib/Converter/PgEntity.php	/^    private function transformData($data, Projection $projection)$/;"	f
+transmute	vendor/pomm-project/foundation/sources/lib/Where.php	/^    private function transmute(Where $where)$/;"	f
 type	sources/lib/Model/CollectionIterator.php	/^        $type = $this->projection->getFieldType($name);$/;"	v
+type	vendor/pomm-project/foundation/sources/lib/ConvertedResultIterator.php	/^                $type = 'text';$/;"	v
+type	vendor/pomm-project/foundation/sources/lib/ConvertedResultIterator.php	/^        $type = $this->result->getFieldType($name);$/;"	v
+type	vendor/pomm-project/foundation/sources/lib/Converter/ConverterClient.php	/^            $type === null ? $this->getClientIdentifier() : $type,$/;"	v
+type	vendor/pomm-project/foundation/sources/lib/Session/ResultHandler.php	/^        $type = pg_field_type($this->handler, $this->getFieldNumber($name));$/;"	v
 types	sources/lib/Model/Projection.php	/^    protected $types = [];$/;"	v
+types	vendor/pomm-project/foundation/sources/lib/ConvertedResultIterator.php	/^    protected $types = [];$/;"	v
+types	vendor/pomm-project/foundation/sources/lib/Converter/ConverterHolder.php	/^    protected $types = [];$/;"	v
+underscore	vendor/pomm-project/foundation/sources/lib/Inflector.php	/^    public static function underscore($string = null)$/;"	f
+unescapeBytea	vendor/pomm-project/foundation/sources/lib/Session/Connection.php	/^    public function unescapeBytea($bytea)$/;"	f
+unlisten	vendor/pomm-project/foundation/sources/lib/Observer/Observer.php	/^    protected function unlisten($channel)$/;"	f
+unorder	vendor/pomm-project/foundation/sources/lib/QueryParameterExpander.php	/^    public static function unorder($string)$/;"	f
 unsetField	sources/lib/Model/Projection.php	/^    public function unsetField($name)$/;"	f
+unsetParameter	vendor/pomm-project/foundation/sources/lib/ParameterHolder.php	/^    public function unsetParameter($name)$/;"	f
 updateByPk	sources/lib/Model/ModelTrait/WriteQueries.php	/^    public function updateByPk(array $primary_key, array $updates)$/;"	f
 updateOne	sources/lib/Model/ModelTrait/WriteQueries.php	/^    public function updateOne(FlexibleEntity &$entity, array $fields)$/;"	f
+updateOne	sources/lib/Model/ModelTrait/WriteQueries.php	/^    public function updateOne(FlexibleEntityInterface &$entity, array $fields)$/;"	f
 update_strings	sources/lib/Model/ModelTrait/WriteQueries.php	/^        $update_strings = [];$/;"	v
+user	vendor/pomm-project/foundation/sources/lib/Session/ConnectionConfigurator.php	/^        $user = $matchs[2];$/;"	v
+valid	vendor/pomm-project/foundation/sources/lib/ResultIterator.php	/^    public function valid()$/;"	f
 vals	sources/lib/Model/Projection.php	/^        $vals = [];$/;"	v
+values	sources/lib/Converter/PgEntity.php	/^        $values = str_getcsv($data);$/;"	v
 values	sources/lib/Model/CollectionIterator.php	/^            $values = call_user_func($filter, $values);$/;"	v
 values	sources/lib/Model/CollectionIterator.php	/^        $values = $this->launchFilters($values);$/;"	v
 values	sources/lib/Model/HydrationPlan.php	/^        $this->values     = $values;$/;"	v
+values	sources/lib/Model/HydrationPlan.php	/^        $values = $this->convert('fromPg', $values);$/;"	v
 values	sources/lib/Model/HydrationPlan.php	/^    protected $values = [];$/;"	v
 values	sources/lib/Model/Hydrator.php	/^        $values = [];$/;"	v
 values	sources/lib/Model/ModelTrait/ReadQueries.php	/^            $values = $where->getValues();$/;"	v
 values	sources/lib/Model/ModelTrait/WriteQueries.php	/^        $values = [];$/;"	v
+values	vendor/pomm-project/foundation/sources/lib/ConvertedResultIterator.php	/^        $values = [];$/;"	v
+values	vendor/pomm-project/foundation/sources/lib/Session/ResultHandler.php	/^        $values = @pg_fetch_assoc($this->handler, $index);$/;"	v
+values	vendor/pomm-project/foundation/sources/lib/Where.php	/^            $this->values = $values;$/;"	v
+values	vendor/pomm-project/foundation/sources/lib/Where.php	/^            $this->values = [];$/;"	v
+values	vendor/pomm-project/foundation/sources/lib/Where.php	/^            $values = array_merge($values, $where->getValues());$/;"	v
+values	vendor/pomm-project/foundation/sources/lib/Where.php	/^        $this->values   = $where->values;$/;"	v
+values	vendor/pomm-project/foundation/sources/lib/Where.php	/^        $values = [];$/;"	v
+values	vendor/pomm-project/foundation/sources/lib/Where.php	/^    public $values = [];$/;"	v
+where	sources/lib/Model/ModelTrait/ReadQueries.php	/^            $where = new Where($where, $values);$/;"	v
 where	sources/lib/Model/ModelTrait/ReadQueries.php	/^        $where = $this$/;"	v
 where	sources/lib/Model/ModelTrait/ReadQueries.php	/^        $where = new Where();$/;"	v
 where	sources/lib/Model/ModelTrait/WriteQueries.php	/^        $where = $this->getWhereFrom($primary_key);$/;"	v
+where	vendor/pomm-project/foundation/sources/lib/Inspector/Inspector.php	/^        $where    = Where::create('objoid = $*', [$table_oid]);$/;"	v
+where	vendor/pomm-project/foundation/sources/lib/Inspector/Inspector.php	/^        $where = Where::create('att.attrelid = $*', [$oid])$/;"	v
+where	vendor/pomm-project/foundation/sources/lib/Inspector/Inspector.php	/^        $where = Where::create('n.nspname =  $*', [$schema])$/;"	v
+x	vendor/pomm-project/foundation/sources/lib/Converter/Type/Point.php	/^        $this->x = (float) $matchs[1];$/;"	v
+x	vendor/pomm-project/foundation/sources/lib/Converter/Type/Point.php	/^    public $x;$/;"	v
+y	vendor/pomm-project/foundation/sources/lib/Converter/Type/Point.php	/^        $this->y = (float) $matchs[2];$/;"	v
+y	vendor/pomm-project/foundation/sources/lib/Converter/Type/Point.php	/^    public $y;$/;"	v
