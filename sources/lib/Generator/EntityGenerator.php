@@ -47,8 +47,8 @@ class EntityGenerator extends BaseGenerator
                         'entity'    => Inflector::studlyCaps($this->relation),
                         'relation'  => $this->relation,
                         'schema'    => $this->schema,
-                        'flexible_container' => $this->flexibe_container,
-                        'flexible_container_class' => array_reverse(explode('\\', $this->flexibe_container))[0]
+                        'flexible_container' => $this->flexible_container,
+                        'flexible_container_class' => array_reverse(explode('\\', $this->flexible_container))[0]
                     ]
                 )
             );

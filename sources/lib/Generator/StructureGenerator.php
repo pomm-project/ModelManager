@@ -115,7 +115,7 @@ TEXT;
      * furthermore more convenient to get all the descriptions in the head of
      * the generated class.
      *
-     * @access protectd
+     * @access protected
      * @param  ConvertedResultIterator $field_informations
      * @return string
      */

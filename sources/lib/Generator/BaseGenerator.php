@@ -32,7 +32,7 @@ abstract class BaseGenerator
     protected $relation;
     protected $filename;
     protected $namespace;
-    protected $flexibe_container;
+    protected $flexible_container;
 
     /*
      * __construct
@@ -53,7 +53,7 @@ abstract class BaseGenerator
         $this->relation  = $relation;
         $this->filename  = $filename;
         $this->namespace = $namespace;
-        $this->flexibe_container = $flexible_container;
+        $this->flexible_container = $flexible_container;
     }
 
     /**
@@ -69,26 +69,11 @@ abstract class BaseGenerator
     {
         if (file_exists($this->filename)) {
             $output[] = ['status' => 'ok', 'operation' => 'overwriting', 'file' => $this->filename];
-            /*
-                sprintf(
-                    " <fg=green>✓</fg=green>  <fg=cyan>Overwriting</fg=cyan> file <fg=yellow>'%s'</fg=yellow>.",
-                    $this->filename
-                )
-            );
-             */
         } else {
             $output[] = ['status' => 'ok', 'operation' => 'creating', 'file' => $this->filename];
-            /*
-            $output->writeln(
-                sprintf(
-                    " <fg=green>✓</fg=green>  <fg=green>Creating</fg=green> file <fg=yellow>'%s'</fg=yellow>.",
-                    $this->filename
-                )
-            );
-             */
         }
 
-        return $output;
+        return $this;
     }
 
     /**
@@ -142,6 +127,8 @@ abstract class BaseGenerator
      * generate
      *
      * Called to generate the file.
+     * Possible options are:
+     * * force: true if files can be overwritten, false otherwise
      *
      * @access public
      * @param  ParameterHolder  $input
@@ -227,7 +214,7 @@ abstract class BaseGenerator
      */
     protected function checkOverwrite(ParameterHolder $input)
     {
-        if (file_exists($this->filename) && !$input->getParameter('force', false)) {
+        if (file_exists($this->filename) && $input->getParameter('force') !== true) {
             throw new GeneratorException(sprintf("Cannot overwrite file '%s' without --force option.", $this->filename));
         }
 
