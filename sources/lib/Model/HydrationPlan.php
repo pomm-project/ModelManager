@@ -182,7 +182,7 @@ class HydrationPlan
      * Return the converter client associated with a field.
      *
      * @access public
-     * @param  string $name
+     * @param  string $field_name
      * @return ConverterClient
      */
     public function getConverterForField($field_name)
