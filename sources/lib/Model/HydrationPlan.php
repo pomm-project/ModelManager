@@ -127,7 +127,7 @@ class HydrationPlan
      * Return values converted to Pg.
      *
      * @access public
-     * @param  array    values
+     * @param  array    $values
      * @return array
      */
     public function dry(array $values)
