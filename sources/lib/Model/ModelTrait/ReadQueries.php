@@ -122,7 +122,7 @@ trait ReadQueries
             ]);
 
         return (int) $this
-            ->session
+            ->getSession()
             ->getClientUsingPooler('prepared_query', $sql)
             ->execute($values)
             ->fetchColumn('count')[0];

@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pomm-project/Foundation.git",
-                "reference": "e607fa4f1a45aea41725bfe82af2872a411f9e75"
+                "reference": "cf2a300646d9a1e25151dcba1f39a5e56db5279b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pomm-project/Foundation/zipball/e607fa4f1a45aea41725bfe82af2872a411f9e75",
-                "reference": "e607fa4f1a45aea41725bfe82af2872a411f9e75",
+                "url": "https://api.github.com/repos/pomm-project/Foundation/zipball/cf2a300646d9a1e25151dcba1f39a5e56db5279b",
+                "reference": "cf2a300646d9a1e25151dcba1f39a5e56db5279b",
                 "shasum": ""
             },
             "require": {
@@ -58,7 +58,7 @@
                 "pomm",
                 "postgresql"
             ],
-            "time": "2015-01-16 09:13:15"
+            "time": "2015-02-06 13:27:36"
         },
         {
             "name": "psr/log",
@@ -66,12 +66,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "a78d6504ff5d4367497785ab2ade91db3a9fbe11"
+                "reference": "1af1529b49a6e065ae6802e70192aba35d79b7d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/a78d6504ff5d4367497785ab2ade91db3a9fbe11",
-                "reference": "a78d6504ff5d4367497785ab2ade91db3a9fbe11",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/1af1529b49a6e065ae6802e70192aba35d79b7d8",
+                "reference": "1af1529b49a6e065ae6802e70192aba35d79b7d8",
                 "shasum": ""
             },
             "type": "library",
@@ -101,7 +101,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2014-01-18 15:33:09"
+            "time": "2015-02-05 09:32:11"
         }
     ],
     "packages-dev": [
@@ -111,12 +111,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/atoum/atoum.git",
-                "reference": "6fe185c6fe4884ff123eaf6c147912dfe8835218"
+                "reference": "2d4fbbc2407dce8add9eb5ff85bad33e60eca69f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/atoum/atoum/zipball/6fe185c6fe4884ff123eaf6c147912dfe8835218",
-                "reference": "6fe185c6fe4884ff123eaf6c147912dfe8835218",
+                "url": "https://api.github.com/repos/atoum/atoum/zipball/2d4fbbc2407dce8add9eb5ff85bad33e60eca69f",
+                "reference": "2d4fbbc2407dce8add9eb5ff85bad33e60eca69f",
                 "shasum": ""
             },
             "require": {
@@ -182,7 +182,7 @@
                 "test",
                 "unit testing"
             ],
-            "time": "2015-01-12 13:54:27"
+            "time": "2015-02-03 16:47:40"
         }
     ],
     "aliases": [],
