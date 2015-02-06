@@ -97,7 +97,7 @@ abstract class BaseGenerator
      * Return the session is set. Throw an exception otherwise.
      *
      * @access protected
-     * @throw  GeneratorException
+     * @throws GeneratorException
      * @return Session
      */
     protected function getSession()
@@ -130,8 +130,10 @@ abstract class BaseGenerator
      * * force: true if files can be overwritten, false otherwise
      *
      * @access public
-     * @param  ParameterHolder  $input
-     * @return array            $output
+     * @param  ParameterHolder    $input
+     * @param  array              $output
+     * @throws GeneratorException
+     * @return array              $output
      */
     abstract public function generate(ParameterHolder $input, array $output = []);
 
@@ -175,6 +177,7 @@ abstract class BaseGenerator
      * @access protected
      * @param  string        $filename
      * @param  string        $content
+     * @throws GeneratorException
      * @return BaseGenerator $this
      */
     protected function saveFile($filename, $content)
@@ -208,8 +211,9 @@ abstract class BaseGenerator
      * Check if the file exists and if it the write is forced.
      *
      * @access protected
-     * @param  ParameterHolder  $input
-     * @return BaseGenerator    $this
+     * @param  ParameterHolder    $input
+     * @throws GeneratorException
+     * @return BaseGenerator      $this
      */
     protected function checkOverwrite(ParameterHolder $input)
     {
