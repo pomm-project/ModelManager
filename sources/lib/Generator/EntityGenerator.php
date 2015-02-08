@@ -12,8 +12,6 @@ namespace PommProject\ModelManager\Generator;
 use PommProject\Foundation\Inflector;
 use PommProject\Foundation\ParameterHolder;
 
-use PommProject\ModelManager\Exception\GeneratorException;
-
 /**
  * EntityGenerator
  *

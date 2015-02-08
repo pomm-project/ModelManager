@@ -12,7 +12,6 @@ namespace PommProject\ModelManager\Generator;
 use PommProject\Foundation\Where;
 use PommProject\Foundation\Inflector;
 use PommProject\Foundation\ParameterHolder;
-use PommProject\ModelManager\Generator\BaseGenerator;
 use PommProject\ModelManager\Exception\GeneratorException;
 
 /**
@@ -34,9 +33,7 @@ class ModelGenerator extends BaseGenerator
      *
      * Generate structure file.
      *
-     * @access public
-     * @param  ParameterHolder  $input
-     * @return array            $output
+     * @see BaseGenerator
      */
     public function generate(ParameterHolder $input, array $output = [])
     {

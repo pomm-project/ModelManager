@@ -161,7 +161,7 @@ TEXT;
      * returned, otherwise a GeneratorException is thrown.
      *
      * @access private
-     * @throw  GeneratorException
+     * @throws GeneratorException
      * @return int $oid
      */
     private function checkRelationInformation()
@@ -192,6 +192,7 @@ TEXT;
      *
      * @access protected
      * @param  int   $table_oid
+     * @throws GeneratorException
      * @return array $informations
      */
     protected function getFieldInformation($table_oid)
