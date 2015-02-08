@@ -105,20 +105,20 @@ class DocumentModel extends Model
 
     public function findSecret($secret_level, $where = null)
     {
-        $whereClause = Where::create('secret_level > $*', [$secret_level])
+        $where_clause = Where::create('secret_level > $*', [$secret_level])
             ->andWhere($where)
             ;
 
-        return $this->findWhere($whereClause);
+        return $this->findWhere($where_clause);
     }
 
     public function findPersonnalSecretFile(SecretAgent $agent, Where $where = null)
     {
-        $whereClause = Where::create('agent_id = $*', [$agent['agent_id']])
+        $where_clause = Where::create('agent_id = $*', [$agent['agent_id']])
             ->andWhere($where)
             ;
 
-        return $this->findSecret($agent['secret_level'], $whereClause);
+        return $this->findSecret($agent['secret_level'], $where_clause);
     }
 ```
 
