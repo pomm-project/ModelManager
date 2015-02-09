@@ -132,4 +132,15 @@ class PgEntity extends ModelSessionAtoum
             ->isEqualTo('NULL::complex_fixture')
             ;
     }
+
+    public function testInvalidDataToPg()
+    {
+        $this->exception(function () {
+            $converter = $this->getComplexFixtureConverter();
+            $session = $this->buildSession();
+            $invalidData = new \stdClass();
+
+            $converter->toPg($invalidData, 'complex_fixture', $session);
+        });
+    }
 }
