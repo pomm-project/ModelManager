@@ -13,10 +13,13 @@ Pomm components are available on [packagist](https://packagist.org/packages/pomm
 In order to load the model manager's poolers at start up, it is possible to use the provided `SessionBuilder` in Pomm's configuration:
 
 ```php
-    $pomm = new Pomm([
-        'project_name' => ['dsn' => …, 'class:session_builder' => '\PommProject\ModelManager\SessionBuilder'],
-        …
-        ]);
+$pomm = new Pomm([
+    'project_name' => [
+        'dsn' => …,
+        'class:session_builder' => '\PommProject\ModelManager\SessionBuilder',
+    ],
+    …
+]);
 ```
 
 It is better to provide dedicated session builders with your project.
