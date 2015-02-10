@@ -142,7 +142,11 @@ class PgEntity implements ConverterInterface
     {
         if ($data === null) {
             return sprintf("NULL::%s", $type);
-        } else if (!$data instanceOf $this->flexible_entity_class) {
+        } else if (is_array($data)) {
+            $fields = $data;
+        } else if ($data instanceOf $this->flexible_entity_class) {
+            $fields = $data->fields();
+        } else {
             throw new ConverterException(
                 sprintf(
                     "Converter for type '%s' only knows how to convert entites of type '%s' ('%s' given).",
@@ -160,7 +164,7 @@ class PgEntity implements ConverterInterface
 
         return sprintf(
             "row(%s)::%s",
-            join(',', $hydration_plan->dry($data->fields())),
+            join(',', $hydration_plan->dry($fields)),
             $type
         );
     }
