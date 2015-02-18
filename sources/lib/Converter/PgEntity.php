@@ -182,6 +182,7 @@ class PgEntity implements ConverterInterface
      *
      * @access protected
      * @param  mixed        $values
+     * throws  ConverterException
      * @return PgEntity     $this
      */
     protected function checkData($data)

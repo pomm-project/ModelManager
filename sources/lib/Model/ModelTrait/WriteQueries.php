@@ -41,29 +41,18 @@ trait WriteQueries
      */
     public function insertOne(FlexibleEntityInterface &$entity)
     {
-        $values = [];
-        $fields = $entity->fields();
-
-        foreach ($this->getStructure()->getDefinition() as $name => $type) {
-            if (isset($fields[$name])) {
-                $values[$name] = $fields[$name] instanceOf RawString
-                    ? $fields[$name]->__toString()
-                    : $this->convertValueToPg($fields[$name], $type)
-                    ;
-            }
-        }
-
+        $values = $entity->fields();
         $sql = strtr(
             "insert into :relation (:fields) values (:values) returning :projection",
             [
                 ':relation'   => $this->getStructure()->getRelation(),
                 ':fields'     => $this->getEscapedFieldList(array_keys($values)),
                 ':projection' => $this->createProjection()->formatFieldsWithFieldAlias(),
-                ':values'     => join(', ', $values),
+                ':values'     => join(',', $this->getParametersList($values))
             ]);
 
         $entity = $this
-            ->query($sql)
+            ->query($sql, array_values($values))
             ->current()
             ->status(FlexibleEntityInterface::STATUS_EXIST);
 
@@ -108,15 +97,14 @@ trait WriteQueries
     public function updateByPk(array $primary_key, array $updates)
     {
         $where = $this->getWhereFrom($primary_key);
+        $parameters = $this->getParametersList($updates);
         $update_strings = [];
 
         foreach ($updates as $field_name => $new_value) {
             $update_strings[] = sprintf(
                 "%s = %s",
                 $this->escapeIdentifier($field_name),
-                $new_value instanceOf RawString
-                ? $new_value->__toString()
-                : $this->convertValueToPg($new_value, $this->getStructure()->getTypeFor($field_name))
+                $parameters[$field_name]
             );
         }
 
@@ -130,7 +118,7 @@ trait WriteQueries
             ]
         );
 
-        $iterator = $this->query($sql, $where->getValues());
+        $iterator = $this->query($sql, array_merge(array_values($updates), $where->getValues()));
 
         if ($iterator->isEmpty()) {
             return null;
@@ -205,34 +193,6 @@ trait WriteQueries
     }
 
     /**
-     * convertValueToPg
-     *
-     * Return the converted value given the type. It detects if the type is an
-     * array or not and call the converter pooler.
-     *
-     * @access protected
-     * @param  mixed  $value
-     * @param  string $type
-     * @return string
-     */
-    protected function convertValueToPg($value, $type)
-    {
-        if (preg_match('/^(.+)\[\]$/', $type, $matchs)) {
-            return $this
-                    ->getSession()
-                    ->getClientUsingPooler('converter', 'array')
-                    ->toPg($value, $matchs[1])
-                    ;
-        } else {
-            return $this
-                    ->getSession()
-                    ->getClientUsingPooler('converter', $type)
-                    ->toPg($value)
-                    ;
-        }
-    }
-
-    /**
      * getEscapedFieldList
      *
      * Return a comma separated list with the given escaped field names.
@@ -249,5 +209,28 @@ trait WriteQueries
                 function ($field) { return $this->escapeIdentifier($field); },
                 $fields
             ));
+    }
+
+    /**
+     * getParametersList
+     *
+     * Create a parameters list from values.
+     *
+     * @access protected
+     * @param  array    $values
+     * @return array    $escape codes
+     */
+    protected function getParametersList(array $values)
+    {
+        $parameters = [];
+
+        foreach ($values as $name => $value) {
+            $parameters[$name] = sprintf(
+                "$*::%s",
+                $this->structure->getTypeFor($name)
+            );
+        }
+
+        return $parameters;
     }
 }

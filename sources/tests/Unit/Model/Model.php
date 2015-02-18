@@ -10,7 +10,6 @@
 namespace PommProject\ModelManager\Test\Unit\Model;
 
 use PommProject\Foundation\Where;
-use PommProject\Foundation\RawString;
 use PommProject\Foundation\Session\Session;
 use PommProject\Foundation\Query\QueryPooler;
 use PommProject\Foundation\Converter\ConverterPooler;
@@ -275,7 +274,7 @@ class Model extends ModelSessionAtoum
             ->boolean($entity->status() === FlexibleEntityInterface::STATUS_EXIST)
             ->isTrue()
             ;
-        $entity->set('a_boolean', new RawString('not a_boolean'));
+        $entity->set('a_boolean', ! $entity->get('a_boolean'));
         $model->updateOne($entity, ['a_boolean']);
         $this
             ->boolean($entity->get('a_boolean'))
@@ -339,7 +338,7 @@ class Model extends ModelSessionAtoum
     {
         $session = $this->buildSession();
         $model   = $this->getWriteFixtureModel($session);
-        $entity  = $model->createAndSave(['a_varchar' => new RawString("'abc'||'def'"), 'a_boolean' => true]);
+        $entity  = $model->createAndSave(['a_varchar' => 'abcdef', 'a_boolean' => true]);
         $this
             ->boolean($entity->has('id'))
             ->isTrue()
