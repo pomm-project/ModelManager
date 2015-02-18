@@ -95,7 +95,7 @@ class PgEntity implements ConverterInterface
     /**
      * transformData
      *
-     * A short description here.
+     * Split data into an array prefixed with field names.
      *
      * @access private
      * @param  string       $data
@@ -145,8 +145,48 @@ class PgEntity implements ConverterInterface
         } else if (is_array($data)) {
             $fields = $data;
         } else if ($data instanceOf $this->flexible_entity_class) {
+            $this->checkData($data);
             $fields = $data->fields();
-        } else {
+        }
+
+        $hydration_plan = $this->createHydrationPlan($session);
+
+        return sprintf(
+            "row(%s)::%s",
+            join(',', $hydration_plan->dry($fields)),
+            $type
+        );
+    }
+
+    /**
+     * createHydrationPlan
+     *
+     * Create a new hydration plan.
+     *
+     * @access protected
+     * @param  Session          $session
+     * @return HydrationPlan
+     */
+    protected function createHydrationPlan(Session $session)
+    {
+        return new HydrationPlan(
+            new Projection($this->flexible_entity_class, $this->row_structure->getDefinition()),
+            $session
+        );
+    }
+
+    /**
+     * checkData
+     *
+     * Check if the given data is the right entity.
+     *
+     * @access protected
+     * @param  mixed        $values
+     * @return PgEntity     $this
+     */
+    protected function checkData($data)
+    {
+        if (!$data instanceOf $this->flexible_entity_class) {
             throw new ConverterException(
                 sprintf(
                     "Converter for type '%s' only knows how to convert entites of type '%s' ('%s' given).",
@@ -157,15 +197,37 @@ class PgEntity implements ConverterInterface
             );
         }
 
-        $hydration_plan = new HydrationPlan(
-            new Projection($this->flexible_entity_class, $this->row_structure->getDefinition()),
-            $session
-        );
+        return $this;
+    }
 
-        return sprintf(
-            "row(%s)::%s",
-            join(',', $hydration_plan->dry($fields)),
-            $type
-        );
+    /**
+     * toPgStandardFormat
+     *
+     * @see ConverterInterface
+     */
+    public function toPgStandardFormat($data, $type, Session $session)
+    {
+        if ($data === null) {
+            return null;
+        }
+
+        $this->checkData($data);
+        $hydration_plan = $this->createHydrationPlan($session);
+
+        return
+            sprintf("(%s)",
+                join(',', array_map(function($val) {
+                    if ($val === null) {
+                        return 'NULL';
+                    } elseif (strlen($val) === 0) {
+                        return '""';
+                    } elseif (preg_match('/[,\s]/', $val)) {
+                        return sprintf('"%s"', str_replace('"', '""', $val));
+                    } else {
+                        return $val;
+                    };
+                }, $this->createHydrationPlan($session)->freeze($data->fields())
+                ))
+            );
     }
 }

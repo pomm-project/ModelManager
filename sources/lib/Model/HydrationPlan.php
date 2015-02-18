@@ -136,6 +136,20 @@ class HydrationPlan
     }
 
     /**
+     * freeze
+     *
+     * Return values converted to Pg standard output.
+     *
+     * @access public
+     * @param  array $values
+     * @return array converted values
+     */
+    public function freeze(array $values)
+    {
+        return $this->convert('toPgStandardFormat', $values);
+    }
+
+    /**
      * convert
      *
      * Convert values from / to postgres.
