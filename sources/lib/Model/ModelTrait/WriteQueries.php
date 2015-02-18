@@ -227,7 +227,7 @@ trait WriteQueries
         foreach ($values as $name => $value) {
             $parameters[$name] = sprintf(
                 "$*::%s",
-                $this->structure->getTypeFor($name)
+                $this->getStructure()->getTypeFor($name)
             );
         }
 

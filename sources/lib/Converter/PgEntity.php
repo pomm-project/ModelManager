@@ -144,7 +144,8 @@ class PgEntity implements ConverterInterface
             return sprintf("NULL::%s", $type);
         } else if (is_array($data)) {
             $fields = $data;
-        } else if ($data instanceOf $this->flexible_entity_class) {
+        } else
+        {
             $this->checkData($data);
             $fields = $data->fields();
         }
@@ -190,8 +191,7 @@ class PgEntity implements ConverterInterface
         if (!$data instanceOf $this->flexible_entity_class) {
             throw new ConverterException(
                 sprintf(
-                    "Converter for type '%s' only knows how to convert entites of type '%s' ('%s' given).",
-                    $type,
+                    "This converter only knows how to convert entites of type '%s' ('%s' given).",
                     $this->flexible_entity_class,
                     get_class($data)
                 )
