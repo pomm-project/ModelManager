@@ -82,7 +82,7 @@ abstract class ModelLayer extends Client
      * @access protected
      * @param  array      $keys
      * @param  string     $state
-     * @throw  ModelLayerException if not valid state
+     * @throws  ModelLayerException if not valid state
      * @return ModelLayer $this
      */
     protected function setDeferrable(array $keys = [], $state)
@@ -119,9 +119,9 @@ abstract class ModelLayer extends Client
      * @see http://www.postgresql.org/docs/9.0/static/sql-set-transaction.html
      *
      * @access protected
-     * @param  string     $state
-     * @throw  ModelLayerException if not valid isolation level
-     * @return ModelLayer $this
+     * @param   string     $isolaton_level
+     * @throws  ModelLayerException if not valid isolation level
+     * @return  ModelLayer $this
      */
     protected function setTransactionIsolationLevel($isolaton_level)
     {
@@ -147,9 +147,9 @@ abstract class ModelLayer extends Client
      * @see http://www.postgresql.org/docs/9.0/static/sql-set-transaction.html
      *
      * @access protected
-     * @param  string     $access_mode
-     * @throw  ModelLayerException if not valid access mode
-     * @return ModelLayer $this
+     * @param   string     $access_mode
+     * @throws  ModelLayerException if not valid access mode
+     * @return  ModelLayer $this
      */
     protected function setTransactionAccessMode($access_mode)
     {

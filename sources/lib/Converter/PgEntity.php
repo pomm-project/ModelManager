@@ -108,8 +108,9 @@ class PgEntity implements ConverterInterface
         $values = str_getcsv($data);
         $definition = $projection->getFieldNames();
         $out_values = [];
+        $values_count = count($values);
 
-        for ($index = 0; $index < count($values); $index++) {
+        for ($index = 0; $index < $values_count; $index++) {
             $out_values[$definition[$index]] = $values[$index];
         }
 
@@ -182,7 +183,7 @@ class PgEntity implements ConverterInterface
      * Check if the given data is the right entity.
      *
      * @access protected
-     * @param  mixed        $values
+     * @param  mixed        $data
      * throws  ConverterException
      * @return PgEntity     $this
      */
@@ -213,7 +214,6 @@ class PgEntity implements ConverterInterface
         }
 
         $this->checkData($data);
-        $hydration_plan = $this->createHydrationPlan($session);
 
         return
             sprintf("(%s)",

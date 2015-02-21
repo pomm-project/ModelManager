@@ -40,7 +40,7 @@ class CollectionIterator extends ResultIterator
      * Constructor
      *
      * @access public
-     * @param  ResultHandler    $result_handler
+     * @param  ResultHandler    $result
      * @param  Session          $session
      * @param  Projection       $projection
      * @return null
