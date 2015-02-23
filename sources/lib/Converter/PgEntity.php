@@ -143,14 +143,9 @@ class PgEntity implements ConverterInterface
     {
         if ($data === null) {
             return sprintf("NULL::%s", $type);
-        } else if (is_array($data)) {
-            $fields = $data;
-        } else
-        {
-            $this->checkData($data);
-            $fields = $data->fields();
         }
 
+        $fields = $this->getFields($data);
         $hydration_plan = $this->createHydrationPlan($session);
 
         return sprintf(
@@ -175,6 +170,27 @@ class PgEntity implements ConverterInterface
             new Projection($this->flexible_entity_class, $this->row_structure->getDefinition()),
             $session
         );
+    }
+
+    /**
+     * getFields
+     *
+     * Return the fields array.
+     *
+     * @access protected
+     * @param mixed $data
+     * @return array
+     */
+    protected function getFields($data)
+    {
+        if (is_array($data)) {
+            $fields = $data;
+        } else {
+            $this->checkData($data);
+            $fields = $data->fields();
+        }
+
+        return $fields;
     }
 
     /**
@@ -213,7 +229,7 @@ class PgEntity implements ConverterInterface
             return null;
         }
 
-        $this->checkData($data);
+        $fields = $this->getFields($data);
 
         return
             sprintf("(%s)",
@@ -227,7 +243,7 @@ class PgEntity implements ConverterInterface
                     } else {
                         return $val;
                     };
-                }, $this->createHydrationPlan($session)->freeze($data->fields())
+                }, $this->createHydrationPlan($session)->freeze($fields)
                 ))
             );
     }
