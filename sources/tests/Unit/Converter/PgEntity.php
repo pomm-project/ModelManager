@@ -52,23 +52,6 @@ class PgEntity extends ModelSessionAtoum
         );
     }
 
-    protected function getComplexFixtureEntity()
-    {
-        return new ComplexFixture(
-            [
-                'id' => 1,
-                'version_id' => 1,
-                'complex_number' => new ComplexNumber(['real' => 1.233,'imaginary' => 2.344]),
-                'complex_numbers' =>
-                [
-                    new ComplexNumber(['real' => 3.455, 'imaginary' => 4.566]),
-                    new ComplexNumber(['real' => 5.677, 'imaginary' => 6.788]),
-                ],
-                'created_at' => new \DateTime('2014-10-24 12:44:40.021324+00'),
-                'updated_at' => [new \DateTime('1982-04-21 23:12:43+00')]
-            ]);
-    }
-
     public function testFromPg()
     {
         $entity = $this->getComplexNumberConverter()->fromPg(
@@ -176,11 +159,13 @@ class PgEntity extends ModelSessionAtoum
         });
     }
 
-    public function testToPgStandardFormat()
+    /**
+     * @dataProvider testToPgDataProvider
+     */
+    public function testToPgStandardFormat($complex_fixture)
     {
         $converter          = $this->getComplexFixtureConverter();
         $session            = $this->buildSession();
-        $complex_fixture    = $this->getComplexFixtureEntity();
 
         $this
             ->variable($converter->toPgStandardFormat(null, 'complex_fixture', $session))
