@@ -237,15 +237,15 @@ class Projection extends Atoum
             ->string($projection->formatFieldsWithFieldAlias(null))
             ->isEmpty()
             ->string($projection->setField('pika', '%:pika:%', 'int4')->formatFieldsWithFieldAlias())
-            ->isEqualTo('"pika" as pika')
+            ->isEqualTo('"pika" as "pika"')
             ->string($projection->formatFieldsWithFieldAlias('my_table'))
-            ->isEqualTo('my_table."pika" as pika')
+            ->isEqualTo('my_table."pika" as "pika"')
             ->string($projection->formatFieldsWithFieldAlias(null))
-            ->isEqualTo('"pika" as pika')
+            ->isEqualTo('"pika" as "pika"')
             ->string($projection->setField('chu', '%:pika:% / 2', 'int4')->formatFieldsWithFieldAlias())
-            ->isEqualTo('"pika" as pika, "pika" / 2 as chu')
+            ->isEqualTo('"pika" as "pika", "pika" / 2 as "chu"')
             ->string($projection->formatFieldsWithFieldAlias('my_table'))
-            ->isEqualTo('my_table."pika" as pika, my_table."pika" / 2 as chu')
+            ->isEqualTo('my_table."pika" as "pika", my_table."pika" / 2 as "chu"')
             ;
     }
 }

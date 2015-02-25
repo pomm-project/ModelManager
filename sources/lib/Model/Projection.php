@@ -288,7 +288,11 @@ class Projection implements \IteratorAggregate
             ', ',
             array_map(
                 function ($field_alias, $field_definition) {
-                    return sprintf("%s as %s", $field_definition, $field_alias);
+                    return sprintf(
+                        '%s as "%s"',
+                        $field_definition,
+                        addcslashes($field_alias, '"\\')
+                    );
                 },
                 array_keys($fields),
                 $fields
