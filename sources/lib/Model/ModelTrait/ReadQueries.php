@@ -112,20 +112,62 @@ trait ReadQueries
      */
     public function countWhere($where, array $values = [])
     {
-        if ($where instanceof Where) {
-            $values = $where->getValues();
+        $sql = sprintf(
+            "select count(*) as result from %s where :condition",
+            $this->getStructure()->getRelation()
+        );
+
+        return $this->fetchSingleValue($sql, $where, $values);
+    }
+
+    /**
+     * existWhere
+     *
+     * Check if rows matching the given condition do exist or not.
+     *
+     * @access public
+     * @param  mixed $where
+     * @param  array $values
+     * @return bool
+     */
+    public function existWhere($where, array $values = [])
+    {
+        $sql = sprintf(
+            "select exists (select true from %s where :condition) as result",
+            $this->getStructure()->getRelation()
+        );
+
+        return $this->fetchSingleValue($sql, $where, $values);
+    }
+
+    /**
+     * fetchSingleValue
+     *
+     * Fetch a single value named « result » from a query.
+     * The query must be formated with ":condition" as WHERE condition
+     * placeholder. If the $where argument is a string, it is turned into a
+     * Where instance.
+     *
+     * @access protected
+     * @param  string       $sql
+     * @param  mixed        $where
+     * @param  array        $values
+     * @return mixed
+     */
+    protected function fetchSingleValue($sql, $where, array $values)
+    {
+        if (!$where instanceof Where) {
+            $where = new Where($where, $values);
         }
 
-        $sql = sprintf("select count(*) as count from :table where %s", (string) $where);
-        $sql = strtr($sql, [
-            ':table' => $this->getStructure()->getRelation(),
-            ]);
+        $sql = str_replace(":condition", (string) $where, $sql);
 
-        return (int) $this
+        return $this
             ->getSession()
-            ->getClientUsingPooler('prepared_query', $sql)
-            ->execute($values)
-            ->fetchColumn('count')[0];
+            ->getClientUsingPooler('query_manager', '\PommProject\Foundation\PreparedQuery\PreparedQueryManager')
+            ->query($sql, $where->getValues())
+            ->current()['result']
+            ;
     }
 
     /**

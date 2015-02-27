@@ -230,6 +230,23 @@ class Model extends ModelSessionAtoum
             ;
     }
 
+    public function testExistWhere()
+    {
+        $model = $this->getReadFixtureModel($this->buildSession());
+        $condition = 'a_varchar = $*';
+        $this
+            ->boolean($model->existWhere('true'))
+            ->isTrue()
+            ->boolean($model->existWhere($condition, ['one']))
+            ->isTrue()
+            ->boolean($model->existWhere($condition, ['aqwzxedc']))
+            ->isFalse()
+            ->boolean($model->existWhere(new Where($condition, ['two'])))
+            ->isTrue()
+            ;
+    }
+
+
     public function testPaginateFindWhere()
     {
         $model = $this->getReadFixtureModel($this->buildSession());
