@@ -9,6 +9,7 @@
  */
 namespace PommProject\ModelManager\Model\ModelTrait;
 
+use PommProject\ModelManager\Exception\ModelException;
 use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
 use PommProject\ModelManager\Model\Model;
 
@@ -92,10 +93,14 @@ trait WriteQueries
      * @access public
      * @param  array          $primary_key
      * @param  array          $updates
+     * @throws ModelException
      * @return FlexibleEntityInterface
      */
     public function updateByPk(array $primary_key, array $updates)
     {
+        if(!$this->hasPrimaryKey())
+            throw new ModelException(sprintf("Model class '%s' has not a primary key.", get_class($this)));
+
         $where = $this->getWhereFrom($primary_key);
         $parameters = $this->getParametersList($updates);
         $update_strings = [];
@@ -152,10 +157,14 @@ trait WriteQueries
      *
      * @access public
      * @param  array          $primary_key
+     * @throws ModelException
      * @return FlexibleEntityInterface
      */
     public function deleteByPK(array $primary_key)
     {
+        if(!$this->hasPrimaryKey())
+            throw new ModelException(sprintf("Model class '%s' has not a primary key.", get_class($this)));
+
         $where = $this->getWhereFrom($primary_key);
         $sql = strtr(
             "delete from :relation where :condition returning :projection",
