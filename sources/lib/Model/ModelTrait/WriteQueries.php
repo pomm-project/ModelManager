@@ -98,10 +98,10 @@ trait WriteQueries
      */
     public function updateByPk(array $primary_key, array $updates)
     {
-        if(!$this->hasPrimaryKey())
-            throw new ModelException(sprintf("Model class '%s' has not a primary key.", get_class($this)));
-
-        $where = $this->getWhereFrom($primary_key);
+        $where = $this
+            ->checkPrimaryKey($primary_key)
+            ->getWhereFrom($primary_key)
+            ;
         $parameters = $this->getParametersList($updates);
         $update_strings = [];
 
@@ -162,10 +162,10 @@ trait WriteQueries
      */
     public function deleteByPK(array $primary_key)
     {
-        if(!$this->hasPrimaryKey())
-            throw new ModelException(sprintf("Model class '%s' has not a primary key.", get_class($this)));
-
-        $where = $this->getWhereFrom($primary_key);
+        $where = $this
+            ->checkPrimaryKey($primary_key)
+            ->getWhereFrom($primary_key)
+            ;
         $sql = strtr(
             "delete from :relation where :condition returning :projection",
             [

@@ -273,11 +273,12 @@ trait ReadQueries
      * Check if model has a primary key
      *
      * @access protected
-     * @return Boolean
+     * @return bool
      */
     protected function hasPrimaryKey()
     {
         $primaryKeys = $this->getStructure()->getPrimaryKey();
+
         return !empty($primaryKeys);
     }
 
@@ -292,10 +293,16 @@ trait ReadQueries
      * @throws ModelException
      * @return Model $this
      */
-    private function checkPrimaryKey(array $values)
+    protected function checkPrimaryKey(array $values)
     {
-        if(!$this->hasPrimaryKey())
-            throw new ModelException(sprintf("Model class '%s' has not a primary key.", get_class($this)));
+        if (!$this->hasPrimaryKey()) {
+            throw new ModelException(
+                sprintf(
+                    "Attached structure '%s' has no primary key.",
+                    get_class($this->getStructure())
+                )
+            );
+        }
 
         foreach ($this->getStructure()->getPrimaryKey() as $key) {
             if (!isset($values[$key])) {

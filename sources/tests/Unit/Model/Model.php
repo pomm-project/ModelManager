@@ -201,7 +201,7 @@ class Model extends ModelSessionAtoum
     public function testFindByPK()
     {
         $model = $this->getReadFixtureModel($this->buildSession());
-        $modelWithoutPK = $this->getWithoutPKFixtureModel($this->buildSession());
+        $model_without_pk = $this->getWithoutPKFixtureModel($this->buildSession());
         $this
             ->object($model->findByPK(['id' => 1]))
             ->isInstanceOf('\PommProject\ModelManager\Test\Fixture\SimpleFixture')
@@ -211,9 +211,12 @@ class Model extends ModelSessionAtoum
             ->isNull()
             ->integer($model->findByPK(['id' => 3])->status())
             ->isEqualTo(FlexibleEntityInterface::STATUS_EXIST)
-            ->exception(function() use ($modelWithoutPK) { $modelWithoutPK->findByPK(['id' => 1]); })
+            ->exception(function() use ($model_without_pk) { $model_without_pk->findByPK(['id' => 1]); })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
-            ->message->contains('has not a primary key')
+            ->message->contains("has no primary key.")
+            ->exception(function() use ($model) { $model->findByPK(['a_varchar' => 'one']); })
+            ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
+            ->message->contains("Key 'id' is missing to fully describes the primary key")
             ;
     }
 
@@ -289,11 +292,11 @@ class Model extends ModelSessionAtoum
     public function testUpdateOne()
     {
         $model = $this->getWriteFixtureModel($this->buildSession());
-        $modelWithoutPK = $this->getWithoutPKFixtureModel($this->buildSession());
+        $model_without_pk = $this->getWithoutPKFixtureModel($this->buildSession());
         $entity = $model->createAndSave(['a_varchar' => 'qwerty', 'a_boolean' => false]);
-        $entityWithoutPK = $modelWithoutPK->createAndSave(['id' => 1, 'a_varchar' => 'qwerty', 'a_boolean' => false]);
+        $entity_without_pk = $model_without_pk->createAndSave(['id' => 1, 'a_varchar' => 'qwerty', 'a_boolean' => false]);
         $entity->set('a_varchar', 'azerty')->set('a_boolean', true);
-        $entityWithoutPK->set('a_varchar', 'azerty')->set('a_boolean', true);
+        $entity_without_pk->set('a_varchar', 'azerty')->set('a_boolean', true);
         $this
             ->assert('Simple update')
             ->object($model->updateOne($entity, ['a_varchar']))
@@ -304,9 +307,9 @@ class Model extends ModelSessionAtoum
             ->isFalse()
             ->boolean($entity->status() === FlexibleEntityInterface::STATUS_EXIST)
             ->isTrue()
-            ->exception(function() use ($modelWithoutPK, $entityWithoutPK) { $modelWithoutPK->updateOne($entityWithoutPK, ['a_varchar']); })
+            ->exception(function() use ($model_without_pk, $entity_without_pk) { $model_without_pk->updateOne($entity_without_pk, ['a_varchar']); })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
-            ->message->contains('has not a primary key')
+            ->message->contains("has no primary key.")
         ;
         $entity->set('a_boolean', ! $entity->get('a_boolean'));
         $model->updateOne($entity, ['a_boolean']);
@@ -319,7 +322,7 @@ class Model extends ModelSessionAtoum
     public function testUpdateByPK()
     {
         $model = $this->getWriteFixtureModel($this->buildSession());
-        $modelWithoutPK = $this->getWithoutPKFixtureModel($this->buildSession());
+        $model_without_pk = $this->getWithoutPKFixtureModel($this->buildSession());
         $entity = $model->createAndSave(['a_varchar' => 'qwerty', 'a_boolean' => false]);
         $updated_entity = $model->updateByPk(['id' => $entity['id']], ['a_boolean' => true]);
         $this
@@ -333,9 +336,9 @@ class Model extends ModelSessionAtoum
             ->isNull()
             ->object($entity)
             ->isIdenticalTo($updated_entity)
-            ->exception(function() use ($modelWithoutPK) { $modelWithoutPK->updateByPk(['id' => 1],  ['a_varchar' => 'whatever']); })
+            ->exception(function() use ($model_without_pk) { $model_without_pk->updateByPk(['id' => 1],  ['a_varchar' => 'whatever']); })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
-            ->message->contains('has not a primary key')
+            ->message->contains("has no primary key.")
 
         ;
     }
@@ -343,8 +346,8 @@ class Model extends ModelSessionAtoum
     public function testDeleteOne()
     {
         $model = $this->getWriteFixtureModel($this->buildSession());
-        $modelWithoutPK = $this->getWithoutPKFixtureModel($this->buildSession());
-        $entityWithoutPK = $modelWithoutPK->createAndSave(['id' => 1, 'a_varchar' => 'qwerty', 'a_boolean' => false]);
+        $model_without_pk = $this->getWithoutPKFixtureModel($this->buildSession());
+        $entity_without_pk = $model_without_pk->createAndSave(['id' => 1, 'a_varchar' => 'qwerty', 'a_boolean' => false]);
         $entity = $model->createAndSave(['a_varchar' => 'mlkjhgf']);
         $this
             ->object($model->deleteOne($entity))
@@ -353,17 +356,17 @@ class Model extends ModelSessionAtoum
             ->isNull()
             ->integer($entity->status())
             ->isEqualTo(FlexibleEntityInterface::STATUS_NONE)
-            ->exception(function() use ($modelWithoutPK, $entityWithoutPK) { $modelWithoutPK->deleteOne($entityWithoutPK); })
+            ->exception(function() use ($model_without_pk, $entity_without_pk) { $model_without_pk->deleteOne($entity_without_pk); })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
-            ->message->contains('has not a primary key')
+            ->message->contains("has no primary key.")
             ;
     }
 
     public function testDeleteByPK()
     {
         $model = $this->getWriteFixtureModel($this->buildSession());
-        $modelWithoutPK = $this->getWithoutPKFixtureModel($this->buildSession());
-        $entityWithoutPK = $modelWithoutPK->createAndSave(['id' => 1, 'a_varchar' => 'qwerty', 'a_boolean' => false]);
+        $model_without_pk = $this->getWithoutPKFixtureModel($this->buildSession());
+        $entity_without_pk = $model_without_pk->createAndSave(['id' => 1, 'a_varchar' => 'qwerty', 'a_boolean' => false]);
         $entity = $model->createAndSave(['a_varchar' => 'qwerty', 'a_boolean' => false]);
         $deleted_entity = $model->deleteByPK(['id' => $entity['id']]);
         $this
@@ -377,9 +380,9 @@ class Model extends ModelSessionAtoum
             ->isIdenticalTo($deleted_entity)
             ->integer($entity->status())
             ->isEqualTo(FlexibleEntityInterface::STATUS_NONE)
-            ->exception(function() use ($modelWithoutPK, $entityWithoutPK) { $modelWithoutPK->deleteOne($entityWithoutPK); })
+            ->exception(function() use ($model_without_pk, $entity_without_pk) { $model_without_pk->deleteOne($entity_without_pk); })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
-            ->message->contains('has not a primary key')
+            ->message->contains("has no primary key.")
             ;
     }
 
