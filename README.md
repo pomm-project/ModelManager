@@ -136,7 +136,7 @@ function createProjection()
 {
     return parent::createProjection()
         ->unsetField('unnecessary_field')
-        ->setField('quality_score', '%page / (%modification + 1)', 'float4')
+        ->setField('quality_score', '%:page:% / (%:modification:% + 1)', 'float4')
         ;
 }
 ```
