@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pomm-project/Foundation.git",
-                "reference": "3d67ff611bc52449e4880e4f98049328f228c5d0"
+                "reference": "9eeb542a7119107df9b06c9f872b0ac90a30c33b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pomm-project/Foundation/zipball/3d67ff611bc52449e4880e4f98049328f228c5d0",
-                "reference": "3d67ff611bc52449e4880e4f98049328f228c5d0",
+                "url": "https://api.github.com/repos/pomm-project/Foundation/zipball/9eeb542a7119107df9b06c9f872b0ac90a30c33b",
+                "reference": "9eeb542a7119107df9b06c9f872b0ac90a30c33b",
                 "shasum": ""
             },
             "require": {
@@ -58,7 +58,7 @@
                 "pomm",
                 "postgresql"
             ],
-            "time": "2015-02-19 15:51:48"
+            "time": "2015-03-02 14:50:27"
         },
         {
             "name": "psr/log",
@@ -111,12 +111,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/atoum/atoum.git",
-                "reference": "9670f1cd83140ecb1eca65ca8f62ca48c06daf84"
+                "reference": "77778c968871b605f73289c72adb907fa5e601f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/atoum/atoum/zipball/9670f1cd83140ecb1eca65ca8f62ca48c06daf84",
-                "reference": "9670f1cd83140ecb1eca65ca8f62ca48c06daf84",
+                "url": "https://api.github.com/repos/atoum/atoum/zipball/77778c968871b605f73289c72adb907fa5e601f0",
+                "reference": "77778c968871b605f73289c72adb907fa5e601f0",
                 "shasum": ""
             },
             "require": {
@@ -139,7 +139,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.x-dev"
+                    "dev-master": "2.x-dev"
                 }
             },
             "autoload": {
@@ -182,7 +182,7 @@
                 "test",
                 "unit testing"
             ],
-            "time": "2015-02-13 11:09:18"
+            "time": "2015-02-27 13:00:25"
         }
     ],
     "aliases": [],
