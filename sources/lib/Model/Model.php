@@ -154,14 +154,19 @@ abstract class Model implements ClientInterface
             $projection = $this->createProjection();
         }
 
-        return $this
-            ->getSession()
-            ->getClientUsingPooler(
-                'query_manager',
-                '\PommProject\ModelManager\Model\CollectionQueryManager'
-            )
-            ->query($sql, $values, $projection)
+        $result = $this
+            ->GetSession()
+            ->getClientUsingPooler('prepared_query', $sql)
+            ->execute($values)
             ;
+
+        $collection = new CollectionIterator(
+            $result,
+            $this->getSession(),
+            $projection
+        );
+
+        return $collection;
     }
 
     /**
