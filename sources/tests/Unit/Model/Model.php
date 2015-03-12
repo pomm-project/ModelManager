@@ -85,6 +85,16 @@ class Model extends BaseTest
             ;
     }
 
+    public function testGetStructure()
+    {
+        $structure = $this->getSimpleFixtureModel($this->buildSession())
+            ->getStructure();
+
+        $this
+            ->object($structure)
+            ->isInstanceOf('PommProject\ModelManager\Test\Fixture\SimpleFixtureStructure');
+    }
+
     public function getClientIdentifier()
     {
         $this

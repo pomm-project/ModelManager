@@ -136,6 +136,19 @@ abstract class Model implements ClientInterface
     }
 
     /**
+     * getStructure
+     *
+     * Return the structure.
+     *
+     * @access public
+     * @return RowStructure
+     */
+    public function getStructure()
+    {
+        return $this->structure;
+    }
+
+    /**
      * query
      *
      * Execute the given query and return a Collection iterator on results. If
@@ -222,19 +235,6 @@ abstract class Model implements ClientInterface
         }
 
         return $this;
-    }
-
-    /**
-     * getStructure
-     *
-     * Return the structure.
-     *
-     * @access protected
-     * @return RowStructure
-     */
-    protected function getStructure()
-    {
-        return $this->structure;
     }
 
     /**
