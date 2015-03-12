@@ -192,10 +192,10 @@ abstract class Model implements ClientInterface
      * This is a helper to create a new projection according to the current
      * structure.Overriding this method will change projection for all models.
      *
-     * @access  protected
+     * @access  public
      * @return  Projection
      */
-    protected function createProjection()
+    public function createProjection()
     {
         return $this->createDefaultProjection();
     }
@@ -229,10 +229,10 @@ abstract class Model implements ClientInterface
      *
      * Return the structure.
      *
-     * @access protected
+     * @access public
      * @return RowStructure
      */
-    protected function getStructure()
+    public function getStructure()
     {
         return $this->structure;
     }
