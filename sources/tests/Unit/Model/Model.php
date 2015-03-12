@@ -93,6 +93,32 @@ class Model extends BaseTest
             ;
     }
 
+    public function testCreateProjection()
+    {
+        $session = $this->buildSession();
+        $model = $this->getSimpleFixtureModel($session);
+
+        $this
+            ->object($model->createProjection())
+            ->isInstanceOf('\PommProject\ModelManager\Model\Projection')
+            ->array($model->createProjection()->getFieldTypes())
+            ->isIdenticalTo(['id' => 'int4', 'a_varchar' => 'varchar', 'a_boolean' => 'bool'])
+            ;
+    }
+
+    public function testGetStructure()
+    {
+        $session = $this->buildSession();
+        $model = $this->getSimpleFixtureModel($session);
+
+        $this
+            ->object($model->getStructure())
+            ->isInstanceOf('\PommProject\ModelManager\Model\RowStructure')
+            ->array($model->getStructure()->getDefinition())
+            ->isIdenticalTo(['id' => 'int4', 'a_varchar' => 'varchar', 'a_boolean' => 'bool'])
+            ;
+    }
+
     public function testInitialize()
     {
         $session = $this->buildSession();
