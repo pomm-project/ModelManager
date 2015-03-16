@@ -164,8 +164,10 @@ class HydrationPlan
         $out_values = [];
 
         foreach ($this->projection as $field_name => $type) {
+            $value = isset($values[$field_name]) ? $values[$field_name] : null;
+
             $out_values[$field_name] = $this->converters[$field_name]
-                ->$from_to($values[$field_name], $this->getFieldType($field_name))
+                ->$from_to($value, $this->getFieldType($field_name))
                 ;
         }
 
