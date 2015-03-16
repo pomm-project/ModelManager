@@ -123,6 +123,7 @@ class PgEntity extends BaseTest
             ]),
             new ComplexFixture([
                 'id' => 1,
+                'extra_field' => 2,
                 'complex_number' => ['imaginary' => 2.344,'real' => 1.233],
                 'complex_numbers' =>
                     [
