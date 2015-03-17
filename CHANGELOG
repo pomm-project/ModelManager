@@ -1,3 +1,27 @@
+== VERSION 2.0.0-rc.1
+
+ *  Projection keeps fields order
+ *  Made getStructure and createProjection public.
+ *  Removed CollectionQeryManager.
+ *  Merge branch 'projection'
+ *  Functionnal PgEntity converter.
+ *  add control if model has pk
+ *  Added a "existWhere()" method in ReadQueries.
+ *  Projection to quote field aliases.
+ *  Specifications of Projection defined in #20.
+ *  Fix PgEntity::toPgStandardFormat when using array
+ *  Write queries to use converted parameters.
+ *  PgEntity::toPgStandardFormat().
+ *  PgEntity::toPg support array
+ *  More readable session builder configuration
+ *  Add missing use statement
+ *  Adapted to FoundationSessionAtoum.
+ *  Finished generators.
+ *  First port of CLI files.
+ *  Refactored HydrationPlan.
+ *  Improved perf. on FlexibleEntity::has() (#9).
+ *  replaced isset() calls with array_key_exists(), which allows testing and fetching for fields containing a null value
+
 == VERSION 2.0.0-beta.2
 
  * Moved FlexibleEntity to Model.
