@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e5f0aee9349dcb1e04048a184934f11c",
+    "hash": "89bd0bebb919ceef23232b69b7cfbda1",
     "packages": [
         {
             "name": "pomm-project/foundation",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pomm-project/Foundation.git",
-                "reference": "0914e04fb305efd7c248ee8c9c68ecf9c626507e"
+                "reference": "9da1ce45bf5a3091c6ab0aac779d4e1365ab7ea2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pomm-project/Foundation/zipball/0914e04fb305efd7c248ee8c9c68ecf9c626507e",
-                "reference": "0914e04fb305efd7c248ee8c9c68ecf9c626507e",
+                "url": "https://api.github.com/repos/pomm-project/Foundation/zipball/9da1ce45bf5a3091c6ab0aac779d4e1365ab7ea2",
+                "reference": "9da1ce45bf5a3091c6ab0aac779d4e1365ab7ea2",
                 "shasum": ""
             },
             "require": {
@@ -58,28 +58,23 @@
                 "pomm",
                 "postgresql"
             ],
-            "time": "2015-03-11 21:42:34"
+            "time": "2015-03-17 09:14:52"
         },
         {
             "name": "psr/log",
-            "version": "dev-master",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "1af1529b49a6e065ae6802e70192aba35d79b7d8"
+                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/1af1529b49a6e065ae6802e70192aba35d79b7d8",
-                "reference": "1af1529b49a6e065ae6802e70192aba35d79b7d8",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/fe0936ee26643249e916849d48e3a51d5f5e278b",
+                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b",
                 "shasum": ""
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
             "autoload": {
                 "psr-0": {
                     "Psr\\Log\\": ""
@@ -101,7 +96,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2015-02-05 09:32:11"
+            "time": "2012-12-21 11:40:51"
         }
     ],
     "packages-dev": [
@@ -186,7 +181,7 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "dev",
+    "minimum-stability": "RC",
     "stability-flags": {
         "pomm-project/foundation": 20,
         "atoum/atoum": 20
