@@ -386,6 +386,47 @@ class Model extends BaseTest
             ;
     }
 
+    public function testDeleteWhere()
+    {
+        $model = $this->getWriteFixtureModel($this->buildSession());
+        $entity1 = $model->createAndSave(['a_varchar' => 'qwerty', 'a_boolean' => false]);
+        $entity2 = $model->createAndSave(['a_varchar' => 'qwertz', 'a_boolean' => true]);
+        $deleted_entities = $model->deleteWhere('a_varchar = $*::varchar', ['qwertz']);
+        $this
+            ->object($deleted_entities)
+            ->isInstanceOf('\PommProject\ModelManager\Model\CollectionIterator')
+            ->integer($deleted_entities->count())
+            ->isEqualTo(1)
+            ->object($deleted_entities->get(0))
+            ->isInstanceOf('\PommProject\ModelManager\Test\Fixture\SimpleFixture')
+            ->isEqualTo($entity2)
+            ->integer($deleted_entities->get(0)->status())
+            ->isEqualTo(FlexibleEntityInterface::STATUS_NONE)
+        ;
+
+        $deleted_entities2 = $model->deleteWhere('a_varchar = $*::varchar', ['qwertz']);
+        $this
+            ->object($deleted_entities2)
+            ->isInstanceOf('\PommProject\ModelManager\Model\CollectionIterator')
+            ->integer($deleted_entities2->count())
+            ->isEqualTo(0)
+           ;
+
+        $deleted_entities3 = $model->deleteWhere(
+            Where::create('a_boolean = $*::boolean', [false])
+        );
+
+        $this
+            ->object($deleted_entities3)
+            ->isInstanceOf('\PommProject\ModelManager\Model\CollectionIterator')
+            ->integer($deleted_entities3->count())
+            ->isEqualTo(1)
+            ->object($deleted_entities3->get(0))
+            ->isInstanceOf('\PommProject\ModelManager\Test\Fixture\SimpleFixture')
+            ->isEqualTo($entity1)
+        ;
+    }
+
     public function testCreateAndSave()
     {
         $session = $this->buildSession();

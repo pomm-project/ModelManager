@@ -165,7 +165,26 @@ trait WriteQueries
         $where = $this
             ->checkPrimaryKey($primary_key)
             ->getWhereFrom($primary_key)
-            ;
+        ;
+
+        return $this->deleteWhere($where)->current();
+    }
+
+    /**
+     * deleteWhere
+     *
+     * Delete records by a given condition. A collection of all deleted entries is returned.
+     *
+     * @param        $where
+     * @param  array $values
+     * @return CollectionIterator
+     */
+    public function deleteWhere($where, array $values = [])
+    {
+        if (!$where instanceof Where) {
+            $where = new Where($where, $values);
+        }
+
         $sql = strtr(
             "delete from :relation where :condition returning :projection",
             [
@@ -175,13 +194,13 @@ trait WriteQueries
             ]
         );
 
-        $entity = $this->query($sql, $where->getValues())->current();
-
-        if ($entity !== null) {
+        $collection = $this->query($sql, $where->getValues());
+        foreach ($collection as $entity) {
             $entity->status(FlexibleEntityInterface::STATUS_NONE);
         }
+        $collection->rewind();
 
-        return $entity;
+        return $collection;
     }
 
     /**
