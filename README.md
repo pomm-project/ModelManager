@@ -4,7 +4,7 @@
 
 Pomm's ModelManager package is the common model layer built upon the Foundation package. It makes developers able to create models against the database and get object oriented entities back. **It is not an ORM**, it grants developers with the ability to perform native queries using native real SQL and use almost all types of Postgresql. This makes model layer to meet with performances while staying lean.
 
-This package is still is beta, this means code can change without notice but should never be broken. Use it to test Pomm or bootstrap a small project. .If you want to use Pomm in production now, look at [Pomm 1.x](http://www.pomm-project.org).
+Pomm's Model Manager is in Release Candistate state. This version will go in stable state soon and may be used  for test purposes or to start new projects.
 
 ## Installation
 

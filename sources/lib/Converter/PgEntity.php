@@ -235,7 +235,7 @@ class PgEntity implements ConverterInterface
             sprintf("(%s)",
                 join(',', array_map(function($val) {
                     if ($val === null) {
-                        return 'NULL';
+                        return '';
                     } elseif (strlen($val) === 0) {
                         return '""';
                     } elseif (preg_match('/[,\s]/', $val)) {

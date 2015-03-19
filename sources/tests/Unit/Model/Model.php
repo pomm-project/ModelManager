@@ -15,8 +15,7 @@ use PommProject\Foundation\Query\QueryPooler;
 use PommProject\Foundation\Converter\ConverterPooler;
 use PommProject\Foundation\PreparedQuery\PreparedQueryPooler;
 
-use PommProject\ModelManager\Tester\ModelSessionAtoum;
-
+use PommProject\ModelManager\Test\Unit\BaseTest;
 use PommProject\ModelManager\Model\ModelPooler;
 use PommProject\ModelManager\Model\Model                as PommModel;
 use PommProject\ModelManager\Converter\PgEntity;
@@ -29,33 +28,8 @@ use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
 use Mock\PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntity  as FlexibleEntityMock;
 use Mock\PommProject\ModelManager\Model\RowStructure    as RowStructureMock;
 
-class Model extends ModelSessionAtoum
+class Model extends BaseTest
 {
-    public function setUp()
-    {
-        $session = $this->buildSession();
-        $sql =
-            [
-                "drop schema if exists pomm_test cascade",
-                "begin",
-                "create schema pomm_test",
-                "create type pomm_test.complex_number as (real float8, imaginary float8)",
-                "commit",
-            ];
-
-        try {
-            $session->getConnection()->executeAnonymousQuery(join(';', $sql));
-        } catch (SqlException $e) {
-            $session->getConnection()->executeAnonymousQuery('rollback');
-            throw $e;
-        }
-    }
-
-    public function tearDown()
-    {
-        $this->buildSession()->getConnection()->executeAnonymousQuery('drop schema if exists pomm_test cascade');
-    }
-
     protected function initializeSession(Session $session)
     {
         $session
@@ -116,6 +90,32 @@ class Model extends ModelSessionAtoum
         $this
             ->string($this->getSimpleFixtureModel($this->buildSession())->getClientIdentifier())
             ->isEqualTo('PommProject\ModelManager\Test\Fixture\SimpleFixtureModel')
+            ;
+    }
+
+    public function testCreateProjection()
+    {
+        $session = $this->buildSession();
+        $model = $this->getSimpleFixtureModel($session);
+
+        $this
+            ->object($model->createProjection())
+            ->isInstanceOf('\PommProject\ModelManager\Model\Projection')
+            ->array($model->createProjection()->getFieldTypes())
+            ->isIdenticalTo(['id' => 'int4', 'a_varchar' => 'varchar', 'a_boolean' => 'bool'])
+            ;
+    }
+
+    public function testGetStructure()
+    {
+        $session = $this->buildSession();
+        $model = $this->getSimpleFixtureModel($session);
+
+        $this
+            ->object($model->getStructure())
+            ->isInstanceOf('\PommProject\ModelManager\Model\RowStructure')
+            ->array($model->getStructure()->getDefinition())
+            ->isIdenticalTo(['id' => 'int4', 'a_varchar' => 'varchar', 'a_boolean' => 'bool'])
             ;
     }
 
