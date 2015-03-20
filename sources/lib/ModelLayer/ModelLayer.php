@@ -9,7 +9,7 @@
  */
 namespace PommProject\ModelManager\ModelLayer;
 
-use PommProject\Foundation\Connection;
+use PommProject\Foundation\Session\Connection;
 use PommProject\Foundation\Client\Client;
 use PommProject\Foundation\Client\ClientInterface;
 
