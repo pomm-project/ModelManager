@@ -85,7 +85,7 @@ abstract class ModelLayer extends Client
      * @throws  ModelLayerException if not valid state
      * @return ModelLayer $this
      */
-    protected function setDeferrable(array $keys = [], $state)
+    protected function setDeferrable(array $keys, $state)
     {
         if (count($keys) === 0) {
             $string = 'ALL';
