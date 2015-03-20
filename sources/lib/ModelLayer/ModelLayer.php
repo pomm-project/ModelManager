@@ -92,7 +92,7 @@ abstract class ModelLayer extends Client
         } else {
             $string = join(
                 ', ',
-                array_map(function ($key) { $this->escapeIdentifier($key); }, $keys)
+                array_map(function ($key) { return $this->escapeIdentifier($key); }, $keys)
             );
         }
 
