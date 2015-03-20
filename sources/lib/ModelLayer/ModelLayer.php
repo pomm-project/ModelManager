@@ -9,7 +9,7 @@
  */
 namespace PommProject\ModelManager\ModelLayer;
 
-use PommProject\Foundation\Connection;
+use PommProject\Foundation\Session\Connection;
 use PommProject\Foundation\Client\Client;
 use PommProject\Foundation\Client\ClientInterface;
 
@@ -85,14 +85,14 @@ abstract class ModelLayer extends Client
      * @throws  ModelLayerException if not valid state
      * @return ModelLayer $this
      */
-    protected function setDeferrable(array $keys = [], $state)
+    protected function setDeferrable(array $keys, $state)
     {
         if (count($keys) === 0) {
             $string = 'ALL';
         } else {
             $string = join(
                 ', ',
-                array_map(function ($key) { $this->escapeIdentifier($key); }, $keys)
+                array_map(function ($key) { return $this->escapeIdentifier($key); }, $keys)
             );
         }
 
