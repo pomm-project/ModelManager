@@ -41,6 +41,20 @@ class ModelLayer extends ModelSessionAtoum
         return $model_layer;
     }
 
+    public function testSetDeferrable()
+    {
+        $model_layer = $this->getModelLayer();
+        $this
+            ->boolean($model_layer->startTransaction())
+            ->isTrue()
+            ->string($model_layer->setDeferrable(['pika.chu']))
+            ->isEqualTo('"pika"."chu"')
+            ->string($model_layer->setDeferrable(['pika']))
+            ->isEqualTo('"pikachu"')
+            ->object($model_layer->commitTransaction())
+            ->isIdenticalTo($model_layer);
+    }
+
     public function testTransaction()
     {
         $model_layer = $this->getModelLayer();
