@@ -96,9 +96,9 @@ abstract class ModelLayer extends Client
                     function ($key) {
                         $parts = explode('.', $key);
                         foreach ($parts as $part) {
-                            $escapedParts[] = $this->escapeIdentifier($part);
+                            $escaped_parts[] = $this->escapeIdentifier($part);
                         }
-                        return join('.', $escapedParts);
+                        return join('.', $escaped_parts);
                     },
                     $keys
                 )
