@@ -50,7 +50,7 @@ class ModelLayer extends ModelSessionAtoum
             ->string($model_layer->setDeferrable(['pika.chu']))
             ->isEqualTo('"pika"."chu"')
             ->string($model_layer->setDeferrable(['pika']))
-            ->isEqualTo('"pikachu"')
+            ->isEqualTo('"pika"')
             ->object($model_layer->commitTransaction())
             ->isIdenticalTo($model_layer);
     }
