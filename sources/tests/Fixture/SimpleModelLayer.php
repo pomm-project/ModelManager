@@ -10,6 +10,8 @@
 namespace PommProject\ModelManager\Test\Fixture;
 
 use PommProject\ModelManager\ModelLayer\ModelLayer;
+use PommProject\Foundation\Session\Session;
+
 
 /**
  * SimpleModelLayer
@@ -82,5 +84,10 @@ class SimpleModelLayer extends ModelLayer
     public function isTransactionOk()
     {
         return parent::isTransactionOk();
+    }
+
+    public function setDeferrable(array $keys, $state)
+    {
+        return parent::setDeferrable($keys, $state);
     }
 }

@@ -12,6 +12,7 @@ namespace PommProject\ModelManager\ModelLayer;
 use PommProject\Foundation\Session\Connection;
 use PommProject\Foundation\Client\Client;
 use PommProject\Foundation\Client\ClientInterface;
+use PommProject\ModelManager\Exception\ModelLayerException;
 
 /**
  * ModelLayer
@@ -92,12 +93,29 @@ abstract class ModelLayer extends Client
         } else {
             $string = join(
                 ', ',
-                array_map(function ($key) { return $this->escapeIdentifier($key); }, $keys)
+                array_map(
+                    function ($key) {
+                        $parts = explode('.', $key);
+                        foreach ($parts as $part) {
+                            $escaped_parts[] = $this->escapeIdentifier($part);
+                        }
+                        return join('.', $escaped_parts);
+                    },
+                    $keys
+                )
             );
         }
 
         if (!in_array($state, [ Connection::CONSTRAINTS_DEFERRED, Connection::CONSTRAINTS_IMMEDIATE ])) {
-            throw new ModelLayerException(sprintf("'%s' is not a valid constraints modifier.", $state));
+            throw new ModelLayerException(
+                sprintf(<<<EOMSG
+'%s' is not a valid constraint modifier.
+Use Connection::CONSTRAINTS_DEFERRED or Connection::CONSTRAINTS_IMMEDIATE.
+EOMSG
+,
+                    $state
+                )
+            );
         }
 
         $this->executeAnonymousQuery(
