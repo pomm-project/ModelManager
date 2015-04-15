@@ -11,12 +11,35 @@ namespace PommProject\ModelManager\Test\Unit\ModelLayer;
 
 use PommProject\Foundation\Session\Session;
 use PommProject\Foundation\Observer\ObserverPooler;
-
+use PommProject\Foundation\Session\Connection;
 use PommProject\ModelManager\Tester\ModelSessionAtoum;
 use PommProject\ModelManager\ModelLayer\ModelLayerPooler;
 
 class ModelLayer extends ModelSessionAtoum
 {
+    public function setUp()
+    {
+        $this
+            ->buildSession()
+            ->getConnection()
+            ->executeAnonymousQuery(<<<EOSQL
+create schema pomm_test;
+create table pomm_test.pika (id serial primary key);
+create table pomm_test.chu (id serial primary key, pika_id int not null references pomm_test.pika (id) deferrable);
+EOSQL
+            )
+        ;
+    }
+
+    public function tearDown()
+    {
+        $this
+            ->buildSession()
+            ->getConnection()
+            ->executeAnonymousQuery('drop schema pomm_test cascade;')
+            ;
+    }
+
     public function afterTestMethod($method)
     {
         /*
@@ -45,14 +68,17 @@ class ModelLayer extends ModelSessionAtoum
     {
         $model_layer = $this->getModelLayer();
         $this
-            ->boolean($model_layer->startTransaction())
-            ->isTrue()
-            ->string($model_layer->setDeferrable(['pika.chu']))
-            ->isEqualTo('"pika"."chu"')
-            ->string($model_layer->setDeferrable(['pika']))
-            ->isEqualTo('"pika"')
-            ->object($model_layer->commitTransaction())
-            ->isIdenticalTo($model_layer);
+            ->object(
+                $model_layer
+                    ->setDeferrable(['pomm_test.chu_pika_id_fkey'], Connection::CONSTRAINTS_DEFERRED)
+            )
+            ->isEqualTo($model_layer)
+            ->exception(function() use ($model_layer) {
+                $model_layer->setDeferrable(['pomm_test.chu_pika_id_fkey'], 'chu');
+            })
+            ->isInstanceOf('\PommProject\ModelManager\Exception\ModelLayerException')
+            ->message->contains("'chu' is not a valid constraint modifier")
+            ;
     }
 
     public function testTransaction()
