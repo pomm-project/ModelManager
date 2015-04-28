@@ -118,7 +118,7 @@ class {:entity:}Model extends Model
     public function __construct()
     {
         $this->structure = new {:entity:}Structure;
-        $this->flexible_entity_class = "\{:namespace:}\{:entity:}";
+        $this->flexible_entity_class = '\{:namespace:}\{:entity:}';
     }
 }
 
