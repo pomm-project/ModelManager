@@ -96,9 +96,12 @@ abstract class ModelLayer extends Client
                 array_map(
                     function ($key) {
                         $parts = explode('.', $key);
+                        $escaped_parts = [];
+
                         foreach ($parts as $part) {
                             $escaped_parts[] = $this->escapeIdentifier($part);
                         }
+
                         return join('.', $escaped_parts);
                     },
                     $keys
