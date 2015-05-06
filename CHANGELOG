@@ -1,3 +1,11 @@
+== VERSION 2.0.0-rc.2
+
+ *  Strengthen model generator against bad ascaping.
+ *  Fix defferables constraints with schemas.
+ *  Fix deferrable sql generator.
+ *  Fix and add Model layer exception.
+ *  Add WriteQueries::deleteWhere.
+
 == VERSION 2.0.0-rc.1
 
  *  Projection keeps fields order
