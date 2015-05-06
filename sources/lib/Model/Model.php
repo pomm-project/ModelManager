@@ -85,6 +85,8 @@ abstract class Model implements ClientInterface
      * based implementations like a socket server.
      * 
      * Should be reset in the encapsulated method to true.
+     * 
+     * @return ClientInterface
      */
     public function withoutStrictness()
     {
@@ -96,6 +98,7 @@ abstract class Model implements ClientInterface
      * Sets strictness for encapsulated calls to true.
      * 
      * This is the default behaviour.
+     * @return ClientInterface
      */
     public function withStrictness()
     {
