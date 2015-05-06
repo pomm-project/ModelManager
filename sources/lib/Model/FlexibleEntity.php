@@ -54,7 +54,7 @@ abstract class FlexibleEntity extends FlexibleContainer implements \ArrayAccess
      * @final
      * @access public
      * @param  string|array $var Key(s) you want to retrieve value from.
-     * @throw  ModelException if strict and the attribute does not exist.
+     * @throws  ModelException if strict and the attribute does not exist.
      * @return mixed
      */
     final public function get($var)
@@ -155,11 +155,11 @@ abstract class FlexibleEntity extends FlexibleContainer implements \ArrayAccess
      *
      * Allows dynamic methods getXxx, setXxx, hasXxx, addXxx or clearXxx.
      *
-     * @access public
-     * @throw  ModelException if method does not exist.
-     * @param  mixed $method
-     * @param  mixed $arguments
-     * @return mixed
+     * @access  public
+     * @throws  ModelException if method does not exist.
+     * @param   mixed $method
+     * @param   mixed $arguments
+     * @return  mixed
      */
     public function __call($method, $arguments)
     {
@@ -186,9 +186,9 @@ abstract class FlexibleEntity extends FlexibleContainer implements \ArrayAccess
      *
      * Make all keys lowercase and hydrate the object.
      *
-     * @access public
-     * @param  Array          $values
-     * @return FlexibleEntity
+     * @access  public
+     * @param   Array          $values
+     * @return  FlexibleEntity
      */
     public function convert(array $values)
     {
@@ -243,8 +243,8 @@ abstract class FlexibleEntity extends FlexibleContainer implements \ArrayAccess
      *
      * Return a list of custom methods with has() accessor.
      *
-     * @access private
-     * @return array
+     * @access  private
+     * @return  array
      */
     private function getCustomFields()
     {
@@ -278,10 +278,10 @@ abstract class FlexibleEntity extends FlexibleContainer implements \ArrayAccess
      *
      * PHP magic to set attributes.
      *
-     * @access public
-     * @param  String         $var   Attribute name.
-     * @param  Mixed          $value Attribute value.
-     * @return FlexibleEntity $this
+     * @access  public
+     * @param   String         $var   Attribute name.
+     * @param   Mixed          $value Attribute value.
+     * @return  FlexibleEntity $this
      */
     public function __set($var, $value)
     {
@@ -296,9 +296,9 @@ abstract class FlexibleEntity extends FlexibleContainer implements \ArrayAccess
      *
      * PHP magic to get attributes.
      *
-     * @access public
-     * @param  String $var Attribute name.
-     * @return Mixed  Attribute value.
+     * @access  public
+     * @param   String $var Attribute name.
+     * @return  Mixed  Attribute value.
      */
     public function __get($var)
     {
@@ -312,9 +312,9 @@ abstract class FlexibleEntity extends FlexibleContainer implements \ArrayAccess
      *
      * Easy value check.
      *
-     * @access public
-     * @param  string $var
-     * @return bool
+     * @access  public
+     * @param   string $var
+     * @return  bool
      */
     public function __isset($var)
     {
@@ -328,9 +328,9 @@ abstract class FlexibleEntity extends FlexibleContainer implements \ArrayAccess
      *
      * Clear an attribute.
      *
-     * @access public
-     * @param  string $var
-     * @return FlexibleEntity   $this
+     * @access  public
+     * @param   string $var
+     * @return  FlexibleEntity   $this
      */
     public function __unset($var)
     {
@@ -379,9 +379,9 @@ abstract class FlexibleEntity extends FlexibleContainer implements \ArrayAccess
      * When getIterator is called the first time, the list of "has" methods is
      * set in a static attribute to boost performances.
      *
-     * @access protected
-     * @param  FlexibleEntity   $entity
-     * @return null
+     * @access  protected
+     * @param   FlexibleEntity   $entity
+     * @return  null
      */
     protected static function fillHasMethods(FlexibleEntity $entity)
     {

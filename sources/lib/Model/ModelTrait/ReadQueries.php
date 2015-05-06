@@ -203,15 +203,15 @@ trait ReadQueries
      * It is important to note it adds limit and offset at the end of the given
      * query.
      *
-     * @access protected
-     * @param  string       $sql
-     * @param  array        $values parameters
-     * @param  int          $count
-     * @param  int          $item_per_page
-     * @param  int          $page
-     * @param  Projection   $projection
-     * @throw  \InvalidArgumentException if pager args are invalid.
-     * @return Pager
+     * @access  protected
+     * @param   string       $sql
+     * @param   array        $values parameters
+     * @param   int          $count
+     * @param   int          $item_per_page
+     * @param   int          $page
+     * @param   Projection   $projection
+     * @throws  \InvalidArgumentException if pager args are invalid.
+     * @return  Pager
      */
     protected function paginateQuery($sql, array $values, $count, $item_per_page, $page = 1, Projection $projection = null)
     {

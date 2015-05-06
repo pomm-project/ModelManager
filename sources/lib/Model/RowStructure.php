@@ -16,7 +16,6 @@ use PommProject\ModelManager\Exception\ModelException;
  *
  * Represent a composite structure like table or row.
  *
- * @abstract
  * @package ModelManager
  * @copyright 2014 Grégoire HUBERT
  * @author Grégoire HUBERT <hubert.greg@gmail.com>

@@ -39,11 +39,11 @@ class CollectionIterator extends ResultIterator
      *
      * Constructor
      *
-     * @access public
-     * @param  ResultHandler    $result
-     * @param  Session          $session
-     * @param  Projection       $projection
-     * @return null
+     * @access  public
+     * @param   ResultHandler   $result
+     * @param   Session         $session
+     * @param   Projection      $projection
+     * @return  null
      */
     public function __construct(ResultHandler $result, Session $session, Projection $projection)
     {
@@ -61,8 +61,8 @@ class CollectionIterator extends ResultIterator
     /**
      * get
      *
-     * @see ResultIterator
-     * @return FlexibleEntityInterface
+     * @see     ResultIterator
+     * @return  FlexibleEntityInterface
      */
     public function get($index)
     {
@@ -74,10 +74,10 @@ class CollectionIterator extends ResultIterator
      *
      * Convert values from Pg.
      *
-     * @access protected
-     * @param  array          $values
-     * @return FlexibleEntityInterface
-     * @see    ResultIterator
+     * @access  protected
+     * @param   array          $values
+     * @return  FlexibleEntityInterface
+     * @see     ResultIterator
      */
     public function parseRow(array $values)
     {
@@ -92,9 +92,10 @@ class CollectionIterator extends ResultIterator
      *
      * Launch filters on the given values.
      *
-     * @access protected
-     * @param  array $values
-     * @return array
+     * @access  protected
+     * @param   array $values
+     * @throws  ModelException   if return is not an array.
+     * @return  array
      */
     protected function launchFilters(array $values)
     {
