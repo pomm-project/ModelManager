@@ -35,6 +35,11 @@ abstract class Model implements ClientInterface
     protected $structure;
 
     /**
+     * @var boolean
+     */
+    private $strictness = true;
+
+    /**
      * getSession
      *
      * Return the current session. If session is not set, a ModelException is
@@ -73,8 +78,34 @@ abstract class Model implements ClientInterface
     }
 
     /**
+     * Sets the strictness for encapsulated calls to false.
+     * 
+     * Use only if you e.g. really need the registration not to fail in case of multiple 
+     * adds of the same converter. This might be the case for non request
+     * based implementations like a socket server.
+     * 
+     * Should be reset in the encapsulated method to true.
+     */
+    public function withoutStrictness()
+    {
+        $this->strictness = false;
+        return $this;
+    }
+
+    /**
+     * Sets strictness for encapsulated calls to true.
+     * 
+     * This is the default behaviour.
+     */
+    public function withStrictness()
+    {
+        $this->strictness = false;
+        return $this;
+    }
+
+    /**
      * initialize
-     *
+     * @param Session $session The session to initialize with.
      * @see ClientInterface
      */
     public function initialize(Session $session)
@@ -104,8 +135,10 @@ abstract class Model implements ClientInterface
                 [
                     $this->getStructure()->getRelation(),
                     $this->flexible_entity_class,
-                ]
+                ],
+                $this->strictness;
         );
+        $this->strictness = true;
     }
 
     /**
