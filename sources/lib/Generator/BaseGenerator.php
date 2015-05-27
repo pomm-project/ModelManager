@@ -9,9 +9,12 @@
  */
 namespace PommProject\ModelManager\Generator;
 
-use PommProject\Foundation\Session\Session;
 use PommProject\Foundation\ParameterHolder;
+use PommProject\Foundation\Inspector\Inspector;
+
+use PommProject\ModelManager\Session;
 use PommProject\ModelManager\Exception\GeneratorException;
+
 /**
  * BaseGenerator
  *
@@ -25,6 +28,9 @@ use PommProject\ModelManager\Exception\GeneratorException;
  */
 abstract class BaseGenerator
 {
+    /**
+     * @var Session
+     */
     private $session;
 
     protected $schema;
@@ -33,17 +39,17 @@ abstract class BaseGenerator
     protected $namespace;
     protected $flexible_container;
 
-    /*
-     * __construct
-     *
+
+    /**
      * Constructor
      *
      * @access public
      * @param  Session $session
+     * @param  string  $schema
      * @param  string  $relation
      * @param  string  $filename
      * @param  string  $namespace
-     * @return void
+     * @param          $flexible_container
      */
     public function __construct(Session $session, $schema, $relation, $filename, $namespace, $flexible_container = null)
     {

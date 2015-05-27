@@ -9,9 +9,10 @@
  */
 namespace PommProject\ModelManager\Model;
 
-use PommProject\ModelManager\Exception\ModelException;
 use PommProject\Foundation\Client\ClientPoolerInterface;
 use PommProject\Foundation\Client\ClientPooler;
+
+use PommProject\ModelManager\Exception\ModelException;
 
 /**
  * ModelPooler
@@ -49,7 +50,7 @@ class ModelPooler extends ClientPooler
      * createModel
      *
      * @see    ClientPooler
-     * @throw  ModelException if incorrect
+     * @throws ModelException if incorrect
      * @return Model
      */
     protected function createClient($class)

@@ -9,11 +9,12 @@
  */
 namespace PommProject\ModelManager\Model;
 
+use PommProject\Foundation\Client\ClientInterface;
+use PommProject\Foundation\Session\Session;
+
 use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
 use PommProject\ModelManager\Exception\ModelException;
 use PommProject\ModelManager\Converter\PgEntity;
-use PommProject\Foundation\Client\ClientInterface;
-use PommProject\Foundation\Session\Session;
 
 /**
  * Model
@@ -32,6 +33,11 @@ abstract class Model implements ClientInterface
 {
     protected $session;
     protected $flexible_entity_class;
+
+
+    /**
+     * @var RowStructure
+     */
     protected $structure;
 
     /**
@@ -42,6 +48,7 @@ abstract class Model implements ClientInterface
      *
      * @access public
      * @return Session
+     * @throws ModelException
      */
     public function getSession()
     {
@@ -143,7 +150,7 @@ abstract class Model implements ClientInterface
      * createProjection() method.
      *
      * @access protected
-     * @param  sql                $sql
+     * @param  string             $sql
      * @param  array              $values
      * @param  Projection         $projection
      * @return CollectionIterator

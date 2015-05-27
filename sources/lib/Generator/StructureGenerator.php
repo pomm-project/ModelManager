@@ -12,6 +12,7 @@ namespace PommProject\ModelManager\Generator;
 use PommProject\Foundation\Inflector;
 use PommProject\Foundation\ParameterHolder;
 use PommProject\Foundation\ConvertedResultIterator;
+
 use PommProject\ModelManager\Exception\GeneratorException;
 
 /**
@@ -193,7 +194,7 @@ TEXT;
      * @access protected
      * @param  int   $table_oid
      * @throws GeneratorException
-     * @return array $informations
+     * @return ConvertedResultIterator $fields_info
      */
     protected function getFieldInformation($table_oid)
     {

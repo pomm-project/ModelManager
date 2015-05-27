@@ -9,10 +9,8 @@
  */
 namespace PommProject\ModelManager\Model\FlexibleEntity;
 
-use PommProject\ModelManager\Model\FlexibleEntity\StatefullEntityTrait;
-use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
-use PommProject\ModelManager\Exception\ModelException;
 use PommProject\Foundation\Inflector;
+use PommProject\ModelManager\Exception\ModelException;
 
 /**
  * FlexibleContainerTrait
@@ -48,7 +46,7 @@ abstract class FlexibleContainer implements FlexibleEntityInterface, \IteratorAg
      * Return the fields array. If a given field does not exist, an exception
      * is thrown.
      *
-     * @throw   InvalidArgumentException
+     * @throws  \InvalidArgumentException
      * @see     FlexibleEntityInterface
      */
     public function fields(array $fields = null)
@@ -103,7 +101,7 @@ abstract class FlexibleContainer implements FlexibleEntityInterface, \IteratorAg
      * Allows dynamic methods getXxx, setXxx, hasXxx or clearXxx.
      *
      * @access public
-     * @throw  ModelException if method does not exist.
+     * @throws ModelException if method does not exist.
      * @param  mixed $method
      * @param  mixed $arguments
      * @return mixed
@@ -141,6 +139,7 @@ abstract class FlexibleContainer implements FlexibleEntityInterface, \IteratorAg
      * @access protected
      * @param  string $attribute
      * @return FlexibleContainer    $this
+     * @throws ModelException
      */
     protected function checkAttribute($attribute)
     {
@@ -167,6 +166,7 @@ abstract class FlexibleContainer implements FlexibleEntityInterface, \IteratorAg
      * @access protected
      * @param  string   $argument
      * @return array
+     * @throws ModelException
      */
     protected function extractMethodName($argument)
     {

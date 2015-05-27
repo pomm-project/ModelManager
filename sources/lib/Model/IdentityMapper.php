@@ -24,6 +24,9 @@ use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
  */
 class IdentityMapper
 {
+    /**
+     * @var FlexibleEntityInterface[]
+     */
     protected $instances = [];
 
     /**

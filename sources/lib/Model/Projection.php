@@ -27,12 +27,13 @@ class Projection implements \IteratorAggregate
     protected $fields = [];
     protected $types = [];
 
+
     /**
      * __construct
      *
      * @access public
-     * @param  array $structure list of field names with types.
-     * @return void
+     * @param  $flexible_entity_class
+     * @param  array  $structure list of field names with types.
      */
     public function __construct($flexible_entity_class, array $structure = null)
     {
@@ -339,7 +340,7 @@ class Projection implements \IteratorAggregate
      *
      * @access private
      * @param  string     $name
-     * @throw ModelException if field does not exist
+     * @throws ModelException if field does not exist
      * @return Projection $this
      */
     private function checkFieldExist($name)

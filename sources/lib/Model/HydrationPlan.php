@@ -9,8 +9,10 @@
  */
 namespace PommProject\ModelManager\Model;
 
-use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
 use PommProject\Foundation\Session\Session;
+use PommProject\Foundation\Converter\ConverterClient;
+
+use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
 
 /**
  * HydrationPlan
@@ -31,14 +33,13 @@ class HydrationPlan
     protected $projection;
     protected $converters = [];
 
+
     /**
-     * __construct
-     *
      * Construct
      *
      * @access public
-     * @param  Projection $projection
-     * @return void
+     * @param Projection $projection
+     * @param Session    $session
      */
     public function __construct(Projection $projection, Session $session)
     {
@@ -112,6 +113,7 @@ class HydrationPlan
      * hydrate the FlexibleEntityInterface through the mapper.
      *
      * @access public
+     * @param array $values
      * @return FlexibleEntityInterface
      */
     public function hydrate(array $values)

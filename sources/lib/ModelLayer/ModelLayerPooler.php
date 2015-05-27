@@ -11,6 +11,7 @@ namespace PommProject\ModelManager\ModelLayer;
 
 use PommProject\Foundation\Client\ClientPooler;
 use PommProject\Foundation\Client\ClientPoolerInterface;
+
 use PommProject\ModelManager\Exception\ModelLayerException;
 
 /**
@@ -41,6 +42,7 @@ class ModelLayerPooler extends ClientPooler
      *
      * @see    ClientPooler
      * @return ModelLayer
+     * @throws ModelLayerException
      */
     protected function createClient($identifier)
     {

@@ -12,7 +12,7 @@ namespace PommProject\ModelManager;
 use PommProject\Foundation\Session as FoundationSession;
 
 use PommProject\ModelManager\Model\Model;
-use PommProject\ModelLayerManager\ModelLayer\ModelLayer;
+use PommProject\ModelManager\ModelLayer\ModelLayer;
 
 /**
  * Session
@@ -36,7 +36,7 @@ class Session extends FoundationSession
      * Return a model instance
      *
      * @access public
-     * @param  string   class
+     * @param  string $class
      * @return Model
      */
     public function getModel($class)
@@ -50,7 +50,7 @@ class Session extends FoundationSession
      * Return a model layer instance
      *
      * @access public
-     * @param  string   class
+     * @param  string $class
      * @return ModelLayer
      */
     public function getModelLayer($class)

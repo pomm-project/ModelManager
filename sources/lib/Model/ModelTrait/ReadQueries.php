@@ -10,8 +10,9 @@
 namespace PommProject\ModelManager\Model\ModelTrait;
 
 use PommProject\ModelManager\Exception\ModelException;
+use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
+use PommProject\ModelManager\Model\CollectionIterator;
 use PommProject\ModelManager\Model\Projection;
-use PommProject\ModelManager\Model\Model;
 
 use PommProject\Foundation\Pager;
 use PommProject\Foundation\Where;
@@ -291,7 +292,7 @@ trait ReadQueries
      * @access private
      * @param  array $values
      * @throws ModelException
-     * @return Model $this
+     * @return ReadQueries $this
      */
     protected function checkPrimaryKey(array $values)
     {

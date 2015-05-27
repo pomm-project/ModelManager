@@ -9,11 +9,13 @@
  */
 namespace PommProject\ModelManager\Model;
 
-use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
-use PommProject\ModelManager\Exception\ModelException;
 use PommProject\Foundation\Session\ResultHandler;
 use PommProject\Foundation\Session\Session;
 use PommProject\Foundation\ResultIterator;
+
+use PommProject\ModelManager\Converter\PgEntity;
+use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
+use PommProject\ModelManager\Exception\ModelException;
 
 /**
  * CollectionIterator
@@ -27,11 +29,29 @@ use PommProject\Foundation\ResultIterator;
  */
 class CollectionIterator extends ResultIterator
 {
+    /**
+     * @var Session
+     */
     protected $session;
+
+    /**
+     * @var Projection
+     */
     protected $projection;
+
+    /**
+     * @var array
+     */
     protected $filters = [];
+
+    /**
+     * @var HydrationPlan
+     */
     protected $hydration_plan;
 
+    /**
+     * @var PgEntity
+     */
     private $entity_converter;
 
     /**
@@ -43,7 +63,6 @@ class CollectionIterator extends ResultIterator
      * @param   ResultHandler   $result
      * @param   Session         $session
      * @param   Projection      $projection
-     * @return  null
      */
     public function __construct(ResultHandler $result, Session $session, Projection $projection)
     {
@@ -118,7 +137,8 @@ class CollectionIterator extends ResultIterator
      *
      * @access public
      * @param  callable   $callable the filter.
-     * @return Collection $this
+     * @return CollectionIterator $this
+     * @throws ModelException
      */
     public function registerFilter($callable)
     {

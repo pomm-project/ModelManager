@@ -9,10 +9,11 @@
  */
 namespace PommProject\ModelManager\Model;
 
+use PommProject\Foundation\Inflector;
+
 use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
 use PommProject\ModelManager\Model\FlexibleEntity\FlexibleContainer;
 use PommProject\ModelManager\Exception\ModelException;
-use PommProject\Foundation\Inflector;
 
 /**
  * FlexibleEntity
@@ -37,7 +38,6 @@ abstract class FlexibleEntity extends FlexibleContainer implements \ArrayAccess
      *
      * @access public
      * @param  array $values Optional starting values.
-     * @return void
      */
     public function __construct(array $values = null)
     {
@@ -114,6 +114,7 @@ abstract class FlexibleEntity extends FlexibleContainer implements \ArrayAccess
      * @param  string         $var
      * @param  mixed          $value
      * @return FlexibleEntity $this
+     * @throws ModelException
      */
     public function add($var, $value)
     {
