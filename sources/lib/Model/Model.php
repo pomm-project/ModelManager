@@ -9,11 +9,12 @@
  */
 namespace PommProject\ModelManager\Model;
 
+use PommProject\Foundation\Client\ClientInterface;
+use PommProject\Foundation\Session\Session;
+
 use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
 use PommProject\ModelManager\Exception\ModelException;
 use PommProject\ModelManager\Converter\PgEntity;
-use PommProject\Foundation\Client\ClientInterface;
-use PommProject\Foundation\Session\Session;
 
 /**
  * Model

@@ -11,6 +11,7 @@ namespace PommProject\ModelManager\ModelLayer;
 
 use PommProject\Foundation\Client\ClientPooler;
 use PommProject\Foundation\Client\ClientPoolerInterface;
+
 use PommProject\ModelManager\Exception\ModelLayerException;
 
 /**

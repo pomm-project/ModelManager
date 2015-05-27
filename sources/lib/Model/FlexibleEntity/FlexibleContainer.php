@@ -9,10 +9,8 @@
  */
 namespace PommProject\ModelManager\Model\FlexibleEntity;
 
-use PommProject\ModelManager\Model\FlexibleEntity\StatefullEntityTrait;
-use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
-use PommProject\ModelManager\Exception\ModelException;
 use PommProject\Foundation\Inflector;
+use PommProject\ModelManager\Exception\ModelException;
 
 /**
  * FlexibleContainerTrait

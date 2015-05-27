@@ -9,9 +9,10 @@
  */
 namespace PommProject\ModelManager\Model;
 
-use PommProject\ModelManager\Exception\ModelException;
 use PommProject\Foundation\Client\ClientPoolerInterface;
 use PommProject\Foundation\Client\ClientPooler;
+
+use PommProject\ModelManager\Exception\ModelException;
 
 /**
  * ModelPooler

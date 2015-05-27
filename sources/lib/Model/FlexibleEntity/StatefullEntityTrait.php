@@ -9,8 +9,6 @@
  */
 namespace PommProject\ModelManager\Model\FlexibleEntity;
 
-use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
-
 /**
  * StatefullEntityTrait
  *

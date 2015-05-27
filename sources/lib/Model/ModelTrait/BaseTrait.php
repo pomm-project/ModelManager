@@ -9,8 +9,11 @@
  */
 namespace PommProject\ModelManager\Model\ModelTrait;
 
-use PommProject\ModelManager\Model\Model;
+use PommProject\Foundation\Session\Session;
+use PommProject\Foundation\ResultIterator;
+
 use PommProject\ModelManager\Model\Projection;
+use PommProject\ModelManager\Model\RowStructure;
 
 /**
  * BaseModelTrait
