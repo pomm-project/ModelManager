@@ -67,6 +67,8 @@ abstract class FlexibleEntity extends FlexibleContainer implements \ArrayAccess
         } elseif (is_array($var)) {
             return array_intersect_key($this->container, array_flip($var));
         }
+
+        return false;
     }
 
     /**

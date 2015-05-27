@@ -242,7 +242,7 @@ class PgEntity implements ConverterInterface
                         return sprintf('"%s"', str_replace('"', '""', $val));
                     } else {
                         return $val;
-                    };
+                    }
                 }, $this->createHydrationPlan($session)->freeze($fields)
                 ))
             );
