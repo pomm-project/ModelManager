@@ -52,9 +52,13 @@ class SessionBuilder extends FoundationSessionBuilder
         return $this;
     }
 
+
     /**
      * createSession
      *
+     * @param Connection   $connection
+     * @param ClientHolder $client_holder
+     * @param null|string  $stamp
      * @return  ModelManagerSession
      * @see     VanillaSessionBuilder
      */

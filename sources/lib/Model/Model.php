@@ -32,6 +32,11 @@ abstract class Model implements ClientInterface
 {
     protected $session;
     protected $flexible_entity_class;
+
+
+    /**
+     * @var RowStructure
+     */
     protected $structure;
 
     /**
@@ -42,6 +47,7 @@ abstract class Model implements ClientInterface
      *
      * @access public
      * @return Session
+     * @throws ModelException
      */
     public function getSession()
     {
@@ -143,7 +149,7 @@ abstract class Model implements ClientInterface
      * createProjection() method.
      *
      * @access protected
-     * @param  sql                $sql
+     * @param  string             $sql
      * @param  array              $values
      * @param  Projection         $projection
      * @return CollectionIterator

@@ -193,7 +193,7 @@ TEXT;
      * @access protected
      * @param  int   $table_oid
      * @throws GeneratorException
-     * @return array $informations
+     * @return ConvertedResultIterator $fields_info
      */
     protected function getFieldInformation($table_oid)
     {

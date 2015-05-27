@@ -49,7 +49,7 @@ class ModelPooler extends ClientPooler
      * createModel
      *
      * @see    ClientPooler
-     * @throw  ModelException if incorrect
+     * @throws ModelException if incorrect
      * @return Model
      */
     protected function createClient($class)

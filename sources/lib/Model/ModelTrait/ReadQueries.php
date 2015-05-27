@@ -291,7 +291,7 @@ trait ReadQueries
      * @access private
      * @param  array $values
      * @throws ModelException
-     * @return Model $this
+     * @return ReadQueries $this
      */
     protected function checkPrimaryKey(array $values)
     {

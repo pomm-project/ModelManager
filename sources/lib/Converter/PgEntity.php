@@ -37,14 +37,14 @@ class PgEntity implements ConverterInterface
     protected $identity_mapper;
     protected $flexible_entity_class;
 
+
     /**
-     * __construct
-     *
      * Constructor.
      *
      * @access public
-     * @param  RowStructure $structure
-     * @return null
+     * @param                $flexible_entity_class
+     * @param RowStructure   $structure
+     * @param IdentityMapper $identity_mapper
      */
     public function __construct(
         $flexible_entity_class,
@@ -200,7 +200,7 @@ class PgEntity implements ConverterInterface
      *
      * @access protected
      * @param  mixed        $data
-     * throws  ConverterException
+     * @throws  ConverterException
      * @return PgEntity     $this
      */
     protected function checkData($data)

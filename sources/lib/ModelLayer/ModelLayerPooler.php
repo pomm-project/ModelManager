@@ -41,6 +41,7 @@ class ModelLayerPooler extends ClientPooler
      *
      * @see    ClientPooler
      * @return ModelLayer
+     * @throws ModelLayerException
      */
     protected function createClient($identifier)
     {

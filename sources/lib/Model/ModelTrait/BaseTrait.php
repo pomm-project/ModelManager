@@ -26,21 +26,26 @@ trait BaseTrait
 {
     /**
      * @see Model
+     * @return Projection
      */
     abstract public function createProjection();
 
     /**
      * @see Model
+     * @return ResultIterator
      */
     abstract protected function query($sql, array $values = [], Projection $projection = null);
 
     /**
      * @see Model
+     * @return Session
      */
     abstract protected function getSession();
 
     /**
      * @see Model
+     * @return RowStructure
+
      */
     abstract public function getStructure();
 
