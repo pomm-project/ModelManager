@@ -290,7 +290,6 @@ class {:entity:} extends RowStructure
      * Structure definition.
      *
      * @access public
-     * @return null
      */
     public function __construct()
     {
