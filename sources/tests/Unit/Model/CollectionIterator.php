@@ -96,14 +96,16 @@ SQL;
                         ? null
                         : $values['some_data'];
                     $values['id'] += 1;
+                    $values['new_value'] = 'love pomm';
+
                     return $values;
                 }
         );
         $this
             ->array($collection->get(0)->extract())
-            ->isEqualTo(['id' => 3, 'some_data' => 'one'])
+            ->isEqualTo(['id' => 3, 'some_data' => 'one', 'new_value' => 'love pomm'])
             ->array($collection->get(3)->extract())
-            ->isEqualTo(['id' => 9, 'some_data' => null])
+            ->isEqualTo(['id' => 9, 'some_data' => null, 'new_value' => 'love pomm'])
             ;
     }
 
@@ -117,6 +119,7 @@ SQL;
             ->message->contains('Filters MUST return an array')
             ;
     }
+
     public function testRegisterBadFilters()
     {
         $collection = $this->getCollectionMock();

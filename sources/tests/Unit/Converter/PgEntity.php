@@ -121,19 +121,6 @@ class PgEntity extends BaseTest
                 'created_at' => new \DateTime('2014-10-24 12:44:40.021324+00'),
                 'updated_at' => [new \DateTime('1982-04-21 23:12:43+00')]
             ]),
-            new ComplexFixture([
-                'id' => 1,
-                'extra_field' => 2,
-                'complex_number' => ['imaginary' => 2.344,'real' => 1.233],
-                'complex_numbers' =>
-                    [
-                        ['real' => 3.455, 'imaginary' => 4.566],
-                        ['real' => 5.677, 'imaginary' => 6.788],
-                        null,
-                    ],
-                'created_at' => new \DateTime('2014-10-24 12:44:40.021324+00'),
-                'updated_at' => [new \DateTime('1982-04-21 23:12:43+00')]
-            ]),
         ];
     }
 
