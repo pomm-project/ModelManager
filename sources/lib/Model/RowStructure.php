@@ -101,7 +101,7 @@ class RowStructure implements \ArrayAccess
      * @access public
      * @param  string       $name
      * @param  string       $type
-     * @throw  ModelException if type or name is null
+     * @throws ModelException if type or name is null
      * @return RowStructure $this
      */
     public function addField($name, $type)

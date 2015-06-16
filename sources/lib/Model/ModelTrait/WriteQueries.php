@@ -42,7 +42,12 @@ trait WriteQueries
      */
     public function insertOne(FlexibleEntityInterface &$entity)
     {
-        $values = $entity->fields();
+        $values = $entity->fields(
+            array_intersect(
+                array_keys($this->getStructure()->getDefinition()),
+                array_keys($entity->extract())
+            )
+        );
         $sql = strtr(
             "insert into :relation (:fields) values (:values) returning :projection",
             [

@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
     "hash": "89bd0bebb919ceef23232b69b7cfbda1",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pomm-project/Foundation.git",
-                "reference": "5c985771d3efd801d14b4e5b5e5027ad73561dde"
+                "reference": "314a884d2ecb3c78a26e91d61f0898cf447b8c5c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pomm-project/Foundation/zipball/5c985771d3efd801d14b4e5b5e5027ad73561dde",
-                "reference": "5c985771d3efd801d14b4e5b5e5027ad73561dde",
+                "url": "https://api.github.com/repos/pomm-project/Foundation/zipball/314a884d2ecb3c78a26e91d61f0898cf447b8c5c",
+                "reference": "314a884d2ecb3c78a26e91d61f0898cf447b8c5c",
                 "shasum": ""
             },
             "require": {
@@ -58,7 +58,7 @@
                 "pomm",
                 "postgresql"
             ],
-            "time": "2015-05-13 14:44:02"
+            "time": "2015-06-03 19:07:14"
         },
         {
             "name": "psr/log",
