@@ -24,7 +24,7 @@ use PommProject\ModelManager\Exception\ModelException;
  */
 abstract class FlexibleContainer implements FlexibleEntityInterface, \IteratorAggregate
 {
-    use StatefullEntityTrait;
+    use StatefulEntityTrait;
 
     protected $container = [];
 

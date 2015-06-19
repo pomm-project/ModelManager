@@ -62,7 +62,7 @@ class PgEntity implements ConverterInterface
     /**
      * fromPg
      *
-     * Embedable entities are converted here.
+     * Embeddable entities are converted here.
      *
      * @see ConverterInterface
      */
@@ -208,7 +208,7 @@ class PgEntity implements ConverterInterface
         if (!$data instanceOf $this->flexible_entity_class) {
             throw new ConverterException(
                 sprintf(
-                    "This converter only knows how to convert entites of type '%s' ('%s' given).",
+                    "This converter only knows how to convert entities of type '%s' ('%s' given).",
                     $this->flexible_entity_class,
                     get_class($data)
                 )

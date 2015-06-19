@@ -145,7 +145,7 @@ trait ReadQueries
      * fetchSingleValue
      *
      * Fetch a single value named « result » from a query.
-     * The query must be formated with ":condition" as WHERE condition
+     * The query must be formatted with ":condition" as WHERE condition
      * placeholder. If the $where argument is a string, it is turned into a
      * Where instance.
      *

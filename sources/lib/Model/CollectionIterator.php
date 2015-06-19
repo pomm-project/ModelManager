@@ -169,7 +169,7 @@ class CollectionIterator extends ResultIterator
     /**
      * extract
      *
-     * Return an array of entities extractd as arrays.
+     * Return an array of entities extracted as arrays.
      *
      * @access public
      * @return array

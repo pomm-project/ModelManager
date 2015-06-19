@@ -59,7 +59,7 @@ class ModelPooler extends ClientPooler
             $reflection = new \ReflectionClass($class);
         } catch (\ReflectionException $e) {
             throw new ModelException(sprintf(
-                "Could not instanciate Model class '%s'. (Reason: '%s').",
+                "Could not instantiate Model class '%s'. (Reason: '%s').",
                 $class,
                 $e->getMessage()
             ));
