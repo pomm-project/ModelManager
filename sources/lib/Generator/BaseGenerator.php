@@ -178,7 +178,7 @@ abstract class BaseGenerator
     /**
      * saveFile
      *
-     * Write the genreated content to a file.
+     * Write the generated content to a file.
      *
      * @access protected
      * @param  string        $filename

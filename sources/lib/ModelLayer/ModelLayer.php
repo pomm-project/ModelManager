@@ -138,19 +138,19 @@ EOMSG
     /**
      * setTransactionIsolationLevel
      *
-     * Transaction isolation level tells postgresql how to manage with the
-     * current transaction. The default is "READ COMMITED".
+     * Transaction isolation level tells PostgreSQL how to manage with the
+     * current transaction. The default is "READ COMMITTED".
      * @see http://www.postgresql.org/docs/9.0/static/sql-set-transaction.html
      *
      * @access protected
-     * @param   string     $isolaton_level
+     * @param   string     $isolation_level
      * @throws  ModelLayerException if not valid isolation level
      * @return  ModelLayer $this
      */
-    protected function setTransactionIsolationLevel($isolaton_level)
+    protected function setTransactionIsolationLevel($isolation_level)
     {
         if (!in_array(
-            $isolaton_level,
+            $isolation_level,
             [Connection::ISOLATION_READ_COMMITTED, Connection::ISOLATION_READ_REPEATABLE, Connection::ISOLATION_SERIALIZABLE]
         )) {
             throw new ModelLayerException(sprintf("'%s' is not a valid transaction isolation level."));
@@ -159,14 +159,14 @@ EOMSG
         return $this->sendParameter(
             "set transaction isolation level %s",
             '',
-            $isolaton_level
+            $isolation_level
         );
     }
 
     /**
      * setTransactionAccessMode
      *
-     * Transaction access modes tell Postgresql if transaction are able to
+     * Transaction access modes tell PostgreSQL if transaction are able to
      * write or read only.
      * @see http://www.postgresql.org/docs/9.0/static/sql-set-transaction.html
      *
@@ -287,7 +287,7 @@ EOMSG
     /**
      * isTransactionOk
      *
-     * In Postgresql, an error during a transaction cancels all the queries and
+     * In PostgreSQL, an error during a transaction cancels all the queries and
      * rollback the transaction on commit. This method returns the current
      * transaction's status. If no transactions are open, it returns null.
      *
@@ -403,7 +403,7 @@ EOMSG
      * sendParameter
      *
      * Send a parameter to the server.
-     * The parameter MUST have been properly checked and escpaed if needed as
+     * The parameter MUST have been properly checked and escaped if needed as
      * it is going to be passed AS IS to the server. Sending untrusted
      * parameters may lead to potential SQL injection.
      *

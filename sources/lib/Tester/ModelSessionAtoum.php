@@ -16,7 +16,7 @@ use PommProject\ModelManager\SessionBuilder;
  * ModelSessionAwareAtoum
  *
  * Session aware Atoum instance. This uses ModelManager's session builder to
- * ensiure all poolers are loaded.
+ * ensure all poolers are loaded.
  *
  * @package ModelManager
  * @copyright 2014 Grégoire HUBERT

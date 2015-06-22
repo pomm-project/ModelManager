@@ -2,15 +2,15 @@
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/pomm-project/ModelManager/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/pomm-project/ModelManager/?branch=master) [![Build Status](https://travis-ci.org/pomm-project/ModelManager.svg)](https://travis-ci.org/pomm-project/ModelManager) [![Monthly Downloads](https://poser.pugx.org/pomm-project/model-manager/d/monthly.png)](https://packagist.org/packages/pomm-project/model-manager) [![License](https://poser.pugx.org/pomm-project/model-manager/license.svg)](https://packagist.org/packages/pomm-project/model-manager)
 
-Pomm's ModelManager package is the common model layer built upon the Foundation package. It makes developers able to create models against the database and get object oriented entities back. **It is not an ORM**, it grants developers with the ability to perform native queries using native real SQL and use almost all types of Postgresql. This makes model layer to meet with performances while staying lean.
+Pomm's ModelManager package is the common model layer built upon the Foundation package. It makes developers able to create models against the database and get object-oriented entities back. **It is not an ORM**, it grants developers with the ability to perform native queries using native real SQL and use almost all types of PostgreSQL. This makes model layer to meet with performances while staying lean.
 
-Pomm's Model Manager is in Release Candistate state. This version will go in stable state soon and may be used  for test purposes or to start new projects.
+Pomm's Model Manager is in Release Candidate state. This version will go in stable state soon and may be used  for test purposes or to start new projects.
 
 ## Installation
 
 Pomm components are available on [packagist](https://packagist.org/packages/pomm-project/) using [composer](https://packagist.org/). To install and use Pomm's model manager, add a require line to `"pomm-project/model-manager"` in your `composer.json` file. It is advised to install the [CLI package](https://github.com/pomm-project/Cli) as well.
 
-In order to load the model manager's poolers at start up, it is possible to use the provided `SessionBuilder` in Pomm's configuration:
+In order to load the model manager's poolers at startup, it is possible to use the provided `SessionBuilder` in Pomm's configuration:
 
 ```php
 $pomm = new Pomm([
@@ -26,7 +26,7 @@ It is better to provide dedicated session builders with your project.
 
 ## Introduction
 
-The model manager links classes with database relation through structure (relation physical ) and projection (fields returned to the application) to hydrate entity instances manipulated by web applications.
+The model manager links classes with database relation through structure (relation physical) and projection (fields returned to the application) to hydrate entity instances manipulated by web applications.
 
 ![Different classes involved](http://yuml.me/816d261c)
 
@@ -55,7 +55,7 @@ class DocumentModel extends Model
 }
 ```
 
-The class shown above defines a structure using the `RowStructure` class for the example's sake. It is a good practice to define a dedicated structure class for each Model as the CLI package does. Since the `document` relation is a table, the class imports the `WriteQueries` trait that contains read and write predefined queries like `findWhere()`, `createAndSave()` and many more methods. As soon as this file is available in the project, it is possible to use the model layer from a controller using the `Model client pooler` (see the [Foundation package](https://github.com/pomm-project/Foundation)):
+The class shown above defines a structure using the `RowStructure` class for the example's sake. It is a good practice to define a dedicated structure class for each Model as the CLI package does. Since the `document` relation is a table, the class imports the `WriteQueries` trait that contains predefined read and write queries like `findWhere()`, `createAndSave()` and many more methods. As soon as this file is available in the project, it is possible to use the model layer from a controller using the `Model client pooler` (see the [Foundation package](https://github.com/pomm-project/Foundation)):
 
 ```php
 function touchDocumentController($document_id)
@@ -127,7 +127,7 @@ class DocumentModel extends Model
 
 ### Projection
 
-Projection is the big difference between Pomm and ORM. ORM define the relation through a static class definition whereas Pomm defines a [projection](http://en.wikipedia.org/wiki/Relational_algebra#Projection_.28.CF.80.29) (ie the fields list of a select or returning) between a database relation and a flexible instance.
+Projection is the big difference between Pomm and ORM. ORM defines the relation through a static class definition whereas Pomm defines a [projection](http://en.wikipedia.org/wiki/Relational_algebra#Projection_.28.CF.80.29) (i.e. the fields list of a `SELECT` or `RETURNING`) between a database relation and a flexible instance.
 
 By default, a `Model` instance takes all the fields of its relation hence `$model->findByPK(['document_id' => 2])` is equivalent to `select d.* from myschema.document d where d.document_id = 2`. But it is possible to tune this projection by overloading the `createProjection()` method:
 
@@ -198,7 +198,7 @@ SQL;
 }
 ```
 
-This way to write queries allow developers to focus on what the query actually does instead of managing list of fields and aliases. All the goodness of Postgres'SQL like window functions, CTE etc. are usable.
+This way to write queries allows developers to focus on what the query actually does instead of managing list of fields and aliases. All the goodness of Postgres's SQL like window functions, CTE etc. are usable.
 
 ## Collection & flexible entities
 
@@ -262,7 +262,7 @@ class DocumentStructure extends RowStructure
 }
 ```
 
-Most of the time, these structure files are generated using Pomm's [CLI package](https://github.com/pomm-project/Cli) so there is no need to really care about this. The interesting point is how these structures handle Postgresql inheritance:
+Most of the time, these structure files are generated using Pomm's [CLI package](https://github.com/pomm-project/Cli) so there is no need to really care about this. The interesting point is how these structures handle PostgreSQL inheritance:
 
 ```php
 class DocumentModel extends Model
@@ -280,7 +280,7 @@ class DocumentModel extends Model
     }
 ```
 
-In the example above, the native document structure is augmented with a `AuthenticableStructure` and a `PostableStructure` exactly the way it is done in Postgresql.
+In the example above, the native document structure is augmented with a `AuthenticableStructure` and a `PostableStructure` exactly the way it is done in PostgreSQL.
 
 ## Model layer
 
@@ -330,9 +330,9 @@ class DocumentModelLayer extends ModelLayer
 }
 ```
 
-Thew example above shows how to embed model calls in a transaction and how to convert technical exceptions into business exceptions.
+The example above shows how to embed model calls in a transaction and how to convert technical exceptions into business exceptions.
 
-Watchful readers may have noticed a call to a method `sendNotify()`. This is a use of [Postgresql's asynchronous messaging system](http://ledgersmbdev.blogspot.fr/2012/09/objectrelational-interlude-messaging-in.html).
+Watchful readers may have noticed a call to a method `sendNotify()`. This is a use of [PostgreSQL's asynchronous messaging system](http://ledgersmbdev.blogspot.fr/2012/09/objectrelational-interlude-messaging-in.html).
 
 ## Session configuration and PgEntity converter
 

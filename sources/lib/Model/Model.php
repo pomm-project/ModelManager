@@ -295,7 +295,7 @@ abstract class Model implements ClientInterface
     /**
      * executeAnonymousQuery
      *
-     * Handy method for DDL statments.
+     * Handy method for DDL statements.
      *
      * @access protected
      * @param  string $sql

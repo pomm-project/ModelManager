@@ -182,7 +182,7 @@ class HydrationPlan
     /**
      * createEntity
      *
-     * Instanciate FlexibleEntityInterface from converted values.
+     * Instantiate FlexibleEntityInterface from converted values.
      *
      * @access protected
      * @param  array $values

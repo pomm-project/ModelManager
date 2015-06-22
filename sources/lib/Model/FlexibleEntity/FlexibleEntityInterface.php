@@ -30,7 +30,7 @@ interface FlexibleEntityInterface
      * hydrate
      *
      * Set raw values in an entity. If some values are already set, they are
-     * overidden with new values.
+     * overridden with new values.
      *
      * @access public
      * @param  array    $fields

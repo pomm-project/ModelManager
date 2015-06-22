@@ -154,7 +154,7 @@ class Projection extends Atoum
             ;
     }
 
-    public function testGetFiedTypes()
+    public function testGetFieldTypes()
     {
         $projection = $this->newTestedInstance('whatever', ['pika' => 'int4'])
             ->setField('chu', 'expression(chu)')

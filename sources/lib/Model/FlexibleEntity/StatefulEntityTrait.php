@@ -10,7 +10,7 @@
 namespace PommProject\ModelManager\Model\FlexibleEntity;
 
 /**
- * StatefullEntityTrait
+ * StatefulEntityTrait
  *
  * Entities with the ability to keep record of their modification or
  * persistence status.
@@ -21,7 +21,7 @@ namespace PommProject\ModelManager\Model\FlexibleEntity;
  * @license X11 {@link http://opensource.org/licenses/mit-license.php}
  * @see FlexibleEntityInterface
  */
-trait StatefullEntityTrait
+trait StatefulEntityTrait
 {
     private $status = FlexibleEntityInterface::STATUS_NONE;
 

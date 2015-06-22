@@ -88,7 +88,7 @@ abstract class FlexibleEntity extends FlexibleContainer implements \ArrayAccess
     /**
      * set
      *
-     * Set a value in the varholder.
+     * Set a value in the var holder.
      *
      * @final
      * @access public
@@ -134,7 +134,7 @@ abstract class FlexibleEntity extends FlexibleContainer implements \ArrayAccess
     /**
      * clear
      *
-     * Drop an attribute from the varholder.
+     * Drop an attribute from the var holder.
      *
      * @final
      * @access public
@@ -389,8 +389,8 @@ abstract class FlexibleEntity extends FlexibleContainer implements \ArrayAccess
         static::$has_methods = [];
 
         foreach (get_class_methods($entity) as $method) {
-            if (preg_match('/^has([A-Z].*)$/', $method, $matchs)) {
-                static::$has_methods[] = $matchs[1];
+            if (preg_match('/^has([A-Z].*)$/', $method, $matches)) {
+                static::$has_methods[] = $matches[1];
             }
         }
     }

@@ -359,15 +359,15 @@ class Projection implements \IteratorAggregate
      *
      * @access protected
      * @param  string $string field definition
-     * @param  string $prefix  optionnal unquoted prefix
+     * @param  string $prefix  optional unquoted prefix
      * @return string
      */
     protected function replaceToken($string, $prefix = '')
     {
         return preg_replace_callback(
             '/%:(\w.*):%/U',
-            function(array $matchs) use ($prefix) {
-                return sprintf('%s"%s"', $prefix, addcslashes($matchs[1], '"\\'));
+            function(array $matches) use ($prefix) {
+                return sprintf('%s"%s"', $prefix, addcslashes($matches[1], '"\\'));
             },
             $string
         );
