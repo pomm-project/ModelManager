@@ -9,15 +9,14 @@
  */
 namespace PommProject\ModelManager\Converter;
 
-use PommProject\Foundation\Exception\ConverterException;
 use PommProject\Foundation\Converter\ConverterInterface;
+use PommProject\Foundation\Exception\ConverterException;
 use PommProject\Foundation\Session\Session;
-
+use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
+use PommProject\ModelManager\Model\HydrationPlan;
+use PommProject\ModelManager\Model\IdentityMapper;
 use PommProject\ModelManager\Model\Projection;
 use PommProject\ModelManager\Model\RowStructure;
-use PommProject\ModelManager\Model\IdentityMapper;
-use PommProject\ModelManager\Model\HydrationPlan;
-use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
 
 /**
  * PgEntity
@@ -75,7 +74,7 @@ class PgEntity implements ConverterInterface
         }
 
 
-        if ($type instanceOf Projection) {
+        if ($type instanceof Projection) {
             $projection = $type;
         } else {
             $projection = new Projection(
@@ -205,7 +204,7 @@ class PgEntity implements ConverterInterface
      */
     protected function checkData($data)
     {
-        if (!$data instanceOf $this->flexible_entity_class) {
+        if (!$data instanceof $this->flexible_entity_class) {
             throw new ConverterException(
                 sprintf(
                     "This converter only knows how to convert entities of type '%s' ('%s' given).",
@@ -233,10 +232,10 @@ class PgEntity implements ConverterInterface
 
         return
             sprintf("(%s)",
-                join(',', array_map(function($val) {
+                join(',', array_map(function ($val) {
                     if ($val === null) {
                         return '';
-                    } elseif (strlen($val) === 0) {
+                    } elseif ($val === '') {
                         return '""';
                     } elseif (preg_match('/[,\s]/', $val)) {
                         return sprintf('"%s"', str_replace('"', '""', $val));

@@ -10,13 +10,12 @@
 namespace PommProject\ModelManager\Test\Unit\Converter;
 
 use PommProject\Foundation\Session\Session;
-
 use PommProject\ModelManager\Model\RowStructure;
-use PommProject\ModelManager\Test\Unit\BaseTest;
-use PommProject\ModelManager\Test\Fixture\ComplexNumber;
-use PommProject\ModelManager\Test\Fixture\ComplexNumberStructure;
 use PommProject\ModelManager\Test\Fixture\ComplexFixture;
 use PommProject\ModelManager\Test\Fixture\ComplexFixtureStructure;
+use PommProject\ModelManager\Test\Fixture\ComplexNumber;
+use PommProject\ModelManager\Test\Fixture\ComplexNumberStructure;
+use PommProject\ModelManager\Test\Unit\BaseTest;
 
 class PgEntity extends BaseTest
 {
@@ -111,7 +110,7 @@ class PgEntity extends BaseTest
             new ComplexFixture([
                 'id' => 1,
                 'version_id' => null,
-                'complex_number' => new ComplexNumber(['real' => 1.233,'imaginary' => 2.344]),
+                'complex_number' => new ComplexNumber(['real' => 1.233, 'imaginary' => 2.344]),
                 'complex_numbers' =>
                     [
                         new ComplexNumber(['real' => 3.455, 'imaginary' => 4.566]),

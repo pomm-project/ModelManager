@@ -9,7 +9,6 @@
  */
 namespace PommProject\ModelManager\Test\Fixture;
 
-use PommProject\ModelManager\Test\Fixture\SimpleFixtureModel;
 use PommProject\ModelManager\Model\ModelTrait\ReadQueries;
 
 class ReadFixtureModel extends SimpleFixtureModel

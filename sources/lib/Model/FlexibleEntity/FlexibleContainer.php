@@ -123,7 +123,7 @@ abstract class FlexibleContainer implements FlexibleEntityInterface, \IteratorAg
         case 'has':
             return isset($this->container[$attribute]) || array_key_exists($attribute, $this->container);
         case 'clear':
-            unset ($this->checkAttribute($attribute)->container[$attribute]);
+            unset($this->checkAttribute($attribute)->container[$attribute]);
 
             return $this;
         default:

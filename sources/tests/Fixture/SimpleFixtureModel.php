@@ -9,8 +9,8 @@
  */
 namespace PommProject\ModelManager\Test\Fixture;
 
-use PommProject\ModelManager\Model\Model;
 use PommProject\Foundation\Where;
+use PommProject\ModelManager\Model\Model;
 
 class SimpleFixtureModel extends Model
 {
@@ -38,4 +38,3 @@ class SimpleFixtureModel extends Model
         return $this->query($sql, $where->getValues());
     }
 }
-

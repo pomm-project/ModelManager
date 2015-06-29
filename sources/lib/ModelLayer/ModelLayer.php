@@ -9,11 +9,10 @@
  */
 namespace PommProject\ModelManager\ModelLayer;
 
-use PommProject\Foundation\Session\Connection;
-use PommProject\Foundation\Session\ResultHandler;
 use PommProject\Foundation\Client\Client;
 use PommProject\Foundation\Client\ClientInterface;
-
+use PommProject\Foundation\Session\Connection;
+use PommProject\Foundation\Session\ResultHandler;
 use PommProject\ModelManager\Exception\ModelLayerException;
 use PommProject\ModelManager\Model\Model;
 
@@ -153,7 +152,7 @@ EOMSG
             $isolation_level,
             [Connection::ISOLATION_READ_COMMITTED, Connection::ISOLATION_READ_REPEATABLE, Connection::ISOLATION_SERIALIZABLE]
         )) {
-            throw new ModelLayerException(sprintf("'%s' is not a valid transaction isolation level."));
+            throw new ModelLayerException(sprintf("'%s' is not a valid transaction isolation level.", $isolation_level));
         }
 
         return $this->sendParameter(
@@ -238,10 +237,9 @@ EOMSG
      */
     protected function rollbackTransaction($name = null)
     {
+        $sql = "rollback transaction";
         if ($name !== null) {
             $sql = sprintf("rollback to savepoint %s", $this->escapeIdentifier($name));
-        } else {
-            $sql = "rollback transaction";
         }
 
         $this->executeAnonymousQuery($sql);

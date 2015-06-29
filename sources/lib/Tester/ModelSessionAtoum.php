@@ -31,4 +31,3 @@ abstract class ModelSessionAtoum extends FoundationSessionAtoum
         return new SessionBuilder($configuration);
     }
 }
-

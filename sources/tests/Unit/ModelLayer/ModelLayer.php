@@ -9,11 +9,9 @@
  */
 namespace PommProject\ModelManager\Test\Unit\ModelLayer;
 
-use PommProject\Foundation\Session\Session;
-use PommProject\Foundation\Observer\ObserverPooler;
 use PommProject\Foundation\Session\Connection;
+use PommProject\Foundation\Session\Session;
 use PommProject\ModelManager\Tester\ModelSessionAtoum;
-use PommProject\ModelManager\ModelLayer\ModelLayerPooler;
 
 class ModelLayer extends ModelSessionAtoum
 {
@@ -73,7 +71,7 @@ EOSQL
                     ->setDeferrable(['pomm_test.chu_pika_id_fkey'], Connection::CONSTRAINTS_DEFERRED)
             )
             ->isEqualTo($model_layer)
-            ->exception(function() use ($model_layer) {
+            ->exception(function () use ($model_layer) {
                 $model_layer->setDeferrable(['pomm_test.chu_pika_id_fkey'], 'chu');
             })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelLayerException')
@@ -99,7 +97,7 @@ EOSQL
             ->isNull()
             ->boolean($model_layer->isTransactionOk())
             ->isTrue()
-            ->exception(function() use ($model_layer) { $model_layer->releaseSavepoint('not exist'); })
+            ->exception(function () use ($model_layer) { $model_layer->releaseSavepoint('not exist'); })
             ->isInstanceOf('\PommProject\Foundation\Exception\SqlException')
             ->boolean($model_layer->isInTransaction())
             ->isTrue()

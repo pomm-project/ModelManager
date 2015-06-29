@@ -9,16 +9,11 @@
  */
 namespace PommProject\ModelManager\Test\Unit\Model;
 
-use Mock\PommProject\ModelManager\Model\Projection         as ProjectionMock;
 use Mock\PommProject\ModelManager\Model\CollectionIterator as CollectionIteratorMock;
-
-use PommProject\ModelManager\Model\ModelPooler;
-
-use PommProject\ModelManager\Tester\ModelSessionAtoum;
-use PommProject\Foundation\Converter\ConverterPooler;
+use Mock\PommProject\ModelManager\Model\Projection as ProjectionMock;
 use PommProject\Foundation\Session\Session;
-
 use PommProject\ModelManager\Test\Fixture\SimpleFixtureModel;
+use PommProject\ModelManager\Tester\ModelSessionAtoum;
 
 class CollectionIterator extends ModelSessionAtoum
 {
@@ -87,15 +82,15 @@ SQL;
     {
         $collection = $this->getCollectionMock();
         $collection->registerFilter(
-            function($values) { $values['id'] *= 2; return $values; }
+            function ($values) { $values['id'] *= 2; return $values; }
         )
             ->registerFilter(
-                function($values) {
+                function ($values) {
                     $values['some_data'] =
                         strlen($values['some_data']) > 3
                         ? null
                         : $values['some_data'];
-                    $values['id'] += 1;
+                    ++$values['id'];
                     $values['new_value'] = 'love pomm';
 
                     return $values;
@@ -112,9 +107,9 @@ SQL;
     public function testGetWithWrongFilter()
     {
         $collection = $this->getCollectionMock();
-        $collection->registerFilter(function($values) { return $values['id']; });
+        $collection->registerFilter(function ($values) { return $values['id']; });
         $this
-            ->exception(function() use ($collection) { $collection->get(2); })
+            ->exception(function () use ($collection) { $collection->get(2); })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains('Filters MUST return an array')
             ;
@@ -124,7 +119,7 @@ SQL;
     {
         $collection = $this->getCollectionMock();
         $this
-            ->exception(function() use ($collection) {
+            ->exception(function () use ($collection) {
                 $collection->registerFilter('whatever');
             })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')

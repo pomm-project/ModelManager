@@ -10,10 +10,9 @@
 namespace PommProject\ModelManager\Model;
 
 use PommProject\Foundation\Inflector;
-
-use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
-use PommProject\ModelManager\Model\FlexibleEntity\FlexibleContainer;
 use PommProject\ModelManager\Exception\ModelException;
+use PommProject\ModelManager\Model\FlexibleEntity\FlexibleContainer;
+use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
 
 /**
  * FlexibleEntity
@@ -28,7 +27,7 @@ use PommProject\ModelManager\Exception\ModelException;
  */
 abstract class FlexibleEntity extends FlexibleContainer implements \ArrayAccess
 {
-    public    static $strict = true;
+    public static $strict = true;
     protected static $has_methods;
 
     /**
@@ -41,7 +40,7 @@ abstract class FlexibleEntity extends FlexibleContainer implements \ArrayAccess
      */
     public function __construct(array $values = null)
     {
-        if (!is_null($values)) {
+        if ($values !== null) {
             $this->hydrate($values);
         }
     }
@@ -119,13 +118,13 @@ abstract class FlexibleEntity extends FlexibleContainer implements \ArrayAccess
     public function add($var, $value)
     {
         if ($this->has($var)) {
-           if (is_array($this->container[$var])) {
-               $this->container[$var][] = $value;
-           } else {
-               throw new ModelException(sprintf("Field '%s' exists and is not an array.", $var));
-           }
+            if (is_array($this->container[$var])) {
+                $this->container[$var][] = $value;
+            } else {
+                throw new ModelException(sprintf("Field '%s' exists and is not an array.", $var));
+            }
         } else {
-            $this->container[$var] = array($value);
+            $this->container[$var] = [$value];
         }
 
         return $this;

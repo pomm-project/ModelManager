@@ -9,11 +9,10 @@
  */
 namespace PommProject\ModelManager\Generator;
 
-use PommProject\Foundation\ParameterHolder;
 use PommProject\Foundation\Inspector\Inspector;
-
-use PommProject\ModelManager\Session;
+use PommProject\Foundation\ParameterHolder;
 use PommProject\ModelManager\Exception\GeneratorException;
+use PommProject\ModelManager\Session;
 
 /**
  * BaseGenerator
@@ -70,7 +69,7 @@ abstract class BaseGenerator
      * @param  array            $output
      * @return BaseGenerator    $this
      */
-    protected function outputFileCreation(array &$output = [])
+    protected function outputFileCreation(array &$output)
     {
         if (file_exists($this->filename)) {
             $output[] = ['status' => 'ok', 'operation' => 'overwriting', 'file' => $this->filename];
@@ -188,15 +187,15 @@ abstract class BaseGenerator
      */
     protected function saveFile($filename, $content)
     {
-        if (!file_exists(dirname($filename))) {
-            if (mkdir(dirname($filename), 0777, true) === false) {
-                throw new GeneratorException(
-                    sprintf(
-                        "Could not create directory '%s'.",
-                        dirname($filename)
-                    )
-                );
-            }
+        if (!file_exists(dirname($filename))
+            && mkdir(dirname($filename), 0777, true) === false
+        ) {
+            throw new GeneratorException(
+                sprintf(
+                    "Could not create directory '%s'.",
+                    dirname($filename)
+                )
+            );
         }
 
         if (file_put_contents($filename, $content) === false) {

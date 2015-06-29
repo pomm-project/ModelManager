@@ -49,7 +49,7 @@ trait StatefulEntityTrait
      */
     public function touch()
     {
-        $this->status = $this->status | FlexibleEntityInterface::STATUS_MODIFIED;
+        $this->status |= FlexibleEntityInterface::STATUS_MODIFIED;
 
         return $this;
     }

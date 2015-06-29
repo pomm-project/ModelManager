@@ -9,9 +9,8 @@
  */
 namespace PommProject\ModelManager\Test\Unit\Model;
 
-use PommProject\ModelManager\Test\Fixture\ComplexFixture;
-
 use Atoum;
+use PommProject\ModelManager\Test\Fixture\ComplexFixture;
 
 class IdentityMapper extends Atoum
 {

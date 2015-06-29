@@ -9,10 +9,9 @@
  */
 namespace PommProject\ModelManager\Test\Unit\Model;
 
+use Atoum;
 use PommProject\ModelManager\Model\FlexibleEntity as PommFlexibleEntity;
 use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
-
-use Atoum;
 
 class FlexibleEntity extends Atoum
 {
@@ -49,7 +48,7 @@ class FlexibleEntity extends Atoum
             ->isEqualTo('whatever')
             ->array($entity->get('an_array'))
             ->isIdenticalTo([1, 2])
-            ->exception(function() use ($entity) { $entity->get('no_such_key'); })
+            ->exception(function () use ($entity) { $entity->get('no_such_key'); })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains('No such key')
             ;
@@ -97,7 +96,7 @@ class FlexibleEntity extends Atoum
             ->isIdenticalTo([1])
             ->array($entity->add('an_array', 2)->get('an_array'))
             ->isIdenticalTo([1, 2])
-            ->Exception(function() use ($entity) { $entity->add('pika', 3); })
+            ->Exception(function () use ($entity) { $entity->add('pika', 3); })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains('is not an array')
             ->array($entity->add('whatever', 1)->get('whatever'))
@@ -122,10 +121,10 @@ class FlexibleEntity extends Atoum
     {
         $entity = new PikaEntity();
         $this
-            ->exception(function() use ($entity) { $entity->eDqSdgeDsTfd(); })
+            ->exception(function () use ($entity) { $entity->eDqSdgeDsTfd(); })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains('No such method')
-            ->exception(function() use ($entity) { $entity->sefPika(); })
+            ->exception(function () use ($entity) { $entity->sefPika(); })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains('No such method')
             ;
@@ -139,7 +138,7 @@ class FlexibleEntity extends Atoum
             ->isEqualTo('WHATEVER')
             ->array($entity->getChu())
             ->isIdenticalTo([1, 2])
-            ->exception(function() use ($entity) { $entity->getNoSuchKey(); })
+            ->exception(function () use ($entity) { $entity->getNoSuchKey(); })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains('No such key')
             ;
@@ -250,7 +249,7 @@ class FlexibleEntity extends Atoum
             ->isEqualTo('WOW')
             ->string($entity->chu)
             ->isEqualTo('WoW')
-            ->exception(function() use ($entity) { $entity->whatever; })
+            ->exception(function () use ($entity) { $entity->whatever; })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains('No such key')
             ;
@@ -279,7 +278,7 @@ class FlexibleEntity extends Atoum
             ->isEqualTo('WOW')
             ->string($entity['chu'])
             ->isEqualTo('wow')
-            ->exception(function() use ($entity) { $entity['no_such_key']; })
+            ->exception(function () use ($entity) { $entity['no_such_key']; })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains('No such key')
             ->boolean(isset($entity['chu']))

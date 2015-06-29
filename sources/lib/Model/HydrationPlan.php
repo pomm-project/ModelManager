@@ -9,9 +9,8 @@
  */
 namespace PommProject\ModelManager\Model;
 
-use PommProject\Foundation\Session\Session;
 use PommProject\Foundation\Converter\ConverterClient;
-
+use PommProject\Foundation\Session\Session;
 use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
 
 /**

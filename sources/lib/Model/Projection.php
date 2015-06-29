@@ -83,7 +83,7 @@ class Projection implements \IteratorAggregate
      * @param  string     $name
      * @param  string     $content
      * @param  string     $type    (null)
-     * @throw  InvalidArgumentException if $name or $content is null
+     * @throws \InvalidArgumentException if $name or $content is null
      * @return Projection $this
      */
     public function setField($name, $content, $type = null)
@@ -106,7 +106,7 @@ class Projection implements \IteratorAggregate
      * @access public
      * @param  string     $name
      * @param  string     $type
-     * @throw  ModelException if name is null or does not exist.
+     * @throws ModelException if name is null or does not exist.
      * @return Projection $this
      */
     public function setFieldType($name, $type)
@@ -123,14 +123,13 @@ class Projection implements \IteratorAggregate
      *
      * @access public
      * @param  string     $name
-     * @throw  ModelException if field $name does not exist.
+     * @throws ModelException if field $name does not exist.
      * @return Projection $this
      */
     public function unsetField($name)
     {
         $this->checkFieldExist($name);
-        unset($this->fields[$name]);
-        unset($this->types[$name]);
+        unset($this->fields[$name], $this->types[$name]);
 
         return $this;
     }
@@ -156,7 +155,7 @@ class Projection implements \IteratorAggregate
      *
      * @access public
      * @param  string $name
-     * @throw  ModelException if $name is null or field does not exist
+     * @throws ModelException if $name is null or field does not exist
      * @return string null if type is not set
      */
     public function getFieldType($name)
@@ -173,8 +172,8 @@ class Projection implements \IteratorAggregate
      *
      * @access public
      * @param  string $name
-     * @throw  ModelException if $name does not exist.
-     * @throw  InvalidArgumentException if $name is null
+     * @throws ModelException if $name does not exist.
+     * @throws \InvalidArgumentException if $name is null
      * @return bool
      */
     public function isArray($name)
@@ -206,7 +205,7 @@ class Projection implements \IteratorAggregate
     public function getFieldTypes()
     {
         $fields = [];
-        foreach (array_keys($this->fields) as $name) {
+        foreach ($this->fields as $name => $value) {
             $fields[$name] = isset($this->types[$name])
                 ? $this->types[$name]
                 : null
@@ -224,8 +223,8 @@ class Projection implements \IteratorAggregate
      * @access public
      * @param  string $name
      * @param  string $table_alias
-     * @throw  ModelException if $name does not exist.
-     * @throw  InvalidArgumentException if $name is null
+     * @throws ModelException if $name does not exist.
+     * @throws \InvalidArgumentException if $name is null
      * @return string
      */
     public function getFieldWithTableAlias($name, $table_alias = null)
@@ -321,7 +320,7 @@ class Projection implements \IteratorAggregate
      *
      * @access private
      * @param  string     $name
-     * @throw \InvalidArgumentException if name is null
+     * @throws \InvalidArgumentException if name is null
      * @return Projection $this
      */
     private function checkField($name)
@@ -366,7 +365,7 @@ class Projection implements \IteratorAggregate
     {
         return preg_replace_callback(
             '/%:(\w.*):%/U',
-            function(array $matches) use ($prefix) {
+            function (array $matches) use ($prefix) {
                 return sprintf('%s"%s"', $prefix, addcslashes($matches[1], '"\\'));
             },
             $string

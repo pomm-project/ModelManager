@@ -22,4 +22,3 @@ class ComplexNumberStructure extends RowStructure
             ;
     }
 }
-

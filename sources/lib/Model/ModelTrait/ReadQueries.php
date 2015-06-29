@@ -9,13 +9,12 @@
  */
 namespace PommProject\ModelManager\Model\ModelTrait;
 
-use PommProject\ModelManager\Exception\ModelException;
-use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
-use PommProject\ModelManager\Model\CollectionIterator;
-use PommProject\ModelManager\Model\Projection;
-
 use PommProject\Foundation\Pager;
 use PommProject\Foundation\Where;
+use PommProject\ModelManager\Exception\ModelException;
+use PommProject\ModelManager\Model\CollectionIterator;
+use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
+use PommProject\ModelManager\Model\Projection;
 
 /**
  * ReadQueries
@@ -262,7 +261,7 @@ trait ReadQueries
             [
                 ':projection' => $projection->formatFieldsWithFieldAlias(),
                 ':relation'   => $this->getStructure()->getRelation(),
-                ':condition'  => $where->__toString(),
+                ':condition'  => (string) $where,
                 ':suffix'     => $suffix,
             ]
         );

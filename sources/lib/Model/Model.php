@@ -11,10 +11,9 @@ namespace PommProject\ModelManager\Model;
 
 use PommProject\Foundation\Client\ClientInterface;
 use PommProject\Foundation\Session\Session;
-
-use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
-use PommProject\ModelManager\Exception\ModelException;
 use PommProject\ModelManager\Converter\PgEntity;
+use PommProject\ModelManager\Exception\ModelException;
+use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
 
 /**
  * Model
@@ -162,7 +161,7 @@ abstract class Model implements ClientInterface
         }
 
         $result = $this
-            ->GetSession()
+            ->getSession()
             ->getClientUsingPooler('prepared_query', $sql)
             ->execute($values)
             ;
@@ -215,7 +214,7 @@ abstract class Model implements ClientInterface
      *
      * @access protected
      * @param  FlexibleEntityInterface $entity
-     * @throw  InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @return Model          $this
      */
     protected function checkFlexibleEntity(FlexibleEntityInterface $entity)
