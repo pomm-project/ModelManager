@@ -9,14 +9,14 @@
  */
 namespace PommProject\ModelManager\Converter;
 
-use PommProject\Foundation\Exception\ConverterException;
 use PommProject\Foundation\Converter\ConverterInterface;
+use PommProject\Foundation\Exception\ConverterException;
 use PommProject\Foundation\Session\Session;
+use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
+use PommProject\ModelManager\Model\HydrationPlan;
+use PommProject\ModelManager\Model\IdentityMapper;
 use PommProject\ModelManager\Model\Projection;
 use PommProject\ModelManager\Model\RowStructure;
-use PommProject\ModelManager\Model\IdentityMapper;
-use PommProject\ModelManager\Model\HydrationPlan;
-use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
 
 /**
  * PgEntity

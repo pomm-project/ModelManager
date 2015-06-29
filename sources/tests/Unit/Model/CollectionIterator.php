@@ -9,13 +9,11 @@
  */
 namespace PommProject\ModelManager\Test\Unit\Model;
 
-use Mock\PommProject\ModelManager\Model\Projection         as ProjectionMock;
 use Mock\PommProject\ModelManager\Model\CollectionIterator as CollectionIteratorMock;
-use PommProject\ModelManager\Model\ModelPooler;
-use PommProject\ModelManager\Tester\ModelSessionAtoum;
-use PommProject\Foundation\Converter\ConverterPooler;
+use Mock\PommProject\ModelManager\Model\Projection as ProjectionMock;
 use PommProject\Foundation\Session\Session;
 use PommProject\ModelManager\Test\Fixture\SimpleFixtureModel;
+use PommProject\ModelManager\Tester\ModelSessionAtoum;
 
 class CollectionIterator extends ModelSessionAtoum
 {

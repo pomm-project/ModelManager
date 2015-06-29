@@ -9,8 +9,8 @@
  */
 namespace PommProject\ModelManager\Model\ModelTrait;
 
-use PommProject\Foundation\Session\Session;
 use PommProject\Foundation\ResultIterator;
+use PommProject\Foundation\Session\Session;
 use PommProject\ModelManager\Model\Projection;
 use PommProject\ModelManager\Model\RowStructure;
 

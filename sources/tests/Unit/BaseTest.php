@@ -9,12 +9,11 @@
  */
 namespace PommProject\ModelManager\Test\Unit;
 
+use PommProject\Foundation\Exception\SqlException;
 use PommProject\Foundation\Session\Session;
-use PommProject\ModelManager\Tester\ModelSessionAtoum;
-use PommProject\ModelManager\Test\Fixture\ComplexNumber;
-use PommProject\ModelManager\Test\Fixture\ComplexFixture;
-use PommProject\ModelManager\Test\Fixture\ComplexNumberStructure;
 use PommProject\ModelManager\Test\Fixture\ComplexFixtureStructure;
+use PommProject\ModelManager\Test\Fixture\ComplexNumberStructure;
+use PommProject\ModelManager\Tester\ModelSessionAtoum;
 
 abstract class BaseTest extends ModelSessionAtoum
 {

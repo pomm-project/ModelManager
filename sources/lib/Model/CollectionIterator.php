@@ -9,12 +9,12 @@
  */
 namespace PommProject\ModelManager\Model;
 
+use PommProject\Foundation\ResultIterator;
 use PommProject\Foundation\Session\ResultHandler;
 use PommProject\Foundation\Session\Session;
-use PommProject\Foundation\ResultIterator;
 use PommProject\ModelManager\Converter\PgEntity;
-use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
 use PommProject\ModelManager\Exception\ModelException;
+use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
 
 /**
  * CollectionIterator

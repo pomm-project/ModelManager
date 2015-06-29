@@ -9,8 +9,8 @@
  */
 namespace PommProject\ModelManager\Test\Unit\Model;
 
-use PommProject\ModelManager\Model\RowStructure as PommRowStructure;
 use Atoum;
+use PommProject\ModelManager\Model\RowStructure as PommRowStructure;
 
 class RowStructure extends Atoum
 {

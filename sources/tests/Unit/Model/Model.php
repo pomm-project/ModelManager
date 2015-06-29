@@ -9,22 +9,16 @@
  */
 namespace PommProject\ModelManager\Test\Unit\Model;
 
-use PommProject\Foundation\Where;
+use Mock\PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntity as FlexibleEntityMock;
+use Mock\PommProject\ModelManager\Model\RowStructure as RowStructureMock;
 use PommProject\Foundation\Session\Session;
-use PommProject\Foundation\Query\QueryPooler;
-use PommProject\Foundation\Converter\ConverterPooler;
-use PommProject\Foundation\PreparedQuery\PreparedQueryPooler;
-use PommProject\ModelManager\Test\Unit\BaseTest;
-use PommProject\ModelManager\Model\ModelPooler;
-use PommProject\ModelManager\Model\Model                as PommModel;
+use PommProject\Foundation\Where;
 use PommProject\ModelManager\Converter\PgEntity;
-use PommProject\ModelManager\Test\Fixture\SimpleFixture;
-use PommProject\ModelManager\Test\Fixture\ComplexFixture;
-use PommProject\ModelManager\Test\Fixture\ModelSchemaClient;
-use PommProject\ModelManager\Test\Fixture\ComplexNumberStructure;
 use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
-use Mock\PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntity  as FlexibleEntityMock;
-use Mock\PommProject\ModelManager\Model\RowStructure    as RowStructureMock;
+use PommProject\ModelManager\Model\Model as PommModel;
+use PommProject\ModelManager\Test\Fixture\ComplexNumberStructure;
+use PommProject\ModelManager\Test\Fixture\SimpleFixture;
+use PommProject\ModelManager\Test\Unit\BaseTest;
 
 class Model extends BaseTest
 {

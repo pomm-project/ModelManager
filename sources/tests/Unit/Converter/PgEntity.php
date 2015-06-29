@@ -11,11 +11,11 @@ namespace PommProject\ModelManager\Test\Unit\Converter;
 
 use PommProject\Foundation\Session\Session;
 use PommProject\ModelManager\Model\RowStructure;
-use PommProject\ModelManager\Test\Unit\BaseTest;
-use PommProject\ModelManager\Test\Fixture\ComplexNumber;
-use PommProject\ModelManager\Test\Fixture\ComplexNumberStructure;
 use PommProject\ModelManager\Test\Fixture\ComplexFixture;
 use PommProject\ModelManager\Test\Fixture\ComplexFixtureStructure;
+use PommProject\ModelManager\Test\Fixture\ComplexNumber;
+use PommProject\ModelManager\Test\Fixture\ComplexNumberStructure;
+use PommProject\ModelManager\Test\Unit\BaseTest;
 
 class PgEntity extends BaseTest
 {

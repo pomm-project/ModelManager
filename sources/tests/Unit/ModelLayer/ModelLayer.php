@@ -9,11 +9,9 @@
  */
 namespace PommProject\ModelManager\Test\Unit\ModelLayer;
 
-use PommProject\Foundation\Session\Session;
-use PommProject\Foundation\Observer\ObserverPooler;
 use PommProject\Foundation\Session\Connection;
+use PommProject\Foundation\Session\Session;
 use PommProject\ModelManager\Tester\ModelSessionAtoum;
-use PommProject\ModelManager\ModelLayer\ModelLayerPooler;
 
 class ModelLayer extends ModelSessionAtoum
 {

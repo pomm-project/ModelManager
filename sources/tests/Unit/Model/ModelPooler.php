@@ -9,10 +9,10 @@
  */
 namespace PommProject\ModelManager\Test\Unit\Model;
 
-use PommProject\Foundation\Session\Session;
-use PommProject\Foundation\Converter\ConverterPooler;
-use PommProject\Foundation\Tester\VanillaSessionAtoum;
 use PommProject\Foundation\Converter\ConverterHolder;
+use PommProject\Foundation\Converter\ConverterPooler;
+use PommProject\Foundation\Session\Session;
+use PommProject\Foundation\Tester\VanillaSessionAtoum;
 
 class ModelPooler extends VanillaSessionAtoum
 {

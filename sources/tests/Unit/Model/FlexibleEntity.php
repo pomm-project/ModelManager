@@ -9,9 +9,9 @@
  */
 namespace PommProject\ModelManager\Test\Unit\Model;
 
+use Atoum;
 use PommProject\ModelManager\Model\FlexibleEntity as PommFlexibleEntity;
 use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
-use Atoum;
 
 class FlexibleEntity extends Atoum
 {

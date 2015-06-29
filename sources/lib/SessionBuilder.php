@@ -9,14 +9,14 @@
  */
 namespace PommProject\ModelManager;
 
-use PommProject\Foundation\Session as FoundationSession;
-use PommProject\Foundation\SessionBuilder as FoundationSessionBuilder;
-use PommProject\Foundation\Session\Session;
-use PommProject\Foundation\Session\Connection;
 use PommProject\Foundation\Client\ClientHolder;
-use PommProject\ModelManager\Session as ModelManagerSession;
+use PommProject\Foundation\Session as FoundationSession;
+use PommProject\Foundation\Session\Connection;
+use PommProject\Foundation\Session\Session;
+use PommProject\Foundation\SessionBuilder as FoundationSessionBuilder;
 use PommProject\ModelManager\Model\ModelPooler;
 use PommProject\ModelManager\ModelLayer\ModelLayerPooler;
+use PommProject\ModelManager\Session as ModelManagerSession;
 
 /**
  * SessionBuilder

@@ -9,10 +9,10 @@
  */
 namespace PommProject\ModelManager\Generator;
 
-use PommProject\Foundation\ParameterHolder;
 use PommProject\Foundation\Inspector\Inspector;
-use PommProject\ModelManager\Session;
+use PommProject\Foundation\ParameterHolder;
 use PommProject\ModelManager\Exception\GeneratorException;
+use PommProject\ModelManager\Session;
 
 /**
  * BaseGenerator

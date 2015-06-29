@@ -10,8 +10,6 @@
 namespace PommProject\ModelManager\Test\Fixture;
 
 use PommProject\Foundation\Session\Session;
-use PommProject\Foundation\Exception\SqlException;
-use PommProject\ModelManager\Test\Fixture\SimpleFixtureModel;
 use PommProject\ModelManager\Model\ModelTrait\WriteQueries;
 
 class WriteFixtureModel extends SimpleFixtureModel

@@ -10,8 +10,8 @@
 namespace PommProject\ModelManager\Test\Fixture;
 
 use PommProject\Foundation\Client\Client;
-use PommProject\Foundation\Session\Session;
 use PommProject\Foundation\Exception\SqlException;
+use PommProject\Foundation\Session\Session;
 
 class ModelSchemaClient extends Client
 {
