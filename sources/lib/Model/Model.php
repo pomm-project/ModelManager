@@ -214,7 +214,7 @@ abstract class Model implements ClientInterface
      *
      * @access protected
      * @param  FlexibleEntityInterface $entity
-     * @throw  InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @return Model          $this
      */
     protected function checkFlexibleEntity(FlexibleEntityInterface $entity)

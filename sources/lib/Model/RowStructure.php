@@ -133,7 +133,7 @@ class RowStructure implements \ArrayAccess
      *
      * @access public
      * @param  string $name
-     * @throw  ModelException if $name is null
+     * @throws ModelException if $name is null
      * @return bool
      */
     public function hasField($name)
@@ -148,7 +148,7 @@ class RowStructure implements \ArrayAccess
      *
      * @access public
      * @param  string $name
-     * @throw  ModelException if $name is null or name does not exist.
+     * @throws ModelException if $name is null or name does not exist.
      * @return string $type
      */
     public function getTypeFor($name)
@@ -202,7 +202,7 @@ class RowStructure implements \ArrayAccess
      * @access              private
      * @param  string       $val
      * @param  string       $name
-     * @throw \InvalidArgumentException if $val is null
+     * @throws \InvalidArgumentException if $val is null
      * @return RowStructure $this
      */
     private function checkNotNull($val, $name)
@@ -221,7 +221,7 @@ class RowStructure implements \ArrayAccess
      *
      * @access private
      * @param  string       $name
-     * @throw  ModelException if $name does not exist.
+     * @throws ModelException if $name does not exist.
      * @return RowStructure $this
      */
     private function checkExist($name)
