@@ -13,7 +13,6 @@ use PommProject\ModelManager\Exception\ModelException;
 use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
 use PommProject\ModelManager\Model\CollectionIterator;
 use PommProject\ModelManager\Model\Projection;
-
 use PommProject\Foundation\Pager;
 use PommProject\Foundation\Where;
 

@@ -12,7 +12,6 @@ namespace PommProject\ModelManager\Generator;
 use PommProject\Foundation\Where;
 use PommProject\Foundation\Inflector;
 use PommProject\Foundation\ParameterHolder;
-
 use PommProject\ModelManager\Exception\GeneratorException;
 
 /**

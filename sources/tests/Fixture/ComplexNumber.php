@@ -14,5 +14,3 @@ use PommProject\ModelManager\Model\FlexibleEntity;
 class ComplexNumber extends FlexibleEntity
 {
 }
-
-

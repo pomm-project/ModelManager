@@ -12,7 +12,6 @@ namespace PommProject\ModelManager\Generator;
 use PommProject\Foundation\Inflector;
 use PommProject\Foundation\ParameterHolder;
 use PommProject\Foundation\ConvertedResultIterator;
-
 use PommProject\ModelManager\Exception\GeneratorException;
 
 /**
@@ -123,7 +122,6 @@ TEXT;
     {
         $comments = [];
         foreach ($field_information as $info) {
-
             if ($info['comment'] === null) {
                 continue;
             }

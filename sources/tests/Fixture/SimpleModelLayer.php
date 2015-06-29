@@ -12,7 +12,6 @@ namespace PommProject\ModelManager\Test\Fixture;
 use PommProject\ModelManager\ModelLayer\ModelLayer;
 use PommProject\Foundation\Session\Session;
 
-
 /**
  * SimpleModelLayer
  *

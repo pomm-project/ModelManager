@@ -60,4 +60,3 @@ class WithoutPKFixtureModel extends Model
         return $this;
     }
 }
-

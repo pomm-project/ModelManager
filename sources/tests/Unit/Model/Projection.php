@@ -49,10 +49,10 @@ class Projection extends Atoum
             ->isIdenticalTo(['pika', 'chu'])
             ->string($projection->getFieldType('chu'))
             ->isEqualTo('char')
-            ->exception(function() use ($projection) { $projection->setField(null, 'whatever', 'whatever'); })
+            ->exception(function () use ($projection) { $projection->setField(null, 'whatever', 'whatever'); })
             ->isInstanceOf('\InvalidArgumentException')
             ->message->contains('Field name cannot be null.')
-            ->exception(function() use ($projection) { $projection->setField('whatever', null, 'whatever'); })
+            ->exception(function () use ($projection) { $projection->setField('whatever', null, 'whatever'); })
             ->isInstanceOf('\InvalidArgumentException')
             ->message->contains('Content cannot be null')
             ->array($projection->setField('chu', '%:chu:%', null)->getFieldNames())
@@ -70,10 +70,10 @@ class Projection extends Atoum
             ->isEqualTo('bool')
             ->variable($projection->setFieldType('pika', null)->getFieldType('pika'))
             ->isNull()
-            ->exception(function() use ($projection) { $projection->setFieldType('whatever', 'whatever'); })
+            ->exception(function () use ($projection) { $projection->setFieldType('whatever', 'whatever'); })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains('does not exist')
-            ->exception(function() use ($projection) { $projection->setFieldType(null, 'whatever'); })
+            ->exception(function () use ($projection) { $projection->setFieldType(null, 'whatever'); })
             ->isInstanceOf('\InvalidArgumentException')
             ->message->contains('cannot be null')
             ;
@@ -85,13 +85,13 @@ class Projection extends Atoum
         $this
             ->array($projection->unsetField('pika')->getFieldNames())
             ->isEmpty()
-            ->exception(function() use ($projection) { $projection->getFieldType('pika'); })
+            ->exception(function () use ($projection) { $projection->getFieldType('pika'); })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains('does not exist')
-            ->exception(function() use ($projection) { $projection->unsetField('pika'); })
+            ->exception(function () use ($projection) { $projection->unsetField('pika'); })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains('does not exist')
-            ->exception(function() use ($projection) { $projection->unsetField(null); })
+            ->exception(function () use ($projection) { $projection->unsetField(null); })
             ->isInstanceOf('\InvalidArgumentException')
             ->message->contains('cannot be null')
             ;
@@ -105,7 +105,7 @@ class Projection extends Atoum
             ->isTrue()
             ->boolean($projection->hasField('chu'))
             ->isFalse()
-            ->exception(function() use ($projection) { $projection->hasField(null); })
+            ->exception(function () use ($projection) { $projection->hasField(null); })
             ->isInstanceOf('\InvalidArgumentException')
             ->message->contains('cannot be null')
             ;
@@ -117,10 +117,10 @@ class Projection extends Atoum
         $this
             ->string($projection->getFieldType('pika'))
             ->isEqualTo('int4')
-            ->exception(function() use ($projection) { $projection->getFieldType('chu'); })
+            ->exception(function () use ($projection) { $projection->getFieldType('chu'); })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains('does not exist')
-            ->exception(function() use ($projection) { $projection->getFieldType(null); })
+            ->exception(function () use ($projection) { $projection->getFieldType(null); })
             ->isInstanceOf('\InvalidArgumentException')
             ->message->contains('cannot be null')
             ;
@@ -133,10 +133,10 @@ class Projection extends Atoum
             ->isFalse()
             ->boolean($projection->setField('chu', '%:chu:%', 'int4[]')->isArray('chu'))
             ->isTrue()
-            ->exception(function() use ($projection) { $projection->isArray('whatever'); })
+            ->exception(function () use ($projection) { $projection->isArray('whatever'); })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains('does not exist')
-            ->exception(function() use ($projection) { $projection->isArray(null); })
+            ->exception(function () use ($projection) { $projection->isArray(null); })
             ->isInstanceOf('\InvalidArgumentException')
             ->message->contains('Field name cannot be null.')
             ;
@@ -158,7 +158,7 @@ class Projection extends Atoum
     {
         $projection = $this->newTestedInstance('whatever', ['pika' => 'int4'])
             ->setField('chu', 'expression(chu)')
-            ->setField('plop' , 'plop', 'string')
+            ->setField('plop', 'plop', 'string')
             ;
 
         $this
@@ -176,10 +176,10 @@ class Projection extends Atoum
             ->isEqualTo('my_table."pika"')
             ->string($projection->setField('chu', '%:pika:% / 2', 'int4')->getFieldWithTableAlias('chu', 'my_table'))
             ->isEqualTo('my_table."pika" / 2')
-            ->exception(function() use ($projection) { $projection->getFieldWithTableAlias('whatever'); })
+            ->exception(function () use ($projection) { $projection->getFieldWithTableAlias('whatever'); })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains('does not exist')
-            ->exception(function() use ($projection) { $projection->getFieldWithTableAlias(null); })
+            ->exception(function () use ($projection) { $projection->getFieldWithTableAlias(null); })
             ->isInstanceOf('\InvalidArgumentException')
             ->message->contains('Field name cannot be null.')
             ;

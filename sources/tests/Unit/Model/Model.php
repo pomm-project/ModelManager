@@ -14,7 +14,6 @@ use PommProject\Foundation\Session\Session;
 use PommProject\Foundation\Query\QueryPooler;
 use PommProject\Foundation\Converter\ConverterPooler;
 use PommProject\Foundation\PreparedQuery\PreparedQueryPooler;
-
 use PommProject\ModelManager\Test\Unit\BaseTest;
 use PommProject\ModelManager\Model\ModelPooler;
 use PommProject\ModelManager\Model\Model                as PommModel;
@@ -24,7 +23,6 @@ use PommProject\ModelManager\Test\Fixture\ComplexFixture;
 use PommProject\ModelManager\Test\Fixture\ModelSchemaClient;
 use PommProject\ModelManager\Test\Fixture\ComplexNumberStructure;
 use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
-
 use Mock\PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntity  as FlexibleEntityMock;
 use Mock\PommProject\ModelManager\Model\RowStructure    as RowStructureMock;
 
@@ -123,17 +121,17 @@ class Model extends BaseTest
     {
         $session = $this->buildSession();
         $this
-            ->exception(function() use ($session) {
+            ->exception(function () use ($session) {
                     $model = new NoStructureNoFlexibleEntityModel();
                     $model->initialize($session);
                 })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
-            ->exception(function() use ($session) {
+            ->exception(function () use ($session) {
                     $model = new NoFlexibleEntityModel();
                     $model->initialize($session);
                 })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
-            ->exception(function() use ($session) {
+            ->exception(function () use ($session) {
                     $model = new NoStructureModel();
                     $model->initialize($session);
                 })
@@ -168,9 +166,9 @@ class Model extends BaseTest
             ->array($model->findAll()->slice('id'))
             ->isIdenticalTo([1, 2, 3, 4])
             ->array($model->findAll('order by id desc')->slice('id'))
-            ->isIdenticalTo([4, 3 ,2 ,1])
+            ->isIdenticalTo([4, 3, 2, 1])
             ->array($model->findAll('limit 3')->slice('id'))
-            ->isIdenticalTo([1, 2, 3,])
+            ->isIdenticalTo([1, 2, 3, ])
             ;
         $complex_model = $this->getComplexFixtureModel($session);
         $entity = $complex_model->findAll('order by id asc limit 1')->current();
@@ -178,7 +176,6 @@ class Model extends BaseTest
             ->object($entity)
             ->isInstanceOf('\PommProject\ModelManager\Test\Fixture\ComplexFixture')
             ;
-
     }
 
     public function testFindWhere()
@@ -211,10 +208,10 @@ class Model extends BaseTest
             ->isNull()
             ->integer($model->findByPK(['id' => 3])->status())
             ->isEqualTo(FlexibleEntityInterface::STATUS_EXIST)
-            ->exception(function() use ($model_without_pk) { $model_without_pk->findByPK(['id' => 1]); })
+            ->exception(function () use ($model_without_pk) { $model_without_pk->findByPK(['id' => 1]); })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains("has no primary key.")
-            ->exception(function() use ($model) { $model->findByPK(['a_varchar' => 'one']); })
+            ->exception(function () use ($model) { $model->findByPK(['a_varchar' => 'one']); })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains("Key 'id' is missing to fully describes the primary key")
             ;
@@ -307,7 +304,7 @@ class Model extends BaseTest
             ->isFalse()
             ->boolean($entity->status() === FlexibleEntityInterface::STATUS_EXIST)
             ->isTrue()
-            ->exception(function() use ($model_without_pk, $entity_without_pk) { $model_without_pk->updateOne($entity_without_pk, ['a_varchar']); })
+            ->exception(function () use ($model_without_pk, $entity_without_pk) { $model_without_pk->updateOne($entity_without_pk, ['a_varchar']); })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains("has no primary key.")
         ;
@@ -336,7 +333,7 @@ class Model extends BaseTest
             ->isNull()
             ->object($entity)
             ->isIdenticalTo($updated_entity)
-            ->exception(function() use ($model_without_pk) { $model_without_pk->updateByPk(['id' => 1],  ['a_varchar' => 'whatever']); })
+            ->exception(function () use ($model_without_pk) { $model_without_pk->updateByPk(['id' => 1],  ['a_varchar' => 'whatever']); })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains("has no primary key.")
 
@@ -356,7 +353,7 @@ class Model extends BaseTest
             ->isNull()
             ->integer($entity->status())
             ->isEqualTo(FlexibleEntityInterface::STATUS_NONE)
-            ->exception(function() use ($model_without_pk, $entity_without_pk) { $model_without_pk->deleteOne($entity_without_pk); })
+            ->exception(function () use ($model_without_pk, $entity_without_pk) { $model_without_pk->deleteOne($entity_without_pk); })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains("has no primary key.")
             ;
@@ -380,7 +377,7 @@ class Model extends BaseTest
             ->isIdenticalTo($deleted_entity)
             ->integer($entity->status())
             ->isEqualTo(FlexibleEntityInterface::STATUS_NONE)
-            ->exception(function() use ($model_without_pk, $entity_without_pk) { $model_without_pk->deleteOne($entity_without_pk); })
+            ->exception(function () use ($model_without_pk, $entity_without_pk) { $model_without_pk->deleteOne($entity_without_pk); })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains("has no primary key.")
             ;

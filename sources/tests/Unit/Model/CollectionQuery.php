@@ -10,7 +10,6 @@
 namespace PommProject\ModelManager\Test\Unit\Model;
 
 use PommProject\Foundation\Session\Session;
-
 use PommProject\ModelManager\Tester\ModelSessionAtoum;
 
 class CollectionQuery extends ModelSessionAtoum

@@ -13,7 +13,6 @@ use PommProject\Foundation\Session\Connection;
 use PommProject\Foundation\Session\ResultHandler;
 use PommProject\Foundation\Client\Client;
 use PommProject\Foundation\Client\ClientInterface;
-
 use PommProject\ModelManager\Exception\ModelLayerException;
 use PommProject\ModelManager\Model\Model;
 

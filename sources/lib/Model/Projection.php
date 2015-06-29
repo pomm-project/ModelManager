@@ -366,7 +366,7 @@ class Projection implements \IteratorAggregate
     {
         return preg_replace_callback(
             '/%:(\w.*):%/U',
-            function(array $matches) use ($prefix) {
+            function (array $matches) use ($prefix) {
                 return sprintf('%s"%s"', $prefix, addcslashes($matches[1], '"\\'));
             },
             $string

@@ -10,7 +10,6 @@
 namespace PommProject\ModelManager;
 
 use PommProject\Foundation\Session as FoundationSession;
-
 use PommProject\ModelManager\Model\Model;
 use PommProject\ModelLayerManager\ModelLayer\ModelLayer;
 

@@ -10,7 +10,6 @@
 namespace PommProject\ModelManager\Test\Fixture;
 
 use PommProject\Foundation\Session\Session;
-
 use PommProject\ModelManager\Model\Model;
 use PommProject\ModelManager\Model\ModelTrait\WriteQueries;
 use PommProject\ModelManager\Test\Fixture\ComplexFixtureStructure;
@@ -88,4 +87,3 @@ SQL;
         return $this;
     }
 }
-

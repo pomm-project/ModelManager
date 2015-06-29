@@ -38,4 +38,3 @@ class SimpleFixtureModel extends Model
         return $this->query($sql, $where->getValues());
     }
 }
-

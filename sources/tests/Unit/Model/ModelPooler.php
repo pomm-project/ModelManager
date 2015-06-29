@@ -14,7 +14,6 @@ use PommProject\Foundation\Converter\ConverterPooler;
 use PommProject\Foundation\Tester\VanillaSessionAtoum;
 use PommProject\Foundation\Converter\ConverterHolder;
 
-
 class ModelPooler extends VanillaSessionAtoum
 {
     protected function initializeSession(Session $session)
