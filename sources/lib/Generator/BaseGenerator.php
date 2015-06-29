@@ -69,7 +69,7 @@ abstract class BaseGenerator
      * @param  array            $output
      * @return BaseGenerator    $this
      */
-    protected function outputFileCreation(array &$output = [])
+    protected function outputFileCreation(array &$output)
     {
         if (file_exists($this->filename)) {
             $output[] = ['status' => 'ok', 'operation' => 'overwriting', 'file' => $this->filename];

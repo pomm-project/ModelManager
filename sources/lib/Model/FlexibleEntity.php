@@ -124,7 +124,7 @@ abstract class FlexibleEntity extends FlexibleContainer implements \ArrayAccess
                 throw new ModelException(sprintf("Field '%s' exists and is not an array.", $var));
             }
         } else {
-            $this->container[$var] = array($value);
+            $this->container[$var] = [$value];
         }
 
         return $this;

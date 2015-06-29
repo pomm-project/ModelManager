@@ -152,7 +152,7 @@ EOMSG
             $isolation_level,
             [Connection::ISOLATION_READ_COMMITTED, Connection::ISOLATION_READ_REPEATABLE, Connection::ISOLATION_SERIALIZABLE]
         )) {
-            throw new ModelLayerException(sprintf("'%s' is not a valid transaction isolation level."));
+            throw new ModelLayerException(sprintf("'%s' is not a valid transaction isolation level.", $isolation_level));
         }
 
         return $this->sendParameter(
