@@ -40,7 +40,7 @@ abstract class FlexibleEntity extends FlexibleContainer implements \ArrayAccess
      */
     public function __construct(array $values = null)
     {
-        if (!is_null($values)) {
+        if ($values !== null) {
             $this->hydrate($values);
         }
     }

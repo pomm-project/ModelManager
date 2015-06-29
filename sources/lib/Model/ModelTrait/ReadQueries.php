@@ -261,7 +261,7 @@ trait ReadQueries
             [
                 ':projection' => $projection->formatFieldsWithFieldAlias(),
                 ':relation'   => $this->getStructure()->getRelation(),
-                ':condition'  => $where->__toString(),
+                ':condition'  => (string) $where,
                 ':suffix'     => $suffix,
             ]
         );

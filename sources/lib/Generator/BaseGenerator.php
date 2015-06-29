@@ -187,15 +187,15 @@ abstract class BaseGenerator
      */
     protected function saveFile($filename, $content)
     {
-        if (!file_exists(dirname($filename))) {
-            if (mkdir(dirname($filename), 0777, true) === false) {
-                throw new GeneratorException(
-                    sprintf(
-                        "Could not create directory '%s'.",
-                        dirname($filename)
-                    )
-                );
-            }
+        if (!file_exists(dirname($filename))
+            && mkdir(dirname($filename), 0777, true) === false
+        ) {
+            throw new GeneratorException(
+                sprintf(
+                    "Could not create directory '%s'.",
+                    dirname($filename)
+                )
+            );
         }
 
         if (file_put_contents($filename, $content) === false) {

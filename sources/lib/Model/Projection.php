@@ -205,7 +205,7 @@ class Projection implements \IteratorAggregate
     public function getFieldTypes()
     {
         $fields = [];
-        foreach (array_keys($this->fields) as $name) {
+        foreach ($this->fields as $name => $value) {
             $fields[$name] = isset($this->types[$name])
                 ? $this->types[$name]
                 : null

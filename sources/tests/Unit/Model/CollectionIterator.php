@@ -90,7 +90,7 @@ SQL;
                         strlen($values['some_data']) > 3
                         ? null
                         : $values['some_data'];
-                    $values['id'] += 1;
+                    ++$values['id'];
                     $values['new_value'] = 'love pomm';
 
                     return $values;

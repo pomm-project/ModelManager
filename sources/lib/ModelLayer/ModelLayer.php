@@ -237,10 +237,9 @@ EOMSG
      */
     protected function rollbackTransaction($name = null)
     {
+        $sql = "rollback transaction";
         if ($name !== null) {
             $sql = sprintf("rollback to savepoint %s", $this->escapeIdentifier($name));
-        } else {
-            $sql = "rollback transaction";
         }
 
         $this->executeAnonymousQuery($sql);
