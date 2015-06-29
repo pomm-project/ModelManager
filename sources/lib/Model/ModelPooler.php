@@ -68,7 +68,7 @@ class ModelPooler extends ClientPooler
             throw new ModelException(sprintf("'%s' class does not implement the ClientInterface interface.", $class));
         }
 
-        if (!$reflection->isSubClassOf('\PommProject\ModelManager\Model\Model')) {
+        if (!$reflection->isSubclassOf('\PommProject\ModelManager\Model\Model')) {
             throw new ModelException(sprintf("'%s' class does not extend \PommProject\ModelManager\Model.", $class));
         }
 

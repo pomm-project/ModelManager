@@ -161,7 +161,7 @@ abstract class Model implements ClientInterface
         }
 
         $result = $this
-            ->GetSession()
+            ->getSession()
             ->getClientUsingPooler('prepared_query', $sql)
             ->execute($values)
             ;
