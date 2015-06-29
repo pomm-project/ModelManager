@@ -1,3 +1,14 @@
+== VERSION 2.0.0-rc.3
+
+ *  Fix typos
+ *  Make entities with extra fields to persist
+ *  Make collection filters able to add values
+ *  Remove useless comments from generated classes.
+ *  fix `use` calls
+ *  fix unreacheable return
+ *  fix #37
+ *  Add a dedicated session with proxy methods.
+
 == VERSION 2.0.0-rc.2
 
  *  Strengthen model generator against bad ascaping.
