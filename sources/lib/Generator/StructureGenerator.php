@@ -55,7 +55,7 @@ TEXT;
                 $this->mergeTemplate(
                     [
                         'namespace'      => $this->namespace,
-                        'entity'         => Inflector::studlyCaps($this->relation),
+                        'class_name'     => $input->getParameter('class_name', Inflector::studlyCaps($this->relation)),
                         'relation'       => sprintf("%s.%s", $this->schema, $this->relation),
                         'primary_key'    => join(
                             ', ',
@@ -271,7 +271,7 @@ namespace {:namespace:};
 use PommProject\ModelManager\Model\RowStructure;
 
 /**
- * {:entity:}
+ * {:class_name:}
  *
  * Structure class for relation {:relation:}.
 {:table_comment:}
@@ -280,7 +280,7 @@ use PommProject\ModelManager\Model\RowStructure;
  *
  * @see RowStructure
  */
-class {:entity:} extends RowStructure
+class {:class_name:} extends RowStructure
 {
     /**
      * __construct
