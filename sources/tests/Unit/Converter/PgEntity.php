@@ -10,6 +10,7 @@
 namespace PommProject\ModelManager\Test\Unit\Converter;
 
 use PommProject\Foundation\Session\Session;
+use PommProject\Foundation\Converter\PgHstore;
 use PommProject\ModelManager\Model\RowStructure;
 use PommProject\ModelManager\Test\Fixture\ComplexFixture;
 use PommProject\ModelManager\Test\Fixture\ComplexFixtureStructure;
@@ -19,6 +20,16 @@ use PommProject\ModelManager\Test\Unit\BaseTest;
 
 class PgEntity extends BaseTest
 {
+    protected function initializeSession(Session $session)
+    {
+        parent::initializeSession($session);
+        $session
+            ->getPoolerForType('converter')
+            ->getConverterHolder()
+            ->registerConverter('HStore', new PgHstore(), ['hstore'])
+            ;
+    }
+
     protected function getComplexNumberConverter()
     {
         return $this->newTestedInstance(
@@ -74,7 +85,7 @@ class PgEntity extends BaseTest
             ->hasSize(3)
             ->variable($entity['version_id'])
             ->isNull()
-            ->variable($converter->fromPg(null, 'complex_fixture', $session))
+            ->variable($converter->fromPg('', 'complex_fixture', $session))
             ->isNull()
             ;
         $converter = $this->newTestedInstance(
@@ -82,11 +93,47 @@ class PgEntity extends BaseTest
             (new RowStructure())
             ->setRelation('some_type')
             ->addField('a_field', 'int4')
-            ->addField('a_null_field', 'int4')
+            ->addField('a_null_field', 'bool')
             ->addField('some_fields', 'int4[]')
+            ->addField('a_hstore', 'hstore')
         );
+        $line = <<<"ROW"
+(34,,"{4,3}","""pika"" => ""\\\\\\"chu, rechu""")
+ROW;
+        $entity = $converter->fromPg($line, 'some_type', $session);
         $this
-            ->object($converter->fromPg('(500,,\"{7200,300}\")', 'some_type', $session))
+            ->object($entity)
+            ->isInstanceOf('PommProject\ModelManager\Test\Fixture\ComplexFixture')
+            ->integer($entity['a_field'])
+            ->isEqualTo(34)
+            ->variable($entity['a_null_field'])
+            ->isNull()
+            ->array($entity['some_fields'])
+            ->isIdenticalTo([4, 3])
+            ->array($entity['a_hstore'])
+            ->isIdenticalTo(['pika' => '\\"chu, rechu'])
+            ;
+    }
+
+    public function testFromPgWithJson()
+    {
+        $session = $this->setUpSession($this->buildSession());
+        $converter = $this->newTestedInstance(
+            'PommProject\ModelManager\Test\Fixture\ComplexFixture',
+            (new RowStructure())
+            ->setRelation('some_type')
+            ->addField('a_field', 'int4')
+            ->addField('a_null_field', 'bool')
+            ->addField('a_json', 'jsonb')
+        );
+        $line = <<<"ROW"
+(34,,"{""a"": {""b"": ""c\\\\""pika\\\\""""}}")
+ROW;
+        $entity = $converter->fromPg($line, 'some_type', $session);
+        $this
+            ->object($entity)
+            ->array($entity['a_json'])
+            ->isIdenticalTo(['a' => ['b' => 'c"pika"']])
             ;
     }
 

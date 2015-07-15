@@ -67,12 +67,11 @@ class PgEntity implements ConverterInterface
      */
     public function fromPg($data, $type, Session $session)
     {
-        $data = trim($data, '()');
-
         if ($data === '') {
             return null;
         }
 
+        $data = trim($data, '()');
 
         if ($type instanceof Projection) {
             $projection = $type;
@@ -103,14 +102,16 @@ class PgEntity implements ConverterInterface
      */
     private function transformData($data, Projection $projection)
     {
-        $data = stripcslashes($data);
-        $values = str_getcsv($data);
-        $definition = $projection->getFieldNames();
-        $out_values = [];
-        $values_count = count($values);
+        $values         = str_getcsv($data);
+        $definition     = $projection->getFieldNames();
+        $out_values     = [];
+        $values_count   = count($values);
 
         for ($index = 0; $index < $values_count; $index++) {
-            $out_values[$definition[$index]] = $values[$index];
+            $out_values[$definition[$index]] = preg_match(':^{.*}$:', $values[$index])
+                ? stripcslashes($values[$index])
+                : $values[$index]
+                ;
         }
 
         return $out_values;
