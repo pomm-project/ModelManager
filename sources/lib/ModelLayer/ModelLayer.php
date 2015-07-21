@@ -2,7 +2,7 @@
 /*
  * This file is part of the PommProject/ModelManager package.
  *
- * (c) 2014 Grégoire HUBERT <hubert.greg@gmail.com>
+ * (c) 2014 - 2015 Grégoire HUBERT <hubert.greg@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -22,11 +22,11 @@ use PommProject\ModelManager\Model\Model;
  * ModelLayer handles mechanisms around model method calls (transactions,
  * events etc.).
  *
- * @package ModelManager
- * @copyright 2014 Grégoire HUBERT
- * @author Grégoire HUBERT
- * @license X11 {@link http://opensource.org/licenses/mit-license.php}
- * @see Client
+ * @package     ModelManager
+ * @copyright   2014 - 2015 Grégoire HUBERT
+ * @author      Grégoire HUBERT
+ * @license     X11 {@link http://opensource.org/licenses/mit-license.php}
+ * @see         Client
  */
 abstract class ModelLayer extends Client
 {
@@ -157,7 +157,6 @@ EOMSG
 
         return $this->sendParameter(
             "set transaction isolation level %s",
-            '',
             $isolation_level
         );
     }

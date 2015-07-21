@@ -2,15 +2,15 @@
 /*
  * This file is part of the PommProject/ModelManager package.
  *
- * (c) 2014 Grégoire HUBERT <hubert.greg@gmail.com>
+ * (c) 2014 - 2015 Grégoire HUBERT <hubert.greg@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 namespace PommProject\ModelManager\Model;
 
-use PommProject\Foundation\Converter\ConverterClient;
 use PommProject\Foundation\Session\Session;
+use PommProject\Foundation\Converter\ConverterClient;
 use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
 
 /**
@@ -18,13 +18,10 @@ use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
  *
  * Tell the FlexibleEntityConverter how to hydrate fields.
  *
- * @package ModelManager
- * @copyright 2014 Grégoire HUBERT
- * @author Grégoire HUBERT
- * @license X11 {@link http://opensource.org/licenses/mit-license.php}
- *
- *
- * @see \IteratorAggregate
+ * @package     ModelManager
+ * @copyright   2014 - 2015 Grégoire HUBERT
+ * @author      Grégoire HUBERT
+ * @license     X11 {@link http://opensource.org/licenses/mit-license.php}
  */
 class HydrationPlan
 {
@@ -36,9 +33,9 @@ class HydrationPlan
     /**
      * Construct
      *
-     * @access public
-     * @param Projection $projection
-     * @param Session    $session
+     * @access  public
+     * @param   Projection $projection
+     * @param   Session    $session
      */
     public function __construct(Projection $projection, Session $session)
     {

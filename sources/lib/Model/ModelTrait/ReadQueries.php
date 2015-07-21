@@ -2,7 +2,7 @@
 /*
  * This file is part of the PommProject/ModelManager package.
  *
- * (c) 2014 Grégoire HUBERT <hubert.greg@gmail.com>
+ * (c) 2014 - 2015 Grégoire HUBERT <hubert.greg@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -21,10 +21,10 @@ use PommProject\ModelManager\Model\Projection;
  *
  * Basic read queries for model instances.
  *
- * @package ModelManager
- * @copyright 2014 Grégoire HUBERT
- * @author Grégoire HUBERT
- * @license X11 {@link http://opensource.org/licenses/mit-license.php}
+ * @package     ModelManager
+ * @copyright   2014 - 2015 Grégoire HUBERT
+ * @author      Grégoire HUBERT
+ * @license     X11 {@link http://opensource.org/licenses/mit-license.php}
  */
 trait ReadQueries
 {
@@ -291,7 +291,7 @@ trait ReadQueries
      * @access private
      * @param  array $values
      * @throws ModelException
-     * @return ReadQueries $this
+     * @return $this
      */
     protected function checkPrimaryKey(array $values)
     {
