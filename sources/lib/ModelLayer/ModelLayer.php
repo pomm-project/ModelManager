@@ -148,11 +148,24 @@ EOMSG
      */
     protected function setTransactionIsolationLevel($isolation_level)
     {
+        $valid_isolation_levels =
+            [
+                Connection::ISOLATION_READ_COMMITTED,
+                Connection::ISOLATION_REPEATABLE_READ,
+                Connection::ISOLATION_SERIALIZABLE
+            ];
+
         if (!in_array(
             $isolation_level,
-            [Connection::ISOLATION_READ_COMMITTED, Connection::ISOLATION_READ_REPEATABLE, Connection::ISOLATION_SERIALIZABLE]
+            $valid_isolation_levels
         )) {
-            throw new ModelLayerException(sprintf("'%s' is not a valid transaction isolation level.", $isolation_level));
+            throw new ModelLayerException(
+                sprintf(
+                    "'%s' is not a valid transaction isolation level. Valid isolation levels are {%s} see Connection class constants.",
+                    $isolation_level,
+                    join(', ', $valid_isolation_levels)
+                )
+            );
         }
 
         return $this->sendParameter(
@@ -175,16 +188,27 @@ EOMSG
      */
     protected function setTransactionAccessMode($access_mode)
     {
+        $valid_access_modes =
+            [
+                Connection::ACCESS_MODE_READ_ONLY,
+                Connection::ACCESS_MODE_READ_WRITE
+            ];
+
         if (!in_array(
             $access_mode,
-            [Connection::ACCESS_MODE_READ_ONLY, Connection::ACCESS_MODE_READ_WRITE]
+            $valid_access_modes
         )) {
-            throw new ModelLayerException(sprintf("'%s' is not a valid transaction access mode.", $access_mode));
+            throw new ModelLayerException(
+                sprintf(
+                    "'%s' is not a valid transaction access mode. Valid access modes are {%s}, see Connection class constants.",
+                    $access_mode,
+                    join(', ', $valid_access_modes)
+                )
+            );
         }
 
         return $this->sendParameter(
             "set transaction %s",
-            '',
             $access_mode
         );
     }
@@ -416,7 +440,7 @@ EOMSG
             ->executeAnonymousQuery(
                 sprintf(
                     $sql,
-                    $this->escapeIdentifier($identifier),
+                    $identifier,
                     $parameter
                 )
             );

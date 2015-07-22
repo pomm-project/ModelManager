@@ -88,4 +88,24 @@ class SimpleModelLayer extends ModelLayer
     {
         return parent::setDeferrable($keys, $state);
     }
+
+    public function setTransactionIsolationLevel($level)
+    {
+        return parent::setTransactionIsolationLevel($level);
+    }
+
+    public function setTransactionAccessMode($level)
+    {
+        return parent::setTransactionAccessMode($level);
+    }
+
+    public function executeAnonymousQuery($sql)
+    {
+        return parent::executeAnonymousQuery($sql);
+    }
+
+    public function getSession()
+    {
+        return parent::getSession();
+    }
 }

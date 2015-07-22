@@ -109,4 +109,57 @@ EOSQL
             ->contains('whatever')
             ;
     }
+
+    protected function testSetTransactionIsolationLevelDataProvider()
+    {
+        return [
+            Connection::ISOLATION_READ_COMMITTED,
+            Connection::ISOLATION_REPEATABLE_READ,
+            Connection::ISOLATION_SERIALIZABLE,
+        ];
+    }
+
+    public function testSetTransactionIsolationLevel($level)
+    {
+        $model_layer = $this->getModelLayer();
+        $model_layer->startTransaction();
+        $this
+            ->object($model_layer->setTransactionIsolationLevel($level))
+            ->string($this->getTransactionIsolationLevel($model_layer))
+            ->isEqualTo(strtolower($level))
+            ;
+        $model_layer->rollbackTransaction();
+    }
+
+    protected function getTransactionIsolationLevel($model_layer)
+    {
+        return $model_layer->getSession()
+            ->getQueryManager()
+            ->query('show transaction_isolation')
+            ->current()['transaction_isolation']
+            ;
+    }
+
+    public function testSetTransactionAccessMode()
+    {
+        $model_layer = $this->getModelLayer();
+        $model_layer->startTransaction();
+        $this
+            ->object($model_layer->setTransactionAccessMode(Connection::ACCESS_MODE_READ_WRITE))
+            ->string($this->getTransactionAccessModel($model_layer))
+            ->isEqualTo('off')
+            ->object($model_layer->setTransactionAccessMode(Connection::ACCESS_MODE_READ_ONLY))
+            ->string($this->getTransactionAccessModel($model_layer))
+            ->isEqualTo('on')
+            ;
+    }
+
+    protected function getTransactionAccessModel($model_layer)
+    {
+        return $model_layer->getSession()
+            ->getQueryManager()
+            ->query('show transaction_read_only')
+            ->current()['transaction_read_only']
+            ;
+    }
 }
