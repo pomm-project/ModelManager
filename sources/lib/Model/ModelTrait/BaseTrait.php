@@ -9,10 +9,10 @@
  */
 namespace PommProject\ModelManager\Model\ModelTrait;
 
-use PommProject\Foundation\ResultIterator;
-use PommProject\Foundation\Session\Session;
+use PommProject\ModelManager\Model\CollectionIterator;
 use PommProject\ModelManager\Model\Projection;
 use PommProject\ModelManager\Model\RowStructure;
+use PommProject\ModelManager\Session;
 
 /**
  * BaseModelTrait
@@ -34,7 +34,7 @@ trait BaseTrait
 
     /**
      * @see Model
-     * @return ResultIterator
+     * @return CollectionIterator
      */
     abstract protected function query($sql, array $values = [], Projection $projection = null);
 
