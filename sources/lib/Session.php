@@ -25,7 +25,7 @@ use PommProject\ModelManager\ModelLayer\ModelLayer;
  * @license X11 {@link http://opensource.org/licenses/mit-license.php}
  *
  *
- * @see BaseSession
+ * @see FoundationSession
  */
 class Session extends FoundationSession
 {
