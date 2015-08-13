@@ -74,13 +74,18 @@ interface FlexibleEntityInterface
     /**
      * status
      *
-     * Return or set the current status of the instance. Status can be
-     * FlexibleEntityInterface::STATUS_NONE,
-     * FlexibleEntityInterface::STATUS_EXIST or
-     * FlexibleEntityInterface::STATUS_MODIFIED.
+     * Return or set the current status of the instance. The status is a
+     * bitmask of the different possible states an entity can have.
+     * Status can be
+     * FlexibleEntityInterface::STATUS_NONE     = 0,
+     * FlexibleEntityInterface::STATUS_EXIST    = 1
+     * FlexibleEntityInterface::STATUS_MODIFIED = 2
+     * STATUS_EXIST + STATUS_MODIFIED           = 3
+     * @see https://github.com/pomm-project/ModelManager/issues/46#issuecomment-130650107
      *
-     * If a status is specified, it returns itself. If no status are provided,
-     * it returns the current status.
+     * If a status is specified, it sets the current entity's status and
+     * returns itself. If no status are provided, it returns the current
+     * status.
      *
      * @access public
      * @param  int (null)
