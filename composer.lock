@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pomm-project/Foundation.git",
-                "reference": "c2b5711f8aa8133fb5ada58b2dc3fd9cc03169d3"
+                "reference": "da0568fee95b7fe7c23e6ade51151e2d1cf9a964"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pomm-project/Foundation/zipball/c2b5711f8aa8133fb5ada58b2dc3fd9cc03169d3",
-                "reference": "c2b5711f8aa8133fb5ada58b2dc3fd9cc03169d3",
+                "url": "https://api.github.com/repos/pomm-project/Foundation/zipball/da0568fee95b7fe7c23e6ade51151e2d1cf9a964",
+                "reference": "da0568fee95b7fe7c23e6ade51151e2d1cf9a964",
                 "shasum": ""
             },
             "require": {
@@ -58,7 +58,7 @@
                 "pomm",
                 "postgresql"
             ],
-            "time": "2015-07-22 19:28:25"
+            "time": "2015-08-15 09:55:30"
         },
         {
             "name": "psr/log",
@@ -106,12 +106,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/atoum/atoum.git",
-                "reference": "cb060c47c4ba356e5c75c67733158cc24fde9e00"
+                "reference": "ab650ec54f65968db592679e3d0e4f01e5684f61"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/atoum/atoum/zipball/cb060c47c4ba356e5c75c67733158cc24fde9e00",
-                "reference": "cb060c47c4ba356e5c75c67733158cc24fde9e00",
+                "url": "https://api.github.com/repos/atoum/atoum/zipball/ab650ec54f65968db592679e3d0e4f01e5684f61",
+                "reference": "ab650ec54f65968db592679e3d0e4f01e5684f61",
                 "shasum": ""
             },
             "require": {
@@ -177,7 +177,7 @@
                 "test",
                 "unit testing"
             ],
-            "time": "2015-07-08 09:55:17"
+            "time": "2015-08-03 05:53:32"
         }
     ],
     "aliases": [],
