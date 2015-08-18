@@ -180,13 +180,14 @@ abstract class Model implements ClientInterface
      * This method creates a projection based on the structure definition of
      * the underlying relation. It may be used to shunt parent createProjection
      * call in inherited classes.
-     * This method SHOULD NOT be used in query methods as it is not possible to
-     * overload it, use createProjection instead.
+     * This method can be used where a projection that sticks to table
+     * definition is needed like recursive CTEs. For normal projections, use
+     * createProjection instead.
      *
-     * @access protected
+     * @access public
      * @return Projection
      */
-    final protected function createDefaultProjection()
+    final public function createDefaultProjection()
     {
         return new Projection($this->flexible_entity_class, $this->structure->getDefinition());
     }
