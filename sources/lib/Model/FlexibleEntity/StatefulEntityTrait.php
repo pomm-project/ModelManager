@@ -16,7 +16,7 @@ namespace PommProject\ModelManager\Model\FlexibleEntity;
  * persistence status.
  *
  * @package     ModelManager
- * @copyright   2014-2015 Grégoire HUBERT
+ * @copyright   2014 - 2015 Grégoire HUBERT
  * @author      Grégoire HUBERT
  * @license     X11 {@link http://opensource.org/licenses/mit-license.php}
  * @see         FlexibleEntityInterface
