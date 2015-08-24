@@ -311,6 +311,31 @@ class FlexibleEntity extends Atoum
             ->isIdenticalTo([1, 2])
             ;
     }
+
+    public function testIsset()
+    {
+        $entity = new ChuEntity(['pika' => 'whatever']);
+        $this
+            ->boolean(isset($entity->pika))
+            ->isTrue()
+            ->boolean(isset($entity->no_such_key))
+            ->isFalse()
+        ;
+    }
+
+    public function testUnset()
+    {
+        $entity = new ChuEntity(['pika' => 'whatever']);
+        $this
+            ->boolean(isset($entity->pika))
+            ->isTrue()
+        ;
+        unset($entity->pika);
+        $this
+            ->boolean(isset($entity->pika))
+            ->isFalse()
+        ;
+    }
 }
 
 class PikaEntity extends PommFlexibleEntity

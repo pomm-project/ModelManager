@@ -320,7 +320,7 @@ abstract class FlexibleEntity extends FlexibleContainer implements \ArrayAccess
     {
         $method_name = "has".Inflector::studlyCaps($var);
 
-        return $this->$method_name;
+        return $this->$method_name();
     }
 
     /**
@@ -336,7 +336,7 @@ abstract class FlexibleEntity extends FlexibleContainer implements \ArrayAccess
     {
         $method_name = "clear".Inflector::studlyCaps($var);
 
-        return $this->$method_name;
+        return $this->$method_name();
     }
 
     /**
