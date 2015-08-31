@@ -60,11 +60,13 @@ class HydrationPlan
                 $this->converters[$name] = $this
                     ->session
                     ->getClientUsingPooler('converter', 'array')
+                    ->getConverter()
                     ;
             } else {
                 $this->converters[$name] = $this
                     ->session
                     ->getClientUsingPooler('converter', $type)
+                    ->getConverter()
                     ;
             }
         }
@@ -165,7 +167,7 @@ class HydrationPlan
             if ($this->projection->hasField($name)) {
                 $out_values[$name] = $this
                     ->converters[$name]
-                    ->$from_to($value, $this->getFieldType($name))
+                    ->$from_to($value, $this->getFieldType($name), $this->session)
                     ;
             } else {
                 $out_values[$name] = $value;

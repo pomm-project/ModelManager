@@ -216,7 +216,7 @@ class CollectionIterator extends ResultIterator
 
         return array_map(
             function ($val) use ($converter, $type) {
-                return $converter->fromPg($val, $type);
+                return $converter->fromPg($val, $type, $this->session);
             },
             $values
         );
