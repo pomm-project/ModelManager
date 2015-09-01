@@ -28,6 +28,7 @@ class HydrationPlan
     protected $session;
     protected $projection;
     protected $converters = [];
+    protected $field_types = [];
 
 
     /**
@@ -69,6 +70,8 @@ class HydrationPlan
                     ->getConverter()
                     ;
             }
+
+            $this->field_types[$name] = $type;
         }
 
         return $this;
@@ -167,7 +170,7 @@ class HydrationPlan
             if (isset($this->converters[$name])) {
                 $out_values[$name] = $this
                     ->converters[$name]
-                    ->$from_to($value, $this->getFieldType($name), $this->session)
+                    ->$from_to($value, $this->field_types[$name], $this->session)
                     ;
             } else {
                 $out_values[$name] = $value;
