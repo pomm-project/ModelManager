@@ -164,7 +164,7 @@ class HydrationPlan
         $out_values = [];
 
         foreach ($values as $name => $value) {
-            if ($this->projection->hasField($name)) {
+            if (isset($this->converters[$name])) {
                 $out_values[$name] = $this
                     ->converters[$name]
                     ->$from_to($value, $this->getFieldType($name), $this->session)
