@@ -249,10 +249,10 @@ abstract class Model implements ClientInterface
      * Return the according flexible entity class associate with this Model
      * instance.
      *
-     * @access protected
+     * @access public
      * @return string
      */
-    protected function getFlexibleEntityClass()
+    public function getFlexibleEntityClass()
     {
         return $this->flexible_entity_class;
     }
