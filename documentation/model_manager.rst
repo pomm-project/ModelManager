@@ -233,25 +233,192 @@ The way projection and relation are expanded is shown using PHP’s function ``s
 Default queries
 ~~~~~~~~~~~~~~~
 
-Because simples queries are almost always the same, Pomm comes with traits to automatically add queries in model classes:
+Because simples queries are almost always the same, Pomm comes with traits to automatically add queries in model classes. All these queries (but ``countWhere`` and ``existWhere``) use the ``createProjection()`` method to get the fields to be returned (see `Projection`_).
 
-- ReadQueries
-    - ``findAll``
-    - ``findWhere``
-    - ``findByPK``
-    - ``countWhere``
-    - ``existWhere``
-    - ``paginate``
-- WriteQueries (uses ReadQueries)
-    - ``insertOne``
-    - ``updateOne``
-    - ``deleteOne``
-    - ``updateByPk``
-    - ``deleteByPK``
-    - ``deleteWhere``
-    - ``createAndSave``
+**ReadQueries**
 
-All the queries above (except ``countWhere`` and ``existWhere``) use the projection defined by the ``createProjection`` method (see `Projection`_ below). 
+findAll
+.......
+
+This method performs a query with no conditions. Still, it can take a query suffix argument that is appended on the right of the query to sort or limit the number of results. This suffix is **NOT** escaped and is passed as-is the database. Ensure the string passed as suffix is SQL safe.
+
+.. code:: php
+
+    <?php
+    // …
+    // select {projection} from {relation} order by salary desc limit 5
+    $employees = $employee_model->fetchAll('order by salary desc limit 5');
+
+findWhere
+.........
+
+Generic method to fetch row instances upon a SQL criteria. For convenience, this method can take a ``Where`` instance as argument (see `Foundation documentation <https://github.com/pomm-project/Foundation/blob/master/documentation/foundation.rst#where-the-condition-builder>`_).
+
+.. code:: php
+
+    <?php
+    // …
+    // select {projection} from {relation} where name ~* 'markus'
+    $employees = $employee_model->findWhere("name ~* $*", ['markus']);
+
+    // select {projection} from {relation} where name ~* 'markus' order by salary inc
+    $employees = $employee_model->findWhere("name ~* $*", ['markus'], 'order by salary inc');
+
+    // select {projection} from {relation} where birthdate > '…' or parental_authorisation
+    $where = Where::create("birthdate > $*::timestamp", [new \DateTime('18 years ago')])
+        ->orWhere('parental_authorisation')
+        ;
+    $workable_employees = $employee_model->findWhere($where);
+
+findByPK
+........
+
+Returns a single entity or null if no entities match this primary key.
+
+.. code:: php
+
+    <?php
+    // …
+    // select {projection} from {relation} where employee_id = $*
+    $employee = $employee_model->findByPK(['employee_id' => 'e4 … c9']);
+
+countWhere
+..........
+
+Returns the count of rows matching the given criteria. For convenience, the criteria can be a ``Where`` instance.
+
+.. code:: php
+
+    <?php
+    // …
+    // select count(*) as result from {relation} where gender = $*::gender_type
+    $male_count = $employee_model->countWhere("gender = $*::gender_type", ['M']);
+
+existWhere
+..........
+
+Returns a boolean whether rows matching the given criteria do exist or not. The criteria can be a ``Where`` instance. This implementation is more performant than a count since it stops on the first row matching the given criteria whereas a count implies scanning the whole table.
+
+.. code:: php
+
+    <?php
+    // …
+    // select exists (select true from from {relation} where email ~ $*) as result
+    $email_exists = $employee_model->existWhere("email ~ $*", ['^markus']);
+
+paginate
+........
+
+This method allows basic pagination for queries using ``LIMIT`` and ``OFFSET`` sql keywords. This is needed for the classical «results per page» approach. For performance reasons, the infinite scrolling approach must be preferred to this whereas it is applicable, see `this page for more information <http://use-the-index-luke.com/no-offset>`_.
+
+This method adds a suffix to the given SQL query, the query passed as argument must not contain an ``OFFSET`` nor a ``LIMIT`` clause already.
+
+.. code:: php
+
+    <?php
+    // …
+    // Paginate a query with 25 results per page and get page 10’s results:
+    $employees = $employee_model->paginate($sql, $parameters $total_result_count, 25, 10);
+
+**WriteQueries** (uses ReadQueries)
+
+createAndSave
+.............
+
+Create a new record from given data and return an according flexible entity. This entity is hydrated with data sent back by the database depending on the model’s configured projection so the entity has got the default values set by the database.
+
+.. code:: php
+
+    <?php
+    // …
+    // insert into {relation} (name, …) values ($*::varchar, …) returning {projection}
+    $employee = $employee_model->createAndSave(['name' => 'Alice Ajouh', 'gender' => 'F', …]);
+
+insertOne
+.........
+
+Insert a given entity and makes it to reflect values changed by the database.
+
+.. code:: php
+
+    <?php
+    // …
+    // insert into {relation} (name, …) values ($*::varchar, …) returning {projection}
+    $employee = new Employee(['name' => 'Alice Ajouh', 'gender' => 'F', …]);
+    $employee_model->insertOne($employee);
+
+updateOne
+.........
+
+Update the given entity and makes it to reflect values changed by the database. The fields to be updated are passed as parameter hence changed values that are not updated will be override by values in the database. This way, the entity reflects what is in the database.
+
+.. code:: php
+
+    <?php
+    // …
+    $employee = $employee_model->findByPK(['employee_id' => '…']);
+    $employee
+        ->setSalary($new_salary)
+        ->setName('whatever')
+        ;
+    // update {relation} set salary = $* where employee_id = $* returning {projection}
+    $employee_model->updateOne($employee, ['salary']);
+    $employee->get(['name', 'salary']);
+    // ↑ ['name' => 'john doe', 'salary' => $new_salary]
+
+deleteOne
+.........
+
+Drop an entity and makes it to reflect the last values according to the model’s projection.
+
+.. code:: php
+
+    <?php
+    // …
+    $employee = $employee_model->findByPK(['employee_id' => '…']);
+    // delete from {relation} where employee_id = $* returning {projection}
+    $employee_model->deleteOne($employee->setName('whatever'), ['salary']);
+    $employee->getName(); // john doe
+
+
+updateByPk
+..........
+
+Update a row identified by its primary key and return the entity corresponding to the model’s projection. Return ``null`` if no records match the given primary key.
+
+.. code:: php
+
+    <?php
+    // …
+    // update {relation} set salary = $* where employee_id = $* returning {projection}
+    $employee = $employee_model->updateByPK(
+        ['employee_id' => '…'],
+        ['salary' => $new_salary]
+    );
+
+deleteByPK
+..........
+
+Delete a row identified by its primary key and return the entity corresponding to the model’s projection. Return ``null`` if no records match the given primary key.
+
+.. code:: php
+
+    <?php
+    // …
+    // delete from {relation} where employee_id = $* returning {projection}
+    $employee = $employee_model->deleteByPK(['employee_id' => '…']);
+
+deleteWhere
+...........
+
+Mass deletion, return an iterator on deleted results hydrated by the model’s projection. For convenience, it can take a ``Where`` instance as parameter.
+
+.. code:: php
+
+    <?php
+    // …
+    // delete from {relation} where salary > $* returning {projection}
+    $employees = $employee_model->deleteWhere('salary > $*', [$max_salary]);
 
 Projection
 ~~~~~~~~~~
@@ -339,3 +506,4 @@ When performing joins, there must be informations regarding the foreign relation
         }
     }
 
+The example above shows how to create a custom projection that adds joined table’s field informations. This custom projection must be passed as parameter to the ``query`` function so the hydration mechanisme knows how to convert these fields. The foreign relations’ name are also replaced using their related model class.
