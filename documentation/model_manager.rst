@@ -128,7 +128,7 @@ This way, database structure definitions are described in a unique defined place
 Inheritance
 ~~~~~~~~~~~
 
-Postgresql supports table multiple inheritance. This term is confusing because from a functional overview, it is not really inheritance since since children rows are seen in the parent table but there cannot be constraints on the parent table that verifies the children rows. Postgres inheritance works more like a structural trait mechanism. It is possible to add as many structural traits as wanted on the table, it adds the columns from the parent tables to the child table. If a parent table is modified, alterations are propagated to the children. ``RowStructure`` class makes easy inheritance declaration:
+Postgresql supports table multiple inheritance. This term is confusing because from a functional overview, it is not really inheritance since children rows are seen in the parent table but there cannot be constraints on the parent table that verifies the children rows. Postgres inheritance works more like a structural trait mechanism. It is possible to add as many structural traits as wanted on the table, it adds the columns from the parent tables to the child table. If a parent table is modified, alterations are propagated to the children. ``RowStructure`` class makes easy inheritance declaration:
 
 .. code:: php
 
@@ -180,7 +180,7 @@ With PHP >= 5.5, it is possible to use the ``::class`` constant to name entity c
     //…
             $this->flexible_entity_class = Employee::class;
 
-Assuming the model manager session builder is used, calling this useless model class is made through the ``Client`` pooler::
+Assuming the model manager session builder is used, calling this useless model class is made through the ``Client`` pooler:
 
 .. code:: php
 
@@ -423,7 +423,7 @@ Mass deletion, return an iterator on deleted results hydrated by the model’s p
 Projection
 ~~~~~~~~~~
 
-The projection mechanism handles the content of the ``SELECT`` fields in the model queries. The model’s underlying database structure defines the default projection of the model class so, by default, the fields SELECTed will be the same as the underlying relation. This projection is changed by overloading the ``createProjection`` method. It is possible to add or delete fields from the projection:
+The projection mechanism handles the content of the ``SELECT`` fields in the model queries. The model’s underlying database structure defines the default projection of the model class so, by default, the fields selected will be the same as the underlying relation. This projection is changed by overloading the ``createProjection`` method. It is possible to add or delete fields from the projection:
 
 .. code:: php
 
