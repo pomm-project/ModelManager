@@ -191,8 +191,48 @@ Assuming the model manager session builder is used, calling this useless model c
 Querying the database
 ---------------------
 
-Queries and projection
-~~~~~~~~~~~~~~~~~~~~~~
+Projection
+~~~~~~~~~~
+
+The projection mechanism handles the content of the ``SELECT`` fields in the model queries. The model’s underlying database structure defines the default projection of the model class so, by default, the SELECTed fields will be the same as the underlying relation. This projection is changed by overloading the ``createProjection`` method. It is possible to add or delete fields from the projection:
+
+.. code:: php
+
+    <?php
+    //…
+    class EmployeeModel extends Model
+    {
+    //…
+        public function createProjection()
+        {
+            return parent::createProjection() // default projection
+                ->unsetField('password')      // Removing unwanted fields
+                ->unsetField('department_id')
+                ;
+        }
+    }
+
+It is possible to add new fields referencing other fields. In order to keep escaping and aliasing good, field references must be enclosed by ``%:`` and ``:%``.
+
+.. code:: php
+
+    <?php
+    //…
+    class EmployeeModel extends Model
+    {
+    //…
+        public function createProjection()
+        {
+            return parent::createProjection()
+                ->setField('age', 'age(%:birthdate:%, now())', 'interval')
+                ;
+        }
+    }
+
+The example above adds a field named ``age`` defined by the expression ``age("birthdate", now())`` which is an interval. The fact that the field is enclosed by the delimiters makes possible to alias the field with the table alias (see `Basic queries`_ below).
+
+Basic queries
+~~~~~~~~~~~~~
 
 The Model package comes with its own ``QueryManager`` and result iterator. The goal is to let developers focus on what queries do instead of actually making queries. Tedious parts of writing SQL queries are solved using the model’s structure and projection:
 
@@ -209,15 +249,21 @@ The Model package comes with its own ``QueryManager`` and result iterator. The g
             $sql = strtr(
                 "select {projection} from {relation} where name ~* $*",
                 [
-                    '{projection}'  => $this->createProjection(),
+                    '{projection}'  => $this->createProjection(), // expand projection
                     '{relation}'    => $this->structure->getRelation(),
                 ]
             );
 
             // ↓ return an iterator on flexible entities
+            // ↓ parameters are escaped and converted.
             return $this->query($sql, [$name]);
         }
     }
+
+Of course, there is no need to write such simple query since it is already shipped by Pomm’s built-in queries (see `findWhere`_).
+
+Expanding the projection
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 The example above shows how Pomm’s model manager decouples entities from database relations using the projection. Furthermore, it eases developer’s work by not having them to write the list of fields and maintain it over time.
 
