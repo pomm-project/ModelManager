@@ -553,3 +553,145 @@ When performing joins, there must be informations regarding the foreign relation
     }
 
 The example above shows how to create a custom projection that adds joined table’s field informations. This custom projection must be passed as parameter to the ``query`` function so the hydration mechanisme knows how to convert these fields. The foreign relations’ name are also replaced using their related model class.
+
+Collection iterator
+-------------------
+
+The model’s query method returns a ``CollectionIterator`` instance which contains a link to the database results. Since it extends the ``ConvertedResultIterator`` class it implements ``SeekableIterator``, ``Countable`` and ``JsonSerializable``. The specific task of this class is to return ``FlexibleEntityInterface`` instances in place of associative arrays.
+
+Flexible entities
+-----------------
+
+Flexible entities are an object oriented representation of results returned by model classes’ queries. As the returned rows depend on projections, they are higly subject to change, this is why entities hydrated with results are called «flexible».
+
+FlexibleEntityInterface
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Although Pomm comes with a ``FlexibleEntity`` as default flexible entity class, it is possible to build custom data container classes as long as they implement ``FlexibleEntityInterface``. 
+
+``hydrate``
+    This method is responsible of how the instance is hydrated with the given data. It can set default values or override unwanted values.
+
+``fields``
+    Return the list of keys pointing on values stored by the entity.
+
+``extract``
+    Return the array representation of the hosted data.
+
+``status``
+    Since the entity is mutable, it is important to keep track of its status.
+
+For convenience, a ``StatefulEntityTrait`` is provided by the package, it implements two functions: ``status`` and ``touch`` which behaves like Unix’s ``touch`` utility.
+
+Stateful entities
+~~~~~~~~~~~~~~~~~
+
+By default, entities can be either persisted or not, modified or not or a combination of both. These different states are represented using a bitmask:
+
+- bit 1: 1 = persisted
+- bit 2: 1 = modified
+
+Combination of these two bits creates 4 different states:
+
+- 0: not persisted nor modified (``FlexibleEntityInterface::STATUS_NONE``).
+- 1: persisted and not modified since then (``FlexibleEntityInterface::STATUS_EXIST``).
+- 2: modified and not persisted yet (``FlexibleEntityInterface::STATUS_MODIFIED``).
+- 3: persisted and modified since then (Sum of the two last statuses above).
+
+.. code:: php
+
+    <?php
+    //…
+    $my_entity = new MyEntity(['field1' => 'a value', …]);
+    $my_entity->status(); // 0
+    $my_entity->setField1('whatever');
+    $my_entity->status(); // 2
+    $model->insertOne($my_entity);
+    $my_entity->status(); // 1
+    $my_entity->touch();
+    $my_entity->status(); // 3
+    $my_entity->status() & FLexibleEntityInteface::STATUS_EXIST; // true
+    $my_entity->status() & FLexibleEntityInteface::STATUS_MODIFIED; // true
+
+It is possible to add more states (``STATUS_TAINTED`` by example to indicate an entity may contain untrusted values). This then will add a new bit 3 state hence four more different states (4, 5, 6 and 7).
+
+Getters and setters
+~~~~~~~~~~~~~~~~~~~
+
+Generic getter
+..............
+
+Pomm’s default flexible entity class mimics POPO implementation by using PHP’s magic setters and getters.
+
+.. code:: php
+
+    <?php
+    //…
+    $my_entity = new MyEntity(['field1' => 1]);
+    $my_entity->field1;         // 1
+    $my_entity['field1'];       // 1
+    $my_entity->get('field1');  // 1
+    $my_entity->getField1();    // 1
+
+What happen if a getter is implemented in ``MyEntity`` class?
+
+.. code:: php
+
+    <?php
+    //…
+    class MyEntity extends FlexibleEntity
+    {
+        public function getField1()
+        {
+            return $this->get('field1') * 2;
+        }
+    }
+    //…
+    $my_entity = new MyEntity(['field1' => 1]);
+    $my_entity->field1;         // 2
+    $my_entity['field1'];       // 2
+    $my_entity->get('field1');  // 1
+    $my_entity->getField1();    // 2
+
+The getter is automatically used when the entity is accessed like an array or a standard object. The only way to get raw values stored in the entity is to use the generic getter ``get("field_name")``. This is mainly useful when the raw value is needed to create URLs in templates. This generic accessor can also take an array of field names, values are then returned in an associative array.
+
+By default, a ``ModelException`` is thrown if a non existant key is accessed to prevent silent errors in templates:
+
+.. code:: php
+
+    <?php
+    //…
+    $my_entity = new MyEntity(['field1' => 1]);
+    $my_entity->field2; // Throws an exception
+
+It is still possible to silently ignore calls to unset attributes using the static ``FlexibleEntity::$strict`` attribute. By default, it is set to true. Turned to false, it will mute these errors.
+
+.. code:: php
+
+    <?php
+    //…
+    MyEntity::$strict = false;
+    $my_entity = new MyEntity(['field1' => 1]);
+    $my_entity->field2; // Returns null
+
+has
+...
+
+By the default, this accessor returns true if the entity has this key (even if the value is null). This is used by the ``ArrayAccess`` implementation and the extract (see `extract`_) method.
+
+.. code:: php
+
+    <?php
+    //…
+    $my_entity = new MyEntity(['field1' => null]);
+    $my_entity->has('field1');  // true
+    $my_entity->hasField1();    // true
+    isset($my_entity['field1']; // true
+    isset($my_entity->field1);  // true
+    $my_entity->has('field2');  // false
+
+
+set
+...
+
+
