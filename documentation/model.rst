@@ -579,7 +579,7 @@ Although Pomm comes with a ``FlexibleEntity`` as default flexible entity class, 
     Return the array representation of the hosted data.
 
 ``status``
-    Since the entity is mutable, it is important to keep track of its status.
+    Since the entity is mutable, it is important to keep track of its status (see `Stateful entities`_ below).
 
 For convenience, a ``StatefulEntityTrait`` is provided by the package, it implements two functions: ``status`` and ``touch`` which behaves like Unix’s ``touch`` utility.
 
@@ -603,17 +603,22 @@ Combination of these two bits creates 4 different states:
     <?php
     //…
     $my_entity = new MyEntity(['field1' => 'a value', …]);
-    $my_entity->status(); // 0
+    $my_entity->status(); // 0 (none)
     $my_entity->setField1('whatever');
-    $my_entity->status(); // 2
+    $my_entity->status(); // 2 (modified)
     $model->insertOne($my_entity);
-    $my_entity->status(); // 1
-    $my_entity->touch();
-    $my_entity->status(); // 3
-    $my_entity->status() & FLexibleEntityInteface::STATUS_EXIST; // true
-    $my_entity->status() & FLexibleEntityInteface::STATUS_MODIFIED; // true
+    $my_entity->status(); // 1 (persisted)
+    $my_entity->touch()->status(); // 3 (modified + persisted)
+    $my_entity->status() & FLexibleEntityInteface::STATUS_EXIST; // 1
+    $my_entity->status() & FLexibleEntityInteface::STATUS_MODIFIED; // 2
 
 It is possible to add more states (``STATUS_TAINTED`` by example to indicate an entity may contain untrusted values). This then will add a new bit 3 state hence four more different states (4, 5, 6 and 7).
+
+``Status`` is a special method. To avoid collisions with custom accessors, it can take two forms:
+
+- ``status()`` return the entity’s current state
+- ``status($status)`` set the status and return ``$this``
+
 
 Getters and setters
 ~~~~~~~~~~~~~~~~~~~
@@ -694,4 +699,54 @@ By the default, this accessor returns true if the entity has this key (even if t
 set
 ...
 
+add
+...
 
+clear
+.....
+
+Unset a key, value pair from the container and set the entity as modified if the key exists.
+
+.. code:: php
+
+    <?php
+    //…
+    $my_entity = new MyEntity(['field1' => null]);
+    $my_entity->clear('field1');
+    $my_entity->clearField1();    // identical as above
+    unset($my_entity->field1);    // identical as above
+    unset($my_entity['field1']);  // identical as above
+    $my_entity->status() & FlexibleEntityInterface::STATUS_MODIFIED; // 2
+
+extract
+.......
+
+This method outputs the array representation of the entity. To do so it extracts recursively its attributes (that can be flexible entities). By default, only values present in the container are dumped but custom getters will be dumped too if their according ``has`` method exists and returns true.
+
+.. code:: php
+
+    <?php
+    //…
+    class Student extends FlexibleEntity
+    {
+        public function getAge()
+        {
+            return (new \DateTime())
+                ->diff($this->getBirthdate())
+                ;
+        }
+
+        public function hasAge()
+        {
+            return $this->hasBirthdate();
+        }
+    }
+    //…
+    $student = new Student(['birthdate' => new \DateTime('1991-06-29')]);
+    $student->extract();
+    /* array (2):
+    [
+        'birthdate' => \DateTime instance (…),
+        'age' => \DateInterval instance (…)
+    ]
+    */
