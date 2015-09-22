@@ -557,7 +557,30 @@ The example above shows how to create a custom projection that adds joined table
 Collection iterator
 -------------------
 
+Iterator overview
+~~~~~~~~~~~~~~~~~
+
 The model’s query method returns a ``CollectionIterator`` instance which contains a link to the database results. Since it extends the ``ConvertedResultIterator`` class it implements ``SeekableIterator``, ``Countable`` and ``JsonSerializable``. The specific task of this class is to return ``FlexibleEntityInterface`` instances in place of associative arrays.
+
+Collection filters
+~~~~~~~~~~~~~~~~~~
+
+One interesting features of ``CollectionIterator`` is they can be attached filters. Filters are anonymous functions that take converted values in an array as parameter and must return an array. Several filters can be attached to a collection this way, they will be triggered in the same order they are added. This may be particularily useful when dealing with JSON fields that can be represented as PHP class instance:
+
+.. code:: php
+
+    <?php
+    //…
+    $collection = $model->findAll();
+    $collection->registerFilter(function($values) {
+        $values['json_field'] = new JsonObject($values['json_field']);
+
+        return $values;
+        });
+    $my_entity = $collection->current();
+    $my_entity['json_field']; // return a JsonObject instance.
+
+Every time a row is fethed from the database, when all the filters have been triggered, the values are injected in an entity instance. It is possible to clear the filters attached to a collection by using the ``clearFilters`` method.
 
 Flexible entities
 -----------------
