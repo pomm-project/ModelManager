@@ -581,6 +581,8 @@ One interesting features of ``CollectionIterator`` is they can be attached filte
     $my_entity['json_field']; // return a JsonObject instance.
 
 Every time a row is fethed from the database, when all the filters have been triggered, the values are injected in an entity instance. It is possible to clear the filters attached to a collection by using the ``clearFilters`` method.
+Important note:
+    Filters do not actually discard results, this would make the iterator to return wrong count and / or rows. The filters are just a way to transform data before they hydrate entity classes. All filters must return an array.
 
 Flexible entities
 -----------------
@@ -705,7 +707,7 @@ It is still possible to silently ignore calls to unset attributes using the stat
 has
 ...
 
-By the default, this accessor returns true if the entity has this key (even if the value is null). This is used by the ``ArrayAccess`` implementation and the extract (see `extract`_) method.
+By default, this accessor returns true if the entity has this key (even if the value is null). This is used by the ``ArrayAccess`` implementation and the extract (see `extract`_) method.
 
 .. code:: php
 
@@ -722,8 +724,30 @@ By the default, this accessor returns true if the entity has this key (even if t
 set
 ...
 
+This is the way values are updated in the entity.
+
+.. code:: php
+
+    <?php
+    //…
+    $my_entity = new MyEntity(['field1' => 1]);
+    $my_entity->set('field2', 2);
+    $my_entity->setField2(2);  // By default, same as above
+    $my_entity['field2'] = 2;  // same as above
+    $my_entity->field2 = 2;    // same as above
+
 add
 ...
+
+The ``add`` method is a shortcut to easily add a new value when the attribute is an array or to create an array with the given value.
+
+.. code:: php
+
+    <?php
+    //…
+    $computer = $model->findByPK(['computer_id' => …]);
+    $computer->add('interfaces', '192.168.2.81/24');
+    $computer->addInterfaces('192.168.2.81/24'); // By default, same as above
 
 clear
 .....
