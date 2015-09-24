@@ -883,7 +883,7 @@ setTransactionIsolationLevel
 The transaction isolation level defines the database consistency level required between concurrent running transactions. (See `Postgres documentation <http://www.postgresql.org/docs/9.2/static/sql-set-transaction.html>`_ Postgres defines the following levels:
 
 ``Connection::ISOLATION_READ_COMMITTED``
-    This is the default value. The transaction snapshot is taken at the begining of each statement.
+    The transaction snapshot is taken at the begining of each statement. This is the default value.
 ``Connection::ISOLATION_REPEATABLE_READ``
     The snapshot seen by the transaction is taken at the begining of the transaction.
 ``Connection::ISOLATION_SERIALIZABLE``
@@ -909,9 +909,10 @@ This starts a transaction on the database server. The transaction uses the mode 
 
             throw $e;
         }
+    }
 
 setDeferrable
-⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅
+.............
 
 This method must be used in an open transaction to be effective. It can tell Postgresql to change the given constraints check policy in a transaction if they are defined as ``deferrable``. This is mainly used to defer the foreign key constraint check at the end of the transaction in place of the constraint being checked at the end of the statement (which is the default). This is needed with circular references.
 
@@ -935,9 +936,9 @@ Since the constraint check policy is defined at creation time, the default can a
 If no keys are specified (empty array), it will tell Postgres to apply the strategy on all the keys it can.
 
 setSavepoint
-⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅
+............
 
-Set a savepoint in a running transaction. Because nested transactions are not possible, savepoints makes possible to rollback a transaction partially.
+Set a savepoint in a running transaction. Because nested transactions are not permitted, savepoints makes possible to rollback a transaction partially.
 
 .. code:: php
 
@@ -957,7 +958,7 @@ Set a savepoint in a running transaction. Because nested transactions are not po
         }
 
 releaseSavepoint
-⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅
+................
 
 Release a previously set transaction save point (see `setSavepoint`_ above).
 
@@ -987,7 +988,7 @@ sendNotify
 Send an asynchronous notification to the server. This can be used to trigger detached processes listening for events. Pomm project’s Foundation ``notify`` pooler can be used to listen to such event.
 
 Note:
-    As a notification can not be rollbacjed, when a notification is sent in a transaction, it is deferred unti the transaction is commited.
+    As a notifications can not be rollbacked, when a notification is sent in a transaction, it is deferred unti the transaction is commited.
 
 getModel
 ........
@@ -1002,7 +1003,7 @@ This is a shortut to ``Connection::executeAnonymousQuery()``. The reason of such
 Example
 -------
 
-Use case: keep tracks of URLs pointing on resource. A resource must have an url and all urls must point to an article.
+Use case: keep track of URLs pointing on articles. An article must have an url and all urls must point to an article.
 
 .. code:: sql
 
@@ -1012,8 +1013,8 @@ Use case: keep tracks of URLs pointing on resource. A resource must have an url 
         -- …
         active_url uri
             references article_url on (article_uri)
-            not null
-    -- …
+            not null,
+        -- …
     );
 
     create table article_url (
