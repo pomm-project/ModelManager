@@ -880,12 +880,12 @@ Postgres defines two types of transaction that changes the locking strategy used
 setTransactionIsolationLevel
 ............................
 
-The transaction isolation level defines the database consistency level required between concurrent running transactions. Postgres defines the following levels:
+The transaction isolation level defines the database consistency level required between concurrent running transactions. (See `Postgres documentation <http://www.postgresql.org/docs/9.2/static/sql-set-transaction.html>`_ Postgres defines the following levels:
 
 ``Connection::ISOLATION_READ_COMMITTED``
-    This is the default value.
+    This is the default value. The transaction snapshot is taken at the begining of each statement.
 ``Connection::ISOLATION_REPEATABLE_READ``
-    TODO
+    The snapshot seen by the transaction is taken at the begining of the transaction.
 ``Connection::ISOLATION_SERIALIZABLE``
     This mode is the most efficient since transactions are run concurrently. Each time a transaction is commited, the database engine checks if its environment has been broken by transactions that would have ended earlier. If the environment is safe, the transaction succeed otherwise, it fails. When using this mode, it is necessary to be prepared to relaunch a failed transaction until it passes.
 
