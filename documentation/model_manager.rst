@@ -477,46 +477,6 @@ Mass deletion, return an iterator on deleted results hydrated by the model’s p
     // delete from {relation} where salary > $* returning {projection}
     $employees = $employee_model->deleteWhere('salary > $*', [$max_salary]);
 
-Projection
-~~~~~~~~~~
-
-The projection mechanism handles the content of the ``SELECT`` fields in the model queries. The model’s underlying database structure defines the default projection of the model class so, by default, the fields selected will be the same as the underlying relation. This projection is changed by overloading the ``createProjection`` method. It is possible to add or delete fields from the projection:
-
-.. code:: php
-
-    <?php
-    //…
-    class EmployeeModel extends Model
-    {
-    //…
-        public function createProjection()
-        {
-            return parent::createProjection() // default projection
-                ->unsetField('password')
-                ->unsetField('department_id')
-                ;
-        }
-    }
-
-It is possible to add new fields referencing other fields. In order to keep escaping and aliasing good, field references must be enclosed by ``%:`` and ``:%``.
-
-.. code:: php
-
-    <?php
-    //…
-    class EmployeeModel extends Model
-    {
-    //…
-        public function createProjection()
-        {
-            return parent::createProjection()
-                ->setField('age', 'age(%:birthdate:%, now())', 'interval')
-                ;
-        }
-    }
-
-The example above adds a field named ``age`` defined by the expression ``age("birthdate", now())`` which is an interval.
-
 Complex queries
 ~~~~~~~~~~~~~~~
 
