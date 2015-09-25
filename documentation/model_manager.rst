@@ -914,7 +914,7 @@ This starts a transaction on the database server. The transaction uses the mode 
 setDeferrable
 .............
 
-This method must be used in an open transaction to be effective. It can tell Postgresql to change the given constraints check policy in a transaction if they are defined as ``deferrable``. This is mainly used to defer the foreign key constraint check at the end of the transaction in place of the constraint being checked at the end of the statement (which is the default). This is needed with circular references.
+This method must be used in an open transaction to be effective. It can tell Postgresql to change the given constraints check policy in a transaction if they are defined as ``deferrable``. (See `Postgresql documentation <http://www.postgresql.org/docs/9.4/static/sql-set-constraints.html>`_) This is mainly used to defer the foreign key constraint check at the end of the transaction in place of the constraint being checked at the end of the statement (which is the default). This is needed with circular references.
 
 Since the constraint check policy is defined at creation time, the default can also be ``deferred`` and set to be immediate in a particular transaction:
 
