@@ -47,6 +47,7 @@ Class and fields comments are inspected from table and fields comments. Just add
 @see http://www.postgresql.org/docs/9.0/static/sql-comment.html
 TEXT;
         }
+
         $this
             ->outputFileCreation($output)
             ->saveFile(
@@ -55,11 +56,7 @@ TEXT;
                     [
                         'namespace'      => $this->namespace,
                         'class_name'     => $input->getParameter('class_name', Inflector::studlyCaps($this->relation)),
-                        'relation'       => sprintf(
-                            "%s.%s",
-                            $this->getSession()->getConnection()->escapeIdentifier($this->schema),
-                            $this->getSession()->getConnection()->escapeIdentifier($this->relation)
-                        ),
+                        'relation'       => sprintf("%s.%s", $this->schema, $this->relation),
                         'primary_key'    => join(
                             ', ',
                             array_map(

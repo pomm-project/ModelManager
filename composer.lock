@@ -5,6 +5,7 @@
         "This file is @generated automatically"
     ],
     "hash": "89bd0bebb919ceef23232b69b7cfbda1",
+    "content-hash": "1aebe7c6d85b6adb59533070d0824a27",
     "packages": [
         {
             "name": "pomm-project/foundation",
@@ -12,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pomm-project/Foundation.git",
-                "reference": "da0568fee95b7fe7c23e6ade51151e2d1cf9a964"
+                "reference": "316aa8ccebbc304d55207b8f38a2a22f5baae806"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pomm-project/Foundation/zipball/da0568fee95b7fe7c23e6ade51151e2d1cf9a964",
-                "reference": "da0568fee95b7fe7c23e6ade51151e2d1cf9a964",
+                "url": "https://api.github.com/repos/pomm-project/Foundation/zipball/316aa8ccebbc304d55207b8f38a2a22f5baae806",
+                "reference": "316aa8ccebbc304d55207b8f38a2a22f5baae806",
                 "shasum": ""
             },
             "require": {
@@ -58,7 +59,7 @@
                 "pomm",
                 "postgresql"
             ],
-            "time": "2015-08-15 09:55:30"
+            "time": "2015-10-02 09:54:02"
         },
         {
             "name": "psr/log",
@@ -106,12 +107,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/atoum/atoum.git",
-                "reference": "ab650ec54f65968db592679e3d0e4f01e5684f61"
+                "reference": "bc1105cba8446bdd82d861d49096fa303aca49ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/atoum/atoum/zipball/ab650ec54f65968db592679e3d0e4f01e5684f61",
-                "reference": "ab650ec54f65968db592679e3d0e4f01e5684f61",
+                "url": "https://api.github.com/repos/atoum/atoum/zipball/bc1105cba8446bdd82d861d49096fa303aca49ea",
+                "reference": "bc1105cba8446bdd82d861d49096fa303aca49ea",
                 "shasum": ""
             },
             "require": {
@@ -126,6 +127,7 @@
                 "mageekguy/atoum": "*"
             },
             "suggest": {
+                "atoum/stubs": "Provides IDE support (like autocompletion) for atoum",
                 "ext-mbstring": "Provides support for UTF-8 strings"
             },
             "bin": [
@@ -177,7 +179,7 @@
                 "test",
                 "unit testing"
             ],
-            "time": "2015-08-03 05:53:32"
+            "time": "2015-10-01 20:37:42"
         }
     ],
     "aliases": [],
