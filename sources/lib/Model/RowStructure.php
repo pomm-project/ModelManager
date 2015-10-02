@@ -227,7 +227,14 @@ class RowStructure implements \ArrayAccess
     private function checkExist($name)
     {
         if (!$this->hasField($name)) {
-            throw new ModelException(sprintf("Field '%s' is not defined in structure '%s'.", $name, get_class($this)));
+            throw new ModelException(
+                sprintf(
+                    "Field '%s' is not defined in structure '%s'. Defined fields are {%s}",
+                    $name,
+                    get_class($this),
+                    join(', ', array_keys($this->field_definitions))
+                )
+            );
         }
 
         return $this;
