@@ -69,6 +69,12 @@ class Model extends BaseTest
             ->getModel('PommProject\ModelManager\Test\Fixture\ComplexFixtureModel');
     }
 
+    protected function getWeirdFixtureModel(Session $session)
+    {
+        return $session
+            ->getModel('PommProject\ModelManager\Test\Fixture\WeirdFixtureModel');
+    }
+
     public function testGetClientType()
     {
         $this
@@ -193,6 +199,7 @@ class Model extends BaseTest
     {
         $model = $this->getReadFixtureModel($this->buildSession());
         $model_without_pk = $this->getWithoutPKFixtureModel($this->buildSession());
+        $model_weird = $this->getWeirdFixtureModel($this->buildSession());
         $this
             ->object($model->findByPK(['id' => 1]))
             ->isInstanceOf('\PommProject\ModelManager\Test\Fixture\SimpleFixture')
@@ -208,6 +215,8 @@ class Model extends BaseTest
             ->exception(function () use ($model) { $model->findByPK(['a_varchar' => 'one']); })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains("Key 'id' is missing to fully describes the primary key")
+            ->object($model_weird->findByPK(['field_a' => 2, 'field_b' => false]))
+            ->isInstanceOf('\PommProject\ModelManager\Test\Fixture\WeirdFixture')
             ;
     }
 

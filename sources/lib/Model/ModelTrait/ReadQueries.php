@@ -31,6 +31,20 @@ trait ReadQueries
     use BaseTrait;
 
     /**
+     * escapeIdentifier
+     *
+     * @see Model
+     */
+    abstract protected function escapeIdentifier($string);
+
+    /**
+     * getStructure
+     *
+     * @see Model
+     */
+    abstract public function getStructure();
+
+    /**
      * findAll
      *
      * Return all elements from a relation. If a suffix is given, it is append
@@ -333,7 +347,14 @@ trait ReadQueries
         $where = new Where();
 
         foreach ($values as $field => $value) {
-            $where->andWhere(sprintf("%s = $*", $this->escapeIdentifier($field)), [$value]);
+            $where->andWhere(
+                sprintf(
+                    "%s = $*::%s",
+                    $this->escapeIdentifier($field),
+                    $this->getStructure()->getTypeFor($field)
+                ),
+                [$value]
+            );
         }
 
         return $where;
