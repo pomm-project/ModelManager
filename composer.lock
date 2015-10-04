@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "89bd0bebb919ceef23232b69b7cfbda1",
-    "content-hash": "1aebe7c6d85b6adb59533070d0824a27",
+    "hash": "a6a4cc0a1e1fa96c35d0574764248a84",
+    "content-hash": "6191c7398e0b6dcb107373297206c4be",
     "packages": [
         {
             "name": "pomm-project/foundation",
-            "version": "dev-master",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pomm-project/Foundation.git",
-                "reference": "316aa8ccebbc304d55207b8f38a2a22f5baae806"
+                "reference": "6f87b60cc036bb8b4ed0731867a088bd582d45cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pomm-project/Foundation/zipball/316aa8ccebbc304d55207b8f38a2a22f5baae806",
-                "reference": "316aa8ccebbc304d55207b8f38a2a22f5baae806",
+                "url": "https://api.github.com/repos/pomm-project/Foundation/zipball/6f87b60cc036bb8b4ed0731867a088bd582d45cd",
+                "reference": "6f87b60cc036bb8b4ed0731867a088bd582d45cd",
                 "shasum": ""
             },
             "require": {
@@ -59,7 +59,7 @@
                 "pomm",
                 "postgresql"
             ],
-            "time": "2015-10-02 09:54:02"
+            "time": "2015-10-04 20:07:27"
         },
         {
             "name": "psr/log",
@@ -183,9 +183,8 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "RC",
+    "minimum-stability": "stable",
     "stability-flags": {
-        "pomm-project/foundation": 20,
         "atoum/atoum": 20
     },
     "prefer-stable": false,
