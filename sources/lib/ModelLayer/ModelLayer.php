@@ -226,7 +226,7 @@ EOMSG
     {
         return $this->sendParameter(
             "savepoint %s",
-            $name
+            $this->escapeIdentifier($name)
         );
     }
 
@@ -243,7 +243,7 @@ EOMSG
     {
         return $this->sendParameter(
             "release savepoint %s",
-            $name
+            $this->escapeIdentifier($name)
         );
     }
 

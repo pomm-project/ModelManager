@@ -85,9 +85,9 @@ EOSQL
         $this
             ->boolean($model_layer->startTransaction())
             ->isTrue()
-            ->boolean($model_layer->setSavepoint('pika'))
+            ->boolean($model_layer->setSavepoint('12 345'))
             ->isTrue()
-            ->boolean($model_layer->releaseSavepoint('pika'))
+            ->boolean($model_layer->releaseSavepoint('12 345'))
             ->isTrue()
             ->boolean($model_layer->setSavepoint('chu'))
             ->isTrue()
