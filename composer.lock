@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cda8799ef494e7c6d5e72d0f59d3c2b6",
-    "content-hash": "980620d0338ee5ce2a54bbdaaa6ef084",
+    "hash": "386559b400c9ddad349523c6d4d5ea13",
+    "content-hash": "224113c8f77fd27f64ae6aec7e3cb7ea",
     "packages": [
         {
             "name": "pomm-project/foundation",
-            "version": "2.0.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pomm-project/Foundation.git",
-                "reference": "6f87b60cc036bb8b4ed0731867a088bd582d45cd"
+                "reference": "9d2a69c8e4bed8e6ab43dcc12dd0813ba3295ee1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pomm-project/Foundation/zipball/6f87b60cc036bb8b4ed0731867a088bd582d45cd",
-                "reference": "6f87b60cc036bb8b4ed0731867a088bd582d45cd",
+                "url": "https://api.github.com/repos/pomm-project/Foundation/zipball/9d2a69c8e4bed8e6ab43dcc12dd0813ba3295ee1",
+                "reference": "9d2a69c8e4bed8e6ab43dcc12dd0813ba3295ee1",
                 "shasum": ""
             },
             "require": {
@@ -32,7 +32,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0-dev"
+                    "dev-master": "2.1-dev"
                 }
             },
             "autoload": {
@@ -59,26 +59,34 @@
                 "pomm",
                 "postgresql"
             ],
-            "time": "2015-10-04 20:07:27"
+            "time": "2015-12-04 10:03:50"
         },
         {
             "name": "psr/log",
-            "version": "1.0.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b"
+                "reference": "9e45edca52cc9c954680072c93e621f8b71fab26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/fe0936ee26643249e916849d48e3a51d5f5e278b",
-                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/9e45edca52cc9c954680072c93e621f8b71fab26",
+                "reference": "9e45edca52cc9c954680072c93e621f8b71fab26",
                 "shasum": ""
             },
+            "require": {
+                "php": ">=5.3.0"
+            },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
             "autoload": {
-                "psr-0": {
-                    "Psr\\Log\\": ""
+                "psr-4": {
+                    "Psr\\Log\\": "Psr/Log/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -97,7 +105,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2012-12-21 11:40:51"
+            "time": "2015-06-02 13:48:41"
         }
     ],
     "packages-dev": [
@@ -183,8 +191,9 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": {
+        "pomm-project/foundation": 20,
         "atoum/atoum": 20
     },
     "prefer-stable": false,
