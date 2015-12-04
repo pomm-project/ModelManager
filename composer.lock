@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5fdb0da3f01bb06094652b118f3d4d77",
-    "content-hash": "9d427cdd6a8e6ed0317227dee3ad2480",
+    "hash": "cda8799ef494e7c6d5e72d0f59d3c2b6",
+    "content-hash": "980620d0338ee5ce2a54bbdaaa6ef084",
     "packages": [
         {
             "name": "pomm-project/foundation",
-            "version": "dev-master",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pomm-project/Foundation.git",
-                "reference": "ab114b4f1dc8cb131fbf8ab93823b34620880376"
+                "reference": "6f87b60cc036bb8b4ed0731867a088bd582d45cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pomm-project/Foundation/zipball/ab114b4f1dc8cb131fbf8ab93823b34620880376",
-                "reference": "ab114b4f1dc8cb131fbf8ab93823b34620880376",
+                "url": "https://api.github.com/repos/pomm-project/Foundation/zipball/6f87b60cc036bb8b4ed0731867a088bd582d45cd",
+                "reference": "6f87b60cc036bb8b4ed0731867a088bd582d45cd",
                 "shasum": ""
             },
             "require": {
@@ -59,7 +59,7 @@
                 "pomm",
                 "postgresql"
             ],
-            "time": "2015-10-06 14:32:14"
+            "time": "2015-10-04 20:07:27"
         },
         {
             "name": "psr/log",
@@ -107,12 +107,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/atoum/atoum.git",
-                "reference": "e6aab9a885c3133419a48df858bd4481a3505552"
+                "reference": "12fa40738d417902738c9cd561868396523e8785"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/atoum/atoum/zipball/e6aab9a885c3133419a48df858bd4481a3505552",
-                "reference": "e6aab9a885c3133419a48df858bd4481a3505552",
+                "url": "https://api.github.com/repos/atoum/atoum/zipball/12fa40738d417902738c9cd561868396523e8785",
+                "reference": "12fa40738d417902738c9cd561868396523e8785",
                 "shasum": ""
             },
             "require": {
@@ -179,13 +179,12 @@
                 "test",
                 "unit testing"
             ],
-            "time": "2015-10-23 07:26:05"
+            "time": "2015-11-26 14:38:45"
         }
     ],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "pomm-project/foundation": 20,
         "atoum/atoum": 20
     },
     "prefer-stable": false,
