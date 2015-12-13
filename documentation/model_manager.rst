@@ -304,7 +304,7 @@ This method performs a query with no conditions. Still, it can take a query suff
     <?php
     // …
     // select {projection} from {relation} order by salary desc limit 5
-    $employees = $employee_model->fetchAll('order by salary desc limit 5');
+    $employees = $employee_model->findAll('order by salary desc limit 5');
 
 findWhere
 .........
