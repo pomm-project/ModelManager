@@ -48,19 +48,31 @@ class PgEntity extends BaseTest
 
     public function testFromPg()
     {
-        $entity = $this->getComplexNumberConverter()->fromPg(
-                '(1.233,2.344)',
-                'complex_number',
-                $this->setUpSession($this->buildSession())
-            );
-
         $this
-            ->object($entity)
-            ->isInstanceOf('PommProject\ModelManager\Test\Fixture\ComplexNumber')
-            ->float($entity['real'])
-            ->isEqualTo(1.233)
-            ->float($entity['imaginary'])
-            ->isEqualTo(2.344)
+            ->assert("Row types are converted into entities.")
+            ->given(
+                $entity = $this->getComplexNumberConverter()->fromPg(
+                    '(1.233,2.344)',
+                    'complex_number',
+                    $this->setUpSession($this->buildSession())
+                )
+            )
+                ->object($entity)
+                    ->isInstanceOf('PommProject\ModelManager\Test\Fixture\ComplexNumber')
+                ->float($entity['real'])
+                    ->isEqualTo(1.233)
+                ->float($entity['imaginary'])
+                    ->isEqualTo(2.344)
+            ->assert("Null values return null.")
+            ->given(
+                $result = $this->getComplexNumberConverter()->fromPg(
+                    null,
+                    'complex_number',
+                    $this->setUpSession($this->buildSession())
+                )
+            )
+                ->variable($result)
+                    ->isNull()
             ;
     }
 
