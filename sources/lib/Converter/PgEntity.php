@@ -67,7 +67,7 @@ class PgEntity implements ConverterInterface
      */
     public function fromPg($data, $type, Session $session)
     {
-        if ($data === '') {
+        if (empty($data)) {
             return null;
         }
 
