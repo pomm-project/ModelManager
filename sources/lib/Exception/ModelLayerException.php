@@ -1,6 +1,6 @@
 <?php
 /*
- * This file is part of Pomm's ModelManager package.
+ * This file is part of the PommProject/ModelManager package.
  *
  * (c) 2014 - 2015 Grégoire HUBERT <hubert.greg@gmail.com>
  *
@@ -9,17 +9,19 @@
  */
 namespace PommProject\ModelManager\Exception;
 
+use PommProject\Foundation\Exception\PommException;
+
 /**
- * GeneratorException
+ * ModelLayerException
  *
- * Exception class for generators.
+ * Exception for the Model layer package
  *
  * @package   ModelManager
  * @copyright 2014 - 2015 Grégoire HUBERT
  * @author    Grégoire HUBERT
  * @license   X11 {@link http://opensource.org/licenses/mit-license.php}
- * @see       ModelException
+ * @see       PommException
  */
-class GeneratorException extends ModelException
+class ModelLayerException extends PommException
 {
 }

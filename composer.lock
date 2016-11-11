@@ -1,10 +1,11 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e5f0aee9349dcb1e04048a184934f11c",
+    "hash": "386559b400c9ddad349523c6d4d5ea13",
+    "content-hash": "224113c8f77fd27f64ae6aec7e3cb7ea",
     "packages": [
         {
             "name": "pomm-project/foundation",
@@ -12,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pomm-project/Foundation.git",
-                "reference": "3d67ff611bc52449e4880e4f98049328f228c5d0"
+                "reference": "9d2a69c8e4bed8e6ab43dcc12dd0813ba3295ee1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pomm-project/Foundation/zipball/3d67ff611bc52449e4880e4f98049328f228c5d0",
-                "reference": "3d67ff611bc52449e4880e4f98049328f228c5d0",
+                "url": "https://api.github.com/repos/pomm-project/Foundation/zipball/9d2a69c8e4bed8e6ab43dcc12dd0813ba3295ee1",
+                "reference": "9d2a69c8e4bed8e6ab43dcc12dd0813ba3295ee1",
                 "shasum": ""
             },
             "require": {
@@ -31,7 +32,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0-dev"
+                    "dev-master": "2.1-dev"
                 }
             },
             "autoload": {
@@ -58,7 +59,7 @@
                 "pomm",
                 "postgresql"
             ],
-            "time": "2015-02-19 15:51:48"
+            "time": "2015-12-04 10:03:50"
         },
         {
             "name": "psr/log",
@@ -66,13 +67,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "1af1529b49a6e065ae6802e70192aba35d79b7d8"
+                "reference": "9e45edca52cc9c954680072c93e621f8b71fab26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/1af1529b49a6e065ae6802e70192aba35d79b7d8",
-                "reference": "1af1529b49a6e065ae6802e70192aba35d79b7d8",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/9e45edca52cc9c954680072c93e621f8b71fab26",
+                "reference": "9e45edca52cc9c954680072c93e621f8b71fab26",
                 "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
             },
             "type": "library",
             "extra": {
@@ -81,8 +85,8 @@
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Psr\\Log\\": ""
+                "psr-4": {
+                    "Psr\\Log\\": "Psr/Log/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -101,7 +105,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2015-02-05 09:32:11"
+            "time": "2015-06-02 13:48:41"
         }
     ],
     "packages-dev": [
@@ -111,12 +115,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/atoum/atoum.git",
-                "reference": "9670f1cd83140ecb1eca65ca8f62ca48c06daf84"
+                "reference": "12fa40738d417902738c9cd561868396523e8785"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/atoum/atoum/zipball/9670f1cd83140ecb1eca65ca8f62ca48c06daf84",
-                "reference": "9670f1cd83140ecb1eca65ca8f62ca48c06daf84",
+                "url": "https://api.github.com/repos/atoum/atoum/zipball/12fa40738d417902738c9cd561868396523e8785",
+                "reference": "12fa40738d417902738c9cd561868396523e8785",
                 "shasum": ""
             },
             "require": {
@@ -131,6 +135,7 @@
                 "mageekguy/atoum": "*"
             },
             "suggest": {
+                "atoum/stubs": "Provides IDE support (like autocompletion) for atoum",
                 "ext-mbstring": "Provides support for UTF-8 strings"
             },
             "bin": [
@@ -139,7 +144,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.x-dev"
+                    "dev-master": "2.x-dev"
                 }
             },
             "autoload": {
@@ -182,7 +187,7 @@
                 "test",
                 "unit testing"
             ],
-            "time": "2015-02-13 11:09:18"
+            "time": "2015-11-26 14:38:45"
         }
     ],
     "aliases": [],

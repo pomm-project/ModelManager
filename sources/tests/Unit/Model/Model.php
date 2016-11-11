@@ -2,60 +2,26 @@
 /*
  * This file is part of the PommProject/ModelManager package.
  *
- * (c) 2014 Grégoire HUBERT <hubert.greg@gmail.com>
+ * (c) 2014 - 2015 Grégoire HUBERT <hubert.greg@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 namespace PommProject\ModelManager\Test\Unit\Model;
 
-use PommProject\Foundation\Where;
+use Mock\PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntity as FlexibleEntityMock;
+use Mock\PommProject\ModelManager\Model\RowStructure as RowStructureMock;
 use PommProject\Foundation\Session\Session;
-use PommProject\Foundation\Query\QueryPooler;
-use PommProject\Foundation\Converter\ConverterPooler;
-use PommProject\Foundation\PreparedQuery\PreparedQueryPooler;
-
-use PommProject\ModelManager\Tester\ModelSessionAtoum;
-
-use PommProject\ModelManager\Model\ModelPooler;
-use PommProject\ModelManager\Model\Model                as PommModel;
+use PommProject\Foundation\Where;
 use PommProject\ModelManager\Converter\PgEntity;
-use PommProject\ModelManager\Test\Fixture\SimpleFixture;
-use PommProject\ModelManager\Test\Fixture\ComplexFixture;
-use PommProject\ModelManager\Test\Fixture\ModelSchemaClient;
-use PommProject\ModelManager\Test\Fixture\ComplexNumberStructure;
 use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
+use PommProject\ModelManager\Model\Model as PommModel;
+use PommProject\ModelManager\Test\Fixture\ComplexNumberStructure;
+use PommProject\ModelManager\Test\Fixture\SimpleFixture;
+use PommProject\ModelManager\Test\Unit\BaseTest;
 
-use Mock\PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntity  as FlexibleEntityMock;
-use Mock\PommProject\ModelManager\Model\RowStructure    as RowStructureMock;
-
-class Model extends ModelSessionAtoum
+class Model extends BaseTest
 {
-    public function setUp()
-    {
-        $session = $this->buildSession();
-        $sql =
-            [
-                "drop schema if exists pomm_test cascade",
-                "begin",
-                "create schema pomm_test",
-                "create type pomm_test.complex_number as (real float8, imaginary float8)",
-                "commit",
-            ];
-
-        try {
-            $session->getConnection()->executeAnonymousQuery(join(';', $sql));
-        } catch (SqlException $e) {
-            $session->getConnection()->executeAnonymousQuery('rollback');
-            throw $e;
-        }
-    }
-
-    public function tearDown()
-    {
-        $this->buildSession()->getConnection()->executeAnonymousQuery('drop schema if exists pomm_test cascade');
-    }
-
     protected function initializeSession(Session $session)
     {
         $session
@@ -103,6 +69,12 @@ class Model extends ModelSessionAtoum
             ->getModel('PommProject\ModelManager\Test\Fixture\ComplexFixtureModel');
     }
 
+    protected function getWeirdFixtureModel(Session $session)
+    {
+        return $session
+            ->getModel('PommProject\ModelManager\Test\Fixture\WeirdFixtureModel');
+    }
+
     public function testGetClientType()
     {
         $this
@@ -119,21 +91,47 @@ class Model extends ModelSessionAtoum
             ;
     }
 
+    public function testCreateProjection()
+    {
+        $session = $this->buildSession();
+        $model = $this->getSimpleFixtureModel($session);
+
+        $this
+            ->object($model->createProjection())
+            ->isInstanceOf('\PommProject\ModelManager\Model\Projection')
+            ->array($model->createProjection()->getFieldTypes())
+            ->isIdenticalTo(['id' => 'int4', 'a_varchar' => 'varchar', 'a_boolean' => 'bool'])
+            ;
+    }
+
+    public function testGetStructure()
+    {
+        $session = $this->buildSession();
+        $model = $this->getSimpleFixtureModel($session);
+
+        $this
+            ->object($model->getStructure())
+            ->isInstanceOf('\PommProject\ModelManager\Model\RowStructure')
+            ->array($model->getStructure()->getDefinition())
+            ->isIdenticalTo(['id' => 'int4', 'a_varchar' => 'varchar', 'a_boolean' => 'bool'])
+            ;
+    }
+
     public function testInitialize()
     {
         $session = $this->buildSession();
         $this
-            ->exception(function() use ($session) {
+            ->exception(function () use ($session) {
                     $model = new NoStructureNoFlexibleEntityModel();
                     $model->initialize($session);
                 })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
-            ->exception(function() use ($session) {
+            ->exception(function () use ($session) {
                     $model = new NoFlexibleEntityModel();
                     $model->initialize($session);
                 })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
-            ->exception(function() use ($session) {
+            ->exception(function () use ($session) {
                     $model = new NoStructureModel();
                     $model->initialize($session);
                 })
@@ -168,9 +166,9 @@ class Model extends ModelSessionAtoum
             ->array($model->findAll()->slice('id'))
             ->isIdenticalTo([1, 2, 3, 4])
             ->array($model->findAll('order by id desc')->slice('id'))
-            ->isIdenticalTo([4, 3 ,2 ,1])
+            ->isIdenticalTo([4, 3, 2, 1])
             ->array($model->findAll('limit 3')->slice('id'))
-            ->isIdenticalTo([1, 2, 3,])
+            ->isIdenticalTo([1, 2, 3, ])
             ;
         $complex_model = $this->getComplexFixtureModel($session);
         $entity = $complex_model->findAll('order by id asc limit 1')->current();
@@ -178,7 +176,6 @@ class Model extends ModelSessionAtoum
             ->object($entity)
             ->isInstanceOf('\PommProject\ModelManager\Test\Fixture\ComplexFixture')
             ;
-
     }
 
     public function testFindWhere()
@@ -202,6 +199,7 @@ class Model extends ModelSessionAtoum
     {
         $model = $this->getReadFixtureModel($this->buildSession());
         $model_without_pk = $this->getWithoutPKFixtureModel($this->buildSession());
+        $model_weird = $this->getWeirdFixtureModel($this->buildSession());
         $this
             ->object($model->findByPK(['id' => 1]))
             ->isInstanceOf('\PommProject\ModelManager\Test\Fixture\SimpleFixture')
@@ -211,12 +209,14 @@ class Model extends ModelSessionAtoum
             ->isNull()
             ->integer($model->findByPK(['id' => 3])->status())
             ->isEqualTo(FlexibleEntityInterface::STATUS_EXIST)
-            ->exception(function() use ($model_without_pk) { $model_without_pk->findByPK(['id' => 1]); })
+            ->exception(function () use ($model_without_pk) { $model_without_pk->findByPK(['id' => 1]); })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains("has no primary key.")
-            ->exception(function() use ($model) { $model->findByPK(['a_varchar' => 'one']); })
+            ->exception(function () use ($model) { $model->findByPK(['a_varchar' => 'one']); })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains("Key 'id' is missing to fully describes the primary key")
+            ->object($model_weird->findByPK(['field_a' => 2, 'field_b' => false]))
+            ->isInstanceOf('\PommProject\ModelManager\Test\Fixture\WeirdFixture')
             ;
     }
 
@@ -278,7 +278,7 @@ class Model extends ModelSessionAtoum
     public function testInsertOne()
     {
         $model = $this->getWriteFixtureModel($this->buildSession());
-        $entity = new SimpleFixture(['a_varchar' => 'e']);
+        $entity = new SimpleFixture(['a_varchar' => 'e', 'undefined_field' => null]);
         $this
             ->object($model->insertOne($entity))
             ->isIdenticalTo($model)
@@ -307,7 +307,7 @@ class Model extends ModelSessionAtoum
             ->isFalse()
             ->boolean($entity->status() === FlexibleEntityInterface::STATUS_EXIST)
             ->isTrue()
-            ->exception(function() use ($model_without_pk, $entity_without_pk) { $model_without_pk->updateOne($entity_without_pk, ['a_varchar']); })
+            ->exception(function () use ($model_without_pk, $entity_without_pk) { $model_without_pk->updateOne($entity_without_pk, ['a_varchar']); })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains("has no primary key.")
         ;
@@ -336,7 +336,7 @@ class Model extends ModelSessionAtoum
             ->isNull()
             ->object($entity)
             ->isIdenticalTo($updated_entity)
-            ->exception(function() use ($model_without_pk) { $model_without_pk->updateByPk(['id' => 1],  ['a_varchar' => 'whatever']); })
+            ->exception(function () use ($model_without_pk) { $model_without_pk->updateByPk(['id' => 1],  ['a_varchar' => 'whatever']); })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains("has no primary key.")
 
@@ -356,7 +356,7 @@ class Model extends ModelSessionAtoum
             ->isNull()
             ->integer($entity->status())
             ->isEqualTo(FlexibleEntityInterface::STATUS_NONE)
-            ->exception(function() use ($model_without_pk, $entity_without_pk) { $model_without_pk->deleteOne($entity_without_pk); })
+            ->exception(function () use ($model_without_pk, $entity_without_pk) { $model_without_pk->deleteOne($entity_without_pk); })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains("has no primary key.")
             ;
@@ -380,10 +380,51 @@ class Model extends ModelSessionAtoum
             ->isIdenticalTo($deleted_entity)
             ->integer($entity->status())
             ->isEqualTo(FlexibleEntityInterface::STATUS_NONE)
-            ->exception(function() use ($model_without_pk, $entity_without_pk) { $model_without_pk->deleteOne($entity_without_pk); })
+            ->exception(function () use ($model_without_pk, $entity_without_pk) { $model_without_pk->deleteOne($entity_without_pk); })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains("has no primary key.")
             ;
+    }
+
+    public function testDeleteWhere()
+    {
+        $model = $this->getWriteFixtureModel($this->buildSession());
+        $entity1 = $model->createAndSave(['a_varchar' => 'qwerty', 'a_boolean' => false]);
+        $entity2 = $model->createAndSave(['a_varchar' => 'qwertz', 'a_boolean' => true]);
+        $deleted_entities = $model->deleteWhere('a_varchar = $*::varchar', ['qwertz']);
+        $this
+            ->object($deleted_entities)
+            ->isInstanceOf('\PommProject\ModelManager\Model\CollectionIterator')
+            ->integer($deleted_entities->count())
+            ->isEqualTo(1)
+            ->object($deleted_entities->get(0))
+            ->isInstanceOf('\PommProject\ModelManager\Test\Fixture\SimpleFixture')
+            ->isEqualTo($entity2)
+            ->integer($deleted_entities->get(0)->status())
+            ->isEqualTo(FlexibleEntityInterface::STATUS_NONE)
+        ;
+
+        $deleted_entities2 = $model->deleteWhere('a_varchar = $*::varchar', ['qwertz']);
+        $this
+            ->object($deleted_entities2)
+            ->isInstanceOf('\PommProject\ModelManager\Model\CollectionIterator')
+            ->integer($deleted_entities2->count())
+            ->isEqualTo(0)
+           ;
+
+        $deleted_entities3 = $model->deleteWhere(
+            Where::create('a_boolean = $*::boolean', [false])
+        );
+
+        $this
+            ->object($deleted_entities3)
+            ->isInstanceOf('\PommProject\ModelManager\Model\CollectionIterator')
+            ->integer($deleted_entities3->count())
+            ->isEqualTo(1)
+            ->object($deleted_entities3->get(0))
+            ->isInstanceOf('\PommProject\ModelManager\Test\Fixture\SimpleFixture')
+            ->isEqualTo($entity1)
+        ;
     }
 
     public function testCreateAndSave()

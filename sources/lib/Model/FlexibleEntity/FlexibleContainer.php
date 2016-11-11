@@ -2,31 +2,29 @@
 /*
  * This file is part of the PommProject/ModelManager package.
  *
- * (c) 2014 Grégoire HUBERT <hubert.greg@gmail.com>
+ * (c) 2014 - 2015 Grégoire HUBERT <hubert.greg@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 namespace PommProject\ModelManager\Model\FlexibleEntity;
 
-use PommProject\ModelManager\Model\FlexibleEntity\StatefullEntityTrait;
-use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
-use PommProject\ModelManager\Exception\ModelException;
 use PommProject\Foundation\Inflector;
+use PommProject\ModelManager\Exception\ModelException;
 
 /**
  * FlexibleContainerTrait
  *
  * Trait for being a flexible data container.
  *
- * @package ModelManager
- * @copyright 2014-2015 Grégoire HUBERT
- * @author Grégoire HUBERT
- * @license X11 {@link http://opensource.org/licenses/mit-license.php}
+ * @package   ModelManager
+ * @copyright 2014 - 2015 Grégoire HUBERT
+ * @author    Grégoire HUBERT
+ * @license   X11 {@link http://opensource.org/licenses/mit-license.php}
  */
 abstract class FlexibleContainer implements FlexibleEntityInterface, \IteratorAggregate
 {
-    use StatefullEntityTrait;
+    use StatefulEntityTrait;
 
     protected $container = [];
 
@@ -48,7 +46,7 @@ abstract class FlexibleContainer implements FlexibleEntityInterface, \IteratorAg
      * Return the fields array. If a given field does not exist, an exception
      * is thrown.
      *
-     * @throw   InvalidArgumentException
+     * @throws  \InvalidArgumentException
      * @see     FlexibleEntityInterface
      */
     public function fields(array $fields = null)
@@ -103,7 +101,7 @@ abstract class FlexibleContainer implements FlexibleEntityInterface, \IteratorAg
      * Allows dynamic methods getXxx, setXxx, hasXxx or clearXxx.
      *
      * @access public
-     * @throw  ModelException if method does not exist.
+     * @throws ModelException if method does not exist.
      * @param  mixed $method
      * @param  mixed $arguments
      * @return mixed
@@ -125,7 +123,7 @@ abstract class FlexibleContainer implements FlexibleEntityInterface, \IteratorAg
         case 'has':
             return isset($this->container[$attribute]) || array_key_exists($attribute, $this->container);
         case 'clear':
-            unset ($this->checkAttribute($attribute)->container[$attribute]);
+            unset($this->checkAttribute($attribute)->container[$attribute]);
 
             return $this;
         default:
@@ -141,6 +139,7 @@ abstract class FlexibleContainer implements FlexibleEntityInterface, \IteratorAg
      * @access protected
      * @param  string $attribute
      * @return FlexibleContainer    $this
+     * @throws ModelException
      */
     protected function checkAttribute($attribute)
     {
@@ -167,6 +166,7 @@ abstract class FlexibleContainer implements FlexibleEntityInterface, \IteratorAg
      * @access protected
      * @param  string   $argument
      * @return array
+     * @throws ModelException
      */
     protected function extractMethodName($argument)
     {

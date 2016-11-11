@@ -2,18 +2,18 @@
 /*
  * This file is part of the PommProject/ModelManager package.
  *
- * (c) 2014 Grégoire HUBERT <hubert.greg@gmail.com>
+ * (c) 2014 - 2015 Grégoire HUBERT <hubert.greg@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 namespace PommProject\ModelManager\Model;
 
-use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
-use PommProject\ModelManager\Exception\ModelException;
-use PommProject\ModelManager\Converter\PgEntity;
 use PommProject\Foundation\Client\ClientInterface;
 use PommProject\Foundation\Session\Session;
+use PommProject\ModelManager\Converter\PgEntity;
+use PommProject\ModelManager\Exception\ModelException;
+use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
 
 /**
  * Model
@@ -21,17 +21,21 @@ use PommProject\Foundation\Session\Session;
  * Base class for custom Model classes.
  *
  * @abstract
- * @package Pomm
- * @copyright 2014 Grégoire HUBERT
- * @author Grégoire HUBERT
- * @license X11 {@link http://opensource.org/licenses/mit-license.php}
- * @see ClientInterface
- * @abstract
+ * @package     Pomm
+ * @copyright   2014 - 2015 Grégoire HUBERT
+ * @author      Grégoire HUBERT
+ * @license     X11 {@link http://opensource.org/licenses/mit-license.php}
+ * @see         ClientInterface
  */
 abstract class Model implements ClientInterface
 {
     protected $session;
     protected $flexible_entity_class;
+
+
+    /**
+     * @var RowStructure
+     */
     protected $structure;
 
     /**
@@ -42,6 +46,7 @@ abstract class Model implements ClientInterface
      *
      * @access public
      * @return Session
+     * @throws ModelException
      */
     public function getSession()
     {
@@ -143,7 +148,7 @@ abstract class Model implements ClientInterface
      * createProjection() method.
      *
      * @access protected
-     * @param  sql                $sql
+     * @param  string             $sql
      * @param  array              $values
      * @param  Projection         $projection
      * @return CollectionIterator
@@ -154,14 +159,19 @@ abstract class Model implements ClientInterface
             $projection = $this->createProjection();
         }
 
-        return $this
+        $result = $this
             ->getSession()
-            ->getClientUsingPooler(
-                'query_manager',
-                '\PommProject\ModelManager\Model\CollectionQueryManager'
-            )
-            ->query($sql, $values, $projection)
+            ->getClientUsingPooler('prepared_query', $sql)
+            ->execute($values)
             ;
+
+        $collection = new CollectionIterator(
+            $result,
+            $this->getSession(),
+            $projection
+        );
+
+        return $collection;
     }
 
     /**
@@ -170,13 +180,14 @@ abstract class Model implements ClientInterface
      * This method creates a projection based on the structure definition of
      * the underlying relation. It may be used to shunt parent createProjection
      * call in inherited classes.
-     * This method SHOULD NOT be used in query methods as it is not possible to
-     * overload it, use createProjection instead.
+     * This method can be used where a projection that sticks to table
+     * definition is needed like recursive CTEs. For normal projections, use
+     * createProjection instead.
      *
-     * @access protected
+     * @access public
      * @return Projection
      */
-    final protected function createDefaultProjection()
+    final public function createDefaultProjection()
     {
         return new Projection($this->flexible_entity_class, $this->structure->getDefinition());
     }
@@ -187,10 +198,10 @@ abstract class Model implements ClientInterface
      * This is a helper to create a new projection according to the current
      * structure.Overriding this method will change projection for all models.
      *
-     * @access  protected
+     * @access  public
      * @return  Projection
      */
-    protected function createProjection()
+    public function createProjection()
     {
         return $this->createDefaultProjection();
     }
@@ -203,7 +214,7 @@ abstract class Model implements ClientInterface
      *
      * @access protected
      * @param  FlexibleEntityInterface $entity
-     * @throw  InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @return Model          $this
      */
     protected function checkFlexibleEntity(FlexibleEntityInterface $entity)
@@ -224,10 +235,10 @@ abstract class Model implements ClientInterface
      *
      * Return the structure.
      *
-     * @access protected
+     * @access public
      * @return RowStructure
      */
-    protected function getStructure()
+    public function getStructure()
     {
         return $this->structure;
     }
@@ -238,10 +249,10 @@ abstract class Model implements ClientInterface
      * Return the according flexible entity class associate with this Model
      * instance.
      *
-     * @access protected
+     * @access public
      * @return string
      */
-    protected function getFlexibleEntityClass()
+    public function getFlexibleEntityClass()
     {
         return $this->flexible_entity_class;
     }
@@ -283,7 +294,7 @@ abstract class Model implements ClientInterface
     /**
      * executeAnonymousQuery
      *
-     * Handy method for DDL statments.
+     * Handy method for DDL statements.
      *
      * @access protected
      * @param  string $sql

@@ -2,18 +2,17 @@
 /*
  * This file is part of the PommProject/ModelManager package.
  *
- * (c) 2014 Grégoire HUBERT <hubert.greg@gmail.com>
+ * (c) 2014 - 2015 Grégoire HUBERT <hubert.greg@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 namespace PommProject\ModelManager\Test\Unit\Model;
 
-use PommProject\Foundation\Session\Session;
-use PommProject\Foundation\Converter\ConverterPooler;
-use PommProject\Foundation\Tester\VanillaSessionAtoum;
 use PommProject\Foundation\Converter\ConverterHolder;
-
+use PommProject\Foundation\Converter\ConverterPooler;
+use PommProject\Foundation\Session\Session;
+use PommProject\Foundation\Tester\VanillaSessionAtoum;
 
 class ModelPooler extends VanillaSessionAtoum
 {
@@ -37,7 +36,6 @@ class ModelPooler extends VanillaSessionAtoum
     {
         $session = $this->buildSession();
         $model_class = '\PommProject\ModelManager\Test\Fixture\SimpleFixtureModel';
-        $identifier  = 'PommProject\ModelManager\Test\Fixture\SimpleFixtureModel';
         $model_instance = $session->getClientUsingPooler('model', $model_class);
 
         $this

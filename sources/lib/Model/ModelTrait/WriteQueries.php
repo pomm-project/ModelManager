@@ -2,29 +2,28 @@
 /*
  * This file is part of the PommProject/ModelManager package.
  *
- * (c) 2014 Grégoire HUBERT <hubert.greg@gmail.com>
+ * (c) 2014 - 2015 Grégoire HUBERT <hubert.greg@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 namespace PommProject\ModelManager\Model\ModelTrait;
 
+use PommProject\Foundation\Where;
 use PommProject\ModelManager\Exception\ModelException;
+use PommProject\ModelManager\Model\CollectionIterator;
 use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
 use PommProject\ModelManager\Model\Model;
-
-use PommProject\Foundation\RawString;
-use PommProject\Foundation\Where;
 
 /**
  * WriteQueries
  *
  * Basic write queries for model instances.
  *
- * @package ModelManager
- * @copyright 2014 Grégoire HUBERT
- * @author Grégoire HUBERT
- * @license X11 {@link http://opensource.org/licenses/mit-license.php}
+ * @package   ModelManager
+ * @copyright 2014 - 2015 Grégoire HUBERT
+ * @author    Grégoire HUBERT
+ * @license   X11 {@link http://opensource.org/licenses/mit-license.php}
  */
 trait WriteQueries
 {
@@ -42,7 +41,12 @@ trait WriteQueries
      */
     public function insertOne(FlexibleEntityInterface &$entity)
     {
-        $values = $entity->fields();
+        $values = $entity->fields(
+            array_intersect(
+                array_keys($this->getStructure()->getDefinition()),
+                array_keys($entity->extract())
+            )
+        );
         $sql = strtr(
             "insert into :relation (:fields) values (:values) returning :projection",
             [
@@ -165,7 +169,26 @@ trait WriteQueries
         $where = $this
             ->checkPrimaryKey($primary_key)
             ->getWhereFrom($primary_key)
-            ;
+        ;
+
+        return $this->deleteWhere($where)->current();
+    }
+
+    /**
+     * deleteWhere
+     *
+     * Delete records by a given condition. A collection of all deleted entries is returned.
+     *
+     * @param        $where
+     * @param  array $values
+     * @return CollectionIterator
+     */
+    public function deleteWhere($where, array $values = [])
+    {
+        if (!$where instanceof Where) {
+            $where = new Where($where, $values);
+        }
+
         $sql = strtr(
             "delete from :relation where :condition returning :projection",
             [
@@ -175,13 +198,13 @@ trait WriteQueries
             ]
         );
 
-        $entity = $this->query($sql, $where->getValues())->current();
-
-        if ($entity !== null) {
+        $collection = $this->query($sql, $where->getValues());
+        foreach ($collection as $entity) {
             $entity->status(FlexibleEntityInterface::STATUS_NONE);
         }
+        $collection->rewind();
 
-        return $entity;
+        return $collection;
     }
 
     /**

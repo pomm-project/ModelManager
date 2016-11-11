@@ -1,3 +1,68 @@
+== VERSION 2.0.0
+
+ *  Leverage converter system in PK queries
+ *  Update transaction isolation
+ *  Add model layer documentation
+ *  Complete model documentation
+ *  Make Model::getFlexibleEntityClass public
+ *  Improve HydrationPlan performances
+ *  Missing parenthesis in __isset and __unset function in FlexibleEntity
+ *  Update copyright information
+ *  Make Model::createDefaultProjection public
+ *  Add travis tests for PHP 5.6
+ *  Protect FlexibleEntityTrait status
+ *  Complete docblock for #46
+ *  Merge pull request #45 from v3106/master
+ *  Correct types
+ *  Fix transaction isolation level setting
+ *  Fix a PgEntity converter issue with JSON
+ *  Add a parameter for Structure class name
+ *  Simplifications and micro optimizations
+ *  Fix PSR2 issues
+
+== VERSION 2.0.0-rc.3
+
+ *  Fix typos
+ *  Make entities with extra fields to persist
+ *  Make collection filters able to add values
+ *  Remove useless comments from generated classes.
+ *  fix `use` calls
+ *  fix unreacheable return
+ *  fix #37
+ *  Add a dedicated session with proxy methods.
+
+== VERSION 2.0.0-rc.2
+
+ *  Strengthen model generator against bad ascaping.
+ *  Fix defferables constraints with schemas.
+ *  Fix deferrable sql generator.
+ *  Fix and add Model layer exception.
+ *  Add WriteQueries::deleteWhere.
+
+== VERSION 2.0.0-rc.1
+
+ *  Projection keeps fields order
+ *  Made getStructure and createProjection public.
+ *  Removed CollectionQeryManager.
+ *  Merge branch 'projection'
+ *  Functionnal PgEntity converter.
+ *  add control if model has pk
+ *  Added a "existWhere()" method in ReadQueries.
+ *  Projection to quote field aliases.
+ *  Specifications of Projection defined in #20.
+ *  Fix PgEntity::toPgStandardFormat when using array
+ *  Write queries to use converted parameters.
+ *  PgEntity::toPgStandardFormat().
+ *  PgEntity::toPg support array
+ *  More readable session builder configuration
+ *  Add missing use statement
+ *  Adapted to FoundationSessionAtoum.
+ *  Finished generators.
+ *  First port of CLI files.
+ *  Refactored HydrationPlan.
+ *  Improved perf. on FlexibleEntity::has() (#9).
+ *  replaced isset() calls with array_key_exists(), which allows testing and fetching for fields containing a null value
+
 == VERSION 2.0.0-beta.2
 
  * Moved FlexibleEntity to Model.

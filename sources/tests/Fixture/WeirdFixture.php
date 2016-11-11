@@ -9,16 +9,9 @@
  */
 namespace PommProject\ModelManager\Test\Fixture;
 
-use PommProject\ModelManager\Model\RowStructure;
+use PommProject\ModelManager\Model\FlexibleEntity;
 
-class ComplexNumberStructure extends RowStructure
+class WeirdFixture extends FlexibleEntity
 {
-    public function __construct()
-    {
-        $this
-            ->setRelation('pomm_test.complex_number')
-            ->addField('real', 'float8')
-            ->addField('imaginary', 'float8')
-            ;
-    }
 }
+

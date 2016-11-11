@@ -2,23 +2,18 @@
 /*
  * This file is part of the PommProject/ModelManager package.
  *
- * (c) 2014 Grégoire HUBERT <hubert.greg@gmail.com>
+ * (c) 2014 - 2015 Grégoire HUBERT <hubert.greg@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 namespace PommProject\ModelManager\Test\Unit\Model;
 
-use Mock\PommProject\ModelManager\Model\Projection         as ProjectionMock;
 use Mock\PommProject\ModelManager\Model\CollectionIterator as CollectionIteratorMock;
-
-use PommProject\ModelManager\Model\ModelPooler;
-
-use PommProject\ModelManager\Tester\ModelSessionAtoum;
-use PommProject\Foundation\Converter\ConverterPooler;
+use Mock\PommProject\ModelManager\Model\Projection as ProjectionMock;
 use PommProject\Foundation\Session\Session;
-
 use PommProject\ModelManager\Test\Fixture\SimpleFixtureModel;
+use PommProject\ModelManager\Tester\ModelSessionAtoum;
 
 class CollectionIterator extends ModelSessionAtoum
 {
@@ -87,41 +82,44 @@ SQL;
     {
         $collection = $this->getCollectionMock();
         $collection->registerFilter(
-            function($values) { $values['id'] *= 2; return $values; }
+            function ($values) { $values['id'] *= 2; return $values; }
         )
             ->registerFilter(
-                function($values) {
+                function ($values) {
                     $values['some_data'] =
                         strlen($values['some_data']) > 3
                         ? null
                         : $values['some_data'];
-                    $values['id'] += 1;
+                    ++$values['id'];
+                    $values['new_value'] = 'love pomm';
+
                     return $values;
                 }
         );
         $this
             ->array($collection->get(0)->extract())
-            ->isEqualTo(['id' => 3, 'some_data' => 'one'])
+            ->isEqualTo(['id' => 3, 'some_data' => 'one', 'new_value' => 'love pomm'])
             ->array($collection->get(3)->extract())
-            ->isEqualTo(['id' => 9, 'some_data' => null])
+            ->isEqualTo(['id' => 9, 'some_data' => null, 'new_value' => 'love pomm'])
             ;
     }
 
     public function testGetWithWrongFilter()
     {
         $collection = $this->getCollectionMock();
-        $collection->registerFilter(function($values) { return $values['id']; });
+        $collection->registerFilter(function ($values) { return $values['id']; });
         $this
-            ->exception(function() use ($collection) { $collection->get(2); })
+            ->exception(function () use ($collection) { $collection->get(2); })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains('Filters MUST return an array')
             ;
     }
+
     public function testRegisterBadFilters()
     {
         $collection = $this->getCollectionMock();
         $this
-            ->exception(function() use ($collection) {
+            ->exception(function () use ($collection) {
                 $collection->registerFilter('whatever');
             })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')

@@ -2,16 +2,16 @@
 /*
  * This file is part of Pomm's ModelManager package.
  *
- * (c) 2014 Grégoire HUBERT <hubert.greg@gmail.com>
+ * (c) 2014 - 2015 Grégoire HUBERT <hubert.greg@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 namespace PommProject\ModelManager\Generator;
 
+use PommProject\Foundation\ConvertedResultIterator;
 use PommProject\Foundation\Inflector;
 use PommProject\Foundation\ParameterHolder;
-use PommProject\Foundation\ConvertedResultIterator;
 use PommProject\ModelManager\Exception\GeneratorException;
 
 /**
@@ -19,10 +19,10 @@ use PommProject\ModelManager\Exception\GeneratorException;
  *
  * Generate a RowStructure file from relation inspection.
  *
- * @package ModelManager
- * @copyright 2014 Grégoire HUBERT
- * @author Grégoire HUBERT
- * @license X11 {@link http://opensource.org/licenses/mit-license.php}
+ * @package   ModelManager
+ * @copyright 2014 - 2015 Grégoire HUBERT
+ * @author    Grégoire HUBERT
+ * @license   X11 {@link http://opensource.org/licenses/mit-license.php}
  */
 class StructureGenerator extends BaseGenerator
 {
@@ -36,7 +36,7 @@ class StructureGenerator extends BaseGenerator
     public function generate(ParameterHolder $input, array $output = [])
     {
         $table_oid          = $this->checkRelationInformation();
-        $field_informations = $this->getFieldInformation($table_oid);
+        $field_information = $this->getFieldInformation($table_oid);
         $primary_key        = $this->getPrimaryKey($table_oid);
         $table_comment      = $this->getTableComment($table_oid);
 
@@ -55,7 +55,7 @@ TEXT;
                 $this->mergeTemplate(
                     [
                         'namespace'      => $this->namespace,
-                        'entity'         => Inflector::studlyCaps($this->relation),
+                        'class_name'     => $input->getParameter('class_name', Inflector::studlyCaps($this->relation)),
                         'relation'       => sprintf("%s.%s", $this->schema, $this->relation),
                         'primary_key'    => join(
                             ', ',
@@ -64,9 +64,9 @@ TEXT;
                                 $primary_key
                             )
                         ),
-                        'add_fields'     => $this->formatAddFields($field_informations),
+                        'add_fields'     => $this->formatAddFields($field_information),
                         'table_comment'  => $this->createPhpDocBlockFromText($table_comment),
-                        'fields_comment' => $this->formatFieldsComment($field_informations),
+                        'fields_comment' => $this->formatFieldsComment($field_information),
                     ]
                 )
             );
@@ -80,19 +80,19 @@ TEXT;
      * Format 'addField' method calls.
      *
      * @access protected
-     * @param  ConvertedResultIterator $field_informations
+     * @param  ConvertedResultIterator $field_information
      * @return string
      */
-    protected function formatAddFields(ConvertedResultIterator $field_informations)
+    protected function formatAddFields(ConvertedResultIterator $field_information)
     {
         $strings = [];
 
-        foreach ($field_informations as $info) {
-            if (preg_match('/^(?:(.*)\.)?_(.*)$/', $info['type'], $matchs)) {
-                if ($matchs[1] !== '') {
-                    $info['type'] = sprintf("%s.%s[]", $matchs[1], $matchs[2]);
+        foreach ($field_information as $info) {
+            if (preg_match('/^(?:(.*)\.)?_(.*)$/', $info['type'], $matches)) {
+                if ($matches[1] !== '') {
+                    $info['type'] = sprintf("%s.%s[]", $matches[1], $matches[2]);
                 } else {
-                    $info['type'] = $matchs[2].'[]';
+                    $info['type'] = $matches[2].'[]';
                 }
             }
 
@@ -115,14 +115,13 @@ TEXT;
      * the generated class.
      *
      * @access protected
-     * @param  ConvertedResultIterator $field_informations
+     * @param  ConvertedResultIterator $field_information
      * @return string
      */
-    protected function formatFieldsComment(ConvertedResultIterator $field_informations)
+    protected function formatFieldsComment(ConvertedResultIterator $field_information)
     {
         $comments = [];
-        foreach ($field_informations as $info) {
-
+        foreach ($field_information as $info) {
             if ($info['comment'] === null) {
                 continue;
             }
@@ -193,7 +192,7 @@ TEXT;
      * @access protected
      * @param  int   $table_oid
      * @throws GeneratorException
-     * @return array $informations
+     * @return ConvertedResultIterator $fields_info
      */
     protected function getFieldInformation($table_oid)
     {
@@ -262,7 +261,7 @@ TEXT;
         return <<<'_'
 <?php
 /**
- * This file has been automaticaly generated by Pomm's generator.
+ * This file has been automatically generated by Pomm's generator.
  * You MIGHT NOT edit this file as your changes will be lost at next
  * generation.
  */
@@ -272,7 +271,7 @@ namespace {:namespace:};
 use PommProject\ModelManager\Model\RowStructure;
 
 /**
- * {:entity:}
+ * {:class_name:}
  *
  * Structure class for relation {:relation:}.
 {:table_comment:}
@@ -281,7 +280,7 @@ use PommProject\ModelManager\Model\RowStructure;
  *
  * @see RowStructure
  */
-class {:entity:} extends RowStructure
+class {:class_name:} extends RowStructure
 {
     /**
      * __construct
@@ -289,7 +288,6 @@ class {:entity:} extends RowStructure
      * Structure definition.
      *
      * @access public
-     * @return null
      */
     public function __construct()
     {

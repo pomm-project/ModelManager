@@ -2,36 +2,55 @@
 /*
  * This file is part of the PommProject's ModelManager package.
  *
- * (c) 2014 Grégoire HUBERT <hubert.greg@gmail.com>
+ * (c) 2014 - 2015 Grégoire HUBERT <hubert.greg@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 namespace PommProject\ModelManager\Model;
 
-use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
-use PommProject\ModelManager\Exception\ModelException;
+use PommProject\Foundation\ResultIterator;
 use PommProject\Foundation\Session\ResultHandler;
 use PommProject\Foundation\Session\Session;
-use PommProject\Foundation\ResultIterator;
+use PommProject\ModelManager\Converter\PgEntity;
+use PommProject\ModelManager\Exception\ModelException;
+use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
 
 /**
  * CollectionIterator
  *
  * Iterator for query results.
  *
- * @package ModelManager
- * @copyright 2014 Grégoire HUBERT
- * @author Grégoire HUBERT <hubert.greg@gmail.com>
- * @license MIT/X11 {@link http://opensource.org/licenses/mit-license.php}
+ * @package   ModelManager
+ * @copyright 2014 - 2015 Grégoire HUBERT
+ * @author    Grégoire HUBERT <hubert.greg@gmail.com>
+ * @license   MIT/X11 {@link http://opensource.org/licenses/mit-license.php}
  */
 class CollectionIterator extends ResultIterator
 {
+    /**
+     * @var Session
+     */
     protected $session;
+
+    /**
+     * @var Projection
+     */
     protected $projection;
+
+    /**
+     * @var array
+     */
     protected $filters = [];
+
+    /**
+     * @var HydrationPlan
+     */
     protected $hydration_plan;
 
+    /**
+     * @var PgEntity
+     */
     private $entity_converter;
 
     /**
@@ -39,11 +58,10 @@ class CollectionIterator extends ResultIterator
      *
      * Constructor
      *
-     * @access public
-     * @param  ResultHandler    $result
-     * @param  Session          $session
-     * @param  Projection       $projection
-     * @return null
+     * @access  public
+     * @param   ResultHandler   $result
+     * @param   Session         $session
+     * @param   Projection      $projection
      */
     public function __construct(ResultHandler $result, Session $session, Projection $projection)
     {
@@ -61,8 +79,8 @@ class CollectionIterator extends ResultIterator
     /**
      * get
      *
-     * @see ResultIterator
-     * @return FlexibleEntityInterface
+     * @see     ResultIterator
+     * @return  FlexibleEntityInterface
      */
     public function get($index)
     {
@@ -74,10 +92,10 @@ class CollectionIterator extends ResultIterator
      *
      * Convert values from Pg.
      *
-     * @access protected
-     * @param  array          $values
-     * @return FlexibleEntityInterface
-     * @see    ResultIterator
+     * @access  protected
+     * @param   array          $values
+     * @return  FlexibleEntityInterface
+     * @see     ResultIterator
      */
     public function parseRow(array $values)
     {
@@ -92,9 +110,10 @@ class CollectionIterator extends ResultIterator
      *
      * Launch filters on the given values.
      *
-     * @access protected
-     * @param  array $values
-     * @return array
+     * @access  protected
+     * @param   array $values
+     * @throws  ModelException   if return is not an array.
+     * @return  array
      */
     protected function launchFilters(array $values)
     {
@@ -117,7 +136,8 @@ class CollectionIterator extends ResultIterator
      *
      * @access public
      * @param  callable   $callable the filter.
-     * @return Collection $this
+     * @return CollectionIterator $this
+     * @throws ModelException
      */
     public function registerFilter($callable)
     {
@@ -148,7 +168,7 @@ class CollectionIterator extends ResultIterator
     /**
      * extract
      *
-     * Return an array of entities extractd as arrays.
+     * Return an array of entities extracted as arrays.
      *
      * @access public
      * @return array
@@ -175,7 +195,7 @@ class CollectionIterator extends ResultIterator
      */
     public function slice($name)
     {
-      return $this->convertSlice(parent::slice($name), $name);
+        return $this->convertSlice(parent::slice($name), $name);
     }
 
 
@@ -196,10 +216,9 @@ class CollectionIterator extends ResultIterator
 
         return array_map(
             function ($val) use ($converter, $type) {
-                return $converter->fromPg($val, $type);
+                return $converter->fromPg($val, $type, $this->session);
             },
             $values
         );
     }
-
 }

@@ -2,7 +2,7 @@
 /*
  * This file is part of the PommProject/ModelManager package.
  *
- * (c) 2014 Grégoire HUBERT <hubert.greg@gmail.com>
+ * (c) 2014 - 2015 Grégoire HUBERT <hubert.greg@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -10,10 +10,8 @@
 namespace PommProject\ModelManager\Test\Fixture;
 
 use PommProject\Foundation\Session\Session;
-
 use PommProject\ModelManager\Model\Model;
 use PommProject\ModelManager\Model\ModelTrait\WriteQueries;
-use PommProject\ModelManager\Test\Fixture\ComplexFixtureStructure;
 
 class ComplexFixtureModel extends Model
 {
@@ -88,4 +86,3 @@ SQL;
         return $this;
     }
 }
-

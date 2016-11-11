@@ -2,16 +2,19 @@
 /*
  * This file is part of the PommProject/ModelManager package.
  *
- * (c) 2014 Grégoire HUBERT <hubert.greg@gmail.com>
+ * (c) 2014 - 2015 Grégoire HUBERT <hubert.greg@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 namespace PommProject\ModelManager\ModelLayer;
 
-use PommProject\Foundation\Connection;
 use PommProject\Foundation\Client\Client;
 use PommProject\Foundation\Client\ClientInterface;
+use PommProject\Foundation\Session\Connection;
+use PommProject\Foundation\Session\ResultHandler;
+use PommProject\ModelManager\Exception\ModelLayerException;
+use PommProject\ModelManager\Model\Model;
 
 /**
  * ModelLayer
@@ -19,11 +22,11 @@ use PommProject\Foundation\Client\ClientInterface;
  * ModelLayer handles mechanisms around model method calls (transactions,
  * events etc.).
  *
- * @package ModelManager
- * @copyright 2014 Grégoire HUBERT
- * @author Grégoire HUBERT
- * @license X11 {@link http://opensource.org/licenses/mit-license.php}
- * @see Client
+ * @package     ModelManager
+ * @copyright   2014 - 2015 Grégoire HUBERT
+ * @author      Grégoire HUBERT
+ * @license     X11 {@link http://opensource.org/licenses/mit-license.php}
+ * @see         Client
  */
 abstract class ModelLayer extends Client
 {
@@ -85,19 +88,39 @@ abstract class ModelLayer extends Client
      * @throws  ModelLayerException if not valid state
      * @return ModelLayer $this
      */
-    protected function setDeferrable(array $keys = [], $state)
+    protected function setDeferrable(array $keys, $state)
     {
         if (count($keys) === 0) {
             $string = 'ALL';
         } else {
             $string = join(
                 ', ',
-                array_map(function ($key) { $this->escapeIdentifier($key); }, $keys)
+                array_map(
+                    function ($key) {
+                        $parts = explode('.', $key);
+                        $escaped_parts = [];
+
+                        foreach ($parts as $part) {
+                            $escaped_parts[] = $this->escapeIdentifier($part);
+                        }
+
+                        return join('.', $escaped_parts);
+                    },
+                    $keys
+                )
             );
         }
 
         if (!in_array($state, [ Connection::CONSTRAINTS_DEFERRED, Connection::CONSTRAINTS_IMMEDIATE ])) {
-            throw new ModelLayerException(sprintf("'%s' is not a valid constraints modifier.", $state));
+            throw new ModelLayerException(
+                sprintf(<<<EOMSG
+'%s' is not a valid constraint modifier.
+Use Connection::CONSTRAINTS_DEFERRED or Connection::CONSTRAINTS_IMMEDIATE.
+EOMSG
+,
+                    $state
+                )
+            );
         }
 
         $this->executeAnonymousQuery(
@@ -114,35 +137,47 @@ abstract class ModelLayer extends Client
     /**
      * setTransactionIsolationLevel
      *
-     * Transaction isolation level tells postgresql how to manage with the
-     * current transaction. The default is "READ COMMITED".
+     * Transaction isolation level tells PostgreSQL how to manage with the
+     * current transaction. The default is "READ COMMITTED".
      * @see http://www.postgresql.org/docs/9.0/static/sql-set-transaction.html
      *
      * @access protected
-     * @param   string     $isolaton_level
+     * @param   string     $isolation_level
      * @throws  ModelLayerException if not valid isolation level
      * @return  ModelLayer $this
      */
-    protected function setTransactionIsolationLevel($isolaton_level)
+    protected function setTransactionIsolationLevel($isolation_level)
     {
+        $valid_isolation_levels =
+            [
+                Connection::ISOLATION_READ_COMMITTED,
+                Connection::ISOLATION_REPEATABLE_READ,
+                Connection::ISOLATION_SERIALIZABLE
+            ];
+
         if (!in_array(
-            $isolaton_level,
-            [Connection::ISOLATION_READ_COMMITTED, Connection::ISOLATION_READ_REPEATABLE, Connection::ISOLATION_SERIALIZABLE]
+            $isolation_level,
+            $valid_isolation_levels
         )) {
-            throw new ModelLayerException(sprintf("'%s' is not a valid transaction isolation level."));
+            throw new ModelLayerException(
+                sprintf(
+                    "'%s' is not a valid transaction isolation level. Valid isolation levels are {%s} see Connection class constants.",
+                    $isolation_level,
+                    join(', ', $valid_isolation_levels)
+                )
+            );
         }
 
         return $this->sendParameter(
             "set transaction isolation level %s",
-            '',
-            $isolaton_level
+            $isolation_level
         );
     }
 
     /**
      * setTransactionAccessMode
      *
-     * Transaction access modes tell Postgresql if transaction are able to
+     * Transaction access modes tell PostgreSQL if transaction are able to
      * write or read only.
      * @see http://www.postgresql.org/docs/9.0/static/sql-set-transaction.html
      *
@@ -153,16 +188,27 @@ abstract class ModelLayer extends Client
      */
     protected function setTransactionAccessMode($access_mode)
     {
+        $valid_access_modes =
+            [
+                Connection::ACCESS_MODE_READ_ONLY,
+                Connection::ACCESS_MODE_READ_WRITE
+            ];
+
         if (!in_array(
             $access_mode,
-            [Connection::ACCESS_MODE_READ_ONLY, Connection::ACCESS_MODE_READ_WRITE]
+            $valid_access_modes
         )) {
-            throw new ModelLayerException(sprintf("'%s' is not a valid transaction access mode.", $access_mode));
+            throw new ModelLayerException(
+                sprintf(
+                    "'%s' is not a valid transaction access mode. Valid access modes are {%s}, see Connection class constants.",
+                    $access_mode,
+                    join(', ', $valid_access_modes)
+                )
+            );
         }
 
         return $this->sendParameter(
             "set transaction %s",
-            '',
             $access_mode
         );
     }
@@ -180,7 +226,7 @@ abstract class ModelLayer extends Client
     {
         return $this->sendParameter(
             "savepoint %s",
-            $name
+            $this->escapeIdentifier($name)
         );
     }
 
@@ -197,7 +243,7 @@ abstract class ModelLayer extends Client
     {
         return $this->sendParameter(
             "release savepoint %s",
-            $name
+            $this->escapeIdentifier($name)
         );
     }
 
@@ -214,10 +260,9 @@ abstract class ModelLayer extends Client
      */
     protected function rollbackTransaction($name = null)
     {
+        $sql = "rollback transaction";
         if ($name !== null) {
             $sql = sprintf("rollback to savepoint %s", $this->escapeIdentifier($name));
-        } else {
-            $sql = "rollback transaction";
         }
 
         $this->executeAnonymousQuery($sql);
@@ -263,7 +308,7 @@ abstract class ModelLayer extends Client
     /**
      * isTransactionOk
      *
-     * In Postgresql, an error during a transaction cancels all the queries and
+     * In PostgreSQL, an error during a transaction cancels all the queries and
      * rollback the transaction on commit. This method returns the current
      * transaction's status. If no transactions are open, it returns null.
      *
@@ -379,7 +424,7 @@ abstract class ModelLayer extends Client
      * sendParameter
      *
      * Send a parameter to the server.
-     * The parameter MUST have been properly checked and escpaed if needed as
+     * The parameter MUST have been properly checked and escaped if needed as
      * it is going to be passed AS IS to the server. Sending untrusted
      * parameters may lead to potential SQL injection.
      *
@@ -395,7 +440,7 @@ abstract class ModelLayer extends Client
             ->executeAnonymousQuery(
                 sprintf(
                     $sql,
-                    $this->escapeIdentifier($identifier),
+                    $identifier,
                     $parameter
                 )
             );

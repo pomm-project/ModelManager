@@ -2,15 +2,15 @@
 /*
  * This file is part of the PommProject/ModelManager package.
  *
- * (c) 2014 Grégoire HUBERT <hubert.greg@gmail.com>
+ * (c) 2014 - 2015 Grégoire HUBERT <hubert.greg@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 namespace PommProject\ModelManager\Test\Unit\Model;
 
-use PommProject\ModelManager\Model\RowStructure as PommRowStructure;
 use Atoum;
+use PommProject\ModelManager\Model\RowStructure as PommRowStructure;
 
 class RowStructure extends Atoum
 {
@@ -31,10 +31,10 @@ class RowStructure extends Atoum
             ->isIdenticalTo(['pika' => 'int4'])
             ->array($structure->addField('chu', 'bool')->getDefinition())
             ->isIdenticalTo(['pika' => 'int4', 'chu' => 'bool'])
-            ->exception(function() use ($structure) { $structure->addField(null, 'int4'); })
+            ->exception(function () use ($structure) { $structure->addField(null, 'int4'); })
             ->isinstanceof('\InvalidArgumentException')
             ->message->contains("'name' cannot be null")
-            ->exception(function() use ($structure) { $structure->addField('name', null); })
+            ->exception(function () use ($structure) { $structure->addField('name', null); })
             ->isinstanceof('\InvalidArgumentException')
             ->message->contains("'type' cannot be null")
             ;
@@ -67,10 +67,10 @@ class RowStructure extends Atoum
         $structure = new GoodStructure();
         $this->string($structure->getTypeFor('pika'))
             ->isEqualTo('int4')
-            ->exception(function() use ($structure) { $structure->getTypeFor(null); })
+            ->exception(function () use ($structure) { $structure->getTypeFor(null); })
             ->isinstanceof('\InvalidArgumentException')
             ->message->contains("'name' cannot be null")
-            ->exception(function() use ($structure) { $structure->getTypeFor('chu'); })
+            ->exception(function () use ($structure) { $structure->getTypeFor('chu'); })
             ->isinstanceof('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains("Field 'chu' is not defined")
             ->string($structure->addField('chu', 'bool')->getTypeFor('chu'))
@@ -117,7 +117,7 @@ class RowStructure extends Atoum
         $structure['chu'] = 'bool';
         $this->boolean(isset($structure['chu']))
             ->isTrue()
-            ->exception(function() use ($structure) { unset($structure['chu']); })
+            ->exception(function () use ($structure) { unset($structure['chu']); })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains('Cannot unset a structure field')
             ;

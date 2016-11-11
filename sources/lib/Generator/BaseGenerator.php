@@ -2,29 +2,34 @@
 /*
  * This file is part of Pomm's ModelManager package.
  *
- * (c) 2014 Grégoire HUBERT <hubert.greg@gmail.com>
+ * (c) 2014 - 2015 Grégoire HUBERT <hubert.greg@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 namespace PommProject\ModelManager\Generator;
 
-use PommProject\Foundation\Session\Session;
+use PommProject\Foundation\Inspector\Inspector;
 use PommProject\Foundation\ParameterHolder;
 use PommProject\ModelManager\Exception\GeneratorException;
+use PommProject\ModelManager\Session;
+
 /**
  * BaseGenerator
  *
  * Base class for Generator
  *
- * @package ModelManager
- * @copyright 2014 Grégoire HUBERT
- * @author Grégoire HUBERT
- * @license X11 {@link http://opensource.org/licenses/mit-license.php}
+ * @package   ModelManager
+ * @copyright 2014 - 2015 Grégoire HUBERT
+ * @author    Grégoire HUBERT
+ * @license   X11 {@link http://opensource.org/licenses/mit-license.php}
  * @abstract
  */
 abstract class BaseGenerator
 {
+    /**
+     * @var Session
+     */
     private $session;
 
     protected $schema;
@@ -33,17 +38,17 @@ abstract class BaseGenerator
     protected $namespace;
     protected $flexible_container;
 
-    /*
-     * __construct
-     *
+
+    /**
      * Constructor
      *
      * @access public
      * @param  Session $session
+     * @param  string  $schema
      * @param  string  $relation
      * @param  string  $filename
      * @param  string  $namespace
-     * @return void
+     * @param          $flexible_container
      */
     public function __construct(Session $session, $schema, $relation, $filename, $namespace, $flexible_container = null)
     {
@@ -64,7 +69,7 @@ abstract class BaseGenerator
      * @param  array            $output
      * @return BaseGenerator    $this
      */
-    protected function outputFileCreation(array &$output = [])
+    protected function outputFileCreation(array &$output)
     {
         if (file_exists($this->filename)) {
             $output[] = ['status' => 'ok', 'operation' => 'overwriting', 'file' => $this->filename];
@@ -172,7 +177,7 @@ abstract class BaseGenerator
     /**
      * saveFile
      *
-     * Write the genreated content to a file.
+     * Write the generated content to a file.
      *
      * @access protected
      * @param  string        $filename
@@ -182,15 +187,15 @@ abstract class BaseGenerator
      */
     protected function saveFile($filename, $content)
     {
-        if (!file_exists(dirname($filename))) {
-            if (mkdir(dirname($filename), 0777, true) === false) {
-                throw new GeneratorException(
-                    sprintf(
-                        "Could not create directory '%s'.",
-                        dirname($filename)
-                    )
-                );
-            }
+        if (!file_exists(dirname($filename))
+            && mkdir(dirname($filename), 0777, true) === false
+        ) {
+            throw new GeneratorException(
+                sprintf(
+                    "Could not create directory '%s'.",
+                    dirname($filename)
+                )
+            );
         }
 
         if (file_put_contents($filename, $content) === false) {

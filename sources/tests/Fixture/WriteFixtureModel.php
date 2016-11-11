@@ -2,7 +2,7 @@
 /*
  * This file is part of the PommProject/ModelManager package.
  *
- * (c) 2014 Grégoire HUBERT <hubert.greg@gmail.com>
+ * (c) 2014 - 2015 Grégoire HUBERT <hubert.greg@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -10,8 +10,6 @@
 namespace PommProject\ModelManager\Test\Fixture;
 
 use PommProject\Foundation\Session\Session;
-use PommProject\Foundation\Exception\SqlException;
-use PommProject\ModelManager\Test\Fixture\SimpleFixtureModel;
 use PommProject\ModelManager\Model\ModelTrait\WriteQueries;
 
 class WriteFixtureModel extends SimpleFixtureModel

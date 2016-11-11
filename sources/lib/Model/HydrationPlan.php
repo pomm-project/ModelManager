@@ -2,43 +2,41 @@
 /*
  * This file is part of the PommProject/ModelManager package.
  *
- * (c) 2014 Grégoire HUBERT <hubert.greg@gmail.com>
+ * (c) 2014 - 2015 Grégoire HUBERT <hubert.greg@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 namespace PommProject\ModelManager\Model;
 
-use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
 use PommProject\Foundation\Session\Session;
+use PommProject\Foundation\Converter\ConverterClient;
+use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
 
 /**
  * HydrationPlan
  *
  * Tell the FlexibleEntityConverter how to hydrate fields.
  *
- * @package ModelManager
- * @copyright 2014 Grégoire HUBERT
- * @author Grégoire HUBERT
- * @license X11 {@link http://opensource.org/licenses/mit-license.php}
- *
- *
- * @see \IteratorAggregate
+ * @package     ModelManager
+ * @copyright   2014 - 2015 Grégoire HUBERT
+ * @author      Grégoire HUBERT
+ * @license     X11 {@link http://opensource.org/licenses/mit-license.php}
  */
 class HydrationPlan
 {
     protected $session;
     protected $projection;
     protected $converters = [];
+    protected $field_types = [];
+
 
     /**
-     * __construct
-     *
      * Construct
      *
-     * @access public
-     * @param  Projection $projection
-     * @return void
+     * @access  public
+     * @param   Projection $projection
+     * @param   Session    $session
      */
     public function __construct(Projection $projection, Session $session)
     {
@@ -63,13 +61,17 @@ class HydrationPlan
                 $this->converters[$name] = $this
                     ->session
                     ->getClientUsingPooler('converter', 'array')
+                    ->getConverter()
                     ;
             } else {
                 $this->converters[$name] = $this
                     ->session
                     ->getClientUsingPooler('converter', $type)
+                    ->getConverter()
                     ;
             }
+
+            $this->field_types[$name] = $type;
         }
 
         return $this;
@@ -112,6 +114,7 @@ class HydrationPlan
      * hydrate the FlexibleEntityInterface through the mapper.
      *
      * @access public
+     * @param  array $values
      * @return FlexibleEntityInterface
      */
     public function hydrate(array $values)
@@ -163,10 +166,15 @@ class HydrationPlan
     {
         $out_values = [];
 
-        foreach ($values as $field_name => $value) {
-            $out_values[$field_name] = $this->converters[$field_name]
-                ->$from_to($value, $this->getFieldType($field_name))
-                ;
+        foreach ($values as $name => $value) {
+            if (isset($this->converters[$name])) {
+                $out_values[$name] = $this
+                    ->converters[$name]
+                    ->$from_to($value, $this->field_types[$name], $this->session)
+                    ;
+            } else {
+                $out_values[$name] = $value;
+            }
         }
 
         return $out_values;
@@ -175,7 +183,7 @@ class HydrationPlan
     /**
      * createEntity
      *
-     * Instanciate FlexibleEntityInterface from converted values.
+     * Instantiate FlexibleEntityInterface from converted values.
      *
      * @access protected
      * @param  array $values

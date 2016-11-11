@@ -2,33 +2,47 @@
 /*
  * This file is part of the PommProject/ModelManager package.
  *
- * (c) 2014 Grégoire HUBERT <hubert.greg@gmail.com>
+ * (c) 2014 - 2015 Grégoire HUBERT <hubert.greg@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 namespace PommProject\ModelManager\Model\ModelTrait;
 
-use PommProject\ModelManager\Exception\ModelException;
-use PommProject\ModelManager\Model\Projection;
-use PommProject\ModelManager\Model\Model;
-
 use PommProject\Foundation\Pager;
 use PommProject\Foundation\Where;
+use PommProject\ModelManager\Exception\ModelException;
+use PommProject\ModelManager\Model\CollectionIterator;
+use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
+use PommProject\ModelManager\Model\Projection;
 
 /**
  * ReadQueries
  *
  * Basic read queries for model instances.
  *
- * @package ModelManager
- * @copyright 2014 Grégoire HUBERT
- * @author Grégoire HUBERT
- * @license X11 {@link http://opensource.org/licenses/mit-license.php}
+ * @package     ModelManager
+ * @copyright   2014 - 2015 Grégoire HUBERT
+ * @author      Grégoire HUBERT
+ * @license     X11 {@link http://opensource.org/licenses/mit-license.php}
  */
 trait ReadQueries
 {
     use BaseTrait;
+
+    /**
+     * escapeIdentifier
+     *
+     * @see Model
+     */
+    abstract protected function escapeIdentifier($string);
+
+    /**
+     * getStructure
+     *
+     * @see Model
+     */
+    abstract public function getStructure();
 
     /**
      * findAll
@@ -144,7 +158,7 @@ trait ReadQueries
      * fetchSingleValue
      *
      * Fetch a single value named « result » from a query.
-     * The query must be formated with ":condition" as WHERE condition
+     * The query must be formatted with ":condition" as WHERE condition
      * placeholder. If the $where argument is a string, it is turned into a
      * Where instance.
      *
@@ -203,15 +217,15 @@ trait ReadQueries
      * It is important to note it adds limit and offset at the end of the given
      * query.
      *
-     * @access protected
-     * @param  string       $sql
-     * @param  array        $values parameters
-     * @param  int          $count
-     * @param  int          $item_per_page
-     * @param  int          $page
-     * @param  Projection   $projection
-     * @throw  \InvalidArgumentException if pager args are invalid.
-     * @return Pager
+     * @access  protected
+     * @param   string       $sql
+     * @param   array        $values parameters
+     * @param   int          $count
+     * @param   int          $item_per_page
+     * @param   int          $page
+     * @param   Projection   $projection
+     * @throws  \InvalidArgumentException if pager args are invalid.
+     * @return  Pager
      */
     protected function paginateQuery($sql, array $values, $count, $item_per_page, $page = 1, Projection $projection = null)
     {
@@ -261,7 +275,7 @@ trait ReadQueries
             [
                 ':projection' => $projection->formatFieldsWithFieldAlias(),
                 ':relation'   => $this->getStructure()->getRelation(),
-                ':condition'  => $where->__toString(),
+                ':condition'  => (string) $where,
                 ':suffix'     => $suffix,
             ]
         );
@@ -291,7 +305,7 @@ trait ReadQueries
      * @access private
      * @param  array $values
      * @throws ModelException
-     * @return Model $this
+     * @return $this
      */
     protected function checkPrimaryKey(array $values)
     {
@@ -333,7 +347,14 @@ trait ReadQueries
         $where = new Where();
 
         foreach ($values as $field => $value) {
-            $where->andWhere(sprintf("%s = $*", $this->escapeIdentifier($field)), [$value]);
+            $where->andWhere(
+                sprintf(
+                    "%s = $*::%s",
+                    $this->escapeIdentifier($field),
+                    $this->getStructure()->getTypeFor($field)
+                ),
+                [$value]
+            );
         }
 
         return $where;

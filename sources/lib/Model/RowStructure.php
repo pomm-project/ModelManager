@@ -2,7 +2,7 @@
 /*
  * This file is part of the PommProject/ModelManager package.
  *
- * (c) 2014 Grégoire HUBERT <hubert.greg@gmail.com>
+ * (c) 2014 - 2015 Grégoire HUBERT <hubert.greg@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -16,11 +16,10 @@ use PommProject\ModelManager\Exception\ModelException;
  *
  * Represent a composite structure like table or row.
  *
- * @abstract
- * @package ModelManager
- * @copyright 2014 Grégoire HUBERT
- * @author Grégoire HUBERT <hubert.greg@gmail.com>
- * @license MIT/X11 {@link http://opensource.org/licenses/mit-license.php}
+ * @package   ModelManager
+ * @copyright 2014 - 2015 Grégoire HUBERT
+ * @author    Grégoire HUBERT <hubert.greg@gmail.com>
+ * @license   MIT/X11 {@link http://opensource.org/licenses/mit-license.php}
  */
 class RowStructure implements \ArrayAccess
 {
@@ -102,7 +101,7 @@ class RowStructure implements \ArrayAccess
      * @access public
      * @param  string       $name
      * @param  string       $type
-     * @throw  ModelException if type or name is null
+     * @throws ModelException if type or name is null
      * @return RowStructure $this
      */
     public function addField($name, $type)
@@ -134,7 +133,7 @@ class RowStructure implements \ArrayAccess
      *
      * @access public
      * @param  string $name
-     * @throw  ModelException if $name is null
+     * @throws ModelException if $name is null
      * @return bool
      */
     public function hasField($name)
@@ -149,7 +148,7 @@ class RowStructure implements \ArrayAccess
      *
      * @access public
      * @param  string $name
-     * @throw  ModelException if $name is null or name does not exist.
+     * @throws ModelException if $name is null or name does not exist.
      * @return string $type
      */
     public function getTypeFor($name)
@@ -203,7 +202,7 @@ class RowStructure implements \ArrayAccess
      * @access              private
      * @param  string       $val
      * @param  string       $name
-     * @throw \InvalidArgumentException if $val is null
+     * @throws \InvalidArgumentException if $val is null
      * @return RowStructure $this
      */
     private function checkNotNull($val, $name)
@@ -222,13 +221,20 @@ class RowStructure implements \ArrayAccess
      *
      * @access private
      * @param  string       $name
-     * @throw  ModelException if $name does not exist.
+     * @throws ModelException if $name does not exist.
      * @return RowStructure $this
      */
     private function checkExist($name)
     {
         if (!$this->hasField($name)) {
-            throw new ModelException(sprintf("Field '%s' is not defined in structure '%s'.", $name, get_class($this)));
+            throw new ModelException(
+                sprintf(
+                    "Field '%s' is not defined in structure '%s'. Defined fields are {%s}",
+                    $name,
+                    get_class($this),
+                    join(', ', array_keys($this->field_definitions))
+                )
+            );
         }
 
         return $this;

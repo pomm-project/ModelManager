@@ -10,7 +10,7 @@
         "php": ">=5.4.4",
         "ext-pgsql": "*",
         "psr/log": "~1.0",
-        "pomm-project/foundation": "2.0.*@dev"
+        "pomm-project/foundation": "2.1.*@dev"
     },
     "require-dev": {
         "atoum/atoum" : "dev-master"
@@ -31,7 +31,7 @@
     "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "2.0-dev"
+            "dev-master": "2.1-dev"
         }
     }
 }

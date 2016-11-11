@@ -2,7 +2,7 @@
 /*
  * This file is part of the PommProject/ModelManager package.
  *
- * (c) 2014 Grégoire HUBERT <hubert.greg@gmail.com>
+ * (c) 2014 - 2015 Grégoire HUBERT <hubert.greg@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -82,5 +82,30 @@ class SimpleModelLayer extends ModelLayer
     public function isTransactionOk()
     {
         return parent::isTransactionOk();
+    }
+
+    public function setDeferrable(array $keys, $state)
+    {
+        return parent::setDeferrable($keys, $state);
+    }
+
+    public function setTransactionIsolationLevel($level)
+    {
+        return parent::setTransactionIsolationLevel($level);
+    }
+
+    public function setTransactionAccessMode($level)
+    {
+        return parent::setTransactionAccessMode($level);
+    }
+
+    public function executeAnonymousQuery($sql)
+    {
+        return parent::executeAnonymousQuery($sql);
+    }
+
+    public function getSession()
+    {
+        return parent::getSession();
     }
 }

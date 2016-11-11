@@ -2,13 +2,21 @@
 /*
  * This file is part of the PommProject/ModelManager package.
  *
- * (c) 2014 Grégoire HUBERT <hubert.greg@gmail.com>
+ * (c) 2014 - 2015 Grégoire HUBERT <hubert.greg@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 namespace PommProject\ModelManager\Model\FlexibleEntity;
 
+/**
+ * FlexibleEntityInterface
+ *
+ * @package   ModelManager
+ * @copyright 2014 - 2015 Grégoire HUBERT
+ * @author    Grégoire HUBERT
+ * @license   X11 {@link http://opensource.org/licenses/mit-license.php}
+ */
 interface FlexibleEntityInterface
 {
     /*
@@ -30,7 +38,7 @@ interface FlexibleEntityInterface
      * hydrate
      *
      * Set raw values in an entity. If some values are already set, they are
-     * overidden with new values.
+     * overridden with new values.
      *
      * @access public
      * @param  array    $fields
@@ -66,13 +74,18 @@ interface FlexibleEntityInterface
     /**
      * status
      *
-     * Return or set the current status of the instance. Status can be
-     * FlexibleEntityInterface::STATUS_NONE,
-     * FlexibleEntityInterface::STATUS_EXIST or
-     * FlexibleEntityInterface::STATUS_MODIFIED.
+     * Return or set the current status of the instance. The status is a
+     * bitmask of the different possible states an entity can have.
+     * Status can be
+     * FlexibleEntityInterface::STATUS_NONE     = 0,
+     * FlexibleEntityInterface::STATUS_EXIST    = 1
+     * FlexibleEntityInterface::STATUS_MODIFIED = 2
+     * STATUS_EXIST + STATUS_MODIFIED           = 3
+     * @see https://github.com/pomm-project/ModelManager/issues/46#issuecomment-130650107
      *
-     * If a status is specified, it returns itself. If no status are provided,
-     * it returns the current status.
+     * If a status is specified, it sets the current entity's status and
+     * returns itself. If no status are provided, it returns the current
+     * status.
      *
      * @access public
      * @param  int (null)
