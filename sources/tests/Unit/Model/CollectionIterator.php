@@ -158,4 +158,20 @@ SQL;
                 ]
             );
     }
+
+    public function testMap()
+    {
+        $collection = $this->getCollectionMock();
+
+        $this
+            ->array($collection->map(function ($result) { return $result->extract(); }))
+            ->isIdenticalTo(
+                [
+                    ['id' => 1, 'some_data' => 'one'],
+                    ['id' => 2, 'some_data' => 'two'],
+                    ['id' => 3, 'some_data' => 'three'],
+                    ['id' => 4, 'some_data' => 'four'],
+                ]
+            );
+    }
 }

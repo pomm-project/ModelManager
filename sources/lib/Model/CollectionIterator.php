@@ -9,6 +9,7 @@
  */
 namespace PommProject\ModelManager\Model;
 
+use Closure;
 use PommProject\Foundation\ResultIterator;
 use PommProject\Foundation\Session\ResultHandler;
 use PommProject\Foundation\Session\Session;
@@ -196,6 +197,15 @@ class CollectionIterator extends ResultIterator
     public function slice($name)
     {
         return $this->convertSlice(parent::slice($name), $name);
+    }
+
+    /**
+     * @param Closure $callback
+     * @return array
+     */
+    public function map(Closure $callback)
+    {
+        return array_map($callback, iterator_to_array($this));
     }
 
 
