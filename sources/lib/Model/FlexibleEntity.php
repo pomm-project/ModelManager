@@ -126,6 +126,7 @@ abstract class FlexibleEntity extends FlexibleContainer implements \ArrayAccess
         } else {
             $this->container[$var] = [$value];
         }
+        $this->touch();
 
         return $this;
     }
