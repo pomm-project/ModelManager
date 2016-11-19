@@ -317,6 +317,12 @@ class Model extends BaseTest
             ->boolean($entity->get('a_boolean'))
             ->isTrue()
             ;
+        $entity->set('a_boolean', false);
+        $model->updateOne($entity);
+        $this
+            ->boolean($entity->get('a_boolean'))
+            ->isFalse()
+        ;
     }
 
     public function testUpdateByPK()

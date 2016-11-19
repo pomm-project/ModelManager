@@ -78,8 +78,12 @@ trait WriteQueries
      * @param  array                    $fields
      * @return Model                    $this
      */
-    public function updateOne(FlexibleEntityInterface &$entity, array $fields)
+    public function updateOne(FlexibleEntityInterface &$entity, array $fields = [])
     {
+        if (empty($fields)) {
+            $fields = $entity->getModifiedColumns();
+        }
+
         $entity = $this->updateByPk(
             $entity->fields($this->getStructure()->getPrimaryKey()),
             $entity->fields($fields)

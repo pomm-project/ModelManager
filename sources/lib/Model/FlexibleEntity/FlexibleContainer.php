@@ -26,6 +26,8 @@ abstract class FlexibleContainer implements FlexibleEntityInterface, \IteratorAg
 {
     use StatefulEntityTrait;
 
+    use ModifiedColumnEntityTrait;
+
     protected $container = [];
 
     /**

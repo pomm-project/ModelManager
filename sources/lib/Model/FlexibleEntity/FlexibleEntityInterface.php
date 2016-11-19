@@ -92,4 +92,13 @@ interface FlexibleEntityInterface
      * @return int|FlexibleEntityInterface
      */
     public function status($status = null);
+
+    /**
+     * getModifiedColuns
+     *
+     * Return columns modified
+     *
+     * @return mixed
+     */
+    public function getModifiedColumns();
 }

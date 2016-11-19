@@ -338,6 +338,19 @@ class FlexibleEntity extends Atoum
             ->isFalse()
         ;
     }
+
+    public function testModifiedColumn()
+    {
+        $entity = new PikaEntity();
+        $this
+            ->array($entity->getModifiedColumns())
+            ->isEmpty()
+            ->array($entity->setChu('foo')->getModifiedColumns())
+            ->isEqualTo(['chu'])
+            ->array($entity->clearChu()->getModifiedColumns())
+            ->isEmpty()
+        ;
+    }
 }
 
 class PikaEntity extends PommFlexibleEntity
