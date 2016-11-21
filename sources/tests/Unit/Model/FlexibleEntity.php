@@ -94,6 +94,8 @@ class FlexibleEntity extends Atoum
         $this
             ->array($entity->add('an_array', 1)->get('an_array'))
             ->isIdenticalTo([1])
+            ->integer($entity->status())
+            ->isEqualTo(FlexibleEntityInterface::STATUS_MODIFIED)
             ->array($entity->add('an_array', 2)->get('an_array'))
             ->isIdenticalTo([1, 2])
             ->Exception(function () use ($entity) { $entity->add('pika', 3); })
