@@ -22,8 +22,6 @@ trait ModifiedColumnEntityTrait
 {
     private $modified_columns = [];
 
-    abstract function touch();
-
     /**
      * @return array
      */
@@ -42,8 +40,6 @@ trait ModifiedColumnEntityTrait
             $this->modified_columns[] = $column;
         }
 
-        $this->touch();
-
         return $this;
     }
 
@@ -58,8 +54,6 @@ trait ModifiedColumnEntityTrait
         if ($key !== FALSE) {
             unset($this->modified_columns[$key]);
         }
-
-	$this->touch();
 
         return $this;
     }
