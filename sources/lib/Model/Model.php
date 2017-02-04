@@ -110,7 +110,7 @@ abstract class Model implements ClientInterface
                     $this->getStructure()->getRelation(),
                     $this->flexible_entity_class,
                 ]
-        );
+            );
     }
 
     /**

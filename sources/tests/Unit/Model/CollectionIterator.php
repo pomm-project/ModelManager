@@ -58,7 +58,10 @@ SQL;
         return new CollectionIteratorMock(
             $this->getQueryResult($sql),
             $this->getSession(),
-            new ProjectionMock('\PommProject\ModelManager\Test\Fixture\SimpleFixture', ['id' => 'int4', 'some_data' => 'varchar'])
+            new ProjectionMock('\PommProject\ModelManager\Test\Fixture\SimpleFixture', [
+                'id' => 'int4',
+                'some_data' => 'varchar',
+            ])
         );
     }
 
@@ -82,7 +85,10 @@ SQL;
     {
         $collection = $this->getCollectionMock();
         $collection->registerFilter(
-            function ($values) { $values['id'] *= 2; return $values; }
+            function ($values) {
+                $values['id'] *= 2;
+                return $values;
+            }
         )
             ->registerFilter(
                 function ($values) {
@@ -95,7 +101,7 @@ SQL;
 
                     return $values;
                 }
-        );
+            );
         $this
             ->array($collection->get(0)->extract())
             ->isEqualTo(['id' => 3, 'some_data' => 'one', 'new_value' => 'love pomm'])
@@ -107,9 +113,13 @@ SQL;
     public function testGetWithWrongFilter()
     {
         $collection = $this->getCollectionMock();
-        $collection->registerFilter(function ($values) { return $values['id']; });
+        $collection->registerFilter(function ($values) {
+            return $values['id'];
+        });
         $this
-            ->exception(function () use ($collection) { $collection->get(2); })
+            ->exception(function () use ($collection) {
+                $collection->get(2);
+            })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains('Filters MUST return an array')
             ;

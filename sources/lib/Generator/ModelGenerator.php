@@ -61,16 +61,14 @@ class ModelGenerator extends BaseGenerator
             ->outputFileCreation($output)
             ->saveFile(
                 $this->filename,
-                $this->mergeTemplate(
-                    [
-                        'entity'        => Inflector::studlyCaps($this->relation),
-                            'namespace'     => trim($this->namespace, '\\'),
-                            'trait'         => $relations_info->current()['type'] === 'table' ? 'WriteQueries' : 'ReadQueries',
-                            'relation_type' => $relations_info->current()['type'],
-                            'relation'      => $this->relation
-                        ]
-                    )
-                );
+                $this->mergeTemplate([
+                    'entity'        => Inflector::studlyCaps($this->relation),
+                    'namespace'     => trim($this->namespace, '\\'),
+                    'trait'         => $relations_info->current()['type'] === 'table' ? 'WriteQueries' : 'ReadQueries',
+                    'relation_type' => $relations_info->current()['type'],
+                    'relation'      => $this->relation
+                ])
+            );
 
         return $output;
     }

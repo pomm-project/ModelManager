@@ -97,7 +97,9 @@ EOSQL
             ->isNull()
             ->boolean($model_layer->isTransactionOk())
             ->isTrue()
-            ->exception(function () use ($model_layer) { $model_layer->releaseSavepoint('not exist'); })
+            ->exception(function () use ($model_layer) {
+                $model_layer->releaseSavepoint('not exist');
+            })
             ->isInstanceOf('\PommProject\Foundation\Exception\SqlException')
             ->boolean($model_layer->isInTransaction())
             ->isTrue()

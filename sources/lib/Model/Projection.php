@@ -345,7 +345,11 @@ class Projection implements \IteratorAggregate
     private function checkFieldExist($name)
     {
         if (!$this->checkField($name)->hasField($name)) {
-            throw new ModelException(sprintf("Field '%s' does not exist. Available fields are {%s}.", $name, join(', ', $this->getFieldNames())));
+            throw new ModelException(sprintf(
+                "Field '%s' does not exist. Available fields are {%s}.",
+                $name,
+                join(', ', $this->getFieldNames())
+            ));
         }
 
         return $this;

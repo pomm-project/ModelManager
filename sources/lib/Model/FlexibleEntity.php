@@ -167,18 +167,18 @@ abstract class FlexibleEntity extends FlexibleContainer implements \ArrayAccess
         list($operation, $attribute) = $this->extractMethodName($method);
 
         switch ($operation) {
-        case 'set':
-            return $this->set($attribute, $arguments[0]);
-        case 'get':
-            return $this->get($attribute);
-        case 'add':
-            return $this->add($attribute, $arguments[0]);
-        case 'has':
-            return $this->has($attribute);
-        case 'clear':
-            return $this->clear($attribute);
-        default:
-            throw new ModelException(sprintf('No such method "%s:%s()"', get_class($this), $method));
+            case 'set':
+                return $this->set($attribute, $arguments[0]);
+            case 'get':
+                return $this->get($attribute);
+            case 'add':
+                return $this->add($attribute, $arguments[0]);
+            case 'has':
+                return $this->has($attribute);
+            case 'clear':
+                return $this->clear($attribute);
+            default:
+                throw new ModelException(sprintf('No such method "%s:%s()"', get_class($this), $method));
         }
     }
 
@@ -221,7 +221,9 @@ abstract class FlexibleEntity extends FlexibleContainer implements \ArrayAccess
             }
 
             if (is_array($val)) {
-                if (is_array(current($val)) || (is_object(current($val)) && current($val) instanceof FlexibleEntityInterface)) {
+                if (is_array(current($val))
+                    || (is_object(current($val)) && current($val) instanceof FlexibleEntityInterface)
+                ) {
                     return array_map($array_recurse, $val);
                 } else {
                     return $val;
@@ -257,7 +259,9 @@ abstract class FlexibleEntity extends FlexibleContainer implements \ArrayAccess
 
         foreach (static::$has_methods as $method) {
             if (call_user_func([$this, sprintf("has%s", $method)]) === true) {
-                $custom_fields[Inflector::underscore(lcfirst($method))] = call_user_func([$this, sprintf("get%s", $method)]);
+                $custom_fields[Inflector::underscore(lcfirst($method))] = call_user_func(
+                    [$this, sprintf("get%s", $method)]
+                );
             }
         }
 

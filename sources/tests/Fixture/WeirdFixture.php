@@ -14,4 +14,3 @@ use PommProject\ModelManager\Model\FlexibleEntity;
 class WeirdFixture extends FlexibleEntity
 {
 }
-

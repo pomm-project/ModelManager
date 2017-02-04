@@ -223,7 +223,9 @@ abstract class BaseGenerator
     protected function checkOverwrite(ParameterHolder $input)
     {
         if (file_exists($this->filename) && $input->getParameter('force') !== true) {
-            throw new GeneratorException(sprintf("Cannot overwrite file '%s' without --force option.", $this->filename));
+            throw new GeneratorException(
+                sprintf("Cannot overwrite file '%s' without --force option.", $this->filename)
+            );
         }
 
         return $this;

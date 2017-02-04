@@ -44,7 +44,9 @@ class FlexibleContainer extends Atoum
             ->isIdenticalTo(["a" => "one", "c" => null])
             ->array($container->fields([]))
             ->isIdenticalTo([])
-            ->exception(function () use ($container) { return $container->fields(["d"]); })
+            ->exception(function () use ($container) {
+                return $container->fields(["d"]);
+            })
             ->isInstanceOf("\InvalidArgumentException")
             ->message->contains("{a, b, c}")
             ;
@@ -84,7 +86,9 @@ class FlexibleContainer extends Atoum
             ->isEqualTo("one")
             ->string($container->getC())
             ->isEqualTo("three")
-            ->exception(function () use ($container) { $container->getPika(); })
+            ->exception(function () use ($container) {
+                $container->getPika();
+            })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains("{a, b, c")
             ;
@@ -134,7 +138,9 @@ class FlexibleContainer extends Atoum
             ->isInstanceOf('\PommProject\ModelManager\Model\FlexibleEntity\FlexibleContainer')
             ->array($container->fields())
             ->isIdenticalTo(["b" => "two", "c" => "three"])
-            ->exception(function () use ($container) { $container->clearA(); })
+            ->exception(function () use ($container) {
+                $container->clearA();
+            })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains("{b, c")
             ;
@@ -146,10 +152,14 @@ class FlexibleContainer extends Atoum
             ->hydrate(["a" => "one", "b" => "two", "c" => "three"])
             ;
         $this
-            ->exception(function () use ($container) { $container->pika(); })
+            ->exception(function () use ($container) {
+                $container->pika();
+            })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains("No such argument")
-            ->exception(function () use ($container) { $container->cliPika(); })
+            ->exception(function () use ($container) {
+                $container->cliPika();
+            })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains("No such method")
             ;

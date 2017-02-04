@@ -231,20 +231,19 @@ class PgEntity implements ConverterInterface
 
         $fields = $this->getFields($data);
 
-        return
-            sprintf("(%s)",
-                join(',', array_map(function ($val) {
-                    if ($val === null) {
-                        return '';
-                    } elseif ($val === '') {
-                        return '""';
-                    } elseif (preg_match('/[,\s]/', $val)) {
-                        return sprintf('"%s"', str_replace('"', '""', $val));
-                    } else {
-                        return $val;
-                    }
-                }, $this->createHydrationPlan($session)->freeze($fields)
-                ))
-            );
+        return sprintf(
+            "(%s)",
+            join(',', array_map(function ($val) {
+                if ($val === null) {
+                    return '';
+                } elseif ($val === '') {
+                    return '""';
+                } elseif (preg_match('/[,\s]/', $val)) {
+                    return sprintf('"%s"', str_replace('"', '""', $val));
+                } else {
+                    return $val;
+                }
+            }, $this->createHydrationPlan($session)->freeze($fields)))
+        );
     }
 }

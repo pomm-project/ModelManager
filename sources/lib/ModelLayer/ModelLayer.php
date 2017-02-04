@@ -302,7 +302,11 @@ EOMSG
             ->getTransactionStatus()
             ;
 
-        return (bool) ($status === \PGSQL_TRANSACTION_INTRANS || $status === \PGSQL_TRANSACTION_INERROR || $status === \PGSQL_TRANSACTION_ACTIVE);
+        return (bool)(
+            $status === \PGSQL_TRANSACTION_INTRANS
+            || $status === \PGSQL_TRANSACTION_INERROR
+            || $status === \PGSQL_TRANSACTION_ACTIVE
+        );
     }
 
     /**

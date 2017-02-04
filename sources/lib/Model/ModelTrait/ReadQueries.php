@@ -227,8 +227,14 @@ trait ReadQueries
      * @throws  \InvalidArgumentException if pager args are invalid.
      * @return  Pager
      */
-    protected function paginateQuery($sql, array $values, $count, $item_per_page, $page = 1, Projection $projection = null)
-    {
+    protected function paginateQuery(
+        $sql,
+        array $values,
+        $count,
+        $item_per_page,
+        $page = 1,
+        Projection $projection = null
+    ) {
         if ($page < 1) {
             throw new \InvalidArgumentException(
                 sprintf("Page cannot be < 1. (%d given)", $page)

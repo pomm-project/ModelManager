@@ -81,10 +81,10 @@ class PgEntity extends BaseTest
         $converter = $this->getComplexFixtureConverter();
         $session = $this->setUpSession($this->buildSession());
         $entity = $converter->fromPg(
-                '(1,,"(1.233,2.344)","{""(3.455,4.566)"",""(5.677,6.788)"",NULL}","2014-10-24 12:44:40.021324+00","{""1982-04-21 23:12:43+00""}")',
-                'complex_fixture',
-                $session
-            );
+            '(1,,"(1.233,2.344)","{""(3.455,4.566)"",""(5.677,6.788)"",NULL}","2014-10-24 12:44:40.021324+00","{""1982-04-21 23:12:43+00""}")',
+            'complex_fixture',
+            $session
+        );
 
         $this
             ->object($entity)

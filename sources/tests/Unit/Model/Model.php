@@ -122,19 +122,19 @@ class Model extends BaseTest
         $session = $this->buildSession();
         $this
             ->exception(function () use ($session) {
-                    $model = new NoStructureNoFlexibleEntityModel();
-                    $model->initialize($session);
-                })
+                $model = new NoStructureNoFlexibleEntityModel();
+                $model->initialize($session);
+            })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->exception(function () use ($session) {
-                    $model = new NoFlexibleEntityModel();
-                    $model->initialize($session);
-                })
+                $model = new NoFlexibleEntityModel();
+                $model->initialize($session);
+            })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->exception(function () use ($session) {
-                    $model = new NoStructureModel();
-                    $model->initialize($session);
-                })
+                $model = new NoStructureModel();
+                $model->initialize($session);
+            })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ;
     }
@@ -209,10 +209,14 @@ class Model extends BaseTest
             ->isNull()
             ->integer($model->findByPK(['id' => 3])->status())
             ->isEqualTo(FlexibleEntityInterface::STATUS_EXIST)
-            ->exception(function () use ($model_without_pk) { $model_without_pk->findByPK(['id' => 1]); })
+            ->exception(function () use ($model_without_pk) {
+                $model_without_pk->findByPK(['id' => 1]);
+            })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains("has no primary key.")
-            ->exception(function () use ($model) { $model->findByPK(['a_varchar' => 'one']); })
+            ->exception(function () use ($model) {
+                $model->findByPK(['a_varchar' => 'one']);
+            })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains("Key 'id' is missing to fully describes the primary key")
             ->object($model_weird->findByPK(['field_a' => 2, 'field_b' => false]))
@@ -294,7 +298,11 @@ class Model extends BaseTest
         $model = $this->getWriteFixtureModel($this->buildSession());
         $model_without_pk = $this->getWithoutPKFixtureModel($this->buildSession());
         $entity = $model->createAndSave(['a_varchar' => 'qwerty', 'a_boolean' => false]);
-        $entity_without_pk = $model_without_pk->createAndSave(['id' => 1, 'a_varchar' => 'qwerty', 'a_boolean' => false]);
+        $entity_without_pk = $model_without_pk->createAndSave([
+            'id' => 1,
+            'a_varchar' => 'qwerty',
+            'a_boolean' => false,
+        ]);
         $entity->set('a_varchar', 'azerty')->set('a_boolean', true);
         $entity_without_pk->set('a_varchar', 'azerty')->set('a_boolean', true);
         $this
@@ -307,7 +315,9 @@ class Model extends BaseTest
             ->isFalse()
             ->boolean($entity->status() === FlexibleEntityInterface::STATUS_EXIST)
             ->isTrue()
-            ->exception(function () use ($model_without_pk, $entity_without_pk) { $model_without_pk->updateOne($entity_without_pk, ['a_varchar']); })
+            ->exception(function () use ($model_without_pk, $entity_without_pk) {
+                $model_without_pk->updateOne($entity_without_pk, ['a_varchar']);
+            })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains("has no primary key.")
         ;
@@ -336,7 +346,9 @@ class Model extends BaseTest
             ->isNull()
             ->object($entity)
             ->isIdenticalTo($updated_entity)
-            ->exception(function () use ($model_without_pk) { $model_without_pk->updateByPk(['id' => 1],  ['a_varchar' => 'whatever']); })
+            ->exception(function () use ($model_without_pk) {
+                $model_without_pk->updateByPk(['id' => 1], ['a_varchar' => 'whatever']);
+            })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains("has no primary key.")
 
@@ -347,7 +359,11 @@ class Model extends BaseTest
     {
         $model = $this->getWriteFixtureModel($this->buildSession());
         $model_without_pk = $this->getWithoutPKFixtureModel($this->buildSession());
-        $entity_without_pk = $model_without_pk->createAndSave(['id' => 1, 'a_varchar' => 'qwerty', 'a_boolean' => false]);
+        $entity_without_pk = $model_without_pk->createAndSave([
+            'id' => 1,
+            'a_varchar' => 'qwerty',
+            'a_boolean' => false,
+        ]);
         $entity = $model->createAndSave(['a_varchar' => 'mlkjhgf']);
         $this
             ->object($model->deleteOne($entity))
@@ -356,7 +372,9 @@ class Model extends BaseTest
             ->isNull()
             ->integer($entity->status())
             ->isEqualTo(FlexibleEntityInterface::STATUS_NONE)
-            ->exception(function () use ($model_without_pk, $entity_without_pk) { $model_without_pk->deleteOne($entity_without_pk); })
+            ->exception(function () use ($model_without_pk, $entity_without_pk) {
+                $model_without_pk->deleteOne($entity_without_pk);
+            })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains("has no primary key.")
             ;
@@ -366,7 +384,11 @@ class Model extends BaseTest
     {
         $model = $this->getWriteFixtureModel($this->buildSession());
         $model_without_pk = $this->getWithoutPKFixtureModel($this->buildSession());
-        $entity_without_pk = $model_without_pk->createAndSave(['id' => 1, 'a_varchar' => 'qwerty', 'a_boolean' => false]);
+        $entity_without_pk = $model_without_pk->createAndSave([
+            'id' => 1,
+            'a_varchar' => 'qwerty',
+            'a_boolean' => false,
+        ]);
         $entity = $model->createAndSave(['a_varchar' => 'qwerty', 'a_boolean' => false]);
         $deleted_entity = $model->deleteByPK(['id' => $entity['id']]);
         $this
@@ -380,7 +402,9 @@ class Model extends BaseTest
             ->isIdenticalTo($deleted_entity)
             ->integer($entity->status())
             ->isEqualTo(FlexibleEntityInterface::STATUS_NONE)
-            ->exception(function () use ($model_without_pk, $entity_without_pk) { $model_without_pk->deleteOne($entity_without_pk); })
+            ->exception(function () use ($model_without_pk, $entity_without_pk) {
+                $model_without_pk->deleteOne($entity_without_pk);
+            })
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains("has no primary key.")
             ;

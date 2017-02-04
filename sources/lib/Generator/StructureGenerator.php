@@ -59,10 +59,9 @@ TEXT;
                         'relation'       => sprintf("%s.%s", $this->schema, $this->relation),
                         'primary_key'    => join(
                             ', ',
-                            array_map(
-                                function ($val) { return sprintf("'%s'", $val); },
-                                $primary_key
-                            )
+                            array_map(function ($val) {
+                                return sprintf("'%s'", $val);
+                            }, $primary_key)
                         ),
                         'add_fields'     => $this->formatAddFields($field_information),
                         'table_comment'  => $this->createPhpDocBlockFromText($table_comment),
@@ -146,10 +145,9 @@ TEXT;
     {
         return join(
             "\n",
-            array_map(
-                function ($line) { return ' * '.$line; },
-                explode("\n", wordwrap($text))
-            )
+            array_map(function ($line) {
+                return ' * '.$line;
+            }, explode("\n", wordwrap($text)))
         );
     }
 

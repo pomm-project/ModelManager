@@ -51,7 +51,9 @@ class ModelLayerPooler extends ClientPooler
                 throw new ModelLayerException(sprintf("Class '%s' is not a subclass of ModelLayer.", $identifier));
             }
         } catch (\ReflectionException $e) {
-            throw new ModelLayerException(sprintf("Error while loading class '%s' (%s).", $identifier, $e->getMessage()));
+            throw new ModelLayerException(
+                sprintf("Error while loading class '%s' (%s).", $identifier, $e->getMessage())
+            );
         }
 
         return new $identifier();

@@ -47,14 +47,12 @@ trait WriteQueries
                 array_keys($entity->extract())
             )
         );
-        $sql = strtr(
-            "insert into :relation (:fields) values (:values) returning :projection",
-            [
-                ':relation'   => $this->getStructure()->getRelation(),
-                ':fields'     => $this->getEscapedFieldList(array_keys($values)),
-                ':projection' => $this->createProjection()->formatFieldsWithFieldAlias(),
-                ':values'     => join(',', $this->getParametersList($values))
-            ]);
+        $sql = strtr("insert into :relation (:fields) values (:values) returning :projection", [
+            ':relation'   => $this->getStructure()->getRelation(),
+            ':fields'     => $this->getEscapedFieldList(array_keys($values)),
+            ':projection' => $this->createProjection()->formatFieldsWithFieldAlias(),
+            ':values'     => join(',', $this->getParametersList($values))
+        ]);
 
         $entity = $this
             ->query($sql, array_values($values))
@@ -117,15 +115,12 @@ trait WriteQueries
             );
         }
 
-        $sql = strtr(
-            "update :relation set :update where :condition returning :projection",
-            [
-                ':relation'   => $this->getStructure()->getRelation(),
-                ':update'     => join(', ', $update_strings),
-                ':condition'  => (string) $where,
-                ':projection' => $this->createProjection()->formatFieldsWithFieldAlias(),
-            ]
-        );
+        $sql = strtr("update :relation set :update where :condition returning :projection", [
+            ':relation'   => $this->getStructure()->getRelation(),
+            ':update'     => join(', ', $update_strings),
+            ':condition'  => (string) $where,
+            ':projection' => $this->createProjection()->formatFieldsWithFieldAlias(),
+        ]);
 
         $iterator = $this->query($sql, array_merge(array_values($updates), $where->getValues()));
 
@@ -237,10 +232,10 @@ trait WriteQueries
     {
         return join(
             ', ',
-            array_map(
-                function ($field) { return $this->escapeIdentifier($field); },
-                $fields
-            ));
+            array_map(function ($field) {
+                return $this->escapeIdentifier($field);
+            }, $fields)
+        );
     }
 
     /**

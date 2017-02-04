@@ -111,23 +111,23 @@ abstract class FlexibleContainer implements FlexibleEntityInterface, \IteratorAg
         list($operation, $attribute) = $this->extractMethodName($method);
 
         switch ($operation) {
-        case 'set':
-            $this->container[$attribute] = $arguments[0];
+            case 'set':
+                $this->container[$attribute] = $arguments[0];
 
-            return $this;
-        case 'get':
-            return $this
-                ->checkAttribute($attribute)
-                ->container[$attribute]
-                ;
-        case 'has':
-            return isset($this->container[$attribute]) || array_key_exists($attribute, $this->container);
-        case 'clear':
-            unset($this->checkAttribute($attribute)->container[$attribute]);
+                return $this;
+            case 'get':
+                return $this
+                    ->checkAttribute($attribute)
+                    ->container[$attribute]
+                    ;
+            case 'has':
+                return isset($this->container[$attribute]) || array_key_exists($attribute, $this->container);
+            case 'clear':
+                unset($this->checkAttribute($attribute)->container[$attribute]);
 
-            return $this;
-        default:
-            throw new ModelException(sprintf('No such method "%s:%s()"', get_class($this), $method));
+                return $this;
+            default:
+                throw new ModelException(sprintf('No such method "%s:%s()"', get_class($this), $method));
         }
     }
 
