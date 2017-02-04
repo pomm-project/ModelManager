@@ -10,13 +10,14 @@
 namespace PommProject\ModelManager\Test\Unit\Model;
 
 use Mock\PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntity as FlexibleEntityMock;
-use Mock\PommProject\ModelManager\Model\RowStructure as RowStructureMock;
 use PommProject\Foundation\Session\Session;
 use PommProject\Foundation\Where;
 use PommProject\ModelManager\Converter\PgEntity;
 use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
-use PommProject\ModelManager\Model\Model as PommModel;
 use PommProject\ModelManager\Test\Fixture\ComplexNumberStructure;
+use PommProject\ModelManager\Test\Fixture\NoFlexibleEntityModel;
+use PommProject\ModelManager\Test\Fixture\NoStructureModel;
+use PommProject\ModelManager\Test\Fixture\NoStructureNoFlexibleEntityModel;
 use PommProject\ModelManager\Test\Fixture\SimpleFixture;
 use PommProject\ModelManager\Test\Unit\BaseTest;
 
@@ -476,25 +477,5 @@ class Model extends BaseTest
         $this
             ->object($entity)
             ->isInstanceOf('PommProject\ModelManager\Test\Fixture\SimpleFixture');
-    }
-}
-
-class NoStructureNoFlexibleEntityModel extends PommModel
-{
-}
-
-class NoStructureModel extends PommModel
-{
-    public function __construct()
-    {
-        $this->flexible_entity_class = 'something';
-    }
-}
-
-class NoFlexibleEntityModel extends PommModel
-{
-    public function __construct()
-    {
-        $this->structure = new RowStructureMock();
     }
 }

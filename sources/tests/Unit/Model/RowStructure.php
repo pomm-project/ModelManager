@@ -11,6 +11,8 @@ namespace PommProject\ModelManager\Test\Unit\Model;
 
 use Atoum;
 use PommProject\ModelManager\Model\RowStructure as PommRowStructure;
+use PommProject\ModelManager\Test\Fixture\ChuStructure;
+use PommProject\ModelManager\Test\Fixture\GoodStructure;
 
 class RowStructure extends Atoum
 {
@@ -131,24 +133,5 @@ class RowStructure extends Atoum
             ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
             ->message->contains('Cannot unset a structure field')
             ;
-    }
-}
-
-class GoodStructure extends PommRowStructure
-{
-    public function __construct()
-    {
-        $this->relation                  = 'pika';
-        $this->field_definitions['pika'] = 'int4';
-    }
-}
-
-class ChuStructure extends PommRowStructure
-{
-    public function __construct()
-    {
-        $this->relation                 = 'chu';
-        $this->field_definitions['chu'] = 'bool';
-        $this->primary_key              = ['chu'];
     }
 }

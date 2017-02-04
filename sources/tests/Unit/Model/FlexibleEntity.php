@@ -10,6 +10,8 @@
 namespace PommProject\ModelManager\Test\Unit\Model;
 
 use Atoum;
+use PommProject\ModelManager\Test\Fixture\ChuEntity;
+use PommProject\ModelManager\Test\Fixture\PikaEntity;
 use PommProject\ModelManager\Model\FlexibleEntity as PommFlexibleEntity;
 use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
 
@@ -355,39 +357,5 @@ class FlexibleEntity extends Atoum
             ->boolean(isset($entity->pika))
             ->isFalse()
         ;
-    }
-}
-
-class PikaEntity extends PommFlexibleEntity
-{
-    public function getPika()
-    {
-        return strtoupper($this->get('pika'));
-    }
-
-    public function setChu($val)
-    {
-        $this->set('chu', strtolower($val));
-
-        return $this;
-    }
-
-    public function getPikaHash()
-    {
-        return md5($this->get('pika'));
-    }
-
-    public function hasPikaHash()
-    {
-        return $this->has('pika');
-    }
-}
-
-class ChuEntity extends PommFlexibleEntity
-{
-    public function __construct(array $values = [])
-    {
-        $this->set('chu', true);
-        parent::__construct($values);
     }
 }
