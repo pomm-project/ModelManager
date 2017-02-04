@@ -98,7 +98,7 @@ abstract class FlexibleEntity extends FlexibleContainer implements \ArrayAccess
     final public function set($var, $value)
     {
         $this->container[$var] = $value;
-	$this->touch();
+        $this->touch();
         $this->addModifiedColumn($var);
 
         return $this;
@@ -126,8 +126,8 @@ abstract class FlexibleEntity extends FlexibleContainer implements \ArrayAccess
             }
         } else {
             $this->container[$var] = [$value];
-	}
-	$this->touch();
+        }
+        $this->touch();
         $this->addModifiedColumn($var);
 
         return $this;
@@ -147,7 +147,7 @@ abstract class FlexibleEntity extends FlexibleContainer implements \ArrayAccess
     {
         if ($this->has($offset)) {
             unset($this->container[$offset]);
-	    $this->touch();
+            $this->touch();
             $this->removeModifiedColumn($offset);
         }
 
