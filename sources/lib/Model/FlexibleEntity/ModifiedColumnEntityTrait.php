@@ -51,7 +51,7 @@ trait ModifiedColumnEntityTrait
     {
         $key = array_search($column, $this->modified_columns, true);
 
-        if ($key !== FALSE) {
+        if ($key !== false) {
             unset($this->modified_columns[$key]);
         }
 
