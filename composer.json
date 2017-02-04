@@ -13,7 +13,8 @@
         "pomm-project/foundation": "2.1.*@dev"
     },
     "require-dev": {
-        "atoum/atoum" : "dev-master"
+        "atoum/atoum" : "dev-master",
+        "squizlabs/php_codesniffer": "~2.7"
     },
     "suggest": {
         "pomm-project/cli": "dev-master"
