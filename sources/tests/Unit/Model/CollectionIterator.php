@@ -72,9 +72,9 @@ SQL;
             ->call('parseRow')
             ->atLeastOnce()
             ->array($collection->get(0)->extract())
-            ->isEqualTo(['id' => 1, 'some_data' => 'one'])
+            ->isEqualTo(['Id' => 1, 'SomeData' => 'one'])
             ->array($collection->get(3)->extract())
-            ->isEqualTo(['id' => 4, 'some_data' => 'four'])
+            ->isEqualTo(['Id' => 4, 'SomeData' => 'four'])
             ;
     }
 
@@ -98,9 +98,9 @@ SQL;
         );
         $this
             ->array($collection->get(0)->extract())
-            ->isEqualTo(['id' => 3, 'some_data' => 'one', 'new_value' => 'love pomm'])
+            ->isEqualTo(['Id' => 3, 'SomeData' => 'one', 'NewValue' => 'love pomm'])
             ->array($collection->get(3)->extract())
-            ->isEqualTo(['id' => 9, 'some_data' => null, 'new_value' => 'love pomm'])
+            ->isEqualTo(['Id' => 9, 'SomeData' => null, 'NewValue' => 'love pomm'])
             ;
     }
 
@@ -135,10 +135,10 @@ SQL;
             ->array($collection->extract())
             ->isIdenticalTo(
                 [
-                    ['id' => 1, 'some_data' => 'one'],
-                    ['id' => 2, 'some_data' => 'two'],
-                    ['id' => 3, 'some_data' => 'three'],
-                    ['id' => 4, 'some_data' => 'four'],
+                    ['Id' => 1, 'SomeData' => 'one'],
+                    ['Id' => 2, 'SomeData' => 'two'],
+                    ['Id' => 3, 'SomeData' => 'three'],
+                    ['Id' => 4, 'SomeData' => 'four'],
                 ]
             );
     }

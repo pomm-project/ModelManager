@@ -44,7 +44,7 @@ trait WriteQueries
         $values = $entity->fields(
             array_intersect(
                 array_keys($this->getStructure()->getDefinition()),
-                array_keys($entity->extract())
+                array_keys($entity->fields())
             )
         );
         $sql = strtr(
