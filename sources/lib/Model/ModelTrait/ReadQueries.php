@@ -93,6 +93,30 @@ trait ReadQueries
     }
 
     /**
+     * findOneWhere
+     *
+     * Perform a simple select on a given condition that is expected to return one result
+     * NOTE: suffix is inserted as is with NO ESCAPING. DO NOT use it to place
+     * "where" condition nor any untrusted params.
+     *
+     * @access public
+     * @param  mixed              $where
+     * @param  array              $values
+     * @param  string             $suffix order by, limit, etc.
+     * @return CollectionIterator
+     */
+    public function findOneWhere($where, array $values = [], $suffix = '')
+    {
+        if (!$where instanceof Where) {
+            $where = new Where($where, $values);
+        }
+
+        $iterator = $this->query($this->getFindWhereSql($where, $this->createProjection(), $suffix), $where->getValues());
+
+        return $iterator->isEmpty() ? null : $iterator->current();
+    }
+
+    /**
      * findByPK
      *
      * Return an entity upon its primary key. If no entities are found, null is
@@ -109,9 +133,10 @@ trait ReadQueries
             ->getWhereFrom($primary_key)
             ;
 
-        $iterator = $this->findWhere($where);
+        //$iterator = $this->findWhere($where);
 
-        return $iterator->isEmpty() ? null : $iterator->current();
+        //return $iterator->isEmpty() ? null : $iterator->current();
+        return $this->findOneWhere($where);
     }
 
     /**

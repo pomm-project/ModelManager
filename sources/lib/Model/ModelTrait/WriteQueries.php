@@ -137,6 +137,48 @@ trait WriteQueries
     }
 
     /**
+     * updateWhere
+     *
+     * Update records by a given condition. A collection of all deleted entries is returned.
+     *
+     * @param        $where
+     * @param  array $values
+     * @param  array $updates
+     * @return Model $this
+     */
+    public function updateWhere($where, array $values = [], array $updates)
+    {
+        if (!$where instanceof Where) {
+            $where = new Where($where, $values);
+        }
+
+        $parameters = $this->getParametersList($updates);
+        $update_strings = [];
+
+        foreach ($updates as $field_name => $new_value) {
+            $update_strings[] = sprintf(
+                "%s = %s",
+                $this->escapeIdentifier($field_name),
+                $parameters[$field_name]
+            );
+        }
+
+        $sql = strtr(
+            "update :relation set :update where :condition returning :projection",
+            [
+                ':relation'   => $this->getStructure()->getRelation(),
+                ':update'     => join(', ', $update_strings),
+                ':condition'  => (string) $where,
+                ':projection' => $this->createProjection()->formatFieldsWithFieldAlias(),
+            ]
+        );
+
+        $entity = $this->query($sql, array_merge(array_values($updates), $where->getValues()));
+
+        return $this;
+    }
+
+    /**
      * deleteOne
      *
      * Delete an entity from a table. Entity is passed by reference and is
