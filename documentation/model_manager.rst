@@ -33,7 +33,7 @@ Poolers for ``model`` and ``model_layer`` must be registered. A ``SessionBuilder
     <?php
     //…
 
-    $pomm = new Pomm(['my_database' => 
+    $pomm = new Pomm(['my_database' =>
         [
             'dsn' => 'pgsql://user:pass@host:port/db_name',
             'class:session_builder' => '\PommProject\ModelManager\SessionBuilder',
@@ -134,7 +134,7 @@ Although it is possible to use directly the ``RowStructure`` class, it can also 
         }
     }
 
-This way, database structure definitions are described in a unique defined place in the code. 
+This way, database structure definitions are described in a unique defined place in the code.
 
 Inheritance
 ~~~~~~~~~~~
@@ -434,7 +434,7 @@ Drop an entity and makes it to reflect the last values according to the model’
     // …
     $employee = $employee_model->findByPK(['employee_id' => '…']);
     // delete from {relation} where employee_id = $* returning {projection}
-    $employee_model->deleteOne($employee->setName('whatever'), ['salary']);
+    $employee_model->deleteOne($employee);
     $employee->getName(); // john doe
 
 
@@ -563,7 +563,7 @@ Flexible entities are an object oriented representation of results returned by m
 FlexibleEntityInterface
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Although Pomm comes with a ``FlexibleEntity`` as default flexible entity class, it is possible to build custom data container classes as long as they implement ``FlexibleEntityInterface``. 
+Although Pomm comes with a ``FlexibleEntity`` as default flexible entity class, it is possible to build custom data container classes as long as they implement ``FlexibleEntityInterface``.
 
 ``hydrate``
     This method is responsible of how the instance is hydrated with the given data. It can set default values or override unwanted values.
@@ -776,7 +776,7 @@ Model Layer
 Overview
 --------
 
-The model layer is an extension provided by Pomm project’s model manager package. 
+The model layer is an extension provided by Pomm project’s model manager package.
 
 The model layer clients define batch computations that regroup calls to multiple models methods into transactions.
 
@@ -832,7 +832,7 @@ setTransactionAccessMode
 Postgres defines two types of transaction that changes the locking strategy used. This affects the behavior of the database when several transactions are running in the same time to ensure data consistency.
 
 ``Connection::ACCESS_MODE_READ_WRITE``
-    This is the default value. The transaction can use write operations. 
+    This is the default value. The transaction can use write operations.
 
 ``Connection::ACCESS_MODE_READ_ONLY``
     The transaction will not perform any write operations.
@@ -1031,4 +1031,3 @@ When an article is created, there must be a ``article_url`` record but this reco
             return $article;
         }
     }
-
