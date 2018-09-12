@@ -4,20 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "980620d0338ee5ce2a54bbdaaa6ef084",
+    "hash": "5fdb0da3f01bb06094652b118f3d4d77",
+    "content-hash": "9d427cdd6a8e6ed0317227dee3ad2480",
     "packages": [
         {
             "name": "pomm-project/foundation",
-            "version": "2.0.2",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pomm-project/Foundation.git",
-                "reference": "6a6278b92956f9949b8e1045bce014a63fae4478"
+                "reference": "ab114b4f1dc8cb131fbf8ab93823b34620880376"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pomm-project/Foundation/zipball/6a6278b92956f9949b8e1045bce014a63fae4478",
-                "reference": "6a6278b92956f9949b8e1045bce014a63fae4478",
+                "url": "https://api.github.com/repos/pomm-project/Foundation/zipball/ab114b4f1dc8cb131fbf8ab93823b34620880376",
+                "reference": "ab114b4f1dc8cb131fbf8ab93823b34620880376",
                 "shasum": ""
             },
             "require": {
@@ -26,9 +27,14 @@
                 "psr/log": "~1.0"
             },
             "require-dev": {
-                "atoum/atoum": "^2.8 || ^3.0"
+                "atoum/atoum": "dev-master"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "PommProject\\Foundation\\": "sources/lib"
@@ -53,34 +59,26 @@
                 "pomm",
                 "postgresql"
             ],
-            "time": "2017-04-28T08:31:47+00:00"
+            "time": "2015-10-06 14:32:14"
         },
         {
             "name": "psr/log",
-            "version": "1.0.2",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d"
+                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
-                "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/fe0936ee26643249e916849d48e3a51d5f5e278b",
+                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b",
                 "shasum": ""
             },
-            "require": {
-                "php": ">=5.3.0"
-            },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
             "autoload": {
-                "psr-4": {
-                    "Psr\\Log\\": "Psr/Log/"
+                "psr-0": {
+                    "Psr\\Log\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -94,13 +92,12 @@
                 }
             ],
             "description": "Common interface for logging libraries",
-            "homepage": "https://github.com/php-fig/log",
             "keywords": [
                 "log",
                 "psr",
                 "psr-3"
             ],
-            "time": "2016-10-10T12:19:37+00:00"
+            "time": "2012-12-21 11:40:51"
         }
     ],
     "packages-dev": [
@@ -110,31 +107,28 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/atoum/atoum.git",
-                "reference": "def510437f6854912b45e234ac8fb34301a5e7dd"
+                "reference": "e6aab9a885c3133419a48df858bd4481a3505552"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/atoum/atoum/zipball/def510437f6854912b45e234ac8fb34301a5e7dd",
-                "reference": "def510437f6854912b45e234ac8fb34301a5e7dd",
+                "url": "https://api.github.com/repos/atoum/atoum/zipball/e6aab9a885c3133419a48df858bd4481a3505552",
+                "reference": "e6aab9a885c3133419a48df858bd4481a3505552",
                 "shasum": ""
             },
             "require": {
                 "ext-hash": "*",
                 "ext-json": "*",
+                "ext-session": "*",
                 "ext-tokenizer": "*",
                 "ext-xml": "*",
-                "php": "^5.6.0 || ^7.0.0 <7.4.0"
+                "php": ">=5.3.3"
             },
             "replace": {
                 "mageekguy/atoum": "*"
             },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2"
-            },
             "suggest": {
                 "atoum/stubs": "Provides IDE support (like autocompletion) for atoum",
-                "ext-mbstring": "Provides support for UTF-8 strings",
-                "ext-xdebug": "Provides code coverage report (>= 2.3)"
+                "ext-mbstring": "Provides support for UTF-8 strings"
             },
             "bin": [
                 "bin/atoum"
@@ -142,7 +136,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.x-dev"
+                    "dev-master": "2.x-dev"
                 }
             },
             "autoload": {
@@ -152,7 +146,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "BSD-3-Clause"
+                "BSD"
             ],
             "authors": [
                 {
@@ -185,12 +179,13 @@
                 "test",
                 "unit testing"
             ],
-            "time": "2018-03-24T16:20:00+00:00"
+            "time": "2015-10-23 07:26:05"
         }
     ],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "pomm-project/foundation": 20,
         "atoum/atoum": 20
     },
     "prefer-stable": false,
