@@ -56,8 +56,17 @@ trait WriteQueries
                 ':values'     => join(',', $this->getParametersList($values))
             ]);
 
+        $query_values = [];
+        foreach ($values as $field => $value) {
+            if (is_array($value)) {
+                $query_values = array_merge($query_values, array_slice($value, 1));
+            } else {
+                $query_values[] = $value;
+            }
+        }
+
         $entity = $this
-            ->query($sql, array_values($values))
+            ->query($sql, $query_values)
             ->current()
             ->status(FlexibleEntityInterface::STATUS_EXIST);
 
@@ -131,7 +140,16 @@ trait WriteQueries
             ]
         );
 
-        $iterator = $this->query($sql, array_merge(array_values($updates), $where->getValues()));
+        $values = [];
+        foreach ($updates as $field => $value) {
+            if (is_array($value)) {
+                $values = array_merge($values, array_slice($value, 1));
+            } else {
+                $values[] = $value;
+            }
+        }
+
+        $iterator = $this->query($sql, array_merge($values, $where->getValues()));
 
         if ($iterator->isEmpty()) {
             return null;
@@ -261,10 +279,17 @@ trait WriteQueries
         $parameters = [];
 
         foreach ($values as $name => $value) {
-            $parameters[$name] = sprintf(
-                "$*::%s",
-                $this->getStructure()->getTypeFor($name)
-            );
+            if (is_array($value)) {
+                $parameters[$name] = sprintf(
+                    '(%s)',
+                    array_shift($value)
+                );
+            } else {
+                $parameters[$name] = sprintf(
+                    "$*::%s",
+                    $this->getStructure()->getTypeFor($name)
+                );
+            }
         }
 
         return $parameters;
