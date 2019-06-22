@@ -121,6 +121,7 @@ trait WriteQueries
             ;
         $parameters = $this->getParametersList($updates);
         $update_strings = [];
+        $values = [];
 
         foreach ($updates as $field_name => $new_value) {
             $update_strings[] = sprintf(
@@ -128,6 +129,11 @@ trait WriteQueries
                 $this->escapeIdentifier($field_name),
                 $parameters[$field_name]
             );
+            if (is_array($new_value)) {
+                $values = array_merge($values, array_slice($new_value, 1));
+            } else {
+                $values[] = $new_value;
+            }
         }
 
         $sql = strtr(
@@ -139,16 +145,6 @@ trait WriteQueries
                 ':projection' => $this->createProjection()->formatFieldsWithFieldAlias(),
             ]
         );
-
-        $values = [];
-        foreach ($updates as $field => $value) {
-            if (is_array($value)) {
-                $values = array_merge($values, array_slice($value, 1));
-            } else {
-                $values[] = $value;
-            }
-        }
-
         $iterator = $this->query($sql, array_merge($values, $where->getValues()));
 
         if ($iterator->isEmpty()) {
