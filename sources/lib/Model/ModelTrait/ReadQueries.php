@@ -347,14 +347,25 @@ trait ReadQueries
         $where = new Where();
 
         foreach ($values as $field => $value) {
-            $where->andWhere(
-                sprintf(
-                    "%s = $*::%s",
-                    $this->escapeIdentifier($field),
-                    $this->getStructure()->getTypeFor($field)
-                ),
-                [$value]
-            );
+            if (is_array($value)) {
+                $where->andWhere(
+                    sprintf(
+                        '%s = (%s)',
+                        $this->escapeIdentifier($field),
+                        array_shift($value)
+                    ),
+                    $value
+                );
+            } else {
+                $where->andWhere(
+                    sprintf(
+                        "%s = $*::%s",
+                        $this->escapeIdentifier($field),
+                        $this->getStructure()->getTypeFor($field)
+                    ),
+                    [$value]
+                );
+            }
         }
 
         return $where;
