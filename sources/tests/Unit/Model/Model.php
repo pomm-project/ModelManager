@@ -69,6 +69,12 @@ class Model extends BaseTest
             ->getModel('PommProject\ModelManager\Test\Fixture\ComplexFixtureModel');
     }
 
+    protected function getNumberFixtureModel(Session $session)
+    {
+        return $session
+            ->getModel('PommProject\ModelManager\Test\Fixture\NumberFixtureModel');
+    }
+
     protected function getWeirdFixtureModel(Session $session)
     {
         return $session
@@ -322,6 +328,33 @@ class Model extends BaseTest
         $this
             ->boolean($entity->get('a_boolean'))
             ->isFalse()
+        ;
+    }
+
+    public function testSubQuery()
+    {
+        $model = $this->getNumberFixtureModel($this->buildSession());
+        $entity_max = $model->findByPk(['id' => [ sprintf('SELECT MAX(id) FROM %s', $model->getStructure()->getRelation()) ]]);
+        $entity_constr = $model->findByPk(['id' => [ sprintf('SELECT MAX(id) FROM %s WHERE id < $*', $model->getStructure()->getRelation()), 2 ]]);
+        $entity_sum = $model->createAndSave(['data' => [ sprintf('SELECT SUM(data) FROM %s', $model->getStructure()->getRelation()) ]]);
+        $entity_math = $model->createAndSave(['data' => ['SELECT $*::int4 + $*::int4', 1, 2]]);
+        $this
+            ->object($entity_max)
+            ->isInstanceOf('PommProject\ModelManager\Test\Fixture\NumberFixture')
+            ->integer($entity_max->getData())
+            ->isEqualTo(2)
+            ->object($entity_constr)
+            ->isInstanceOf('PommProject\ModelManager\Test\Fixture\NumberFixture')
+            ->integer($entity_constr->getData())
+            ->isEqualTo(1)
+            ->object($entity_sum)
+            ->isInstanceOf('PommProject\ModelManager\Test\Fixture\NumberFixture')
+            ->integer($entity_sum->getData())
+            ->isEqualTo(3)
+            ->object($entity_math)
+            ->isInstanceOf('PommProject\ModelManager\Test\Fixture\NumberFixture')
+            ->integer($entity_math->getData())
+            ->isEqualTo(3)
         ;
     }
 

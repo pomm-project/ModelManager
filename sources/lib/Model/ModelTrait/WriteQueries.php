@@ -145,6 +145,7 @@ trait WriteQueries
                 ':projection' => $this->createProjection()->formatFieldsWithFieldAlias(),
             ]
         );
+
         $iterator = $this->query($sql, array_merge($values, $where->getValues()));
 
         if ($iterator->isEmpty()) {
