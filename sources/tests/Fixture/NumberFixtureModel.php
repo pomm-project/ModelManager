@@ -50,11 +50,11 @@ SQL;
 insert into %s (data, created_at) values
     (
         1,
-				now()
+        now()
     ),
     (
         2,
-				now()
+        now()
     )
 SQL;
         $this->executeAnonymousQuery(sprintf($sql, $this->getStructure()->getRelation()));
