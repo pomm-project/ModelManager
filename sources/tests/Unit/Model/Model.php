@@ -459,6 +459,15 @@ class Model extends BaseTest
             ->object($entity)
             ->isInstanceOf('PommProject\ModelManager\Test\Fixture\SimpleFixture');
     }
+
+    public function testGetModel()
+    {
+        $this
+            ->given($model = $this->getSimpleFixtureModel($this->buildSession()))
+            ->boolean($model->testGetModel())
+            ->isTrue()
+            ;
+    }
 }
 
 class NoStructureNoFlexibleEntityModel extends PommModel
