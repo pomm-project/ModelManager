@@ -37,4 +37,8 @@ class SimpleFixtureModel extends Model
 
         return $this->query($sql, $where->getValues());
     }
+
+    public function testGetModel() {
+        return $this === $this->getModel(self::class);
+    }
 }

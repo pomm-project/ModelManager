@@ -22,7 +22,7 @@ use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
  *
  * @abstract
  * @package     Pomm
- * @copyright   2014 - 2015 Grégoire HUBERT
+ * @copyright   2014 - 2019 Grégoire HUBERT
  * @author      Grégoire HUBERT
  * @license     X11 {@link http://opensource.org/licenses/mit-license.php}
  * @see         ClientInterface
@@ -242,6 +242,22 @@ abstract class Model implements ClientInterface
     {
         return $this->structure;
     }
+
+    /**
+     * getModel
+     *
+     * Proxy to Session::getModel();
+     *
+     * @param  string    model identifier
+     * @return Model
+     */
+    protected function getModel($identifier)
+    {
+        return $this
+            ->getSession()
+            ->getClientUsingPooler('model', $identifier);
+    }
+
 
     /**
      * getFlexibleEntityClass
