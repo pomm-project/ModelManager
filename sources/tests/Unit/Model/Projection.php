@@ -97,6 +97,24 @@ class Projection extends Atoum
             ;
     }
 
+    public function testUnsetFields()
+    {
+        $projection = $this->newTestedInstance('whatever', ['pika' => 'int4', 'pok' => 'int4']);
+        $this
+            ->array($projection->unsetFields(['pika', 'pok'])->getFieldNames())
+            ->isEmpty()
+            ->exception(function () use ($projection) { $projection->getFieldType('pika'); })
+            ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
+            ->message->contains('does not exist')
+            ->exception(function () use ($projection) { $projection->unsetField('pok'); })
+            ->isInstanceOf('\PommProject\ModelManager\Exception\ModelException')
+            ->message->contains('does not exist')
+            ->exception(function () use ($projection) { $projection->unsetField(null); })
+            ->isInstanceOf('\InvalidArgumentException')
+            ->message->contains('cannot be null')
+        ;
+    }
+
     public function testHasField()
     {
         $projection = $this->newTestedInstance('whatever', ['pika' => 'int4']);

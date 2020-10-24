@@ -135,6 +135,25 @@ class Projection implements \IteratorAggregate
     }
 
     /**
+     * unsetField
+     *
+     * Unset multiple existing fields
+     *
+     * @access public
+     * @param  array     $fields
+     * @throws ModelException if one field of $fields does not exist.
+     * @return Projection $this
+     */
+    public function unsetFields($fields)
+    {
+        foreach ($fields as $field) {
+            $this->unsetField($field);
+        }
+
+        return $this;
+    }
+
+    /**
      * hasField
      *
      * Return if the given field exist.
