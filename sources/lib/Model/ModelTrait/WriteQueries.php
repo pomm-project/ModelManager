@@ -238,7 +238,7 @@ trait WriteQueries
             [
                 ':relation'   => $this->getStructure()->getRelation(),
                 ':type_truncate'  => $type_truncate,
-                ':identity' => $identity . ' IDENTITY'
+                ':identity' => $identity . ' IDENTITY '
             ]
         );
 
