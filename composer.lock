@@ -1,11 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "hash": "386559b400c9ddad349523c6d4d5ea13",
-    "content-hash": "224113c8f77fd27f64ae6aec7e3cb7ea",
+    "content-hash": "1cc5bcb4856cc36e8966a760b1bbeb37",
     "packages": [
         {
             "name": "pomm-project/foundation",
@@ -13,28 +12,25 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pomm-project/Foundation.git",
-                "reference": "9d2a69c8e4bed8e6ab43dcc12dd0813ba3295ee1"
+                "reference": "11840c088f31033a39e4b8c033579b2e8f993801"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pomm-project/Foundation/zipball/9d2a69c8e4bed8e6ab43dcc12dd0813ba3295ee1",
-                "reference": "9d2a69c8e4bed8e6ab43dcc12dd0813ba3295ee1",
+                "url": "https://api.github.com/repos/pomm-project/Foundation/zipball/11840c088f31033a39e4b8c033579b2e8f993801",
+                "reference": "11840c088f31033a39e4b8c033579b2e8f993801",
                 "shasum": ""
             },
             "require": {
                 "ext-pgsql": "*",
-                "php": ">=5.4.4",
+                "php": ">=8.0",
                 "psr/log": "~1.0"
             },
             "require-dev": {
-                "atoum/atoum": "dev-master"
+                "atoum/atoum": "^2.8 || ^4.0",
+                "squizlabs/php_codesniffer": "~2.8"
             },
+            "default-branch": true,
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.1-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "PommProject\\Foundation\\": "sources/lib"
@@ -59,20 +55,24 @@
                 "pomm",
                 "postgresql"
             ],
-            "time": "2015-12-04 10:03:50"
+            "support": {
+                "issues": "https://github.com/pomm-project/Foundation/issues",
+                "source": "https://github.com/pomm-project/Foundation/tree/master"
+            },
+            "time": "2023-02-15T21:36:15+00:00"
         },
         {
             "name": "psr/log",
-            "version": "dev-master",
+            "version": "1.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "9e45edca52cc9c954680072c93e621f8b71fab26"
+                "reference": "d49695b909c3b7628b6289db5479a1c204601f11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/9e45edca52cc9c954680072c93e621f8b71fab26",
-                "reference": "9e45edca52cc9c954680072c93e621f8b71fab26",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/d49695b909c3b7628b6289db5479a1c204601f11",
+                "reference": "d49695b909c3b7628b6289db5479a1c204601f11",
                 "shasum": ""
             },
             "require": {
@@ -81,7 +81,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "1.1.x-dev"
                 }
             },
             "autoload": {
@@ -96,47 +96,54 @@
             "authors": [
                 {
                     "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
+                    "homepage": "https://www.php-fig.org/"
                 }
             ],
             "description": "Common interface for logging libraries",
+            "homepage": "https://github.com/php-fig/log",
             "keywords": [
                 "log",
                 "psr",
                 "psr-3"
             ],
-            "time": "2015-06-02 13:48:41"
+            "support": {
+                "source": "https://github.com/php-fig/log/tree/1.1.4"
+            },
+            "time": "2021-05-03T11:20:27+00:00"
         }
     ],
     "packages-dev": [
         {
             "name": "atoum/atoum",
-            "version": "dev-master",
+            "version": "4.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/atoum/atoum.git",
-                "reference": "12fa40738d417902738c9cd561868396523e8785"
+                "reference": "e866f3d4ad683c35757cd73fc6da3e3d5e563667"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/atoum/atoum/zipball/12fa40738d417902738c9cd561868396523e8785",
-                "reference": "12fa40738d417902738c9cd561868396523e8785",
+                "url": "https://api.github.com/repos/atoum/atoum/zipball/e866f3d4ad683c35757cd73fc6da3e3d5e563667",
+                "reference": "e866f3d4ad683c35757cd73fc6da3e3d5e563667",
                 "shasum": ""
             },
             "require": {
                 "ext-hash": "*",
                 "ext-json": "*",
-                "ext-session": "*",
                 "ext-tokenizer": "*",
                 "ext-xml": "*",
-                "php": ">=5.3.3"
+                "php": "^7.4 || ^8.0"
             },
             "replace": {
                 "mageekguy/atoum": "*"
             },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.2"
+            },
             "suggest": {
                 "atoum/stubs": "Provides IDE support (like autocompletion) for atoum",
-                "ext-mbstring": "Provides support for UTF-8 strings"
+                "ext-mbstring": "Provides support for UTF-8 strings",
+                "ext-xdebug": "Provides code coverage report (>= 2.3)"
             },
             "bin": [
                 "bin/atoum"
@@ -144,7 +151,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.x-dev"
+                    "dev-master": "4.x-dev"
                 }
             },
             "autoload": {
@@ -154,7 +161,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "BSD"
+                "BSD-3-Clause"
             ],
             "authors": [
                 {
@@ -187,7 +194,11 @@
                 "test",
                 "unit testing"
             ],
-            "time": "2015-11-26 14:38:45"
+            "support": {
+                "issues": "https://github.com/atoum/atoum/issues",
+                "source": "https://github.com/atoum/atoum/tree/4.1"
+            },
+            "time": "2022-11-20T20:18:31+00:00"
         }
     ],
     "aliases": [],
@@ -199,8 +210,9 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.4.4",
+        "php": ">=8.0",
         "ext-pgsql": "*"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
