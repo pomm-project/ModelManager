@@ -471,6 +471,19 @@ Mass deletion, return an iterator on deleted results hydrated by the model’s p
     // delete from {relation} where salary > $* returning {projection}
     $employees = $employee_model->deleteWhere('salary > $*', [$max_salary]);
 
+truncate
+...........
+
+Remove all data from model.
+
+.. code:: php
+
+    <?php
+    // …
+    // truncate {relation} {cascade} {restart}
+    $employee_model->truncate(false, false);
+
+
 Complex queries
 ~~~~~~~~~~~~~~~
 

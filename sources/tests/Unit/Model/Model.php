@@ -56,6 +56,20 @@ class Model extends BaseTest
             ;
     }
 
+    protected function getTruncateFixtureModel(Session $session)
+    {
+        return $session
+            ->getModel('PommProject\ModelManager\Test\Fixture\TruncateFixtureModel')
+            ;
+    }
+
+    protected function getForeignKeyFixtureModel(Session $session)
+    {
+        return $session
+            ->getModel('PommProject\ModelManager\Test\Fixture\ForeignKeyFixtureModel')
+            ;
+    }
+
     protected function getWithoutPKFixtureModel(Session $session)
     {
         return $session
@@ -467,6 +481,88 @@ class Model extends BaseTest
             ->boolean($model->testGetModel())
             ->isTrue()
             ;
+    }
+
+    public function testTruncateNoCascadeNoRestart()
+    {
+        $session = $this->buildSession();
+        $model   = $this->getTruncateFixtureModel($session);
+        $entity  = $model->createAndSave(['a_varchar' => 'abcdef', 'a_boolean' => true]);
+        $where   = new Where();
+
+        $this
+            ->integer($entity->getId())
+            ->isEqualTo(1)
+            ->integer($model->countWhere($where))
+            ->isEqualTo(1)
+            ->object($model->truncate())
+            ->isInstanceOf('\PommProject\ModelManager\Test\Fixture\TruncateFixtureModel')
+            ->integer($model->countWhere($where))
+            ->isEqualTo(0)
+        ;
+
+        $entity  = $model->createAndSave(['a_varchar' => 'abcdef', 'a_boolean' => true]);
+        $this
+            ->integer($entity->getId())
+            ->isEqualTo(2);
+    }
+
+    public function testTruncateNoCascadeRestart()
+    {
+        $session = $this->buildSession();
+        $model   = $this->getTruncateFixtureModel($session);
+        $entity  = $model->createAndSave(['a_varchar' => 'abcdef', 'a_boolean' => true]);
+        $where   = new Where();
+        $this
+            ->integer($entity->getId())
+            ->isEqualTo(1)
+            ->integer($model->countWhere($where))
+            ->isEqualTo(1)
+            ->object($model->truncate(false, true))
+            ->isInstanceOf('\PommProject\ModelManager\Test\Fixture\TruncateFixtureModel')
+            ->integer($model->countWhere($where))
+            ->isEqualTo(0)
+        ;
+
+        $entity  = $model->createAndSave(['a_varchar' => 'abcdef', 'a_boolean' => true]);
+        $this
+            ->integer($entity->getId())
+            ->isEqualTo(1);
+    }
+
+    public function testTruncateCascadeNoRestart()
+    {
+        $session  = $this->buildSession();
+        $model    = $this->getTruncateFixtureModel($session);
+        $modelFk  = $this->getForeignKeyFixtureModel($session);
+        $entity   = $model->createAndSave(['a_varchar' => 'abcdef', 'a_boolean' => true]);
+        $entityFk = $modelFk->createAndSave(['truncate_id' => $entity->getId()]);
+
+        $where    = new Where();
+        $this
+            ->integer($entity->getId())
+            ->isEqualTo(1)
+            ->integer($model->countWhere($where))
+            ->isEqualTo(1)
+            ->integer($modelFk->countWhere($where))
+            ->isEqualTo(1)
+            ->object($model->truncate(true, false))
+            ->isInstanceOf('\PommProject\ModelManager\Test\Fixture\TruncateFixtureModel')
+            ->integer($model->countWhere($where))
+            ->isEqualTo(0)
+            ->integer($modelFk->countWhere($where))
+            ->isEqualTo(0)
+        ;
+
+        $entity  = $model->createAndSave(['a_varchar' => 'abcdef', 'a_boolean' => true]);
+        $entityFk = $modelFk->createAndSave(['truncate_id' => $entity->getId()]);
+        $this
+            ->integer($entity->getId())
+            ->isEqualTo(2)
+            ->exception(function () use ($model) {$model->truncate(false, false);})
+            ->isInstanceOf('\PommProject\Foundation\Exception\SqlException')
+            ->message->contains("0A000")
+        ;
     }
 }
 

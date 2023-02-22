@@ -212,6 +212,42 @@ trait WriteQueries
     }
 
     /**
+     * truncate
+     *
+     * Delete all records.
+     *
+     * @param  bool $cascade
+     * @param  bool $restart
+     * @return Model $this
+     */
+    public function truncate($cascade = false, $restart = false)
+    {
+        $type_truncate = 'RESTRICT';
+        $identity = 'CONTINUE';
+
+        if ($cascade) {
+            $type_truncate = 'CASCADE';
+        }
+
+        if ($restart) {
+            $identity = 'RESTART';
+        }
+
+        $sql = strtr(
+            "truncate :relation :identity :type_truncate",
+            [
+                ':relation'   => $this->getStructure()->getRelation(),
+                ':type_truncate'  => $type_truncate,
+                ':identity' => $identity . ' IDENTITY '
+            ]
+        );
+
+        $this->query($sql, []);
+
+        return $this;
+    }
+
+    /**
      * createAndSave
      *
      * Create a new entity from given values and save it in the database.
