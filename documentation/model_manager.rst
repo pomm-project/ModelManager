@@ -605,8 +605,8 @@ Combination of these two bits creates 4 different states:
     $model->insertOne($my_entity);
     $my_entity->status(); // 1 (persisted)
     $my_entity->touch()->status(); // 3 (modified + persisted)
-    $my_entity->status() & FLexibleEntityInteface::STATUS_EXIST; // 1
-    $my_entity->status() & FLexibleEntityInteface::STATUS_MODIFIED; // 2
+    $my_entity->status() & FlexibleEntityInterface::STATUS_EXIST; // 1
+    $my_entity->status() & FlexibleEntityInterface::STATUS_MODIFIED; // 2
 
 It is possible to add more states (``STATUS_TAINTED`` by example to indicate an entity may contain untrusted values). This then will add a new bit 3 state hence four more different states (4, 5, 6 and 7).
 
