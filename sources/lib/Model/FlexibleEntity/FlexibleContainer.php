@@ -92,7 +92,7 @@ abstract class FlexibleContainer implements FlexibleEntityInterface, \IteratorAg
      *
      * @see FlexibleEntityInterface
      */
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return new \ArrayIterator($this->extract());
     }

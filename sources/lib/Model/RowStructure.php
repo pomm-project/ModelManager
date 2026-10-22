@@ -243,7 +243,7 @@ class RowStructure implements \ArrayAccess
     /**
      * @see \ArrayAccess
      */
-    public function offsetSet($name, $type)
+    public function offsetSet($name, $type): void
     {
         $this->addField($name, $type);
     }
@@ -251,7 +251,7 @@ class RowStructure implements \ArrayAccess
     /**
      * @see \ArrayAccess
      */
-    public function offsetGet($name)
+    public function offsetGet($name): mixed
     {
         return $this->getTypeFor($name);
     }
@@ -259,7 +259,7 @@ class RowStructure implements \ArrayAccess
     /**
      * @see \ArrayAccess
      */
-    public function offsetExists($name)
+    public function offsetExists($name): bool
     {
         return $this->hasField($name);
     }
@@ -267,7 +267,7 @@ class RowStructure implements \ArrayAccess
     /**
      * @see \ArrayAccess
      */
-    public function offsetUnset($name)
+    public function offsetUnset($name): void
     {
         throw new ModelException(sprintf("Cannot unset a structure field ('%s').", $name));
     }

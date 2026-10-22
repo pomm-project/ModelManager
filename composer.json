@@ -13,7 +13,7 @@
         "pomm-project/foundation": "dev-master"
     },
     "require-dev": {
-        "atoum/atoum" : "4.x-dev"
+        "atoum/atoum" : "^4.0"
     },
     "suggest": {
         "pomm-project/cli": "dev-master"
