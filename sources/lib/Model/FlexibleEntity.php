@@ -272,7 +272,7 @@ abstract class FlexibleEntity extends FlexibleContainer implements \ArrayAccess
      *
      * @see FlexibleEntityInterface
      */
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return new \ArrayIterator(array_merge($this->container, $this->getCustomFields()));
     }
@@ -346,7 +346,7 @@ abstract class FlexibleEntity extends FlexibleContainer implements \ArrayAccess
     /**
      * {@inheritdoc}
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         $method_name = "has".Inflector::studlyCaps($offset);
 
@@ -356,7 +356,7 @@ abstract class FlexibleEntity extends FlexibleContainer implements \ArrayAccess
     /**
      * {@inheritdoc}
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         $this->__set($offset, $value);
     }
@@ -364,7 +364,7 @@ abstract class FlexibleEntity extends FlexibleContainer implements \ArrayAccess
     /**
      * {@inheritdoc}
      */
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         return $this->__get($offset);
     }
@@ -372,7 +372,7 @@ abstract class FlexibleEntity extends FlexibleContainer implements \ArrayAccess
     /**
      * {@inheritdoc}
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         $this->clear($offset);
     }

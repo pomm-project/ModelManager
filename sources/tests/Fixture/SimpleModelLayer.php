@@ -67,7 +67,7 @@ class SimpleModelLayer extends ModelLayer
             ->RestartListening()
             ;
         parent::sendNotify($channel, $data);
-        sleep(0.3);
+        usleep(300000);
 
         return $observer
             ->getNotification()
